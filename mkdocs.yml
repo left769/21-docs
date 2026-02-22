@@ -2,7 +2,24 @@ site_name: Лабораторний довідник
 theme:
   name: material
   language: uk
-  features:
+palette: 
+    # Налаштування для світлої теми
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Перейти на темну тему
+    # Налаштування для темної теми
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Перейти на світлу тему
+features:
     # - navigation.tabs
     # - content.code.copy
     # - search.suggest
