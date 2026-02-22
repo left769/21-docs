@@ -6,14 +6,14 @@
 
 # 1. Налаштування ІР-адреси та активація інтерфейсу
 ## Cisco IOS:
-    ```bash
+    ``` bash
     interface ethernet 0/0
     ip address 10.0.0.1 255.255.255.252
     no shutdown
     ```
 
 ## Mikrotik ROS:
-    ```bash
+    ``` bash
     /ip/address/add address=10.0.0.1/30 interface=ether1
     /interface/set ether1 disabled=no
     ```
@@ -30,27 +30,27 @@
 ## Cisco IOS:
     Повна інформація
 
-    ```bash
+    ``` bash
     show ip interface 
     ```
     Скорочена інформація
 
-    ```bash
+    ``` bash
     show ip interface brief
     ```
     Перегляд конфігурації конкретного інтерфейсу
 
-    ```bash
+    ``` bash
     show running-config interface ethernet 0/0
     ```
 
 ## Mikrotik ROS
-    ```bash
+    ``` bash
     /ip/address/print
     ```
 
 ## Linux
-    ```bash
+    ``` bash
     ip address
     ```
 
