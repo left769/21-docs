@@ -3,10 +3,28 @@ theme:
   name: material
   language: uk
   features:
-    - navigation.tabs
+    # - navigation.tabs
+    # - content.code.copy
+    # - search.suggest
+    # - search.highlight
+    - navigation.tabs 
+    - navigation.sections
+    - navigation.expand
     - content.code.copy
     - search.suggest
     - search.highlight
+
+nav:
+  - Головна: index.md
+  - Налаштування обладнання:
+      - 'Вступ до мереж': network-configs/index.md
+      - 'IP інтерфейси': network-configs/IP-interfaces.md
+      - 'VLAN та Trunk': network-configs/vlans.md
+      - 'Маршрутизація': network-configs/routing.md
+      - 'Контроль доступу': network-configs/ACL.md
+  - Розгортання сервісів:
+      # - 'DHCP': server-services/dhcp-server.md
+      - 'RADIUS': server-services/radius.md
 
 markdown_extensions:
   - pymdownx.highlight:
