@@ -5,8 +5,8 @@
 ------------------------------------------------------------------------
 
 
-# 1. Налаштування статичних маршрутів
-## Cisco IOS:
+## 1. Налаштування статичних маршрутів
+Cisco IOS:
 Налаштування статичного маршруту
 
     ip route 172.16.0.0 255.240.0.0 10.0.0.2
@@ -19,11 +19,11 @@
 
     ip default-gateway 10.0.0.1
 
-## Mikrotik ROS:
+Mikrotik ROS:
 
     /ip/route/add dst-address=0.0.0.0/0 gateway=10.0.0.2
 
-## Linux
+Linux
 
     sudo ip route add default via 10.0.0.2 dev eth0
 
@@ -31,15 +31,15 @@
 
     sudo ip route add 0.0.0.0/0 via 10.0.0.2 dev eth0
 
-# 2. Перегляд таблиці маршрутизації
-## Cisco IOS:
+## 2. Перегляд таблиці маршрутизації
+Cisco IOS:
 
     show ip route
 
-## Mikrotik ROS
+Mikrotik ROS
 
     /ip/route/print
 
-## Linux
+Linux
 
     ip route
