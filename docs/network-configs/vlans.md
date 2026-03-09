@@ -1,4 +1,4 @@
-# Налштування VLAN (Virtual Local Area Network)
+# Налаштування VLAN (Virtual Local Area Network)
 
 Тут зібрані команди для налаштування VLAN
 
