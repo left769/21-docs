@@ -3,24 +3,6 @@
 
 ---
 
-## Зміст
-- [1 Device Fundamentals](#1-device-fundamentals)
-- [2 Навігація та основи IOS](#2-навігація-та-основи-ios)
-- [4 File System Operations](#4-file-system-operations)
-- [5 Licensing Management](#5-licensing-management)
-- [6 Device Management](#6-device-management)
-- [7 Security Fundamentals](#7-security-fundamentals)
-- [8 AAA & Access Control](#8-aaa--access-control)
-- [9 Management Protocols](#9-management-protocols)
-- [10 Ethernet Switching](#10-ethernet-switching)
-- [11 VLANs & Trunking](#11-vlans--trunking)
-- [12 Spanning Tree Protocol](#12-spanning-tree-protocol)
-- [13 EtherChannel & LACP](#13-etherchannel--lacp)
-- [14 IP Addressing & Services](#14-ip-addressing--services)
-- [15 Static Routing](#15-static-routing)
-
----
-
 ## 1 Основи роботи
 
 ### 1.1 Скидання налаштувань
