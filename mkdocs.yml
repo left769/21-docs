@@ -39,6 +39,7 @@ nav:
       - 'VLAN та Trunk': network-configs/vlans.md
       - 'Маршрутизація': network-configs/routing.md
       - 'Контроль доступу': network-configs/ACL.md
+      - 'Cisco cheat sheet': network-configs/cisco-cheat-sheet.md
   - 🖥️ Розгортання сервісів:
       # - 'DHCP': server-services/dhcp-server.md
       - 'RADIUS': server-services/radius.md
