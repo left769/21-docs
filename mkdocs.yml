@@ -10,9 +10,9 @@ extra:
 theme:
   name: material
   logo: assets/logo_dep21_white.png
-  favicon: assets/ogo_dep21_white.ico
+  favicon: assets/logo_dep21_white.ico
   language: uk
-palette: 
+  palette: 
     # Налаштування для світлої теми
     - media: "(prefers-color-scheme: light)"
       scheme: default
@@ -29,7 +29,7 @@ palette:
       toggle:
         icon: material/brightness-4
         name: Перейти на світлу тему
-features:
+  features:
     # - navigation.tabs
     # - content.code.copy
     # - search.suggest
