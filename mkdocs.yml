@@ -1,6 +1,16 @@
-site_name: Лабораторний довідник
+site_name: Довідник кафедри Інформаційних систем та технологій
+site_author: Створено колективом кафедри №21
+copyright: '© 2026 Кафедра №21 - Bci права захищені'
+
+extra:
+  social:
+    - icon: assets/logo_dep21_white.png
+      link: https://mitit.mil.gov.ua/page/faculty2
+
 theme:
   name: material
+  logo: assets/logo_dep21_white.png
+  favicon: assets/ogo_dep21_white.ico
   language: uk
 palette: 
     # Налаштування для світлої теми
