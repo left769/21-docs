@@ -37,6 +37,7 @@ theme:
     - navigation.tabs 
     - navigation.sections
     - navigation.expand
+    - navigation.top
     - content.code.copy
     - search.suggest
     - search.highlight
@@ -65,6 +66,10 @@ markdown_extensions:
           format: !!python/name:pymdownx.superfences.fence_code_format
   - pymdownx.tabbed:
       alternate_style: true
+  - attr_list
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
 
 plugins:
   - search
