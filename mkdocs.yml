@@ -24,7 +24,7 @@ theme:
     # Налаштування для темної теми
     - media: "(prefers-color-scheme: dark)"
       scheme: slate
-      primary: indigo
+      primary: black
       accent: indigo
       toggle:
         icon: material/brightness-4
