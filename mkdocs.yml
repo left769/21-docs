@@ -4,7 +4,7 @@ copyright: '© 2026 Кафедра №21 - Bci права захищені'
 
 extra:
   social:
-    - icon: assets/logo_dep21_white.png
+    - icon: material/web
       link: https://mitit.mil.gov.ua/page/faculty2
 
 theme:
