@@ -11,17 +11,17 @@
 
 ```
 ! Повне скидання (знищення всіх даних)
-Router# delete nvram:startup-config
-Router# delete flash:vlan.dat
-Router# erase nvram:
-Router# erase flash:
-Router# write erase
-Router# reload
+delete nvram:startup-config
+delete flash:vlan.dat
+erase nvram:
+erase flash:
+write erase
+reload
 
 ! Часткове скидання (зі збереженням IOS)
-Router# write erase
-Router# delete vlan.dat
-Router# reload
+write erase
+delete vlan.dat
+reload
 ```
 
 ### 1.2 Процес завантаження та ROMMON
@@ -30,11 +30,11 @@ Router# reload
 ! Перервати завантаження: натисніть Ctrl+Break протягом перших 60 секунд
 
 ! Команди ROMMON:
-rommon 1 > confreg 0x2142    ! обхід завантаження startup-config
-rommon 2 > reset             ! перезавантаження
-rommon 3 > dir flash:        ! список файлів у Flash
+rommon 1 > confreg 0x2142                                   ! обхід завантаження startup-config
+rommon 2 > reset                                            ! перезавантаження
+rommon 3 > dir flash:                                       ! список файлів у Flash
 rommon 4 > boot flash:c2900-universalk9-mz.SPA.157-3.M.bin  ! завантажити конкретний IOS
-rommon 5 > tftpdnld          ! завантаження IOS з TFTP-сервера
+rommon 5 > tftpdnld                                         ! завантаження IOS з TFTP-сервера
 ```
 
 ### 1.3 Процедура відновлення пароля
@@ -72,42 +72,42 @@ rommon 5 > tftpdnld          ! завантаження IOS з TFTP-сервер
 
 ```
 ! Переглянути відомості про "залізо"
-Router# show inventory         ! перелік модулів та серійних номерів
-Router# show diag              ! детальна діагностика
-Router# show environment       ! температура, живлення, вентилятори
-Router# show module            ! встановлені модулі
-Router# show idprom backplane
+show inventory                      ! перелік модулів та серійних номерів
+show diag                           ! детальна діагностика
+show environment                    ! температура, живлення, вентилятори
+show module                         ! встановлені модулі
+show idprom backplane
 
 ! Cisco 2960X/3650/3850 — команди для стекованих шасі
-Switch# show switch            ! список пристроїв у стеку
-Switch# show switch detail     ! детально
-Switch# show switch neighbors  ! сусіди по стеку
-Switch# switch 1 provision ws-c3650-24ps
-Switch# switch 1 priority 15  ! більше значення = головний пристрій
-Switch# switch 2 renumber 3
-Switch# switch 1 reload
+show switch                         ! список пристроїв у стеку
+show switch detail                  ! детально
+show switch neighbors               ! сусіди по стеку
+switch 1 provision ws-c3650-24ps
+switch 1 priority 15                ! більше значення = головний пристрій
+switch 2 renumber 3
+switch 1 reload
 ```
 
 ### 1.5 Управління прошивкою IOS
 
 ```
 ! Перевірити поточну версію IOS
-Router# show version           ! версія IOS, uptime, модель пристрою
-Router# show boot
-Router# show flash:
-Router# dir flash:
+show version           ! версія IOS, uptime, модель пристрою
+show boot
+show flash:
+dir flash:
 
 ! Оновити IOS через TFTP
-Router# copy tftp://192.168.1.10/c2900-universalk9-mz.SPA.157-3.M.bin flash:
-Router# boot system flash:c2900-universalk9-mz.SPA.157-3.M.bin
-Router# copy running-config startup-config
-Router# reload
+copy tftp://192.168.1.10/c2900-universalk9-mz.SPA.157-3.M.bin flash:
+boot system flash:c2900-universalk9-mz.SPA.157-3.M.bin
+copy running-config startup-config
+reload
 
 ! Встановлення пакетів Bundle/Install (Cat3K/4K)
-Switch# archive download-sw /force-reload /overwrite tftp://192.168.1.10/cat3k_caa-universalk9.16.12.04.SPA.bin
+archive download-sw /force-reload /overwrite tftp://192.168.1.10/cat3k_caa-universalk9.16.12.04.SPA.bin
 
 ! Режим встановлення (IOS XE)
-Router# request platform software package install switch all file tftp://192.168.1.10/asr1000-universalk9.17.03.03.SPA.pkg
+request platform software package install switch all file tftp://192.168.1.10/asr1000-universalk9.17.03.03.SPA.pkg
 ```
 
 ---
@@ -118,10 +118,10 @@ Router# request platform software package install switch all file tftp://192.168
 
 ```
 ! Скорочення команд (до унікальних символів)
-Router# conf t          ! configure terminal
-Router# sh run          ! show running-config
-Router# sh ip int br    ! show ip interface brief
-Router# wr              ! write memory (copy run start)
+conf t          ! configure terminal
+sh run          ! show running-config
+sh ip int br    ! show ip interface brief
+wr              ! write memory (copy run start)
 
 ! Комбінації клавіш для редагування
 Ctrl+A          ! перейти на початок рядка
@@ -135,70 +135,70 @@ Ctrl+Y          ! вставити видалений текст
 Tab             ! автодоповнення
 
 ! Фільтрація виводу команд
-Router# show running-config | include ospf   ! рядки що містять "ospf"
-Router# show running-config | section router ! секція "router"
-Router# show running-config | exclude !      ! без рядків-коментарів
-Router# show running-config | begin interface! починаючи з рядка "interface"
-Router# show running-config | count ospf     ! кількість входжень
+show running-config | include ospf      ! рядки що містять "ospf"
+show running-config | section router    ! секція "router"
+show running-config | exclude !         ! без рядків-коментарів
+show running-config | begin interface   ! починаючи з рядка "interface"
+show running-config | count ospf        ! кількість входжень
 ```
 
 ### 3.2 Контекстна довідка
 
 ```
-Router# ?                           ! список доступних команд
-Router# show ?                      ! параметри команди show
-Router# configure ?                 ! параметри configure
-Router# interface gigabitEthernet 0/0/0 ?
-Router# show ip route <Tab>         ! автодоповнення
+?                           ! список доступних команд
+show ?                      ! параметри команди show
+configure ?                 ! параметри configure
+interface gigabitEthernet 0/0/0 ?
+show ip route <Tab>         ! автодоповнення
 
 ! Часткове доповнення
-Router# sh ip ro<Tab>               ! доповнює до "show ip route"
+sh ip ro<Tab>               ! доповнює до "show ip route"
 ```
 
 ### 3.3 Рівні привілеїв користувачів
 
 ```
 ! Налаштування рівнів привілеїв (0–15, де 15 = повний доступ)
-Router(config)# privilege exec level 5 configure terminal
-Router(config)# privilege exec level 5 show running-config
-Router(config)# privilege interface level 5 shutdown
-Router(config)# username admin privilege 5 secret P@ssw0rd
+privilege exec level 5 configure terminal
+privilege exec level 5 show running-config
+privilege interface level 5 shutdown
+username admin privilege 5 secret P@ssw0rd
 
 ! Перегляд поточного рівня
-Router# show privilege
-Router# show privilege all
+show privilege
+show privilege all
 
 ! Встановити пароль для рівня та увійти
-Router(config)# enable secret level 5 SuperSecret123
-Router# enable 5
+enable secret level 5 SuperSecret123
+enable 5
 ```
 
 ### 3.4 Псевдоніми команд
 
 ```
 ! Створення власних псевдонімів команд
-Router(config)# alias exec srs show running-config | section
-Router(config)# alias exec shbr show ip interface brief
-Router(config)# alias exec routes show ip route
-Router(config)# alias exec neighbors show cdp neighbors detail
-Router(config)# alias configure config t
+alias exec srs show running-config | section
+alias exec shbr show ip interface brief
+alias exec routes show ip route
+alias exec neighbors show cdp neighbors detail
+alias configure config t
 
 ! Постійний псевдонім для резервного копіювання
-Router(config)# alias exec backup copy running-config tftp://192.168.1.10/
-Router# backup R1-config.txt
+alias exec backup copy running-config tftp://192.168.1.10/
+backup R1-config.txt
 ```
 
 ### 3.5 Скрипти за допомогою TCL
 
 ```
 ! Вхід в TCL-оболонку для автоматизації команд
-Router# tclsh
-Router(tcl)# puts [exec "show version"]
-Router(tcl)# foreach i {1 2 3 4 5} { puts "Interface Gi0/$i" }
-Router(tcl)# exit
+tclsh
+ puts [exec "show version"]
+ foreach i {1 2 3 4 5} { puts "Interface Gi0/$i" }
+ exit
 
 ! Одноразова TCL-команда
-Router# tclsh puts [exec "show ip interface brief"]
+tclsh puts [exec "show ip interface brief"]
 ```
 
 ---
@@ -209,61 +209,61 @@ Router# tclsh puts [exec "show ip interface brief"]
 
 ```
 ! Навігація по файловій системі
-Router# pwd                     ! поточна директорія
-Router# dir                     ! список файлів
-Router# dir flash:              ! вміст Flash-пам'яті
-Router# dir nvram:              ! вміст NVRAM
-Router# dir usbflash0:          ! USB (якщо підключено)
-Router# dir sdflash:            ! SD-карта (ASR/ISR)
-Router# dir bootflash:          ! завантажувальна Flash
-Router# dir system:             ! системні файли
+pwd                     ! поточна директорія
+dir                     ! список файлів
+dir flash:              ! вміст Flash-пам'яті
+dir nvram:              ! вміст NVRAM
+dir usbflash0:          ! USB (якщо підключено)
+dir sdflash:            ! SD-карта (ASR/ISR)
+dir bootflash:          ! завантажувальна Flash
+dir system:             ! системні файли
 
 ! Операції з файлами
-Router# copy source-url destination-url        ! копіювати файл
-Router# copy running-config flash:backup-config! зберегти конфіг у Flash
-Router# copy flash:config.text tftp://192.168.1.10/ ! копіювати на TFTP
-Router# delete flash:old-config.text           ! видалити файл
-Router# erase flash:                           ! ⚠️ очистити всю Flash
-Router# mkdir flash:backups                    ! створити директорію
-Router# rmdir flash:backups                    ! видалити директорію
+copy source-url destination-url                 ! копіювати файл
+copy running-config flash:backup-config         ! зберегти конфіг у Flash
+copy flash:config.text tftp://192.168.1.10/     ! копіювати на TFTP
+delete flash:old-config.text                    ! видалити файл
+erase flash:                                    ! ⚠️ очистити всю Flash
+mkdir flash:backups                             ! створити директорію
+rmdir flash:backups                             ! видалити директорію
 ```
 
 ### 4.2 Управління конфігурацією
 
 ```
 ! Архівування конфігурацій
-Router# archive
-Router(config-archive)# path flash:backups/$h-config  ! $h = hostname
-Router(config-archive)# maximum 10            ! зберігати до 10 версій
-Router(config-archive)# time-period 1440      ! авто-збереження кожні 24 год
-Router(config-archive)# write-memory          ! архівувати при wr
+archive
+  path flash:backups/$h-config  ! $h = hostname
+  maximum 10                    ! зберігати до 10 версій
+  time-period 1440              ! авто-збереження кожні 24 год
+  write-memory                  ! архівувати при wr
 
 ! Перегляд та відновлення з архіву
-Router# show archive
-Router# configure replace flash:backups/R1-config-1  ! відкат до версії
+show archive
+configure replace flash:backups/R1-config-1  ! відкат до версії
 
 ! Відкат конфігурації
-Router# configure replace flash:backup-config 10
-Router# configure revert now
-Router# configure confirm
+configure replace flash:backup-config 10
+configure revert now
+configure confirm
 
 ! Точки відновлення (IOS XE)
-Router# checkpoint database
-Router# show checkpoint database
-Router# rollback checkpoint checkpoint_name
+checkpoint database
+show checkpoint database
+rollback checkpoint checkpoint_name
 ```
 
 ### 4.3 Робота з SCP
 
 ```
 ! Налаштувати SCP-сервер на пристрої
-Router(config)# ip scp server enable
-Router(config)# username admin secret admin123
-Router(config)# ip ssh version 2
+ip scp server enable
+username admin secret admin123
+ip ssh version 2
 
 ! Копіювання через SCP (зашифровано, на відміну від TFTP)
-Router# copy running-config scp://admin@192.168.1.10/backups/R1-config
-Router# copy scp://admin@192.168.1.10/configs/new-config running-config
+copy running-config scp://admin@192.168.1.10/backups/R1-config
+copy scp://admin@192.168.1.10/configs/new-config running-config
 
 ! З Linux на маршрутизатор
 # scp R1-config admin@10.0.0.1:flash:
@@ -273,26 +273,26 @@ Router# copy scp://admin@192.168.1.10/configs/new-config running-config
 
 ```
 ! Перевірити стан USB
-Router# show usb
-Router# dir usbflash0:
+show usb
+dir usbflash0:
 
 ! Копіювати на/з USB
-Router# copy running-config usbflash0:/backup-config
-Router# copy usbflash0:/new-ios.bin flash:
+copy running-config usbflash0:/backup-config
+copy usbflash0:/new-ios.bin flash:
 
 ! Завантажитись з USB
-Router(config)# boot system usbflash0:c2900-universalk9-mz.SPA.157-3.M.bin
+boot system usbflash0:c2900-universalk9-mz.SPA.157-3.M.bin
 ```
 
 ### 4.5 Автоматизація бекапів
 
 ```
 ! EEM-скрипт для автоматичного резервного копіювання щодня о 02:00
-Router(config)# event manager applet AUTO-BACKUP
-Router(config-applet)# event timer cron cron-entry "0 2 * * *"
-Router(config-applet)# action 1.0 cli command "enable"
-Router(config-applet)# action 2.0 cli command "copy running-config tftp://192.168.1.10/backups/$_device_name-$_event_pub_time"
-Router(config-applet)# action 3.0 syslog msg "Backup completed successfully"
+event manager applet AUTO-BACKUP
+  event timer cron cron-entry "0 2 * * *"
+  action 1.0 cli command "enable"
+  action 2.0 cli command "copy running-config tftp://192.168.1.10/backups/$_device_name-$_event_pub_time"
+  action 3.0 syslog msg "Backup completed successfully"
 ```
 
 ---
@@ -303,53 +303,53 @@ Router(config-applet)# action 3.0 syslog msg "Backup completed successfully"
 
 ```
 ! Переглянути інформацію про ліцензії
-Router# show license
-Router# show license feature
-Router# show license udi                       ! унікальний ідентифікатор пристрою
-Router# show license right-to-use
-Router# show license tech-support
+show license
+show license feature
+show license udi                       ! унікальний ідентифікатор пристрою
+show license right-to-use
+show license tech-support
 
 ! Smart Licensing (IOS XE)
-Router# show license status
-Router# show license authorization
-Router# license smart register idtoken XXXX-XXXX-XXXX-XXXX
-Router# license smart reservation request local
-Router# license smart reservation install file flash:reservation.lic
+show license status
+show license authorization
+license smart register idtoken XXXX-XXXX-XXXX-XXXX
+license smart reservation request local
+license smart reservation install file flash:reservation.lic
 
 ! Traditional Licensing (класичний варіант)
-Router# show license all
-Router# license install flash:license.lic
-Router# license boot level ipbasek9
-Router# reload
+show license all
+license install flash:license.lic
+license boot level ipbasek9
+reload
 ```
 
 ### 5.2 Робота з ліцензіями
 
 ```
 ! Зберегти ліцензію у файл
-Router# license save flash:all_licenses.lic
+license save flash:all_licenses.lic
 
 ! Експорт/імпорт ліцензії
-Router# license export flash:license_pa.lic
-Router# license import flash:new_license.lic
+license export flash:license_pa.lic
+license import flash:new_license.lic
 
 ! Ознайомча (Evaluation) ліцензія
-Router# license accept end user agreement
-Router# license boot level securityk9
-Router# reload
+license accept end user agreement
+license boot level securityk9
+reload
 
 ! Перевірити відповідність ліцензій
-Router# show license violation
+show license violation
 ```
 
 ### 5.3 Right-to-Use (RTU) Ліцензування
 
 ```
 ! Управління RTU-ліцензіями
-Router# license right-to-use activate ipservices
-Router# license right-to-use deactivate ipservices
-Router# show license right-to-use
-Router# license right-to-use perpetual ipservices accept
+license right-to-use activate ipservices
+license right-to-use deactivate ipservices
+show license right-to-use
+license right-to-use perpetual ipservices accept
 ```
 
 ---
@@ -360,33 +360,33 @@ Router# license right-to-use perpetual ipservices accept
 
 ```
 ! Базове налаштування пристрою
-Router(config)# hostname R1-CORE
-Router(config)# no ip domain-lookup            ! вимкнути DNS-запити в CLI
-Router(config)# ip domain-name company.com
-Router(config)# service password-encryption    ! шифрувати паролі у конфізі
-Router(config)# service timestamps debug datetime msec localtime show-timezone
-Router(config)# service timestamps log datetime msec localtime show-timezone
-Router(config)# logging buffered 16384 debugging
-Router(config)# logging console critical
-Router(config)# logging monitor debugging
-Router(config)# logging host 192.168.100.10
-Router(config)# logging source-interface Loopback0
+hostname R1-CORE
+no ip domain-lookup                 ! вимкнути DNS-запити в CLI
+ip domain-name company.com
+service password-encryption         ! шифрувати паролі у конфізі
+service timestamps debug datetime msec localtime show-timezone
+service timestamps log datetime msec localtime show-timezone
+logging buffered 16384 debugging
+logging console critical
+logging monitor debugging
+logging host 192.168.100.10
+logging source-interface Loopback0
 
 ! Налаштування банерів
-Router(config)# banner motd ^
+banner motd ^
 ************************************************************
 *              AUTHORIZED ACCESS ONLY                      *
 *  This system is the property of Company Inc.             *
-*  Unauthorized access is prohibited and will be prosecuted. *
+*Unauthorized access is prohibited and will be prosecuted. *
 ************************************************************
 ^
 
-Router(config)# banner login ^
+banner login ^
 Please enter your credentials to access this device.
 Contact Network Operations for assistance.
 ^
 
-Router(config)# banner exec ^
+banner exec ^
 Welcome to R1-CORE. You are logged in as $username.
 Current time: $_timenow
 ^
@@ -396,130 +396,130 @@ Current time: $_timenow
 
 ```
 ! Сервери NTP для синхронізації часу
-Router(config)# ntp server 0.pool.ntp.org prefer
-Router(config)# ntp server 1.pool.ntp.org
-Router(config)# ntp server 2.pool.ntp.org
-Router(config)# ntp server 192.168.100.10
+ntp server 0.pool.ntp.org prefer
+ntp server 1.pool.ntp.org
+ntp server 2.pool.ntp.org
+ntp server 192.168.100.10
 
 ! Автентифікація NTP
-Router(config)# ntp authenticate
-Router(config)# ntp authentication-key 1 md5 NTP-KEY-123
-Router(config)# ntp trusted-key 1
-Router(config)# ntp server 0.pool.ntp.org key 1
+ntp authenticate
+ntp authentication-key 1 md5 NTP-KEY-123
+ntp trusted-key 1
+ntp server 0.pool.ntp.org key 1
 
 ! NTP Master/Peer
-Router(config)# ntp master 3               ! зробити пристрій NTP-сервером (stratum 3)
-Router(config)# ntp peer 192.168.1.2
-Router(config)# ntp update-calendar
+ntp master 3               ! зробити пристрій NTP-сервером (stratum 3)
+ntp peer 192.168.1.2
+ntp update-calendar
 
 ! Контроль доступу до NTP
-Router(config)# ntp access-group peer 10
-Router(config)# ntp access-group serve-only 20
-Router(config)# ntp access-group serve 30
-Router(config)# ntp access-group query-only 40
+ntp access-group peer 10
+ntp access-group serve-only 20
+ntp access-group serve 30
+ntp access-group query-only 40
 
 ! Перевірка
-Router# show ntp associations
-Router# show ntp status
-Router# show ntp clock
-Router# show clock detail
+show ntp associations
+show ntp status
+show ntp clock
+show clock detail
 ```
 
 ### 6.3 Налаштування DNS
 
 ```
 ! DNS-сервери
-Router(config)# ip name-server 8.8.8.8
-Router(config)# ip name-server 8.8.4.4
-Router(config)# ip name-server 192.168.100.10
-Router(config)# ip domain-name company.com
-Router(config)# ip domain-list branch.company.com
-Router(config)# ip domain-list partner.com
-Router(config)# ip domain lookup source-interface Loopback0
+ip name-server 8.8.8.8
+ip name-server 8.8.4.4
+ip name-server 192.168.100.10
+ip domain-name company.com
+ip domain-list branch.company.com
+ip domain-list partner.com
+ip domain lookup source-interface Loopback0
 
 ! Статичні DNS-записи (hosts)
-Router(config)# ip host router1.company.com 192.168.1.1
-Router(config)# ip host switch1 10.0.0.1 10.0.0.2
-Router(config)# ip host ftp-server 192.168.100.10
+ip host router1.company.com 192.168.1.1
+ip host switch1 10.0.0.1 10.0.0.2
+ip host ftp-server 192.168.100.10
 
 ! DNS Caching
-Router(config)# ip dns server
-Router(config)# ip dns cache
-Router(config)# ip dns spoofing 192.168.1.1
+ip dns server
+ip dns cache
+ip dns spoofing 192.168.1.1
 
 ! Перевірка
-Router# show hosts
-Router# nslookup router1.company.com
-Router# ping router1.company.com
+show hosts
+nslookup router1.company.com
+ping router1.company.com
 ```
 
 ### 6.4 Налаштування Syslog
 
 ```
 ! Налаштування Syslog-сервера
-Router(config)# logging on
-Router(config)# logging host 192.168.100.10
-Router(config)# logging host 192.168.100.11
-Router(config)# logging trap debugging          ! рівень: debug/info/warning/error/critical
-Router(config)# logging facility local7
-Router(config)# logging source-interface Loopback0
-Router(config)# logging origin-id hostname
-Router(config)# logging sequence-numbers
-Router(config)# logging discriminator OSPF msg-body includes "OSPF"
+logging on
+logging host 192.168.100.10
+logging host 192.168.100.11
+logging trap debugging          ! рівень: debug/info/warning/error/critical
+logging facility local7
+logging source-interface Loopback0
+logging origin-id hostname
+logging sequence-numbers
+logging discriminator OSPF msg-body includes "OSPF"
 
 ! Локальне логування (в буфер пристрою)
-Router(config)# logging buffered 16384 informational
-Router(config)# logging console warnings
-Router(config)# logging monitor debugging
-Router(config)# logging persistent url flash:logs size 4096
-Router(config)# logging history debugging
+logging buffered 16384 informational
+logging console warnings
+logging monitor debugging
+logging persistent url flash:logs size 4096
+logging history debugging
 
 ! Фільтри логів
-Router(config)# logging filter OSPF ROUTER-ID 1.1.1.1
-Router(config)# logging filter BGP neighbor 192.168.1.2
+logging filter OSPF ROUTER-ID 1.1.1.1
+logging filter BGP neighbor 192.168.1.2
 
 ! Перевірка
-Router# show logging
-Router# show logging history
-Router# show logging filter
+show logging
+show logging history
+show logging filter
 ```
 
 ### 6.5 Налаштування SNMP
 
 ```
 ! SNMPv2c (простий, без шифрування)
-Router(config)# snmp-server community RO-COMMUNITY RO 10
-Router(config)# snmp-server community RW-COMMUNITY RW 20
-Router(config)# snmp-server host 192.168.100.10 version 2c RO-COMMUNITY
-Router(config)# snmp-server enable traps
-Router(config)# snmp-server trap-source Loopback0
-Router(config)# snmp-server queue-length 100
-Router(config)# snmp-server location "Data Center Rack A1"
-Router(config)# snmp-server contact "Network Operations noc@company.com"
-Router(config)# snmp-server chassis-id R1-CORE-ASR1001
+snmp-server community RO-COMMUNITY RO 10
+snmp-server community RW-COMMUNITY RW 20
+snmp-server host 192.168.100.10 version 2c RO-COMMUNITY
+snmp-server enable traps
+snmp-server trap-source Loopback0
+snmp-server queue-length 100
+snmp-server location "Data Center Rack A1"
+snmp-server contact "Network Operations noc@company.com"
+snmp-server chassis-id R1-CORE-ASR1001
 
 ! SNMPv3 (безпечний варіант з шифруванням)
-Router(config)# snmp-server group ADMIN v3 priv read ALL write ALL
-Router(config)# snmp-server user admin1 ADMIN v3 auth sha AuthPass123 priv aes 128 PrivPass123
-Router(config)# snmp-server host 192.168.100.10 version 3 priv admin1
-Router(config)# snmp-server enable traps snmp authentication linkdown coldstart warmstart
-Router(config)# snmp-server enable traps config
-Router(config)# snmp-server enable traps entity
-Router(config)# snmp-server enable traps cpu threshold
-Router(config)# snmp-server enable traps memory threshold
-Router(config)# snmp-server enable traps ospf
-Router(config)# snmp-server enable traps bgp
+snmp-server group ADMIN v3 priv read ALL write ALL
+snmp-server user admin1 ADMIN v3 auth sha AuthPass123 priv aes 128 PrivPass123
+snmp-server host 192.168.100.10 version 3 priv admin1
+snmp-server enable traps snmp authentication linkdown coldstart warmstart
+snmp-server enable traps config
+snmp-server enable traps entity
+snmp-server enable traps cpu threshold
+snmp-server enable traps memory threshold
+snmp-server enable traps ospf
+snmp-server enable traps bgp
 
 ! SNMP Views (обмеження видимих OID)
-Router(config)# snmp-server view ALL iso included
-Router(config)# snmp-server view RESTRICTED system included
-Router(config)# snmp-server view RESTRICTED interfaces excluded
+snmp-server view ALL iso included
+snmp-server view RESTRICTED system included
+snmp-server view RESTRICTED interfaces excluded
 
 ! Перевірка
-Router# show snmp
-Router# show snmp user
-Router# show snmp group
-Router# show snmp host
+show snmp
+show snmp user
+show snmp group
+show snmp host
 ```
 
 ---
@@ -530,126 +530,126 @@ Router# show snmp host
 
 ```
 ! Налаштування паролів
-Router(config)# enable secret SuperSecret123!
-Router(config)# enable algorithm-type scrypt secret EvenMoreSecret456!  ! сильніше хешування
-Router(config)# username admin privilege 15 secret P@ssw0rd123!
-Router(config)# username operator privilege 5 secret 0p3rator!
-Router(config)# service password-encryption      ! шифрувати всі паролі у конфізі
-Router(config)# security passwords min-length 10 ! мінімальна довжина пароля
-Router(config)# login block-for 300 attempts 3 within 60  ! блокувати після 3 невдалих спроб за 60 сек
-Router(config)# login delay 2                    ! затримка між спробами входу
-Router(config)# login on-failure log
-Router(config)# login on-success log
+enable secret SuperSecret123!
+enable algorithm-type scrypt secret EvenMoreSecret456!  ! сильніше хешування
+username admin privilege 15 secret P@ssw0rd123!
+username operator privilege 5 secret 0p3rator!
+service password-encryption                             ! шифрувати всі паролі у конфізі
+security passwords min-length 10                        ! мінімальна довжина пароля
+login block-for 300 attempts 3 within 60                ! блокувати після 3 невдалих спроб за 60 сек
+login delay 2                                           ! затримка між спробами входу
+login on-failure log
+login on-success log
 
 ! Налаштування ліній (console/vty)
 Router(config-line)# password Cons0leP@ss
 Router(config-line)# login local
-Router(config-line)# exec-timeout 5 0            ! автовихід через 5 хв бездіяльності
-Router(config-line)# absolute-timeout 30          ! примусовий вихід через 30 хв
+Router(config-line)# exec-timeout 5 0                   ! автовихід через 5 хв бездіяльності
+Router(config-line)# absolute-timeout 30                ! примусовий вихід через 30 хв
 Router(config-line)# session-timeout 30
 Router(config-line)# logout-warning 5
 
 ! Заборона відновлення пароля
-Router(config)# no service password-recovery
-Router(config)# enable secret recovery SecretRecovery789!
+no service password-recovery
+enable secret recovery SecretRecovery789!
 ```
 
 ### 7.2 Налаштування SSH
 
 ```
 ! Налаштування SSH v2
-Router(config)# ip ssh version 2
-Router(config)# ip ssh time-out 60
-Router(config)# ip ssh authentication-retries 2
-Router(config)# ip ssh maxstartups 3
-Router(config)# ip ssh logging events
-Router(config)# ip ssh server algorithm mac hmac-sha2-256 hmac-sha2-512
-Router(config)# ip ssh server algorithm encryption aes128-ctr aes192-ctr aes256-ctr
-Router(config)# ip ssh server algorithm hostkey rsa-sha2-256 rsa-sha2-512
-Router(config)# ip ssh server disable-deprecated-version 1.99
-Router(config)# ip ssh server max-sessions-per-connection 10
+ip ssh version 2
+ip ssh time-out 60
+ip ssh authentication-retries 2
+ip ssh maxstartups 3
+ip ssh logging events
+ip ssh server algorithm mac hmac-sha2-256 hmac-sha2-512
+ip ssh server algorithm encryption aes128-ctr aes192-ctr aes256-ctr
+ip ssh server algorithm hostkey rsa-sha2-256 rsa-sha2-512
+ip ssh server disable-deprecated-version 1.99
+ip ssh server max-sessions-per-connection 10
 
 ! Автентифікація за ключем (замість пароля)
-Router(config)# crypto key generate rsa modulus 4096
-Router(config)# crypto key generate dsa modulus 2048
-Router(config)# crypto key generate ecdsa curve 256
-Router(config)# ip ssh pubkey-chain
+crypto key generate rsa modulus 4096
+crypto key generate dsa modulus 2048
+crypto key generate ecdsa curve 256
+ip ssh pubkey-chain
 Router(config-ssh-pubkey)# username admin
 Router(config-ssh-pubkey)# key-hash ssh-rsa AAAA...==
 Router(config-ssh-pubkey)# exit
 
 ! Source Interface для SSH
-Router(config)# ip ssh source-interface Loopback0
-Router(config)# ip ssh vrf MGMT
+ip ssh source-interface Loopback0
+ip ssh vrf MGMT
 
 ! Перевірка
-Router# show ip ssh
-Router# show ssh
-Router# show crypto key mypubkey rsa
+show ip ssh
+show ssh
+show crypto key mypubkey rsa
 ```
 
 ### 7.3 Сервіси TCP/UDP
 
 ```
 ! Вимкнути непотрібні сервіси (hardening)
-Router(config)# no service tcp-small-servers
-Router(config)# no service udp-small-servers
-Router(config)# no service finger
-Router(config)# no ip bootp server
-Router(config)# no ip http server
-Router(config)# no ip http secure-server
-Router(config)# no ip source-route
-Router(config)# no ip gratuitous-arps
-Router(config)# no cdp run                  ! вимкнути CDP глобально
-Router(config)# no lldp run                 ! вимкнути LLDP глобально
-Router(config)# no ip proxy-arp
-Router(config)# no ip unreachables
-Router(config)# no ip redirects
-Router(config)# no ip mask-reply
+no service tcp-small-servers
+no service udp-small-servers
+no service finger
+no ip bootp server
+no ip http server
+no ip http secure-server
+no ip source-route
+no ip gratuitous-arps
+no cdp run                  ! вимкнути CDP глобально
+no lldp run                 ! вимкнути LLDP глобально
+no ip proxy-arp
+no ip unreachables
+no ip redirects
+no ip mask-reply
 
 ! Вимкнути на конкретному інтерфейсі
-Router(config-if)# no cdp enable
-Router(config-if)# no lldp transmit
-Router(config-if)# no lldp receive
-Router(config-if)# no ip directed-broadcast
-Router(config-if)# no ip unreachables
-Router(config-if)# no ip proxy-arp
+ no cdp enable
+ no lldp transmit
+ no lldp receive
+ no ip directed-broadcast
+ no ip unreachables
+ no ip proxy-arp
 ```
 
 ### 7.4 Політики Control Plane (CoPP)
 
 ```
 ! CoPP — обмежує трафік до CPU маршрутизатора
-Router(config)# class-map match-any COPP-CRITICAL
+class-map match-any COPP-CRITICAL
 Router(config-cmap)# match access-group 110
 Router(config-cmap)# exit
 
-Router(config)# class-map match-any COPP-IMPORTANT
+class-map match-any COPP-IMPORTANT
 Router(config-cmap)# match access-group 120
 Router(config-cmap)# exit
 
-Router(config)# policy-map COPP-POLICY
-Router(config-pmap)# class COPP-CRITICAL
-Router(config-pmap-c)# police 8000 conform-action transmit exceed-action drop
-Router(config-pmap-c)# exit
-Router(config-pmap)# class COPP-IMPORTANT
-Router(config-pmap-c)# police 40000 conform-action transmit exceed-action drop
-Router(config-pmap-c)# exit
-Router(config-pmap)# class class-default
-Router(config-pmap-c)# police 10000 conform-action transmit exceed-action drop
-Router(config-pmap-c)# exit
-Router(config-pmap)# exit
+policy-map COPP-POLICY
+ class COPP-CRITICAL
+  police 8000 conform-action transmit exceed-action drop
+  exit
+ class COPP-IMPORTANT
+  police 40000 conform-action transmit exceed-action drop
+  exit
+ class class-default
+  police 10000 conform-action transmit exceed-action drop
+  exit
+ exit
 
-Router(config)# control-plane
-Router(config-cp)# service-policy input COPP-POLICY
-Router(config-cp)# exit
+control-plane
+ service-policy input COPP-POLICY
+ exit
 
 ! ACL для CoPP
-Router(config)# access-list 110 permit tcp any any eq 22
-Router(config)# access-list 110 permit tcp any any eq 23
-Router(config)# access-list 120 permit ospf any any
-Router(config)# access-list 120 permit eigrp any any
-Router(config)# access-list 120 permit pim any any
+access-list 110 permit tcp any any eq 22
+access-list 110 permit tcp any any eq 23
+access-list 120 permit ospf any any
+access-list 120 permit eigrp any any
+access-list 120 permit pim any any
 ```
 
 ---
@@ -660,118 +660,118 @@ Router(config)# access-list 120 permit pim any any
 
 ```
 ! Увімкнути AAA (Authentication, Authorization, Accounting)
-Router(config)# aaa new-model
-Router(config)# aaa authentication login default local
-Router(config)# aaa authentication enable default enable
-Router(config)# aaa authorization exec default local
-Router(config)# aaa accounting exec default start-stop group radius
+aaa new-model
+aaa authentication login default local
+aaa authentication enable default enable
+aaa authorization exec default local
+aaa accounting exec default start-stop group radius
 
 ! Локальна база користувачів
-Router(config)# username admin privilege 15 algorithm-type scrypt secret AdminPass123!
-Router(config)# username operator privilege 5 secret 0p3rator!
-Router(config)# username guest privilege 1 secret GuestAccess!
+username admin privilege 15 algorithm-type scrypt secret AdminPass123!
+username operator privilege 5 secret 0p3rator!
+username guest privilege 1 secret GuestAccess!
 
 ! Паролі для рівнів enable
-Router(config)# enable secret level 15 SuperSecret!
-Router(config)# enable secret level 5 OperatorPass
+enable secret level 15 SuperSecret!
+enable secret level 5 OperatorPass
 ```
 
 ### 8.2 Налаштування RADIUS
 
 ```
 ! Налаштування RADIUS-серверів
-Router(config)# radius server ISE-PRIMARY
-Router(config-radius-server)# address ipv4 192.168.100.10 auth-port 1812 acct-port 1813
-Router(config-radius-server)# key RadiusKey123!
-Router(config-radius-server)# retransmit 3
-Router(config-radius-server)# timeout 5
-Router(config-radius-server)# exit
+radius server ISE-PRIMARY
+ address ipv4 192.168.100.10 auth-port 1812 acct-port 1813
+ key RadiusKey123!
+ retransmit 3
+ timeout 5
+ exit
 
-Router(config)# radius server ISE-SECONDARY
-Router(config-radius-server)# address ipv4 192.168.100.11 auth-port 1812 acct-port 1813
-Router(config-radius-server)# key RadiusKey456!
-Router(config-radius-server)# exit
+radius server ISE-SECONDARY
+ address ipv4 192.168.100.11 auth-port 1812 acct-port 1813
+ key RadiusKey456!
+ exit
 
 ! Група серверів RADIUS
-Router(config)# aaa group server radius ISE-GROUP
+aaa group server radius ISE-GROUP
 Router(config-sg-radius)# server name ISE-PRIMARY
 Router(config-sg-radius)# server name ISE-SECONDARY
 Router(config-sg-radius)# exit
 
 ! AAA з RADIUS
-Router(config)# aaa authentication login default group ISE-GROUP local
-Router(config)# aaa authentication enable default group ISE-GROUP enable
-Router(config)# aaa authorization exec default group ISE-GROUP local
-Router(config)# aaa accounting exec default start-stop group ISE-GROUP
-Router(config)# aaa accounting network default start-stop group ISE-GROUP
+aaa authentication login default group ISE-GROUP local
+aaa authentication enable default group ISE-GROUP enable
+aaa authorization exec default group ISE-GROUP local
+aaa accounting exec default start-stop group ISE-GROUP
+aaa accounting network default start-stop group ISE-GROUP
 ```
 
 ### 8.3 Налаштування TACACS+
 
 ```
 ! Налаштування TACACS+-серверів
-Router(config)# tacacs server TACACS-PRIMARY
-Router(config-server-tacacs)# address ipv4 192.168.100.20
-Router(config-server-tacacs)# key TacacsKey123!
-Router(config-server-tacacs)# single-connection
-Router(config-server-tacacs)# timeout 10
-Router(config-server-tacacs)# exit
+tacacs server TACACS-PRIMARY
+ address ipv4 192.168.100.20
+ key TacacsKey123!
+ single-connection
+ timeout 10
+ exit
 
 ! Група серверів TACACS+
-Router(config)# aaa group server tacacs+ TACACS-GROUP
-Router(config-sg-tacacs)# server name TACACS-PRIMARY
-Router(config-sg-tacacs)# exit
+aaa group server tacacs+ TACACS-GROUP
+ server name TACACS-PRIMARY
+ exit
 
 ! AAA з TACACS+
-Router(config)# aaa authentication login default group TACACS-GROUP local
-Router(config)# aaa authentication enable default group TACACS-GROUP enable
-Router(config)# aaa authorization commands 15 default group TACACS-GROUP local
-Router(config)# aaa authorization config-commands
-Router(config)# aaa authorization exec default group TACACS-GROUP local
-Router(config)# aaa accounting commands 15 default start-stop group TACACS-GROUP
-Router(config)# aaa accounting exec default start-stop group TACACS-GROUP
+aaa authentication login default group TACACS-GROUP local
+aaa authentication enable default group TACACS-GROUP enable
+aaa authorization commands 15 default group TACACS-GROUP local
+aaa authorization config-commands
+aaa authorization exec default group TACACS-GROUP local
+aaa accounting commands 15 default start-stop group TACACS-GROUP
+aaa accounting exec default start-stop group TACACS-GROUP
 ```
 
 ### 8.4 Авторизація команд
 
 ```
 ! Рівні авторизації команд
-Router(config)# privilege exec level 5 show running-config
-Router(config)# privilege exec level 5 show interfaces
-Router(config)# privilege exec level 10 configure terminal
-Router(config)# privilege exec level 15 reload
-Router(config)# privilege interface level 5 shutdown
-Router(config)# privilege interface level 10 ip address
+privilege exec level 5 show running-config
+privilege exec level 5 show interfaces
+privilege exec level 10 configure terminal
+privilege exec level 15 reload
+privilege interface level 5 shutdown
+privilege interface level 10 ip address
 
 ! CLI Views — набори дозволених команд для різних ролей
-Router(config)# parser view ROOT
-Router(config-view)# secret RootView123!
-Router(config-view)# commands exec include all show
-Router(config-view)# commands exec include configure
-Router(config-view)# commands exec include reload
-Router(config-view)# exit
+parser view ROOT
+ secret RootView123!
+ commands exec include all show
+ commands exec include configure
+ commands exec include reload
+ exit
 
-Router(config)# parser view OPERATOR
-Router(config-view)# secret OperatorView456!
-Router(config-view)# commands exec include show
-Router(config-view)# commands exec exclude show running-config  ! заборонити конкретну команду
-Router(config-view)# commands exec include ping
-Router(config-view)# commands exec include traceroute
-Router(config-view)# exit
+parser view OPERATOR
+ secret OperatorView456!
+ commands exec include show
+ commands exec exclude show running-config  ! заборонити конкретну команду
+ commands exec include ping
+ commands exec include traceroute
+ exit
 ```
 
 ### 8.5 Downloadable ACLs
 
 ```
 ! ACL, що завантажується з RADIUS після автентифікації
-Router(config)# ip access-list extended DYNACL-WEBSERVER
-Router(config-ext-nacl)# permit tcp any host 192.168.1.10 eq 80
-Router(config-ext-nacl)# permit tcp any host 192.168.1.10 eq 443
-Router(config-ext-nacl)# deny ip any any
-Router(config-ext-nacl)# exit
+ip access-list extended DYNACL-WEBSERVER
+ permit tcp any host 192.168.1.10 eq 80
+ permit tcp any host 192.168.1.10 eq 443
+ deny ip any any
+ exit
 
 ! AAA атрибут для ACL
-Router(config)# aaa authorization network default group ISE-GROUP
+aaa authorization network default group ISE-GROUP
 ```
 
 ---
@@ -782,76 +782,76 @@ Router(config)# aaa authorization network default group ISE-GROUP
 
 ```
 ! Налаштування HTTP/HTTPS для веб-інтерфейсу
-Router(config)# ip http server
-Router(config)# ip http port 8080
-Router(config)# ip http authentication local
-Router(config)# ip http access-class 10            ! обмежити доступ ACL
-Router(config)# ip http secure-server
-Router(config)# ip http secure-port 443
-Router(config)# ip http secure-ciphersuite aes256-cbc-sha1
-Router(config)# ip http timeout-policy idle 60 life 86400 requests 100
+ip http server
+ip http port 8080
+ip http authentication local
+ip http access-class 10            ! обмежити доступ ACL
+ip http secure-server
+ip http secure-port 443
+ip http secure-ciphersuite aes256-cbc-sha1
+ip http timeout-policy idle 60 life 86400 requests 100
 
 ! ACL для обмеження доступу до HTTP
-Router(config)# access-list 10 permit 192.168.100.0 0.0.0.255
-Router(config)# access-list 10 deny any
+access-list 10 permit 192.168.100.0 0.0.0.255
+access-list 10 deny any
 
 ! Перевірка
-Router# show ip http server status
-Router# show ip http secure-server status
+show ip http server status
+show ip http secure-server status
 ```
 
 ### 9.2 Netconf/RESTCONF
 
 ```
 ! NETCONF — програмне управління пристроєм (через SSH, порт 830)
-Router(config)# netconf-yang
-Router(config)# netconf-yang feature candidate-datastore
-Router(config)# netconf-yang feature notify
-Router(config)# netconf-yang feature url
-Router(config)# netconf-yang ssh port 830
+netconf-yang
+netconf-yang feature candidate-datastore
+netconf-yang feature notify
+netconf-yang feature url
+netconf-yang ssh port 830
 
 ! RESTCONF — HTTP-API для управління пристроєм
-Router(config)# restconf
-Router(config)# ip http secure-server
-Router(config)# restconf data-entries 10000
+restconf
+ip http secure-server
+restconf data-entries 10000
 
 ! Перевірка
-Router# show netconf-yang sessions
-Router# show restconf
+show netconf-yang sessions
+show restconf
 ```
 
 ### 9.3 gRPC/Telemetry
 
 ```
 ! gRPC — протокол для streaming-телеметрії
-Router(config)# grpc
-Router(config-grpc)# port 57400
-Router(config-grpc)# no-tls
-Router(config-grpc)# address-family ipv4
-Router(config-grpc)# max-request-total 64
-Router(config-grpc)# max-request-per-user 16
+grpc
+ port 57400
+ no-tls
+ address-family ipv4
+ max-request-total 64
+ max-request-per-user 16
 
 ! Телеметрія — потокова передача метрик на колектор
-Router(config)# telemetry ietf subscription 101
-Router(config-telemetry)# encoding encode-kvgpb
-Router(config-telemetry)# filter xpath /interfaces/interface/statistics
-Router(config-telemetry)# source-address 192.168.1.1
-Router(config-telemetry)# stream yang-push
-Router(config-telemetry)# update-policy periodic 500
-Router(config-telemetry)# receiver ip address 192.168.100.30 5432 protocol grpc-tcp
+telemetry ietf subscription 101
+ encoding encode-kvgpb
+ filter xpath /interfaces/interface/statistics
+ source-address 192.168.1.1
+ stream yang-push
+ update-policy periodic 500
+ receiver ip address 192.168.100.30 5432 protocol grpc-tcp
 ```
 
 ### 9.4 NETCONF/YANG моделі
 
 ```
 ! Перевірка YANG-моделей
-Router# show platform software yang-management process
-Router# show yang-operational memory
-Router# show yang schema
+show platform software yang-management process
+show yang-operational memory
+show yang schema
 
 ! Встановлення YANG-моделей
-Router# copy tftp://192.168.1.10/ietf-interfaces@2014-05-08.yang flash:
-Router# install add file flash:ietf-interfaces@2014-05-08.yang activate
+copy tftp://192.168.1.10/ietf-interfaces@2014-05-08.yang flash:
+install add file flash:ietf-interfaces@2014-05-08.yang activate
 
 ! NETCONF-операції (з Linux)
 # netconf-console --host 10.0.0.1 --port 830 --user admin --password pass --get-config
@@ -865,117 +865,117 @@ Router# install add file flash:ietf-interfaces@2014-05-08.yang activate
 
 ```
 ! Переглянути таблицю MAC-адрес
-Switch# show mac address-table
-Switch# show mac address-table dynamic
-Switch# show mac address-table aging-time
-Switch# show mac address-table count
-Switch# show mac address-table interface gigabitEthernet 1/0/1
-Switch# show mac address-table vlan 10
-Switch# show mac address-table address 0050.7966.6800
+show mac address-table
+show mac address-table dynamic
+show mac address-table aging-time
+show mac address-table count
+show mac address-table interface gigabitEthernet 1/0/1
+show mac address-table vlan 10
+show mac address-table address 0050.7966.6800
 
 ! Налаштування таблиці MAC
-Switch(config)# mac address-table aging-time 300           ! час старіння запису (сек)
-Switch(config)# mac address-table learning vlan 10         ! дозволити навчання
-Switch(config)# no mac address-table learning vlan 20      ! заборонити навчання
-Switch(config)# mac address-table static 0050.7966.6800 vlan 10 interface gi1/0/1  ! статичний запис
-Switch(config)# mac address-table notification change
-Switch(config)# mac address-table limit maximum 1000 vlan 10
+mac address-table aging-time 300                                   ! час старіння запису (сек)
+mac address-table learning vlan 10                                 ! дозволити навчання
+no mac address-table learning vlan 20                              ! заборонити навчання
+mac address-table static 0050.7966.6800 vlan 10 interface gi1/0/1  ! статичний запис
+mac address-table notification change
+mac address-table limit maximum 1000 vlan 10
 
 ! Очистити таблицю MAC
-Switch# clear mac address-table dynamic
-Switch# clear mac address-table dynamic interface gi1/0/1
-Switch# clear mac address-table dynamic vlan 10
-Switch# clear mac address-table dynamic address 0050.7966.6800
+clear mac address-table dynamic
+clear mac address-table dynamic interface gi1/0/1
+clear mac address-table dynamic vlan 10
+clear mac address-table dynamic address 0050.7966.6800
 ```
 
 ### 10.2 Налаштування портів
 
 ```
 ! Базове налаштування порту
-Switch(config)# interface gigabitEthernet 1/0/1
-Switch(config-if)# description "Connected to Server01"
-Switch(config-if)# switchport mode access
-Switch(config-if)# switchport access vlan 10
-Switch(config-if)# switchport voice vlan 20
-Switch(config-if)# spanning-tree portfast           ! прискорити вхід у forwarding
-Switch(config-if)# spanning-tree bpduguard enable   ! захист від несанкціонованих SW
-Switch(config-if)# no shutdown
-Switch(config-if)# exit
+interface gigabitEthernet 1/0/1
+ description "Connected to Server01"
+ switchport mode access
+ switchport access vlan 10
+ switchport voice vlan 20
+ spanning-tree portfast           ! прискорити вхід у forwarding
+ spanning-tree bpduguard enable   ! захист від несанкціонованих SW
+ no shutdown
+ exit
 
 ! Швидкість та дуплекс
-Switch(config-if)# speed 1000
-Switch(config-if)# duplex full
-Switch(config-if)# negotiation auto
-Switch(config-if)# mtu 9216                         ! jumbo frames
+ speed 1000
+ duplex full
+ negotiation auto
+ mtu 9216                         ! jumbo frames
 
 ! Відновлення портів з err-disabled стану
-Switch(config)# errdisable recovery cause psecure-violation
-Switch(config)# errdisable recovery cause bpduguard
-Switch(config)# errdisable recovery interval 30
-Switch(config)# errdisable detect cause all
+errdisable recovery cause psecure-violation
+errdisable recovery cause bpduguard
+errdisable recovery interval 30
+errdisable detect cause all
 
 ! Шаблони інтерфейсів (застосувати однакові налаштування до багатьох портів)
-Switch(config)# template USER-PORT
-Switch(config-template)# switchport mode access
-Switch(config-template)# switchport access vlan 10
-Switch(config-template)# spanning-tree portfast
-Switch(config-template)# spanning-tree bpduguard enable
-Switch(config-template)# storm-control broadcast level 10.00
-Switch(config-template)# service-policy input AUTOQOS-VOIP
-Switch(config-template)# exit
+template USER-PORT
+ switchport mode access
+ switchport access vlan 10
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ storm-control broadcast level 10.00
+ service-policy input AUTOQOS-VOIP
+ exit
 
-Switch(config)# interface range gi1/0/1 - 24
-Switch(config-if-range)# source template USER-PORT
+interface range gi1/0/1 - 24
+ source template USER-PORT
 ```
 
 ### 10.3 CDP/LLDP
 
 ```
 ! CDP — виявлення сусідніх Cisco-пристроїв
-Switch(config)# cdp run
-Switch(config)# cdp timer 60                        ! інтервал надсилання (сек)
-Switch(config)# cdp holdtime 180                    ! час утримання інформації
-Switch(config)# cdp advertise-v2
-Switch(config-if)# cdp enable
-Switch(config-if)# no cdp enable                    ! вимкнути на порту
+cdp run
+cdp timer 60                        ! інтервал надсилання (сек)
+cdp holdtime 180                    ! час утримання інформації
+cdp advertise-v2
+ cdp enable
+ no cdp enable                      ! вимкнути на порту
 
 ! LLDP — стандартний протокол виявлення (будь-який виробник)
-Switch(config)# lldp run
-Switch(config)# lldp timer 30
-Switch(config)# lldp holdtime 120
-Switch(config)# lldp reinit 2
-Switch(config-if)# lldp transmit
-Switch(config-if)# lldp receive
-Switch(config-if)# lldp med
+lldp run
+lldp timer 30
+lldp holdtime 120
+lldp reinit 2
+ lldp transmit
+ lldp receive
+ lldp med
 
 ! Перевірка
-Switch# show cdp neighbors
-Switch# show cdp neighbors detail
-Switch# show cdp traffic
-Switch# show lldp neighbors
-Switch# show lldp neighbors detail
-Switch# show lldp traffic
-Switch# show lldp interface gi1/0/1
+show cdp neighbors
+show cdp neighbors detail
+show cdp traffic
+show lldp neighbors
+show lldp neighbors detail
+show lldp traffic
+show lldp interface gi1/0/1
 ```
 
 ### 10.4 UDLD & Loop Guard
 
 ```
 ! UDLD — виявлення однонаправлених зв'язків
-Switch(config)# udld enable
-Switch(config)# udld aggressive              ! агресивний режим: блокує порт при збої
-Switch(config-if)# udld port aggressive
-Switch(config-if)# udld disable
+udld enable
+udld aggressive              ! агресивний режим: блокує порт при збої
+ udld port aggressive
+ udld disable
 
 ! Loop Guard — захист від петель через втрату BPDU
-Switch(config)# spanning-tree loopguard default
-Switch(config-if)# spanning-tree guard loop
-Switch(config-if)# spanning-tree guard root
+spanning-tree loopguard default
+ spanning-tree guard loop
+ spanning-tree guard root
 
 ! Перевірка
-Switch# show udld neighbors
-Switch# show udld gi1/0/1
-Switch# show spanning-tree inconsistentports
+show udld neighbors
+show udld gi1/0/1
+show spanning-tree inconsistentports
 ```
 
 ---
@@ -986,136 +986,136 @@ Switch# show spanning-tree inconsistentports
 
 ```
 ! Створення VLAN
-Switch(config)# vlan 10
-Switch(config-vlan)# name SALES
-Switch(config-vlan)# state active
-Switch(config-vlan)# exit
+vlan 10
+ name SALES
+ state active
+ exit
 
-Switch(config)# vlan 20
-Switch(config-vlan)# name ENGINEERING
-Switch(config-vlan)# exit
+vlan 20
+ name ENGINEERING
+ exit
 
-Switch(config)# vlan 99
-Switch(config-vlan)# name MANAGEMENT
-Switch(config-vlan)# exit
+vlan 99
+ name MANAGEMENT
+ exit
 
 ! Діапазон VLAN
-Switch(config)# vlan 100-200
-Switch(config-vlan)# name USER-VLANS
-Switch(config-vlan)# exit
+vlan 100-200
+ name USER-VLANS
+ exit
 
 ! Extended VLANs (1006–4094)
-Switch(config)# vlan 2000
-Switch(config-vlan)# name EXTENDED-VLAN
-Switch(config-vlan)# exit
+vlan 2000
+ name EXTENDED-VLAN
+ exit
 
 ! Private VLANs — ізоляція в межах VLAN
-Switch(config)# vlan 500
-Switch(config-vlan)# private-vlan primary
-Switch(config-vlan)# private-vlan association 501-502
-Switch(config-vlan)# exit
+vlan 500
+ private-vlan primary
+ private-vlan association 501-502
+ exit
 
-Switch(config)# vlan 501
-Switch(config-vlan)# private-vlan isolated          ! порти не бачать одне одного
-Switch(config-vlan)# exit
+vlan 501
+ private-vlan isolated          ! порти не бачать одне одного
+ exit
 
-Switch(config)# vlan 502
-Switch(config-vlan)# private-vlan community         ! порти бачать одне одного
-Switch(config-vlan)# exit
+vlan 502
+ private-vlan community         ! порти бачать одне одного
+ exit
 ```
 
 ### 11.2 VLAN Trunking
 
 ```
 ! Налаштування транк-порту (передає кілька VLAN)
-Switch(config)# interface gigabitEthernet 1/0/24
-Switch(config-if)# switchport mode trunk
-Switch(config-if)# switchport trunk encapsulation dot1q
-Switch(config-if)# switchport trunk native vlan 99       ! нетегований VLAN
-Switch(config-if)# switchport trunk allowed vlan 10,20,30,99
-Switch(config-if)# switchport trunk allowed vlan add 40-50
-Switch(config-if)# switchport trunk allowed vlan remove 30
-Switch(config-if)# switchport trunk pruning vlan 2-1001
-Switch(config-if)# switchport nonegotiate               ! вимкнути DTP
-Switch(config-if)# spanning-tree guard root
-Switch(config-if)# exit
+interface gigabitEthernet 1/0/24
+ switchport mode trunk
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 99       ! нетегований VLAN
+ switchport trunk allowed vlan 10,20,30,99
+ switchport trunk allowed vlan add 40-50
+ switchport trunk allowed vlan remove 30
+ switchport trunk pruning vlan 2-1001
+ switchport nonegotiate               ! вимкнути DTP
+ spanning-tree guard root
+ exit
 
 ! Dynamic Trunking Protocol (DTP)
-Switch(config-if)# switchport mode dynamic desirable     ! активно ініціює транк
-Switch(config-if)# switchport mode dynamic auto          ! чекає ініціативи
+ switchport mode dynamic desirable     ! активно ініціює транк
+ switchport mode dynamic auto          ! чекає ініціативи
 
 ! VLAN Translation (перетворення номерів VLAN)
-Switch(config-if)# switchport vlan mapping 10 110
-Switch(config-if)# switchport vlan mapping 20 120
+ switchport vlan mapping 10 110
+ switchport vlan mapping 20 120
 
 ! Перевірка
-Switch# show interfaces trunk
-Switch# show interfaces gi1/0/24 switchport
-Switch# show interfaces gi1/0/24 trunk
-Switch# show vlan
-Switch# show vlan id 10
-Switch# show vlan name SALES
+show interfaces trunk
+show interfaces gi1/0/24 switchport
+show interfaces gi1/0/24 trunk
+show vlan
+show vlan id 10
+show vlan name SALES
 ```
 
 ### 11.3 Налаштування VTP
 
 ```
 ! VTP — синхронізація VLAN між комутаторами
-Switch(config)# vtp domain COMPANY
-Switch(config)# vtp mode server      ! server = створює/змінює VLAN
-Switch(config)# vtp password VTP-Pass123!
-Switch(config)# vtp version 2
-Switch(config)# vtp pruning          ! не надсилати трафік VLAN туди, де їх немає
-Switch(config)# vtp interface Loopback0
+vtp domain COMPANY
+vtp mode server      ! server = створює/змінює VLAN
+vtp password VTP-Pass123!
+vtp version 2
+vtp pruning          ! не надсилати трафік VLAN туди, де їх немає
+vtp interface Loopback0
 
 ! VTP Client (отримує VLAN від server, не може створювати)
-Switch(config)# vtp mode client
-Switch(config)# vtp transparent      ! не бере участі в VTP, але пропускає його
+vtp mode client
+vtp transparent      ! не бере участі в VTP, але пропускає його
 
 ! Перевірка
-Switch# show vtp status
-Switch# show vtp password
-Switch# show vtp counters
-Switch# show vlan brief
+show vtp status
+show vtp password
+show vtp counters
+show vlan brief
 ```
 
 ### 11.4 Voice VLAN
 
 ```
 ! Налаштування Voice VLAN для IP-телефонів
-Switch(config)# interface gigabitEthernet 1/0/10
-Switch(config-if)# switchport voice vlan 110
-Switch(config-if)# switchport priority extend cos 0
-Switch(config-if)# auto qos voip trust
-Switch(config-if)# mls qos trust cos              ! довіряти CoS-мітці від телефону
-Switch(config-if)# spanning-tree portfast
-Switch(config-if)# spanning-tree bpduguard enable
+interface gigabitEthernet 1/0/10
+ switchport voice vlan 110
+ switchport priority extend cos 0
+ auto qos voip trust
+ mls qos trust cos              ! довіряти CoS-мітці від телефону
+ spanning-tree portfast
+ spanning-tree bpduguard enable
 
 ! LLDP-MED для IP-телефонів
-Switch(config)# lldp run
-Switch(config-if)# lldp med
-Switch(config-if)# lldp med-tlv-select inventory-management network-policy
+lldp run
+ lldp med
+ lldp med-tlv-select inventory-management network-policy
 ```
 
 ### 11.5 VLAN ACLs (VACLs)
 
 ```
 ! VACL — фільтрація трафіку всередині VLAN
-Switch(config)# vlan access-map BLOCK-SERVER 10
-Switch(config-access-map)# match ip address SERVER-ACL
-Switch(config-access-map)# action drop
-Switch(config-access-map)# exit
+vlan access-map BLOCK-SERVER 10
+ match ip address SERVER-ACL
+ action drop
+ exit
 
-Switch(config)# vlan access-map BLOCK-SERVER 20
-Switch(config-access-map)# action forward
-Switch(config-access-map)# exit
+vlan access-map BLOCK-SERVER 20
+ action forward
+ exit
 
-Switch(config)# vlan filter BLOCK-SERVER vlan-list 10  ! застосувати до VLAN 10
+vlan filter BLOCK-SERVER vlan-list 10  ! застосувати до VLAN 10
 
 ! ACL для VACL
-Switch(config)# ip access-list extended SERVER-ACL
-Switch(config-ext-nacl)# deny tcp any host 192.168.10.10 eq 3389
-Switch(config-ext-nacl)# permit ip any any
+ip access-list extended SERVER-ACL
+ deny tcp any host 192.168.10.10 eq 3389
+ permit ip any any
 ```
 
 ---
@@ -1126,101 +1126,101 @@ Switch(config-ext-nacl)# permit ip any any
 
 ```
 ! Вибір режиму STP
-Switch(config)# spanning-tree mode rapid-pvst    ! Rapid PVST+ — рекомендовано
-Switch(config)# spanning-tree mode mst           ! MST — для великих мереж
-Switch(config)# spanning-tree mode pvst          ! класичний PVST
+spanning-tree mode rapid-pvst    ! Rapid PVST+ — рекомендовано
+spanning-tree mode mst           ! MST — для великих мереж
+spanning-tree mode pvst          ! класичний PVST
 
 ! Пріоритет мосту (менше = більше шансів стати Root Bridge)
-Switch(config)# spanning-tree vlan 1,10,20,30 priority 4096
-Switch(config)# spanning-tree vlan 40-50 priority 8192
+spanning-tree vlan 1,10,20,30 priority 4096
+spanning-tree vlan 40-50 priority 8192
 
 ! Захист Root Bridge
-Switch(config)# spanning-tree portfast bpduguard default
-Switch(config-if)# spanning-tree guard root
-Switch(config-if)# spanning-tree bpdufilter enable
-Switch(config-if)# spanning-tree bpduguard enable
+spanning-tree portfast bpduguard default
+ spanning-tree guard root
+ spanning-tree bpdufilter enable
+ spanning-tree bpduguard enable
 
 ! Перевірка
-Switch# show spanning-tree
-Switch# show spanning-tree vlan 10
-Switch# show spanning-tree interface gi1/0/1
-Switch# show spanning-tree detail
-Switch# show spanning-tree inconsistentports
-Switch# show spanning-tree mst configuration
+show spanning-tree
+show spanning-tree vlan 10
+show spanning-tree interface gi1/0/1
+show spanning-tree detail
+show spanning-tree inconsistentports
+show spanning-tree mst configuration
 ```
 
 ### 12.2 Налаштування MST
 
 ```
 ! Налаштування MST-регіону
-Switch(config)# spanning-tree mst configuration
-Switch(config-mst)# name REGION1
-Switch(config-mst)# revision 1
-Switch(config-mst)# instance 1 vlan 10,20,30    ! прив'язати VLAN до instance
-Switch(config-mst)# instance 2 vlan 40,50,60
-Switch(config-mst)# exit
+spanning-tree mst configuration
+ name REGION1
+ revision 1
+ instance 1 vlan 10,20,30    ! прив'язати VLAN до instance
+ instance 2 vlan 40,50,60
+ exit
 
 ! Параметри MST-instance
-Switch(config)# spanning-tree mst 1 priority 4096
-Switch(config)# spanning-tree mst 2 priority 8192
-Switch(config)# spanning-tree mst 0-2 hello-time 2
-Switch(config)# spanning-tree mst 0-2 forward-time 15
-Switch(config)# spanning-tree mst 0-2 max-age 20
+spanning-tree mst 1 priority 4096
+spanning-tree mst 2 priority 8192
+spanning-tree mst 0-2 hello-time 2
+spanning-tree mst 0-2 forward-time 15
+spanning-tree mst 0-2 max-age 20
 
 ! Перевірка
-Switch# show spanning-tree mst
-Switch# show spanning-tree mst configuration
-Switch# show spanning-tree mst 1
-Switch# show spanning-tree mst interface gi1/0/1
+show spanning-tree mst
+show spanning-tree mst configuration
+show spanning-tree mst 1
+show spanning-tree mst interface gi1/0/1
 ```
 
 ### 12.3 Таймери та оптимізація STP
 
 ```
 ! Таймери STP
-Switch(config)# spanning-tree vlan 1 hello-time 2      ! BPDU кожні 2 сек
-Switch(config)# spanning-tree vlan 1 forward-time 15   ! затримка переходу
-Switch(config)# spanning-tree vlan 1 max-age 20        ! час до визнання Root недоступним
-Switch(config)# spanning-tree transmit hold-count 6
+spanning-tree vlan 1 hello-time 2      ! BPDU кожні 2 сек
+spanning-tree vlan 1 forward-time 15   ! затримка переходу
+spanning-tree vlan 1 max-age 20        ! час до визнання Root недоступним
+spanning-tree transmit hold-count 6
 
 ! PortFast & BPDU Guard
-Switch(config)# spanning-tree portfast default         ! увімкнути глобально для access-портів
-Switch(config)# spanning-tree portfast bpduguard default
-Switch(config-if)# spanning-tree portfast
-Switch(config-if)# spanning-tree portfast trunk
+spanning-tree portfast default         ! увімкнути глобально для access-портів
+spanning-tree portfast bpduguard default
+ spanning-tree portfast
+ spanning-tree portfast trunk
 
 ! UplinkFast & BackboneFast (тільки для PVST)
-Switch(config)# spanning-tree uplinkfast               ! швидший переключення uplink
-Switch(config)# spanning-tree backbonefast             ! швидше виявлення змін топології
+spanning-tree uplinkfast               ! швидший переключення uplink
+spanning-tree backbonefast             ! швидше виявлення змін топології
 
 ! Loop Guard
-Switch(config)# spanning-tree loopguard default
-Switch(config-if)# spanning-tree guard loop
+spanning-tree loopguard default
+ spanning-tree guard loop
 ```
 
 ### 12.4 Безпека STP
 
 ```
 ! BPDU Guard — вимкнути порт якщо прийшов BPDU (захист від зайвих SW)
-Switch(config)# spanning-tree portfast bpduguard default
-Switch(config)# errdisable recovery cause bpduguard
-Switch(config)# errdisable recovery interval 30
+spanning-tree portfast bpduguard default
+errdisable recovery cause bpduguard
+errdisable recovery interval 30
 
 ! BPDU Filter — не надсилати та не обробляти BPDU на порту
-Switch(config)# spanning-tree portfast bpdufilter default
-Switch(config-if)# spanning-tree bpdufilter enable
+spanning-tree portfast bpdufilter default
+ spanning-tree bpdufilter enable
 
 ! Root Guard — заборонити порту ставати root port
-Switch(config-if)# spanning-tree guard root
+ spanning-tree guard root
 
 ! TC Guard — обмежити обробку Topology Change повідомлень
-Switch(config)# spanning-tree tc-guard
-Switch(config)# spanning-tree tc-filter
+spanning-tree tc-guard
+spanning-tree tc-filter
 
 ! Перевірка
-Switch# show spanning-tree summary
-Switch# show spanning-tree detail
-Switch# debug spanning-tree events
+show spanning-tree summary
+show spanning-tree detail
+debug spanning-tree events
 ```
 
 ---
@@ -1231,107 +1231,107 @@ Switch# debug spanning-tree events
 
 ```
 ! LACP Configuration (рекомендовано)
-Switch(config)# interface range gigabitEthernet 1/0/1-2
-Switch(config-if-range)# channel-group 1 mode active    ! активно надсилає LACP PDU
-Switch(config-if-range)# channel-protocol lacp
-Switch(config-if-range)# lacp port-priority 1000        ! менше = вищий пріоритет
-Switch(config-if-range)# lacp rate fast
-Switch(config-if-range)# exit
+interface range gigabitEthernet 1/0/1-2
+ channel-group 1 mode active    ! активно надсилає LACP PDU
+ channel-protocol lacp
+ lacp port-priority 1000        ! менше = вищий пріоритет
+ lacp rate fast
+ exit
 
 ! PAgP Configuration (протокол Cisco)
-Switch(config-if-range)# channel-group 1 mode desirable
-Switch(config-if-range)# channel-protocol pagp
-Switch(config-if-range)# pagp port-priority 1000
+ channel-group 1 mode desirable
+ channel-protocol pagp
+ pagp port-priority 1000
 
 ! Static EtherChannel (без протоколу, обидва боки = on)
-Switch(config-if-range)# channel-group 1 mode on
+ channel-group 1 mode on
 
 ! Port-Channel Interface — логічний інтерфейс для групи
-Switch(config)# interface port-channel 1
-Switch(config-if)# description "Uplink to Core"
-Switch(config-if)# switchport mode trunk
-Switch(config-if)# switchport trunk native vlan 99
-Switch(config-if)# switchport trunk allowed vlan 10,20,30,99
-Switch(config-if)# lacp system-priority 1000
-Switch(config-if)# lacp system-id 0050.7966.6800
-Switch(config-if)# exit
+interface port-channel 1
+ description "Uplink to Core"
+ switchport mode trunk
+ switchport trunk native vlan 99
+ switchport trunk allowed vlan 10,20,30,99
+ lacp system-priority 1000
+ lacp system-id 0050.7966.6800
+ exit
 ```
 
 ### 13.2 Балансування навантаження
 
 ```
 ! Алгоритми балансування трафіку по каналах
-Switch(config)# port-channel load-balance src-dst-ip    ! за IP-адресами
-Switch(config)# port-channel load-balance src-dst-mac   ! за MAC-адресами
-Switch(config)# port-channel load-balance src-dst-port  ! за TCP/UDP портами
-Switch(config)# port-channel load-balance src-ip
-Switch(config)# port-channel load-balance dst-ip
-Switch(config)# port-channel load-balance src-mac
-Switch(config)# port-channel load-balance dst-mac
+port-channel load-balance src-dst-ip    ! за IP-адресами
+port-channel load-balance src-dst-mac   ! за MAC-адресами
+port-channel load-balance src-dst-port  ! за TCP/UDP портами
+port-channel load-balance src-ip
+port-channel load-balance dst-ip
+port-channel load-balance src-mac
+port-channel load-balance dst-mac
 
 ! Балансування на рівні VLAN
-Switch(config)# vlan 10
-Switch(config-vlan)# lacp load-balancing src-dst-ip
-Switch(config-vlan)# exit
+vlan 10
+ lacp load-balancing src-dst-ip
+ exit
 
 ! Перевірка
-Switch# show etherchannel summary
-Switch# show etherchannel port-channel
-Switch# show etherchannel load-balance
-Switch# show lacp neighbor
-Switch# show lacp internal
-Switch# show lacp counters
-Switch# show pagp neighbor
-Switch# show pagp internal
+show etherchannel summary
+show etherchannel port-channel
+show etherchannel load-balance
+show lacp neighbor
+show lacp internal
+show lacp counters
+show pagp neighbor
+show pagp internal
 ```
 
 ### 13.3 Розширене налаштування EtherChannel
 
 ```
 ! Cross-Stack EtherChannel (StackWise)
-Switch(config)# interface port-channel 10
-Switch(config-if)# stack-port 1/1-1/2
-Switch(config-if)# switchport mode trunk
-Switch(config-if)# exit
+interface port-channel 10
+ stack-port 1/1-1/2
+ switchport mode trunk
+ exit
 
 ! VSS EtherChannel
-Switch(config)# interface port-channel 100
-Switch(config-if)# vss-port-channel
-Switch(config-if)# switchport mode trunk
-Switch(config-if)# exit
+interface port-channel 100
+ vss-port-channel
+ switchport mode trunk
+ exit
 
 ! Мінімальна кількість активних портів
-Switch(config-if)# lacp min-links 2
-Switch(config)# port-channel min-links 2
+ lacp min-links 2
+port-channel min-links 2
 
 ! Максимальна кількість активних портів у bundle
-Switch(config-if)# lacp max-bundle 8
+ lacp max-bundle 8
 
 ! Graceful Shutdown
-Switch(config-if)# lacp graceful-convergence
+ lacp graceful-convergence
 ```
 
 ### 13.4 Пошук несправностей в EtherChannel
 
 ```
 ! Діагностика проблем
-Switch# show etherchannel detail
-Switch# show etherchannel inconsistency  ! виявити розбіжності в налаштуваннях
-Switch# debug etherchannel
-Switch# debug lacp
-Switch# debug pagp
+show etherchannel detail
+show etherchannel inconsistency  ! виявити розбіжності в налаштуваннях
+debug etherchannel
+debug lacp
+debug pagp
 
 ! Скинути лічильники
-Switch# clear lacp counters
-Switch# clear pagp counters
-Switch(config)# default interface port-channel 1  ! скинути налаштування port-channel
+clear lacp counters
+clear pagp counters
+default interface port-channel 1  ! скинути налаштування port-channel
 
 ! Перенастройка порту вручну
-Switch(config)# interface gi1/0/1
-Switch(config-if)# shutdown
-Switch(config-if)# no channel-group
-Switch(config-if)# no shutdown
-Switch(config-if)# channel-group 1 mode active
+interface gi1/0/1
+ shutdown
+ no channel-group
+ no shutdown
+ channel-group 1 mode active
 ```
 
 ---
@@ -1342,106 +1342,106 @@ Switch(config-if)# channel-group 1 mode active
 
 ```
 ! Базова IP-адресація
-Router(config)# interface gigabitEthernet 0/0
-Router(config-if)# ip address 192.168.1.1 255.255.255.0
-Router(config-if)# ip address 10.0.0.1 255.255.255.0 secondary  ! другорядна адреса
-Router(config-if)# ip directed-broadcast
-Router(config-if)# ip unreachables
-Router(config-if)# ip redirects
-Router(config-if)# ip proxy-arp
-Router(config-if)# no shutdown
+interface gigabitEthernet 0/0
+ ip address 192.168.1.1 255.255.255.0
+ ip address 10.0.0.1 255.255.255.0 secondary  ! другорядна адреса
+ ip directed-broadcast
+ ip unreachables
+ ip redirects
+ ip proxy-arp
+ no shutdown
 
 ! Loopback-інтерфейс (завжди активний, використовується як Router ID)
-Router(config)# interface loopback 0
-Router(config-if)# ip address 1.1.1.1 255.255.255.255
-Router(config-if)# description "Router ID and Management"
-Router(config-if)# ip ospf network point-to-point
+interface loopback 0
+ ip address 1.1.1.1 255.255.255.255
+ description "Router ID and Management"
+ ip ospf network point-to-point
 
 ! VLSM — маски змінної довжини
-Router(config-if)# ip address 172.16.1.1 255.255.255.192   ! /26
-Router(config-if)# ip address 10.1.1.1 255.255.255.224     ! /27
-Router(config-if)# ip address 192.168.1.129 255.255.255.240! /28
+ ip address 172.16.1.1 255.255.255.192    ! /26
+ ip address 10.1.1.1 255.255.255.224      ! /27
+ ip address 192.168.1.129 255.255.255.240 ! /28
 
 ! IPv6
-Router(config-if)# ipv6 enable
-Router(config-if)# ipv6 address 2001:db8::1/64
-Router(config-if)# ipv6 address fe80::1 link-local
-Router(config-if)# ipv6 address autoconfig
+ ipv6 enable
+ ipv6 address 2001:db8::1/64
+ ipv6 address fe80::1 link-local
+ ipv6 address autoconfig
 ```
 
 ### 14.2 Сервіси DHCP
 
 ```
 ! DHCP-сервер
-Router(config)# ip dhcp excluded-address 192.168.1.1 192.168.1.10  ! резерв для статики
-Router(config)# ip dhcp excluded-address 192.168.1.254
-Router(config)# ip dhcp pool LAN-POOL
-Router(dhcp-config)# network 192.168.1.0 255.255.255.0
-Router(dhcp-config)# default-router 192.168.1.1
-Router(dhcp-config)# dns-server 8.8.8.8 8.8.4.4
-Router(dhcp-config)# domain-name company.com
-Router(dhcp-config)# lease 8                            ! оренда 8 днів
-Router(dhcp-config)# option 150 ip 192.168.1.10         ! TFTP для VoIP
-Router(dhcp-config)# client-identifier 0100.5056.c000.08
-Router(dhcp-config)# host 192.168.1.100 255.255.255.0   ! резервування адреси
-Router(dhcp-config)# exit
+ip dhcp excluded-address 192.168.1.1 192.168.1.10  ! резерв для статики
+ip dhcp excluded-address 192.168.1.254
+ip dhcp pool LAN-POOL
+ network 192.168.1.0 255.255.255.0
+ default-router 192.168.1.1
+ dns-server 8.8.8.8 8.8.4.4
+ domain-name company.com
+ lease 8                            ! оренда 8 днів
+ option 150 ip 192.168.1.10         ! TFTP для VoIP
+ client-identifier 0100.5056.c000.08
+ host 192.168.1.100 255.255.255.0   ! резервування адреси
+ exit
 
 ! DHCP Relay — якщо сервер в іншій підмережі
-Router(config-if)# ip helper-address 192.168.100.10
-Router(config-if)# ip forward-protocol udp 67
-Router(config-if)# ip forward-protocol udp 68
+ ip helper-address 192.168.100.10
+ ip forward-protocol udp 67
+ ip forward-protocol udp 68
 
 ! Додаткові параметри DHCP
-Router(config)# ip dhcp ping timeout 100
-Router(config)# ip dhcp ping packets 2
-Router(config)# ip dhcp conflict logging
-Router(config)# ip dhcp snooping
+ip dhcp ping timeout 100
+ip dhcp ping packets 2
+ip dhcp conflict logging
+ip dhcp snooping
 ```
 
 ### 14.3 DHCP Snooping
 
 ```
 ! Захист від підроблених DHCP-серверів
-Switch(config)# ip dhcp snooping
-Switch(config)# ip dhcp snooping vlan 10,20,30
-Switch(config)# ip dhcp snooping information option
-Switch(config)# ip dhcp snooping limit rate 100     ! макс. DHCP-пакетів на порту
-Switch(config)# ip dhcp snooping verify mac-address
-Switch(config)# ip dhcp snooping database flash:dhcp-snooping.db
-Switch(config)# ip dhcp snooping database write-delay 300
+ip dhcp snooping
+ip dhcp snooping vlan 10,20,30
+ip dhcp snooping information option
+ip dhcp snooping limit rate 100     ! макс. DHCP-пакетів на порту
+ip dhcp snooping verify mac-address
+ip dhcp snooping database flash:dhcp-snooping.db
+ip dhcp snooping database write-delay 300
 
 ! Довірений/ненадійний порт
-Switch(config-if)# ip dhcp snooping trust           ! тільки uplink до реального сервера
-Switch(config-if)# ip dhcp snooping limit rate 50
-Switch(config-if)# ip dhcp snooping vlan 10 information option
+ ip dhcp snooping trust             ! тільки uplink до реального сервера
+ ip dhcp snooping limit rate 50
+ ip dhcp snooping vlan 10 information option
 
 ! Перевірка
-Switch# show ip dhcp snooping
-Switch# show ip dhcp snooping binding
-Switch# show ip dhcp snooping statistics
-Switch# debug ip dhcp snooping
+show ip dhcp snooping
+show ip dhcp snooping binding
+show ip dhcp snooping statistics
+debug ip dhcp snooping
 ```
 
 ### 14.4 Налаштування ARP
 
 ```
 ! Налаштування ARP
-Router(config)# arp timeout 300                             ! час зберігання ARP-запису
-Router(config)# arp 192.168.1.100 0050.7966.6800 arpa      ! статичний ARP-запис
-Router(config)# arp proxy disable
-Router(config)# arp gratuitous ignore
+arp timeout 300                            ! час зберігання ARP-запису
+arp 192.168.1.100 0050.7966.6800 arpa      ! статичний ARP-запис
+arp proxy disable
+arp gratuitous ignore
 
 ! Proxy ARP
-Router(config-if)# ip proxy-arp                            ! дозволити proxy ARP
-Router(config-if)# no ip proxy-arp                         ! заборонити
+ ip proxy-arp                            ! дозволити proxy ARP
+ no ip proxy-arp                         ! заборонити
 
 ! ARP Inspection (DAI) — захист від ARP-spoofing
-Switch(config)# ip arp inspection vlan 10,20
-Switch(config)# ip arp inspection validate src-mac dst-mac ip
-Switch(config)# ip arp inspection log-buffer entries 32
-Switch(config)# ip arp inspection log-buffer logs 1024 interval 10
-Switch(config-if)# ip arp inspection trust                  ! довірений порт (uplink)
-Switch(config-if)# ip arp inspection limit rate 100
+ip arp inspection vlan 10,20
+ip arp inspection validate src-mac dst-mac ip
+ip arp inspection log-buffer entries 32
+ip arp inspection log-buffer logs 1024 interval 10
+ ip arp inspection trust                 ! довірений порт (uplink)
+ ip arp inspection limit rate 100
 ```
 
 ---
@@ -1452,57 +1452,57 @@ Switch(config-if)# ip arp inspection limit rate 100
 
 ```
 ! Стандартні статичні маршрути
-Router(config)# ip route 192.168.2.0 255.255.255.0 10.0.0.2              ! через next-hop
-Router(config)# ip route 192.168.3.0 255.255.255.0 GigabitEthernet0/1 10.0.0.3
-Router(config)# ip route 192.168.4.0 255.255.255.0 10.0.0.4 50           ! AD=50
+ip route 192.168.2.0 255.255.255.0 10.0.0.2             ! через next-hop
+ip route 192.168.3.0 255.255.255.0 GigabitEthernet0/1 10.0.0.3
+ip route 192.168.4.0 255.255.255.0 10.0.0.4 50          ! AD=50
 
 ! Default Route (маршрут за замовчуванням)
-Router(config)# ip route 0.0.0.0 0.0.0.0 203.0.113.1
-Router(config)# ip route 0.0.0.0 0.0.0.0 Dialer1
+ip route 0.0.0.0 0.0.0.0 203.0.113.1
+ip route 0.0.0.0 0.0.0.0 Dialer1
 
 ! Summary Routes (зведені маршрути)
-Router(config)# ip route 172.16.0.0 255.255.0.0 10.0.0.1
-Router(config)# ip route 10.0.0.0 255.255.0.0 Null0                      ! "чорна діра"
+ip route 172.16.0.0 255.255.0.0 10.0.0.1
+ip route 10.0.0.0 255.255.0.0 Null0                     ! "чорна діра"
 
 ! Floating Static Routes (резервний маршрут з більшою AD)
-Router(config)# ip route 0.0.0.0 0.0.0.0 192.168.1.1                    ! AD=1 основний
-Router(config)# ip route 0.0.0.0 0.0.0.0 192.168.2.1 250                ! AD=250 резервний
+ip route 0.0.0.0 0.0.0.0 192.168.1.1                    ! AD=1 основний
+ip route 0.0.0.0 0.0.0.0 192.168.2.1 250                ! AD=250 резервний
 ```
 
 ### 15.2 Відстеження статичних маршрутів
 
 ```
 ! IP SLA — зонд для відстеження досяжності
-Router(config)# ip sla 1
-Router(config-ip-sla)# icmp-echo 8.8.8.8 source-interface GigabitEthernet0/0
-Router(config-ip-sla)# timeout 1000
-Router(config-ip-sla)# frequency 5                                        ! ping кожні 5 сек
-Router(config-ip-sla)# exit
+ip sla 1
+ icmp-echo 8.8.8.8 source-interface GigabitEthernet0/0
+ timeout 1000
+ frequency 5                                        ! ping кожні 5 сек
+ exit
 
-Router(config)# ip sla schedule 1 life forever start-time now
+ip sla schedule 1 life forever start-time now
 
 ! Track-об'єкт — реагує на стан SLA
-Router(config)# track 10 ip sla 1 reachability
-Router(config-track)# delay down 10 up 5
+track 10 ip sla 1 reachability
+ delay down 10 up 5
 
 ! Маршрут зникає, якщо track=down
-Router(config)# ip route 0.0.0.0 0.0.0.0 192.168.1.1 track 10
-Router(config)# ip route 0.0.0.0 0.0.0.0 192.168.2.1 250                ! резервний
+ip route 0.0.0.0 0.0.0.0 192.168.1.1 track 10
+ip route 0.0.0.0 0.0.0.0 192.168.2.1 250                ! резервний
 ```
 
 ### 15.3 Policy-Based Routing
 
 ```
 ! PBR — маршрутизація на основі правил (не тільки за dest. IP)
-Router(config)# access-list 100 permit tcp any any eq 80
-Router(config)# access-list 100 permit tcp any any eq 443
+access-list 100 permit tcp any any eq 80
+access-list 100 permit tcp any any eq 443
 
-Router(config)# route-map PBR-OUTBOUND permit 10
-Router(config-route-map)# match ip address 100                            ! яким трафіком
-Router(config-route-map)# set ip next-hop 192.168.1.10                   ! куди направити
-Router(config-route-map)# set interface Null0
-Router(config-route-map)# set ip dscp af41
-Router(config-route-map)# set ip precedence flash
+route-map PBR-OUTBOUND permit 10
+ match ip address 100                           ! яким трафіком
+ set ip next-hop 192.168.1.10                   ! куди направити
+ set interface Null0
+ set ip dscp af41
+ set ip precedence flash
 ```
 
 ---
