@@ -66,6 +66,23 @@ mkdocs serve
 
 ---
 
+## 👨🏻‍🔧 TO DO
+
+Network:
+- network-configs/ACL.md
+- network-configs/ospf.md
+- network-configs/mikrotik-cheat-sheet.md
+- network-configs/dhcp.md
+
+Services:
+- server-services/bind9.md
+- server-services/dhcp.md
+- server-services/ldap.md
+- server-services/ssh.md
+- server-services/basics.md
+
+---
+
 ## 📬 Контакти
 
 **Кафедра інформаційних систем та технологій — Кафедра №21**
