@@ -9,7 +9,7 @@
 
 <div class="grid cards" markdown>
 
--   :material-ethernet: **IP інтерфейси**
+-   :material-ethernet: __IP інтерфейси__
 
     ---
 
@@ -17,7 +17,7 @@
 
     [:octicons-arrow-right-24: Читати](IP-interfaces.md)
 
--   :material-lan: **VLAN та Trunk**
+-   :material-lan: __VLAN та Trunk__
 
     ---
 
@@ -25,7 +25,7 @@
 
     [:octicons-arrow-right-24: Читати](vlans.md)
 
--   :material-router: **Маршрутизація**
+-   :material-router: __Маршрутизація__
 
     ---
 
@@ -33,7 +33,7 @@
 
     [:octicons-arrow-right-24: Читати](routing.md)
 
--   :material-shield-lock: **Контроль доступу (ACL)**
+-   :material-shield-lock: __Контроль доступу (ACL)__
 
     ---
 
@@ -41,7 +41,7 @@
 
     [:octicons-arrow-right-24: Читати](ACL.md)
 
--   :material-note-text: **Cisco IOS — Шпаргалка**
+-   :material-note-text: __Cisco IOS - Шпаргалка__
 
     ---
 
