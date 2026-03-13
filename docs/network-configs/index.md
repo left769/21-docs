@@ -15,7 +15,7 @@
 
     Налаштування фізичних та логічних інтерфейсів, IPv4/IPv6 адресація, loopback.
 
-    [:octicons-arrow-right-24: Читати](IP-interfaces/index.md)
+    [:octicons-arrow-right-24: Читати](IP-interfaces.md)
 
 -   :material-lan: **VLAN та Trunk**
 
@@ -23,7 +23,7 @@
 
     Сегментація мережі за допомогою VLAN, налаштування транкових портів 802.1Q, VTP.
 
-    [:octicons-arrow-right-24: Читати](vlans/index.md)
+    [:octicons-arrow-right-24: Читати](vlans.md)
 
 -   :material-router: **Маршрутизація**
 
@@ -31,7 +31,7 @@
 
     Статична маршрутизація, динамічні протоколи OSPF, EIGRP, BGP та їх базове налаштування.
 
-    [:octicons-arrow-right-24: Читати](routing/index.md)
+    [:octicons-arrow-right-24: Читати](routing.md)
 
 -   :material-shield-lock: **Контроль доступу (ACL)**
 
@@ -39,7 +39,7 @@
 
     Стандартні та розширені списки доступу, фільтрація трафіку, застосування на інтерфейсах.
 
-    [:octicons-arrow-right-24: Читати](ACL/index.md)
+    [:octicons-arrow-right-24: Читати](ACL.md)
 
 -   :material-note-text: **Cisco IOS — Шпаргалка**
 
@@ -47,7 +47,7 @@
 
     Повний довідник команд: від базових налаштувань до безпеки, комутації та маршрутизації.
 
-    [:octicons-arrow-right-24: Читати](cisco-cheat-sheet/index.md)
+    [:octicons-arrow-right-24: Читати](cisco-cheat-sheet.md)
 
 </div>
 

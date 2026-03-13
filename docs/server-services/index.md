@@ -15,7 +15,7 @@
 
     Розгортання FreeRADIUS, інтеграція з Cisco для AAA-автентифікації, налаштування користувачів.
 
-    [:octicons-arrow-right-24: Читати](radius/index.md)
+    [:octicons-arrow-right-24: Читати](radius.md)
 
 -   :material-dns: **DNS** 🚧
 
