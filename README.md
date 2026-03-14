@@ -69,18 +69,39 @@ mkdocs serve
 ## 👨🏻‍🔧 TO DO
 
 Network:
+```bash
 - network-configs/ACL.md
 - network-configs/ospf.md
 - network-configs/mikrotik-cheat-sheet.md
 - network-configs/dhcp.md
+```
 
 Services:
+```bash
+- server-services/basics.md
+- server-services/nfs.md
 - server-services/bind9.md
 - server-services/dhcp.md
+- server-services/syslog.md
 - server-services/ldap.md
 - server-services/ssh.md
-- server-services/basics.md
-
+- server-services/git.md
+- server-services/snort.md
+- server-services/suricata.md
+- server-services/iptables.md
+- server-services/nmap.md
+- server-services/certbot.md
+- server-services/netbox.md
+- server-services/zabbix.md #Дані привіт
+- server-services/ansible.md
+- server-services/docker.md
+- server-services/terraform.md
+- server-services/haproxy.md
+- server-services/openvpn.md
+- server-services/wireguard.md
+- server-services/email.md
+- server-services/asterisk.md #Єгору привіт
+```
 ---
 
 ## 📬 Контакти
