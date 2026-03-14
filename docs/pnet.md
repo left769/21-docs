@@ -492,19 +492,7 @@
             container.style.zIndex = '1000';
             container.style.display = 'flex';
             container.style.gap = '10px';
-            
-            const pdfButton = document.createElement('button');
-            pdfButton.textContent = '📄 PDF з посиланнями';
-            pdfButton.className = 'button';
-            pdfButton.onclick = generatePDF;
-            
-            const printButton = document.createElement('button');
-            printButton.textContent = '🖨️ Друк';
-            printButton.className = 'button';
-            printButton.onclick = printPDF;
-            
-            container.appendChild(pdfButton);
-            container.appendChild(printButton);
+
             document.body.appendChild(container);
         });
     </script>
