@@ -8,37 +8,24 @@
 ## 📋 Зміст розділу
 
 <div class="grid cards" markdown>
-
 -   :material-key-wireless: **RADIUS**
-
     ---
-
     Розгортання FreeRADIUS, інтеграція з Cisco для AAA-автентифікації, налаштування користувачів.
-
     [:octicons-arrow-right-24: Читати](radius.md)
 
 -   :material-dns: **DNS** 🚧
-
     ---
-
     Налаштування BIND9, зони прямого та зворотного перегляду, делегування.
-
     *Розділ у розробці*
 
 -   :material-ip: **DHCP** 🚧
-
     ---
-
     Розгортання ISC DHCP Server, пули адрес, резервування, relay-агент.
-
     *Розділ у розробці*
 
 -   :material-file-lock: **SSH та безпека** 🚧
-
     ---
-
     Hardening SSH, автентифікація за ключем, fail2ban, налаштування firewall (iptables/ufw).
-
     *Розділ у розробці*
 
 </div>

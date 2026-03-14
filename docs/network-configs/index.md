@@ -8,7 +8,6 @@
 ## 📋 Зміст розділу
 
 <div class="grid cards" markdown>
-
 -   :material-ethernet: __IP інтерфейси__
     ---
     Налаштування фізичних та логічних інтерфейсів, IPv4/IPv6 адресація, loopback.
