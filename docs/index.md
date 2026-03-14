@@ -7,17 +7,27 @@
 
 ## 🗂️ Розділи довідника
 
--   [Мережі](https://left769.github.io/21-docs/network-configs/)
+<div class="grid cards" markdown>
+
+-   :material-ethernet: __Мережі__
+
+    ---
 
     Налаштування мережевого обладнання Cisco: інтерфейси, VLAN, маршрутизація, ACL та повна шпаргалка команд IOS
 
-    ---
+    [:octicons-arrow-right-24: Перейти до розділу](https://left769.github.io/21-docs/network-configs/)
 
--   [Сервіси Linux](https://left769.github.io/21-docs/server-services/)
-
-    Розгортання та налаштування серверних сервісів на базі ОС Linux: RADIUS, DHCP, DNS та інші
+-   :simple-linux: __Сервіси Linux__
 
     ---
+
+    Розгортання та налаштування сервісів на базі ОС Linux: RADIUS, DHCP, DNS та інші
+
+    [:octicons-arrow-right-24: Перейти до розділу](https://left769.github.io/21-docs/server-services/)
+
+</div>
+
+---
 
 ## 🎓 Для кого цей довідник
 
