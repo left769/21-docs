@@ -13,7 +13,7 @@
 
     ---
 
-    Налаштування мережевого обладнання Cisco: інтерфейси, VLAN, маршрутизація, ACL та повна шпаргалка команд IOS
+    Налаштування мережевого обладнання (Cisco, Mikrotik та інші): інтерфейси, VLAN, маршрутизація, ACL та повна шпаргалка команд IOS
 
     [:octicons-arrow-right-24: Перейти до розділу](https://left769.github.io/21-docs/network-configs/)
 
@@ -66,8 +66,6 @@ Services:
 - ``server-services/dhcp.md``
 
 - ``server-services/ldap.md``
-
-- ``server-services/ssh.md``
 
 - ``server-services/basics.md``
 

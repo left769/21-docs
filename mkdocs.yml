@@ -55,6 +55,7 @@ nav:
       - 'Cisco cheat sheet': network-configs/cisco-cheat-sheet.md
   - 🖥️ Сервіси:
       - 'Сервіси на базі OC Linux': server-services/index.md
+      - 'SSH': server-services/ssh.md
       # - 'DHCP': server-services/dhcp-server.md
       - 'RADIUS': server-services/radius.md
 

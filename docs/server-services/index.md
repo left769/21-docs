@@ -9,6 +9,14 @@
 
 <div class="grid cards" markdown>
 
+-   :material-file-lock: **SSH та безпека** 🚧
+
+    ---
+
+    Hardening SSH, автентифікація за ключем, fail2ban, налаштування firewall (iptables/ufw).
+
+    [:octicons-arrow-right-24: Читати](ssh.md)
+
 -   :material-key-wireless: **RADIUS**
 
     ---
@@ -30,14 +38,6 @@
     ---
 
     Розгортання ISC DHCP Server, пули адрес, резервування, relay-агент.
-
-    *Розділ у розробці*
-
--   :material-file-lock: **SSH та безпека** 🚧
-
-    ---
-
-    Hardening SSH, автентифікація за ключем, fail2ban, налаштування firewall (iptables/ufw).
 
     *Розділ у розробці*
 
