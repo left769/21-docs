@@ -23,6 +23,7 @@
 | Розділ | Опис |
 |--------|------|
 | [Сервіси на базі Linux](https://left769.github.io/21-docs/server-services/) | Розгортання серверних сервісів |
+| [SSH](https://left769.github.io/21-docs/server-services/ssh/) | Налаштування SSH |
 | [RADIUS](https://left769.github.io/server-services/radius/) | Налаштування сервера автентифікації |
 
 ---
