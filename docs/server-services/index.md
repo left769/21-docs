@@ -13,7 +13,7 @@
 
     ---
 
-    Hardening SSH, автентифікація за ключем, fail2ban, налаштування firewall (iptables/ufw).
+    Hardening SSH, автентифікація за ключем та fail2ban.
 
     [:octicons-arrow-right-24: Читати](ssh.md)
 
