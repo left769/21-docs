@@ -41,7 +41,7 @@
 
     [:octicons-arrow-right-24: Читати](ACL.md)
 
--   :material-note-text: __Cisco IOS - Шпаргалка__
+-   :simple-cisco: __Cisco IOS - Шпаргалка__
 
     ---
 
