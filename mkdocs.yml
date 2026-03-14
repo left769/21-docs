@@ -45,7 +45,7 @@ theme:
 nav:
   - 🏠 Головна:
       - 'Вступ': index.md
-      - 'Інструкція з користування PNET Lab': pnet.md
+      - '🧪Інструкція з користування PNET Lab': pnet.md
   - 🌐 Мережі:
       - 'Вступ до мереж': network-configs/index.md
       - 'IP інтерфейси': network-configs/IP-interfaces.md
