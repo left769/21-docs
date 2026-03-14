@@ -10,28 +10,43 @@
 <div class="grid cards" markdown>
 
 -   :material-ethernet: __IP інтерфейси__
+
     ---
+
     Налаштування фізичних та логічних інтерфейсів, IPv4/IPv6 адресація, loopback.
+
     [:octicons-arrow-right-24: Читати](IP-interfaces.md)
 
 -   :material-lan: __VLAN та Trunk__
+
     ---
+
     Сегментація мережі за допомогою VLAN, налаштування транкових портів 802.1Q, VTP.
+
     [:octicons-arrow-right-24: Читати](vlans.md)
 
 -   :material-router: __Маршрутизація__
+
     ---
+
     Статична маршрутизація, динамічні протоколи OSPF, EIGRP, BGP та їх базове налаштування.
+
     [:octicons-arrow-right-24: Читати](routing.md)
 
 -   :material-shield-lock: __Контроль доступу (ACL)__
+
     ---
+
     Стандартні та розширені списки доступу, фільтрація трафіку, застосування на інтерфейсах.
+
     [:octicons-arrow-right-24: Читати](ACL.md)
 
 -   :material-note-text: __Cisco IOS - Шпаргалка__
+
     ---
+
     Повний довідник команд: від базових налаштувань до безпеки, комутації та маршрутизації.
+
     [:octicons-arrow-right-24: Читати](cisco-cheat-sheet.md)
 
 </div>
@@ -67,9 +82,3 @@
 !!! info "Рівень матеріалу"
     Базові розділи (IP, VLAN, маршрутизація, ACL) — для 2 курсу.
     Cisco cheat sheet містить також просунуті теми рівня CCNP — вони позначені відповідно.
-
-
-<div class="grid" markdown>
-- Картка 1
-- Картка 2
-</div>
