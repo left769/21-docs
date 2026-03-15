@@ -15,7 +15,7 @@
 
     Налаштування фізичних та логічних інтерфейсів, IPv4 адресація, loopback.
 
-    [:octicons-arrow-right-24: Читати](IP-interfaces.md)
+    [:octicons-arrow-right-24: Читати](ip-interfaces.md)
 
 -   :material-lan: __VLAN та Trunk__
 
@@ -39,7 +39,7 @@
 
     Стандартні та розширені списки доступу, фільтрація трафіку, застосування на інтерфейсах.
 
-    [:octicons-arrow-right-24: Читати](ACL.md)
+    [:octicons-arrow-right-24: Читати](acl.md)
 
 -   :simple-cisco: __Cisco IOS - Шпаргалка__
 

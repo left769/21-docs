@@ -72,14 +72,16 @@ mkdocs serve
 Network:
 ```bash
 - network-configs/stp.md
-- network-configs/ACL.md
+- network-configs/acl.md
 - network-configs/ipsec.md
 - network-configs/ospf.md
 - network-configs/bgp.md
 - network-configs/mikrotik-cheat-sheet.md
 - network-configs/mikrotik-ovpn.md
 - network-configs/mikrotik-wireguard.md
+- network-configs/microtik-firewall.md
 - network-configs/dhcp.md
+- network-configs/cisco-nat.md
 - network-configs/fortigate.md
 ```
 
