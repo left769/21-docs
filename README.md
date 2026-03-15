@@ -72,7 +72,6 @@ mkdocs serve
 Network:
 ```bash
 - network-configs/stp.md
-- network-configs/acl.md
 - network-configs/ipsec.md
 - network-configs/ospf.md
 - network-configs/bgp.md
