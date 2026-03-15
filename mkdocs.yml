@@ -48,10 +48,10 @@ nav:
       - '🧪Інструкція з користування PNET Lab': pnet.md
   - 🌐 Мережі:
       - 'Вступ до мереж': network-configs/index.md
-      - 'IP інтерфейси': network-configs/IP-interfaces.md
+      - 'IP інтерфейси': network-configs/ip-interfaces.md
       - 'VLAN та Trunk': network-configs/vlans.md
       - 'Маршрутизація': network-configs/routing.md
-      - 'Контроль доступу': network-configs/ACL.md
+      - 'Контроль доступу': network-configs/acl.md
       - 'Cisco cheat sheet': network-configs/cisco-cheat-sheet.md
   - 🖥️ Сервіси:
       - 'Сервіси на базі OC Linux': server-services/index.md

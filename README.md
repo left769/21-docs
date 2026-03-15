@@ -13,10 +13,10 @@
 | Розділ | Опис |
 |--------|------|
 | [Вступ до мереж](https://left769.github.io/21-docs/network-configs/) | Базові концепції та моделі OSI/TCP-IP |
-| [IP інтерфейси](https://left769.github.io/21-docs/network-configs/IP-interfaces/) | Налаштування інтерфейсів, IPv4/IPv6 |
+| [IP інтерфейси](https://left769.github.io/21-docs/network-configs/ip-interfaces/) | Налаштування інтерфейсів, IPv4/IPv6 |
 | [VLAN та Trunk](https://left769.github.io/21-docs/network-configs/vlans/) | Сегментація мережі, 802.1Q |
 | [Маршрутизація](https://left769.github.io/21-docs/network-configs/routing/) | Статична та динамічна маршрутизація |
-| [Контроль доступу](https://left769.github.io/21-docs/network-configs/ACL/) | ACL, фільтрація трафіку |
+| [Контроль доступу](https://left769.github.io/21-docs/network-configs/acl/) | ACL, фільтрація трафіку |
 | [Cisco IOS — Шпаргалка](https://left769.github.io/21-docs/network-configs/cisco-cheat-sheet/) | Повний довідник команд Cisco IOS |
 
 ### 🖥️ Сервіси Linux
