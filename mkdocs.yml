@@ -47,6 +47,7 @@ nav:
       - '👋Вступ': index.md
       - '🧪Інструкція з користування PNET Lab': pnet.md
       - 'Калькулятор маски підмереж': network-configs/subnet-calculator.md
+      - 'Калькулятор прав Linux': server-services/chmod-calculator.md
   - 🌐 Мережі:
       - 'Вступ до мереж': network-configs/index.md
       - 'IP інтерфейси': network-configs/IP-interfaces.md
@@ -61,6 +62,7 @@ nav:
       - 'SSH': server-services/ssh.md
       # - 'DHCP': server-services/dhcp-server.md
       - 'RADIUS': server-services/radius.md
+      - 'Калькулятор прав': server-services/chmod-calculator.md
 
 markdown_extensions:
   - pymdownx.highlight:
