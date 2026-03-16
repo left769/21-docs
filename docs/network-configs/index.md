@@ -65,6 +65,14 @@
 
     [:octicons-arrow-right-24: Читати](subnet-calculator.md)
 
+-   :material-ip: __DHCP Server__
+
+    ---
+
+    Налаштування DHCP-сервевра на маршрутизаторі
+
+    [:octicons-arrow-right-24: Читати](dhcp.md)
+
 </div>
 
 ---
