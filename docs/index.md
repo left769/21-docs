@@ -61,7 +61,6 @@ Network:
 - network-configs/mikrotik-wireguard.md
 - network-configs/microtik-firewall.md
 - network-configs/dhcp.md
-- network-configs/cisco-nat.md
 - network-configs/fortigate.md
 ```
 

@@ -52,6 +52,7 @@ nav:
       - 'VLAN та Trunk': network-configs/vlans.md
       - 'Маршрутизація': network-configs/routing.md
       - 'Контроль доступу': network-configs/acl.md
+      - 'NAT в Cisco': network-configs/cisco-nat.md
       - 'Cisco cheat sheet': network-configs/cisco-cheat-sheet.md
   - 🖥️ Сервіси:
       - 'Сервіси на базі OC Linux': server-services/index.md

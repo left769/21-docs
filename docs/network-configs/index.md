@@ -49,6 +49,14 @@
 
     [:octicons-arrow-right-24: Читати](cisco-cheat-sheet.md)
 
+-   :material-ip-network: __Cisco NAT__
+
+    ---
+
+    Налаштування трансляції мережевих адрес NAT
+
+    [:octicons-arrow-right-24: Читати](cisco-nat.md)
+
 </div>
 
 ---
