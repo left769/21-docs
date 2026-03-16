@@ -44,7 +44,7 @@ PC-3: 172.16.0.30 ──┘         se0/0 (outside)
                                203.0.113.5
 ```
  
-![Схема мережі NAT](../assets/nat-topology.svg)
+![Схема мережі NAT](../assets/network-configs_cisco-nat_1.svg)
 ---
  
 ## 4 PAT з overload — вся мережа за однією адресою
