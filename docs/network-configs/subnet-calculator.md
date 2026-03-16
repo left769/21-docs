@@ -16,7 +16,7 @@
   </div>
   <div class="calc-field">
     <label>Маска підмережі</label>
-    <input type="text" id="mask-input" placeholder="255.255.255.0" oninput="calculateFromMask()" />
+    <input type="text" id="mask-input" placeholder="255.255.255.0" onchange="calculateFromMask()" onblur="calculateFromMask()" />
   </div>
 </div>
  
