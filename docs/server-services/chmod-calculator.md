@@ -250,7 +250,7 @@
   overflow-x: auto;
   color: var(--md-default-fg-color, #222);
 }
-.cmd-chmod { color: var(--md-primary-fg-color, #3f51b5); font-weight: 600; }
+.cmd-chmod { color: var(--md-primary-fg-color, #e65100); font-weight: 600; }
 .cmd-perm  { color: #e65100; font-weight: 700; margin: 0 0.4rem; }
 .cmd-path  { color: var(--md-default-fg-color--light, #888); }
 .chmod-copy-btn {
