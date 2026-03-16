@@ -46,7 +46,7 @@ nav:
   - 🏠 Головна:
       - '👋Вступ': index.md
       - '🧪Інструкція з користування PNET Lab': pnet.md
-      - '🧮Калькулятор маски підмереж': network-configs/subnet-calculator.md
+      - 'Калькулятор маски підмереж': network-configs/subnet-calculator.md
   - 🌐 Мережі:
       - 'Вступ до мереж': network-configs/index.md
       - 'IP інтерфейси': network-configs/ip-interfaces.md

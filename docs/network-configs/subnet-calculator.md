@@ -89,7 +89,7 @@
   flex: 1;
   min-width: 160px;
 }
-.calc-field--slash { max-width: 120px; }
+.calc-field--slash { max-width: 150px; }
 .calc-field label {
   font-size: 0.75rem;
   font-weight: 500;
@@ -125,7 +125,7 @@
   font-weight: 300;
   line-height: 42px;
 }
-.slash-wrap input { width: 70px; text-align: center; }
+.slash-wrap input { width: 90px; text-align: center; }
 .calc-error {
   padding: 0.6rem 1rem;
   border-radius: 6px;
@@ -244,10 +244,7 @@ function prefixToMask(prefix) {
 }
  
 function maskToPrefix(mask) {
-  let n = mask >>> 0;
-  let count = 0;
-  while (n & 0x80000000) { count++; n = (n << 1) >>> 0; }
-  return count;
+  return (mask >>> 0).toString(2).split('0')[0].length;
 }
  
 function showError(msg) {
