@@ -9,7 +9,7 @@
 
 <div class="grid cards" markdown>
 
--   :material-file-lock: **SSH та безпека** 🚧
+-   :material-file-lock: **SSH та безпека**
 
     ---
 

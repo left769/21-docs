@@ -44,8 +44,9 @@ theme:
 
 nav:
   - 🏠 Головна:
-      - 'Вступ': index.md
+      - '👋Вступ': index.md
       - '🧪Інструкція з користування PNET Lab': pnet.md
+      - '🧮Калькулятор маски підмереж': network-configs/subnet-calculator.md
   - 🌐 Мережі:
       - 'Вступ до мереж': network-configs/index.md
       - 'IP інтерфейси': network-configs/ip-interfaces.md
@@ -54,6 +55,7 @@ nav:
       - 'Контроль доступу': network-configs/acl.md
       - 'NAT в Cisco': network-configs/cisco-nat.md
       - 'Cisco cheat sheet': network-configs/cisco-cheat-sheet.md
+      - 'Калькулятор маски підмереж': network-configs/subnet-calculator.md
   - 🖥️ Сервіси:
       - 'Сервіси на базі OC Linux': server-services/index.md
       - 'SSH': server-services/ssh.md

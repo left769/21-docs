@@ -57,6 +57,14 @@
 
     [:octicons-arrow-right-24: Читати](cisco-nat.md)
 
+-   :material-calculator: __Калькулятор маски__
+
+    ---
+
+    Онлайн калькулятор IP маски підмережі
+
+    [:octicons-arrow-right-24: Читати](subnet-calculator.md)
+
 </div>
 
 ---
