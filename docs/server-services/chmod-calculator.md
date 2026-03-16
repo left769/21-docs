@@ -55,7 +55,7 @@
     <div class="chmod-result-label">Шаблон команди</div>
     <div class="chmod-cmd-row">
       <div class="chmod-cmd-display">
-        <span class="cmd-chmod">chmod</span>
+        <span class="cmd-chmod">chmod</span><span class="cmd-rec" id="cmd-rec"></span>
         <span class="cmd-perm" id="cmd-perm">755</span>
         <span class="cmd-path" id="cmd-path-display">/шлях/до/файлу</span>
       </div>
@@ -250,9 +250,10 @@
   overflow-x: auto;
   color: var(--md-default-fg-color, #222);
 }
-.cmd-chmod { color: var(--md-primary-fg-color, #e65100); font-weight: 600; }
+.cmd-chmod { color: var(--md-primary-fg-color, #4c8dff); font-weight: 600; }
 .cmd-perm  { color: #e65100; font-weight: 700; margin: 0 0.4rem; }
 .cmd-path  { color: var(--md-default-fg-color--light, #888); }
+.cmd-rec { color: #4c8dff; font-weight: 600; margin: 0 0.3rem 0 0.4rem; }
 .chmod-copy-btn {
   display: flex;
   align-items: center;
@@ -433,6 +434,7 @@ window.update = function() {
   document.getElementById('res-numeric').textContent = numeric;
   document.getElementById('res-symbolic').textContent = symbolic;
   document.getElementById('cmd-perm').textContent = numeric;
+  document.getElementById('cmd-rec').textContent = document.getElementById('recursive').checked ? '-R' : '';
 
   const pathInput = document.getElementById('cmd-path-input').value.trim();
   document.getElementById('cmd-path-display').textContent = pathInput || '/шлях/до/файлу';
