@@ -49,10 +49,10 @@ nav:
       - 'Калькулятор маски підмереж': network-configs/subnet-calculator.md
   - 🌐 Мережі:
       - 'Вступ до мереж': network-configs/index.md
-      - 'IP інтерфейси': network-configs/ip-interfaces.md
+      - 'IP інтерфейси': network-configs/IP-interfaces.md
       - 'VLAN та Trunk': network-configs/vlans.md
       - 'Маршрутизація': network-configs/routing.md
-      - 'Контроль доступу': network-configs/acl.md
+      - 'Контроль доступу': network-configs/ACL.md
       - 'NAT в Cisco': network-configs/cisco-nat.md
       - 'Cisco cheat sheet': network-configs/cisco-cheat-sheet.md
       - 'Калькулятор маски підмереж': network-configs/subnet-calculator.md
