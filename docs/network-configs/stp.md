@@ -20,7 +20,7 @@ SW-A ──── SW-B            SW-A ──── SW-B
 ```
 
 > 📁 Схема вибору маршруту: `assets/network-configs_stp_1.svg`
-
+![Схема вибору маршруту](../assets/network-configs_stp_1.svg)
 ---
 
 ## 2 Різновиди STP
@@ -79,10 +79,12 @@ Bridge ID = Пріоритет (2 байти) + MAC-адреса (6 байт)
 | **Backup Port** | BP | Резервний порт у тому ж сегменті. Заблокований |
 
 > 📁 Схема топології з ролями портів: `assets/network-configs_stp_1.svg`
+![Схема топології з ролями портів](../assets/network-configs_stp_1.svg)
 
 ### 3.3 Стани портів
 
 > 📁 Діаграма переходів між станами: `assets/network-configs_stp_2.svg`
+![Діаграма переходів між станами](../assets/network-configs_stp_2.svg)
 
 ```
 Disabled → Blocking → Listening → Learning → Forwarding
