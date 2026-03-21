@@ -65,6 +65,9 @@ mkdocs serve
 - [Material for MkDocs](https://squidfunk.github.io/mkdocs-material/) — тема
 - [GitHub Pages](https://pages.github.com/) — хостинг
 
+Для додавання стилізованих іконок можна скористатися офіційним репозиторієм
+- [Material for MkDocs](https://squidfunk.github.io/mkdocs-material/reference/icons-emojis/)
+
 ---
 
 ## 👨🏻‍🔧 TO DO
