@@ -73,6 +73,14 @@
 
     [:octicons-arrow-right-24: Читати](dhcp.md)
 
+-   :material-family-tree: __STP__
+
+    ---
+
+    Налаштування Spanning Tree Protocol
+
+    [:octicons-arrow-right-24: Читати](stp.md)
+
 </div>
 
 ---
