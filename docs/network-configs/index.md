@@ -25,6 +25,14 @@
 
     [:octicons-arrow-right-24: Читати](vlans.md)
 
+-   :material-router-network: __VLAN на Mikrotik__
+
+    ---
+
+    Налаштування VLAN на маршрутизаторі Mikrotik та реалізація схеми router-on-stick
+
+    [:octicons-arrow-right-24: Читати](vlans-mikrotik.md)
+
 -   :material-router: __Маршрутизація__
 
     ---
