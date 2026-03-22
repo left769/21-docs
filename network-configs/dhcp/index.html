@@ -1,0 +1,2048 @@
+
+<!doctype html>
+<html lang="uk" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="Створено колективом кафедри №21">
+      
+      
+      
+        <link rel="prev" href="../cisco-nat/">
+      
+      
+        <link rel="next" href="../cisco-cheat-sheet/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/logo_dep21_white.ico">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>DHCP-сервер - Довідник кафедри Інформаційних систем та технологій</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#dhcp-cisco-ios" class="md-skip">
+          Перейти до змісту
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Хедер">
+    <a href="../.." title="Довідник кафедри Інформаційних систем та технологій" class="md-header__button md-logo" aria-label="Довідник кафедри Інформаційних систем та технологій" data-md-component="logo">
+      
+  <img src="../../assets/logo_dep21_white.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Довідник кафедри Інформаційних систем та технологій
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              DHCP-сервер
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Перейти на темну тему"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Перейти на темну тему" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="indigo"  aria-label="Перейти на світлу тему"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Перейти на світлу тему" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Пошук" placeholder="Пошук" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Шукати">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Очистити" aria-label="Очистити" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Пошук розпочато
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Вкладки" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../.." class="md-tabs__link">
+          
+  
+  
+  🏠 Головна
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+  🌐 Мережі
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../server-services/" class="md-tabs__link">
+          
+  
+  
+  🖥️ Сервіси
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Навігація" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Довідник кафедри Інформаційних систем та технологій" class="md-nav__button md-logo" aria-label="Довідник кафедри Інформаційних систем та технологій" data-md-component="logo">
+      
+  <img src="../../assets/logo_dep21_white.png" alt="logo">
+
+    </a>
+    Довідник кафедри Інформаційних систем та технологій
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🏠 Головна
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    🏠 Головна
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    👋Вступ
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../pnet/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🧪Інструкція з користування PNET Lab
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../subnet-calculator/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Калькулятор маски підмереж
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../server-services/chmod-calculator/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Калькулятор прав Linux
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🌐 Мережі
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    🌐 Мережі
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Вступ до мереж
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../IP-interfaces/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IP інтерфейси
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../vlans/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VLAN та Trunk
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../vlans-mikrotik/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VLAN в Mikrotik
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../stp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    STP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../routing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Маршрутизація
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ACL/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Контроль доступу
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cisco-nat/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NAT в Cisco
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DHCP-сервер
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DHCP-сервер
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Зміст">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Зміст
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-dhcp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1 Протокол DHCP
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1 Протокол DHCP">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-dora" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 Процес DORA
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-dhcp-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2 Базове налаштування DHCP-сервера
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2 Базове налаштування DHCP-сервера">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 Схема мережі для прикладу
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 Крок 1 — Виключити статичні адреси з пулу
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 Крок 2 — Налаштувати пул адрес
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4 Крок 3 — Перевірити що сервіс увімкнено
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#25" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.5 Повний приклад базового налаштування
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-dhcp-relay-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3 DHCP Relay - сервер в іншій підмережі
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4 Перевірка та діагностика
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4 Перевірка та діагностика">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-show-ip-dhcp-binding" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 Приклад виводу show ip dhcp binding
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-mac-static-binding" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5 Резервування адреси по MAC (Static Binding)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-dhcp-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6 Додаткові DHCP-опції
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6 Додаткові DHCP-опції">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 Стандартні опції через іменовані команди
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-43-vendor-specific-cisco-wlc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2 Опція 43 — Vendor Specific (Cisco WLC / точки доступу)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63-66-67-tftp-pxe-boot-voip" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3 Опція 66 / 67 — TFTP-сервер та ім'я файлу (PXE Boot, VoIP)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#64-138-capwap-cisco-ap-controller" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.4 Опція 138 — CAPWAP / Cisco AP Controller
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#65-150-tftp-cisco-ip-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.5 Опція 150 — TFTP для Cisco IP-телефонів
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#66-dhcp-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.6 Таблиця популярних DHCP-опцій
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-database-agent" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7 Збереження бази адрес (Database Agent)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8 Кілька пулів на одному маршрутизаторі
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cisco-cheat-sheet/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cisco cheat sheet
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../subnet-calculator/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Калькулятор маски підмереж
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🖥️ Сервіси
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    🖥️ Сервіси
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../server-services/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Сервіси на базі OC Linux
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../server-services/ssh/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SSH
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../server-services/radius/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RADIUS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../server-services/chmod-calculator/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Калькулятор прав Linux
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Зміст">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Зміст
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-dhcp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1 Протокол DHCP
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1 Протокол DHCP">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-dora" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 Процес DORA
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-dhcp-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2 Базове налаштування DHCP-сервера
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2 Базове налаштування DHCP-сервера">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 Схема мережі для прикладу
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 Крок 1 — Виключити статичні адреси з пулу
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 Крок 2 — Налаштувати пул адрес
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4 Крок 3 — Перевірити що сервіс увімкнено
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#25" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.5 Повний приклад базового налаштування
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-dhcp-relay-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3 DHCP Relay - сервер в іншій підмережі
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4 Перевірка та діагностика
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4 Перевірка та діагностика">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-show-ip-dhcp-binding" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 Приклад виводу show ip dhcp binding
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-mac-static-binding" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5 Резервування адреси по MAC (Static Binding)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-dhcp-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6 Додаткові DHCP-опції
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6 Додаткові DHCP-опції">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 Стандартні опції через іменовані команди
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-43-vendor-specific-cisco-wlc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2 Опція 43 — Vendor Specific (Cisco WLC / точки доступу)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63-66-67-tftp-pxe-boot-voip" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3 Опція 66 / 67 — TFTP-сервер та ім'я файлу (PXE Boot, VoIP)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#64-138-capwap-cisco-ap-controller" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.4 Опція 138 — CAPWAP / Cisco AP Controller
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#65-150-tftp-cisco-ip-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.5 Опція 150 — TFTP для Cisco IP-телефонів
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#66-dhcp-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.6 Таблиця популярних DHCP-опцій
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-database-agent" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7 Збереження бази адрес (Database Agent)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8 Кілька пулів на одному маршрутизаторі
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="dhcp-cisco-ios">DHCP-сервер на Cisco IOS — Шпаргалка</h1>
+<blockquote>
+<p>Курс: Комп'ютерні мережі | 2 курс</p>
+</blockquote>
+<hr />
+<h2 id="1-dhcp">1 Протокол DHCP</h2>
+<p><strong>DHCP (Dynamic Host Configuration Protocol)</strong> — протокол автоматичного призначення мережевих параметрів клієнтам. Замість того щоб вручну налаштовувати IP-адресу, маску, шлюз та DNS на кожному пристрої — маршрутизатор або сервер видає ці параметри автоматично при підключенні</p>
+<p>Що видає DHCP-сервер клієнту:</p>
+<ul>
+<li>IP-адресу та маску підмережі</li>
+<li>Шлюз за замовчуванням (default gateway)</li>
+<li>DNS-сервери</li>
+<li>Доменне ім'я</li>
+<li>Час оренди адреси (lease time)</li>
+<li>Додаткові опції (TFTP-сервер, VoIP, тощо)</li>
+</ul>
+<h3 id="11-dora">1.1 Процес DORA</h3>
+<p>Отримання адреси відбувається у чотири кроки — <strong>D</strong>iscover → <strong>O</strong>ffer → <strong>R</strong>equest → <strong>A</strong>cknowledge:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Клієнт                                          DHCP-сервер
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>  |                                                 |
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>  |──① DHCPDISCOVER────────────────────────────────►|
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>  |   Broadcast: &quot;Хто може дати мені адресу?&quot;       |
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>  |                                                 |
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>  |◄─② DHCPOFFER────────────────────────────────────|
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>  |   &quot;Пропоную: 192.168.1.100/24, GW: 192.168.1.1&quot; |
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>  |                                                 |
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>  |──③ DHCPREQUEST─────────────────────────────────►|
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>  |   Broadcast: &quot;Беру адресу 192.168.1.100&quot;        |
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>  |   (щоб інші сервери знали про вибір)            |
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>  |                                                 |
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>  |◄─④ DHCPACK──────────────────────────────────────|
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>  |   &quot;Підтверджую. Оренда: 8 годин&quot;                |
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>  |                                                 |
+</code></pre></div>
+<div class="admonition info">
+<p class="admonition-title">Чому DHCPREQUEST — broadcast?</p>
+<p>На кроці ③ клієнт ще не має IP-адреси. Broadcast-повідомлення дозволяє повідомити <strong>всі</strong> DHCP-сервери в мережі про те, яку пропозицію було прийнято — решта серверів відкликають свої оферти</p>
+</div>
+<hr />
+<h2 id="2-dhcp-">2 Базове налаштування DHCP-сервера</h2>
+<h3 id="21">2.1 Схема мережі для прикладу</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>[PC-1]──┐
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>[PC-2]──┤──[Switch]──[fa0/0: 192.168.1.1/24]──[Router]──[Internet]
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>[PC-3]──┘                                       DHCP-сервер
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>                                                Пул: 192.168.1.0/24
+</code></pre></div>
+<h3 id="22-1">2.2 Крок 1 — Виключити статичні адреси з пулу</h3>
+<p>Перш за все потрібно зарезервувати адреси, які <strong>не</strong> повинні видаватися клієнтам, їх статично можна прописати на: шлюзі, принтерах, серверах, тощо</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>! Виключити діапазон (шлюз та статичні пристрої)
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>ip dhcp excluded-address 192.168.1.1 192.168.1.10
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>! Виключити одну адресу
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>ip dhcp excluded-address 192.168.1.254
+</code></pre></div>
+<h3 id="23-2">2.3 Крок 2 — Налаштувати пул адрес</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>ip dhcp pool LAN-POOL
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a> network 192.168.1.0 255.255.255.0    ! підмережа для роздачі
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a> default-router 192.168.1.1           ! шлюз за замовчуванням
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a> dns-server 8.8.8.8 1.1.1.1           ! DNS-сервери (до 8 адрес)
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a> domain-name example.local            ! доменне ім&#39;я
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a> lease 8                              ! оренда 8 днів (default: 1 день)
+</code></pre></div>
+<h3 id="24-3">2.4 Крок 3 — Перевірити що сервіс увімкнено</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>! DHCP-сервер увімкнено за замовчуванням
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>! Якщо раніше вимикали — увімкнути назад:
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>service dhcp
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>! Переконатись що рядка &quot;no service dhcp&quot; немає у конфізі:
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>show running-config | include service dhcp
+</code></pre></div>
+<h3 id="25">2.5 Повний приклад базового налаштування</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>! --- Виключити статичні адреси ---
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>ip dhcp excluded-address 192.168.1.1 192.168.1.10
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>ip dhcp excluded-address 192.168.1.254
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>! --- Пул для LAN ---
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>ip dhcp pool LAN-POOL
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a> network 192.168.1.0 255.255.255.0
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a> default-router 192.168.1.1
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a> dns-server 8.8.8.8 8.8.4.4
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a> domain-name company.local
+<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a> lease 8
+<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a> exit
+<a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a>
+<a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a>! --- Інтерфейс маршрутизатора (шлюз для клієнтів) ---
+<a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a>interface FastEthernet0/0
+<a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a> ip address 192.168.1.1 255.255.255.0
+<a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a> no shutdown
+</code></pre></div>
+<hr />
+<h2 id="3-dhcp-relay-">3 DHCP Relay - сервер в іншій підмережі</h2>
+<p>Якщо DHCP-сервер знаходиться в іншій підмережі, маршрутизатор повинен пересилати DHCP-запити до нього за допомогою <strong>ip helper-address</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>                          ip helper-address 10.0.0.10
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>[Client: 192.168.1.x]──[fa0/0: 192.168.1.1]──[Router]──[DHCP-сервер: 10.0.0.10]
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>! На інтерфейсі, що дивиться до клієнтів:
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>interface FastEthernet0/0
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a> ip address 192.168.1.1 255.255.255.0
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a> ip helper-address 10.0.0.10          ! адреса DHCP-сервера
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a> no shutdown
+</code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">Декілька серверів</p>
+<p>Можна вказати кілька <code>ip helper-address</code> для резервування — маршрутизатор надсилатиме запит на всі адреси одночасно</p>
+</div>
+<hr />
+<h2 id="4">4 Перевірка та діагностика</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>! Переглянути таблицю виданих адрес
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>show ip dhcp binding
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>show ip dhcp binding 192.168.1.100    ! конкретна адреса
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>! Статистика сервера (кількість пакетів DISCOVER/OFFER/REQUEST/ACK)
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>show ip dhcp server statistics
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>! Переглянути конфлікти адрес
+<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a>show ip dhcp conflict
+<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a>
+<a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a>! Переглянути налаштовані пули
+<a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a>show ip dhcp pool
+<a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a>
+<a id="__codelineno-8-14" name="__codelineno-8-14" href="#__codelineno-8-14"></a>! Очистити таблицю виданих адрес
+<a id="__codelineno-8-15" name="__codelineno-8-15" href="#__codelineno-8-15"></a>clear ip dhcp binding *               ! всі записи
+<a id="__codelineno-8-16" name="__codelineno-8-16" href="#__codelineno-8-16"></a>clear ip dhcp binding 192.168.1.100  ! конкретний запис
+<a id="__codelineno-8-17" name="__codelineno-8-17" href="#__codelineno-8-17"></a>
+<a id="__codelineno-8-18" name="__codelineno-8-18" href="#__codelineno-8-18"></a>! Очистити лічильники конфліктів
+<a id="__codelineno-8-19" name="__codelineno-8-19" href="#__codelineno-8-19"></a>clear ip dhcp conflict *
+<a id="__codelineno-8-20" name="__codelineno-8-20" href="#__codelineno-8-20"></a>
+<a id="__codelineno-8-21" name="__codelineno-8-21" href="#__codelineno-8-21"></a>! Debug
+<a id="__codelineno-8-22" name="__codelineno-8-22" href="#__codelineno-8-22"></a>debug ip dhcp server events           ! події DHCP-сервера
+<a id="__codelineno-8-23" name="__codelineno-8-23" href="#__codelineno-8-23"></a>debug ip dhcp server packets          ! пакети
+<a id="__codelineno-8-24" name="__codelineno-8-24" href="#__codelineno-8-24"></a>no debug all
+</code></pre></div>
+<h3 id="41-show-ip-dhcp-binding">4.1 Приклад виводу show ip dhcp binding</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>Router# show ip dhcp binding
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>Bindings from all pools not associated with VRF:
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>IP address      Client-ID/        Lease expiration        Type       State      Interface
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>                Hardware address/
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>                User name
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>192.168.1.11    0100.5056.c000.01  Mar 24 2026 09:00 AM   Automatic  Active     Fa0/0
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>192.168.1.12    0100.5056.c000.02  Mar 24 2026 11:30 AM   Automatic  Active     Fa0/0
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>192.168.1.100   0100.50ab.1234.56  infinite               Manual     Active     Fa0/0
+</code></pre></div>
+<hr />
+<h2 id="5-mac-static-binding">5 Резервування адреси по MAC (Static Binding)</h2>
+<p>Дозволяє закріпити конкретну IP-адресу за пристроєм на основі його MAC-адреси. Корисно для принтерів, серверів, IP-камер — пристроїв що мають отримувати адресу через DHCP але завжди одну і ту ж</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>! Кожне резервування — окремий пул типу host
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>ip dhcp pool PRINTER-01
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a> host 192.168.1.200 255.255.255.0     ! зарезервована адреса
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a> hardware-address 00e0.4c68.1234      ! MAC-адреса пристрою
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a> default-router 192.168.1.1
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a> dns-server 8.8.8.8
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a> client-name printer-01               ! необов&#39;язково — ім&#39;я для зручності
+<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a> exit
+<a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a>
+<a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a>ip dhcp pool CAMERA-01
+<a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a> host 192.168.1.201 255.255.255.0
+<a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a> hardware-address b4a9.fc00.aabb
+<a id="__codelineno-10-13" name="__codelineno-10-13" href="#__codelineno-10-13"></a> default-router 192.168.1.1
+<a id="__codelineno-10-14" name="__codelineno-10-14" href="#__codelineno-10-14"></a> exit
+</code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">Окремий пул для кожного пристрою</p>
+<p>Статичне резервування <strong>не можна</strong> змішувати з динамічним пулом (<code>network</code>). Для кожного зарезервованого пристрою потрібен окремий <code>ip dhcp pool</code></p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">Де знайти MAC-адресу?</p>
+<p>На клієнті Windows: <code>ipconfig /all</code> → Physical Address
+На Linux/Mac: <code>ip link show</code> або <code>ifconfig</code>
+На Cisco: <code>show arp</code> або <code>show mac address-table</code></p>
+</div>
+<hr />
+<h2 id="6-dhcp-">6 Додаткові DHCP-опції</h2>
+<p>DHCP може передавати клієнтам додаткові параметри через <strong>опції</strong>. Деякі задаються іменованими командами, інші — через універсальну команду <code>option &lt;номер&gt;</code></p>
+<h3 id="61">6.1 Стандартні опції через іменовані команди</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>ip dhcp pool LAN-POOL
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a> network 192.168.1.0 255.255.255.0
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a> default-router 192.168.1.1           ! опція 3
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a> dns-server 8.8.8.8 8.8.4.4           ! опція 6
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a> domain-name company.local            ! опція 15
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a> netbios-name-server 192.168.1.5      ! опція 44 — WINS-сервер (для Windows)
+<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a> netbios-node-type h-node             ! опція 46 — тип NetBIOS-вузла
+<a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a> lease 7                              ! опція 51 — час оренди в днях
+</code></pre></div>
+<h3 id="62-43-vendor-specific-cisco-wlc">6.2 Опція 43 — Vendor Specific (Cisco WLC / точки доступу)</h3>
+<p>Використовується для передачі адреси Cisco Wireless LAN Controller точкам доступу (Cisco AP)</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>ip dhcp pool AP-POOL
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a> network 192.168.10.0 255.255.255.0
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a> default-router 192.168.10.1
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a> dns-server 8.8.8.8
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a> ! Опція 43 — адреса WLC у hex форматі
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a> ! Формат: f1:04:&lt;IP у hex&gt;
+<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a> ! 192.168.10.200 = c0.a8.0a.c8
+<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a> option 43 hex f104c0a80ac8
+</code></pre></div>
+<h3 id="63-66-67-tftp-pxe-boot-voip">6.3 Опція 66 / 67 — TFTP-сервер та ім'я файлу (PXE Boot, VoIP)</h3>
+<p>Використовується для мережевого завантаження (PXE) або автоматичного оновлення прошивки IP-телефонів</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>ip dhcp pool VOIP-POOL
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a> network 192.168.20.0 255.255.255.0
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a> default-router 192.168.20.1
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a> dns-server 8.8.8.8
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a> option 66 ascii 192.168.20.10        ! адреса TFTP-сервера (next-server)
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a> option 67 ascii SEP.cnf.xml          ! ім&#39;я конфігураційного файлу
+<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a> ! Або через окремі команди:
+<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a> next-server 192.168.20.10            ! аналог опції 66
+<a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a> bootfile SEP.cnf.xml                 ! аналог опції 67
+</code></pre></div>
+<h3 id="64-138-capwap-cisco-ap-controller">6.4 Опція 138 — CAPWAP / Cisco AP Controller</h3>
+<p>Альтернативний метод передачі адреси WLC для новіших точок доступу Cisco (замість опції 43)</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>ip dhcp pool AP-POOL
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a> network 192.168.10.0 255.255.255.0
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a> default-router 192.168.10.1
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a> ! Опція 138 — IP-адреса WLC (підтримує до 4 адрес контролерів)
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a> option 138 ip 192.168.100.10
+<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a> ! Або декілька WLC через пробіл:
+<a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a> option 138 ip 192.168.100.10 192.168.100.11
+</code></pre></div>
+<h3 id="65-150-tftp-cisco-ip-">6.5 Опція 150 — TFTP для Cisco IP-телефонів</h3>
+<p>Cisco IP Phone використовує опцію 150 (не стандартну 66) для отримання адреси TFTP-сервера з конфігурацією</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>ip dhcp pool PHONE-POOL
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a> network 192.168.30.0 255.255.255.0
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a> default-router 192.168.30.1
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a> dns-server 8.8.8.8
+<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a> option 150 ip 192.168.30.5           ! адреса TFTP-сервера для IP-телефонів
+<a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a> lease 1
+</code></pre></div>
+<h3 id="66-dhcp-">6.6 Таблиця популярних DHCP-опцій</h3>
+<table>
+<thead>
+<tr>
+<th>Опція</th>
+<th>Назва</th>
+<th>Команда / Застосування</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>3</td>
+<td>Default Gateway</td>
+<td><code>default-router</code></td>
+</tr>
+<tr>
+<td>6</td>
+<td>DNS Servers</td>
+<td><code>dns-server</code></td>
+</tr>
+<tr>
+<td>15</td>
+<td>Domain Name</td>
+<td><code>domain-name</code></td>
+</tr>
+<tr>
+<td>43</td>
+<td>Vendor Specific</td>
+<td><code>option 43 hex ...</code> — Cisco WLC (старіші AP)</td>
+</tr>
+<tr>
+<td>44</td>
+<td>NetBIOS Name Server</td>
+<td><code>netbios-name-server</code> — WINS</td>
+</tr>
+<tr>
+<td>46</td>
+<td>NetBIOS Node Type</td>
+<td><code>netbios-node-type</code></td>
+</tr>
+<tr>
+<td>51</td>
+<td>Lease Time</td>
+<td><code>lease</code></td>
+</tr>
+<tr>
+<td>66</td>
+<td>TFTP Server Name</td>
+<td><code>option 66 ascii</code> або <code>next-server</code></td>
+</tr>
+<tr>
+<td>67</td>
+<td>Bootfile Name</td>
+<td><code>option 67 ascii</code> або <code>bootfile</code></td>
+</tr>
+<tr>
+<td>82</td>
+<td>Relay Agent Info</td>
+<td>Автоматично — relay agent</td>
+</tr>
+<tr>
+<td>138</td>
+<td>CAPWAP AC Address</td>
+<td><code>option 138 ip</code> — Cisco WLC (нові AP)</td>
+</tr>
+<tr>
+<td>150</td>
+<td>TFTP Server</td>
+<td><code>option 150 ip</code> — Cisco IP Phone</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="7-database-agent">7 Збереження бази адрес (Database Agent)</h2>
+<p>За замовчуванням таблиця виданих адрес зберігається в оперативній пам'яті і <strong>втрачається при перезавантаженні</strong>. Щоб уникнути конфліктів адрес після ребуту можна налаштувати збереження на TFTP/FTP</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>! Зберігати на TFTP-сервері кожні 300 секунд
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>ip dhcp database tftp://192.168.1.10/dhcp-bindings.txt timeout 300 write-delay 60
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>
+<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a>! Зберігати на FTP
+<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a>ip dhcp database ftp://admin:password@192.168.1.10/dhcp-bindings.txt
+<a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a>
+<a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a>! Або - вимкнути логування конфліктів (якщо Database Agent не використовується)
+<a id="__codelineno-16-8" name="__codelineno-16-8" href="#__codelineno-16-8"></a>no ip dhcp conflict logging
+</code></pre></div>
+<hr />
+<h2 id="8">8 Кілька пулів на одному маршрутизаторі</h2>
+<p>Маршрутизатор може обслуговувати кілька підмереж - наприклад, якщо є кілька VLAN або інтерфейсів</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>! Пул для VLAN 10 (співробітники)
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>ip dhcp excluded-address 192.168.10.1 192.168.10.10
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>ip dhcp pool VLAN10-STAFF
+<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a> network 192.168.10.0 255.255.255.0
+<a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a> default-router 192.168.10.1
+<a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a> dns-server 8.8.8.8
+<a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a> lease 8
+<a id="__codelineno-17-8" name="__codelineno-17-8" href="#__codelineno-17-8"></a>
+<a id="__codelineno-17-9" name="__codelineno-17-9" href="#__codelineno-17-9"></a>! Пул для VLAN 20 (гостьова мережа)
+<a id="__codelineno-17-10" name="__codelineno-17-10" href="#__codelineno-17-10"></a>ip dhcp excluded-address 192.168.20.1 192.168.20.5
+<a id="__codelineno-17-11" name="__codelineno-17-11" href="#__codelineno-17-11"></a>ip dhcp pool VLAN20-GUEST
+<a id="__codelineno-17-12" name="__codelineno-17-12" href="#__codelineno-17-12"></a> network 192.168.20.0 255.255.255.0
+<a id="__codelineno-17-13" name="__codelineno-17-13" href="#__codelineno-17-13"></a> default-router 192.168.20.1
+<a id="__codelineno-17-14" name="__codelineno-17-14" href="#__codelineno-17-14"></a> dns-server 8.8.8.8 1.1.1.1
+<a id="__codelineno-17-15" name="__codelineno-17-15" href="#__codelineno-17-15"></a> lease 1                              ! гостям — коротша оренда
+<a id="__codelineno-17-16" name="__codelineno-17-16" href="#__codelineno-17-16"></a>
+<a id="__codelineno-17-17" name="__codelineno-17-17" href="#__codelineno-17-17"></a>! Підінтерфейси для VLAN (Router-on-a-Stick)
+<a id="__codelineno-17-18" name="__codelineno-17-18" href="#__codelineno-17-18"></a>interface FastEthernet0/0.10
+<a id="__codelineno-17-19" name="__codelineno-17-19" href="#__codelineno-17-19"></a> encapsulation dot1Q 10
+<a id="__codelineno-17-20" name="__codelineno-17-20" href="#__codelineno-17-20"></a> ip address 192.168.10.1 255.255.255.0
+<a id="__codelineno-17-21" name="__codelineno-17-21" href="#__codelineno-17-21"></a>
+<a id="__codelineno-17-22" name="__codelineno-17-22" href="#__codelineno-17-22"></a>interface FastEthernet0/0.20
+<a id="__codelineno-17-23" name="__codelineno-17-23" href="#__codelineno-17-23"></a> encapsulation dot1Q 20
+<a id="__codelineno-17-24" name="__codelineno-17-24" href="#__codelineno-17-24"></a> ip address 192.168.20.1 255.255.255.0
+</code></pre></div>
+<hr />
+<blockquote>
+<p>📌 <strong>Зберегти конфігурацію:</strong> <code>copy running-config startup-config</code> або <code>wr</code></p>
+</blockquote>
+<hr />
+<div class="admonition quote">
+<p class="admonition-title">Джерело</p>
+<p>Деякі матеріали взято офіційної документації Cisco
+Оригінал (англійською): <a href="https://www.cisco.com/en/US/docs/ios/12_4t/ip_addr/configuration/guide/htdhcpsv.html">Configuring the Cisco IOS DHCP Server</a></p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Повернутись нагору
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      © 2026 Кафедра №21 - Bci права захищені
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://mitit.mil.gov.ua/page/faculty2" target="_blank" rel="noopener" title="mitit.mil.gov.ua" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M16.36 14c.08-.66.14-1.32.14-2s-.06-1.34-.14-2h3.38c.16.64.26 1.31.26 2s-.1 1.36-.26 2m-5.15 5.56c.6-1.11 1.06-2.31 1.38-3.56h2.95a8.03 8.03 0 0 1-4.33 3.56M14.34 14H9.66c-.1-.66-.16-1.32-.16-2s.06-1.35.16-2h4.68c.09.65.16 1.32.16 2s-.07 1.34-.16 2M12 19.96c-.83-1.2-1.5-2.53-1.91-3.96h3.82c-.41 1.43-1.08 2.76-1.91 3.96M8 8H5.08A7.92 7.92 0 0 1 9.4 4.44C8.8 5.55 8.35 6.75 8 8m-2.92 8H8c.35 1.25.8 2.45 1.4 3.56A8 8 0 0 1 5.08 16m-.82-2C4.1 13.36 4 12.69 4 12s.1-1.36.26-2h3.38c-.08.66-.14 1.32-.14 2s.06 1.34.14 2M12 4.03c.83 1.2 1.5 2.54 1.91 3.97h-3.82c.41-1.43 1.08-2.77 1.91-3.97M18.92 8h-2.95a15.7 15.7 0 0 0-1.38-3.56c1.84.63 3.37 1.9 4.33 3.56M12 2C6.47 2 2 6.5 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "content.code.copy", "search.suggest", "search.highlight"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u0421\u043a\u043e\u043f\u0456\u0439\u043e\u0432\u0430\u043d\u043e \u0432 \u0431\u0443\u0444\u0435\u0440", "clipboard.copy": "\u0421\u043a\u043e\u043f\u0456\u044e\u0432\u0430\u0442\u0438 \u0432 \u0431\u0443\u0444\u0435\u0440", "search.result.more.one": "\u0429\u0435 1 \u0437\u0431\u0456\u0433 \u043d\u0430 \u0446\u0456\u0439 \u0441\u0442\u043e\u0440\u0456\u043d\u0446\u0456", "search.result.more.other": "\u0429\u0435 # \u0437\u0431\u0456\u0433\u0456\u0432 \u043d\u0430 \u0446\u0456\u0439 \u0441\u0442\u043e\u0440\u0456\u043d\u0446\u0456", "search.result.none": "\u0417\u0431\u0456\u0433\u0456\u0432 \u043d\u0435 \u0437\u043d\u0430\u0439\u0434\u0435\u043d\u043e", "search.result.one": "\u0417\u043d\u0430\u0439\u0434\u0435\u043d\u043e 1 \u0437\u0431\u0456\u0433", "search.result.other": "\u0417\u043d\u0430\u0439\u0434\u0435\u043d\u043e # \u0437\u0431\u0456\u0433\u0456\u0432", "search.result.placeholder": "\u0420\u043e\u0437\u043f\u043e\u0447\u043d\u0456\u0442\u044c \u043f\u0438\u0441\u0430\u0442\u0438 \u0434\u043b\u044f \u043f\u043e\u0448\u0443\u043a\u0443", "search.result.term.missing": "\u041d\u0435 \u0437\u043d\u0430\u0439\u0434\u0435\u043d\u043e \u0437\u0430\u043f\u0438\u0442\u0443", "select.version": "\u041e\u0431\u0440\u0430\u0442\u0438 \u0432\u0435\u0440\u0441\u0456\u044e"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,2198 @@
+
+<!doctype html>
+<html lang="uk" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="Створено колективом кафедри №21">
+      
+      
+      
+        <link rel="prev" href="../vlans-mikrotik/">
+      
+      
+        <link rel="next" href="../routing/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/logo_dep21_white.ico">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>STP - Довідник кафедри Інформаційних систем та технологій</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#spanning-tree-protocol" class="md-skip">
+          Перейти до змісту
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Хедер">
+    <a href="../.." title="Довідник кафедри Інформаційних систем та технологій" class="md-header__button md-logo" aria-label="Довідник кафедри Інформаційних систем та технологій" data-md-component="logo">
+      
+  <img src="../../assets/logo_dep21_white.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Довідник кафедри Інформаційних систем та технологій
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              STP
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Перейти на темну тему"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Перейти на темну тему" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="indigo"  aria-label="Перейти на світлу тему"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Перейти на світлу тему" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Пошук" placeholder="Пошук" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Шукати">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Очистити" aria-label="Очистити" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Пошук розпочато
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Вкладки" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../.." class="md-tabs__link">
+          
+  
+  
+  🏠 Головна
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+  🌐 Мережі
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../server-services/" class="md-tabs__link">
+          
+  
+  
+  🖥️ Сервіси
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Навігація" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Довідник кафедри Інформаційних систем та технологій" class="md-nav__button md-logo" aria-label="Довідник кафедри Інформаційних систем та технологій" data-md-component="logo">
+      
+  <img src="../../assets/logo_dep21_white.png" alt="logo">
+
+    </a>
+    Довідник кафедри Інформаційних систем та технологій
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🏠 Головна
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    🏠 Головна
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    👋Вступ
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../pnet/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🧪Інструкція з користування PNET Lab
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../subnet-calculator/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Калькулятор маски підмереж
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../server-services/chmod-calculator/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Калькулятор прав Linux
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🌐 Мережі
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    🌐 Мережі
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Вступ до мереж
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../IP-interfaces/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IP інтерфейси
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../vlans/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VLAN та Trunk
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../vlans-mikrotik/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VLAN в Mikrotik
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    STP
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    STP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Зміст">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Зміст
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-stp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1 Що таке STP і навіщо він потрібен
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-stp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2 Різновиди STP
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2 Різновиди STP">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-stp-vs-per-vlan-stp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 Плаский STP vs Per-VLAN STP
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-stp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3 Як STP будує топологію
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3 Як STP будує топологію">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-root-bridge" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 Вибір Root Bridge
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 Ролі портів
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 Стани портів
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34-path-cost" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4 Вибір кращого шляху — Path Cost
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-rapid-pvst" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4 Налаштування Rapid PVST+
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4 Налаштування Rapid PVST+">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 Вмикання режиму
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-root-bridge" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 Призначення Root Bridge
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3 Пріоритет портів та вартість шляху
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.4 Налаштування таймерів
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#45" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.5 Перевірка
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#46-show-spanning-tree-vlan-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.6 Приклад виводу show spanning-tree vlan 1
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-stp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5 Безпека STP
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5 Безпека STP">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-portfast-forwarding" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 PortFast — швидкий перехід у Forwarding
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-bpdu-guard" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 BPDU Guard — захист від несанкціонованих комутаторів
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-bpdu-filter-bpdu" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3 BPDU Filter — не надсилати і не приймати BPDU
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#54-root-guard-root-bridge" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.4 Root Guard — захист Root Bridge від заміни
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#55-loop-guard-bpdu" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.5 Loop Guard — захист від петель при втраті BPDU
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#56" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.6 Зведена таблиця механізмів захисту
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-distribution-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6 Типова конфігурація distribution-комутатора
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../routing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Маршрутизація
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ACL/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Контроль доступу
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cisco-nat/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NAT в Cisco
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dhcp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DHCP-сервер
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cisco-cheat-sheet/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cisco cheat sheet
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../subnet-calculator/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Калькулятор маски підмереж
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🖥️ Сервіси
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    🖥️ Сервіси
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../server-services/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Сервіси на базі OC Linux
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../server-services/ssh/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SSH
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../server-services/radius/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RADIUS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../server-services/chmod-calculator/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Калькулятор прав Linux
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Зміст">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Зміст
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-stp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1 Що таке STP і навіщо він потрібен
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-stp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2 Різновиди STP
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2 Різновиди STP">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-stp-vs-per-vlan-stp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 Плаский STP vs Per-VLAN STP
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-stp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3 Як STP будує топологію
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3 Як STP будує топологію">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-root-bridge" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 Вибір Root Bridge
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 Ролі портів
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 Стани портів
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34-path-cost" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4 Вибір кращого шляху — Path Cost
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-rapid-pvst" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4 Налаштування Rapid PVST+
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4 Налаштування Rapid PVST+">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 Вмикання режиму
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-root-bridge" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 Призначення Root Bridge
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3 Пріоритет портів та вартість шляху
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.4 Налаштування таймерів
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#45" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.5 Перевірка
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#46-show-spanning-tree-vlan-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.6 Приклад виводу show spanning-tree vlan 1
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-stp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5 Безпека STP
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5 Безпека STP">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-portfast-forwarding" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 PortFast — швидкий перехід у Forwarding
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-bpdu-guard" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 BPDU Guard — захист від несанкціонованих комутаторів
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-bpdu-filter-bpdu" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3 BPDU Filter — не надсилати і не приймати BPDU
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#54-root-guard-root-bridge" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.4 Root Guard — захист Root Bridge від заміни
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#55-loop-guard-bpdu" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.5 Loop Guard — захист від петель при втраті BPDU
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#56" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.6 Зведена таблиця механізмів захисту
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-distribution-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6 Типова конфігурація distribution-комутатора
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="spanning-tree-protocol">Spanning Tree Protocol — Шпаргалка</h1>
+<blockquote>
+<p>Курс: Комп'ютерні мережі | 2–3 курс</p>
+</blockquote>
+<hr />
+<h2 id="1-stp">1 Що таке STP і навіщо він потрібен</h2>
+<p>У реальних мережах комутатори з'єднують резервними каналами - якщо один канал впаде, мережа продовжить працювати через інший. Але на рівні L2 це створює <strong>петлю (loop)</strong>: кадр може нескінченно циркулювати між комутаторами, що швидко перевантажує мережу. Це явище називається <strong>broadcast storm</strong></p>
+<p><strong>STP (Spanning Tree Protocol)</strong> вирішує цю проблему - він автоматично <strong>блокує один з резервних каналів</strong>, залишаючи лише одне активне дерево маршрутів. Якщо активний канал падає, заблокований відкривається автоматично</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Без STP — петля:          З STP — дерево:
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>SW-A ──── SW-B            SW-A ──── SW-B
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>  │          │               │
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>  └──── SW-C ┘             SW-C  (канал SW-B↔SW-C заблоковано)
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>  ↑ Кадр крутиться вічно
+</code></pre></div>
+<blockquote>
+<p>📁 Схема вибору маршруту: <code>assets/network-configs_stp_1.svg</code>
+<img alt="Схема вибору маршруту" src="../../assets/network-configs_stp_1.svg" /></p>
+</blockquote>
+<hr />
+<h2 id="2-stp">2 Різновиди STP</h2>
+<table>
+<thead>
+<tr>
+<th>Протокол</th>
+<th>Стандарт</th>
+<th>Конвергенція</th>
+<th>Особливість</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>STP</strong></td>
+<td>IEEE 802.1D</td>
+<td>~30–50 сек</td>
+<td>Класичний, застарілий</td>
+</tr>
+<tr>
+<td><strong>RSTP</strong></td>
+<td>IEEE 802.1w</td>
+<td><strong>&lt; 2 сек</strong></td>
+<td>Рекомендований, сумісний з STP</td>
+</tr>
+<tr>
+<td><strong>MSTP</strong></td>
+<td>IEEE 802.1s</td>
+<td>&lt; 2 сек</td>
+<td>Кілька інстанцій для VLAN-груп</td>
+</tr>
+<tr>
+<td><strong>PVST+</strong></td>
+<td>Cisco</td>
+<td>~30–50 сек</td>
+<td>Окремий STP для кожного VLAN</td>
+</tr>
+<tr>
+<td><strong>Rapid PVST+</strong></td>
+<td>Cisco</td>
+<td><strong>&lt; 2 сек</strong></td>
+<td>Окремий RSTP для кожного VLAN ✅</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition info">
+<p class="admonition-title">Що використовувати?</p>
+<p>На Cisco Catalyst за замовчуванням увімкнено <strong>Rapid PVST+</strong> - окремий RSTP для кожного VLAN. Саме цей режим розглядається у прикладах нижче</p>
+</div>
+<h3 id="21-stp-vs-per-vlan-stp">2.1 Плаский STP vs Per-VLAN STP</h3>
+<p><strong>Плаский STP (CST — Common Spanning Tree)</strong> будує одне єдине дерево для всієї мережі незалежно від кількості VLAN. Простий, але неефективний: якщо є 10 VLAN, всі вони заблокують один і той же канал</p>
+<p><strong>Per-VLAN STP (PVST+)</strong> запускає <strong>окремий екземпляр STP для кожного VLAN</strong>. Це дозволяє балансувати навантаження - для VLAN 10 заблокований один канал, для VLAN 20 - інший</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>PVST+ — балансування навантаження між VLAN:
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>VLAN 10:  SW-A(Root)──SW-B──SW-C     (канал B↔C заблоковано)
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>VLAN 20:  SW-B(Root)──SW-A──SW-C     (канал A↔C заблоковано)
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>Обидва канали фізично активні, але для різних VLAN
+</code></pre></div>
+<hr />
+<h2 id="3-stp">3 Як STP будує топологію</h2>
+<h3 id="31-root-bridge">3.1 Вибір Root Bridge</h3>
+<p>Root Bridge - це "центр" дерева STP. <strong>Перемагає комутатор з меншим Bridge ID.</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>Bridge ID = Пріоритет (2 байти) + MAC-адреса (6 байт)
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>Пріоритет за замовчуванням: 32768
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>Крок зміни пріоритету: 4096
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>Можливі значення: 0, 4096, 8192, 12288, ..., 61440
+</code></pre></div>
+<p>При однакових пріоритетах перемагає комутатор з <strong>меншою MAC-адресою</strong> - тобто в мережі без налаштувань Root Bridge стає найстаріший комутатор. Тому завжди <strong>потрібно призначати Root Bridge вручну</strong></p>
+<h3 id="32">3.2 Ролі портів</h3>
+<table>
+<thead>
+<tr>
+<th>Роль порту</th>
+<th>Позначення</th>
+<th>Опис</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Root Port</strong></td>
+<td>RP</td>
+<td>Найкращий шлях до Root Bridge. Є на кожному не-root комутаторі</td>
+</tr>
+<tr>
+<td><strong>Designated Port</strong></td>
+<td>DP</td>
+<td>Найкращий порт для кожного сегменту мережі. Завжди forwarding</td>
+</tr>
+<tr>
+<td><strong>Alternate Port</strong></td>
+<td>AP</td>
+<td>Резервний шлях до Root Bridge. Заблокований</td>
+</tr>
+<tr>
+<td><strong>Backup Port</strong></td>
+<td>BP</td>
+<td>Резервний порт у тому ж сегменті. Заблокований</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>📁 Схема топології з ролями портів: <code>assets/network-configs_stp_1.svg</code>
+<img alt="Схема топології з ролями портів" src="../../assets/network-configs_stp_1.svg" /></p>
+</blockquote>
+<h3 id="33">3.3 Стани портів</h3>
+<blockquote>
+<p>📁 Діаграма переходів між станами: <code>assets/network-configs_stp_2.svg</code>
+<img alt="Діаграма переходів між станами" src="../../assets/network-configs_stp_2.svg" /></p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>Disabled → Blocking → Listening → Learning → Forwarding
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>                          ↑
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>                   зміна топології
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Стан</th>
+<th>MAC-таблиця</th>
+<th>Трафік</th>
+<th>Час (STP)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Blocking</strong></td>
+<td>Не навчається</td>
+<td>Не пропускає</td>
+<td>max-age: 20 сек</td>
+</tr>
+<tr>
+<td><strong>Listening</strong></td>
+<td>Не навчається</td>
+<td>Не пропускає</td>
+<td>forward-delay: 15 сек</td>
+</tr>
+<tr>
+<td><strong>Learning</strong></td>
+<td>Навчається</td>
+<td>Не пропускає</td>
+<td>forward-delay: 15 сек</td>
+</tr>
+<tr>
+<td><strong>Forwarding</strong></td>
+<td>Навчається</td>
+<td><strong>Пропускає</strong></td>
+<td>—</td>
+</tr>
+<tr>
+<td><strong>Disabled</strong></td>
+<td>—</td>
+<td>—</td>
+<td>Адмін вимкнув порт</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition tip">
+<p class="admonition-title">RSTP прискорює конвергенцію</p>
+<p>У RSTP стани Listening і Learning об'єднані в один, а Alternate Port переходить у Forwarding майже миттєво — без очікування таймерів</p>
+</div>
+<h3 id="34-path-cost">3.4 Вибір кращого шляху — Path Cost</h3>
+<p>Кожен порт має вартість (cost) залежно від швидкості. <strong>Менший cost = кращий шлях</strong></p>
+<table>
+<thead>
+<tr>
+<th>Швидкість</th>
+<th>Short cost (IEEE 802.1D)</th>
+<th>Long cost (IEEE 802.1t)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>10 Mbps</td>
+<td>100</td>
+<td>2 000 000</td>
+</tr>
+<tr>
+<td>100 Mbps</td>
+<td>19</td>
+<td>200 000</td>
+</tr>
+<tr>
+<td>1 Gbps</td>
+<td>4</td>
+<td>20 000</td>
+</tr>
+<tr>
+<td>10 Gbps</td>
+<td>2</td>
+<td>2 000</td>
+</tr>
+<tr>
+<td>100 Gbps</td>
+<td>1</td>
+<td>200</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="4-rapid-pvst">4 Налаштування Rapid PVST+</h2>
+<h3 id="41">4.1 Вмикання режиму</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>! Rapid PVST+ — рекомендований режим для Cisco Catalyst
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>spanning-tree mode rapid-pvst
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>! Перевірити поточний режим
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>show spanning-tree summary
+</code></pre></div>
+<h3 id="42-root-bridge">4.2 Призначення Root Bridge</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>! Спосіб 1 — встановити пріоритет вручну (крок: 4096)
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>spanning-tree vlan 1 priority 4096          ! зробити основним Root
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>spanning-tree vlan 1 priority 8192          ! зробити вторинним Root
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>! Спосіб 2 — автоматично (рекомендовано)
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>spanning-tree vlan 1 root primary           ! встановлює priority 24576 або менше
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>spanning-tree vlan 1 root secondary         ! встановлює priority 28672
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>! Для кількох VLAN одночасно
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>spanning-tree vlan 1,10,20,30 root primary
+<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>spanning-tree vlan 40,50 root secondary
+</code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">Root Bridge — завжди distribution/core комутатор</p>
+<p>Ніколи не призначай Root Bridge на access-рівні (комутатор до якого підключені кінцеві пристрої). Root Bridge повинен бути distribution або core комутатором.</p>
+</div>
+<h3 id="43">4.3 Пріоритет портів та вартість шляху</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>! Змінити пріоритет порту (менше = вищий пріоритет, крок 16)
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>interface GigabitEthernet1/0/1
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a> spanning-tree port-priority 64         ! default: 128
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>! Змінити вартість шляху вручну
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>interface GigabitEthernet1/0/1
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a> spanning-tree cost 10                  ! менше = кращий шлях
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>! Per-VLAN вартість
+<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a>interface GigabitEthernet1/0/1
+<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a> spanning-tree vlan 10 cost 10
+<a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a> spanning-tree vlan 20 cost 50
+</code></pre></div>
+<h3 id="44">4.4 Налаштування таймерів</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>! Таймери налаштовуються тільки на Root Bridge і поширюються на всю мережу
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>! Hello time — інтервал між BPDU (default: 2 сек, діапазон: 1–10)
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>spanning-tree vlan 1 hello-time 2
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>! Forward delay — час у станах Listening/Learning (default: 15 сек)
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>spanning-tree vlan 1 forward-time 15
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>
+<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a>! Max age — час до визнання Root Bridge недосяжним (default: 20 сек)
+<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a>spanning-tree vlan 1 max-age 20
+</code></pre></div>
+<div class="admonition danger">
+<p class="admonition-title">Обережно зі зміною таймерів</p>
+<p>Зменшення таймерів може призвести до нестабільності мережі. Змінюй тільки якщо розумієш наслідки і тільки на Root Bridge.</p>
+</div>
+<h3 id="45">4.5 Перевірка</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>! Загальна інформація про всі VLAN
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>show spanning-tree summary
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>! Детально по конкретному VLAN
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>show spanning-tree vlan 1
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>show spanning-tree vlan 1 detail
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>! Стан конкретного інтерфейсу
+<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a>show spanning-tree interface GigabitEthernet1/0/1
+<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a>show spanning-tree interface GigabitEthernet1/0/1 detail
+<a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a>
+<a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a>! Порти в inconsistent стані (проблема)
+<a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a>show spanning-tree inconsistentports
+<a id="__codelineno-8-14" name="__codelineno-8-14" href="#__codelineno-8-14"></a>
+<a id="__codelineno-8-15" name="__codelineno-8-15" href="#__codelineno-8-15"></a>! Активна топологія (зведено)
+<a id="__codelineno-8-16" name="__codelineno-8-16" href="#__codelineno-8-16"></a>show spanning-tree vlan 1 brief
+</code></pre></div>
+<h3 id="46-show-spanning-tree-vlan-1">4.6 Приклад виводу show spanning-tree vlan 1</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>SW-A# show spanning-tree vlan 1
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>VLAN0001
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>  Spanning tree enabled protocol rstp
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>  Root ID    Priority    4097
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>             Address     0001.6C2A.1234
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>             This bridge is the root        ← цей комутатор є Root Bridge
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>             Hello Time   2 sec  Max Age 20 sec  Forward Delay 15 sec
+<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a>
+<a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a>  Bridge ID  Priority    4097
+<a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a>             Address     0001.6C2A.1234
+<a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a>             Hello Time   2 sec  Max Age 20 sec  Forward Delay 15 sec
+<a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a>
+<a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a>Interface           Role  Sts  Cost      Prio.Nbr  Type
+<a id="__codelineno-9-15" name="__codelineno-9-15" href="#__codelineno-9-15"></a>-------------------+------+---+----------+---------+---
+<a id="__codelineno-9-16" name="__codelineno-9-16" href="#__codelineno-9-16"></a>Gi1/0/1             Desg  FWD  4         128.1     P2p
+<a id="__codelineno-9-17" name="__codelineno-9-17" href="#__codelineno-9-17"></a>Gi1/0/2             Desg  FWD  4         128.2     P2p
+</code></pre></div>
+<hr />
+<h2 id="5-stp">5 Безпека STP</h2>
+<h3 id="51-portfast-forwarding">5.1 PortFast — швидкий перехід у Forwarding</h3>
+<p>Порти до кінцевих пристроїв (ПК, сервери) не потребують проходження через всі стани STP - вони не можуть утворити петлю. PortFast дозволяє порту миттєво перейти у Forwarding</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>! Увімкнути глобально для всіх access-портів
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>spanning-tree portfast default
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>! Увімкнути на конкретному порту
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>interface GigabitEthernet1/0/10
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a> spanning-tree portfast
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>
+<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a>! Для trunk-порту (наприклад до сервера з тегованим трафіком)
+<a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a>interface GigabitEthernet1/0/10
+<a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a> spanning-tree portfast trunk
+</code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">PortFast тільки на портах до кінцевих пристроїв</p>
+<p>Ніколи не вмикай PortFast на портах між комутаторами - це може утворити петлю</p>
+</div>
+<h3 id="52-bpdu-guard">5.2 BPDU Guard — захист від несанкціонованих комутаторів</h3>
+<p>Якщо на PortFast-порт надходить BPDU (хтось підключив комутатор), порт переходить у стан <strong>err-disabled</strong> і повністю вимикається</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>! Увімкнути глобально (рекомендовано разом з portfast default)
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>spanning-tree portfast bpduguard default
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>! Увімкнути на конкретному порту
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>interface GigabitEthernet1/0/10
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a> spanning-tree bpduguard enable
+<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a>
+<a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a>! Автовідновлення після err-disabled (через N секунд)
+<a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a>errdisable recovery cause bpduguard
+<a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a>errdisable recovery interval 300       ! відновлення через 5 хв
+<a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a>
+<a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a>! Перевірити err-disabled порти
+<a id="__codelineno-11-13" name="__codelineno-11-13" href="#__codelineno-11-13"></a>show interfaces status err-disabled
+<a id="__codelineno-11-14" name="__codelineno-11-14" href="#__codelineno-11-14"></a>show errdisable recovery
+</code></pre></div>
+<h3 id="53-bpdu-filter-bpdu">5.3 BPDU Filter — не надсилати і не приймати BPDU</h3>
+<p>Повністю вимикає обробку BPDU на порту. Використовується обережно - на граничних портах мережі</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>! Глобально (тільки на PortFast-портах — не надсилає BPDU назовні)
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>spanning-tree portfast bpdufilter default
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>! На конкретному порту (УВАГА: повністю вимикає STP на порту!)
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>interface GigabitEthernet1/0/10
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a> spanning-tree bpdufilter enable
+</code></pre></div>
+<div class="admonition danger">
+<p class="admonition-title">BPDU Filter небезпечний</p>
+<p><code>bpdufilter enable</code> на конкретному порту <strong>повністю вимикає STP</strong> - порт ніколи не заблокується навіть якщо утвориться петля. Використовуй тільки на стиках з провайдерами або граничних точках</p>
+</div>
+<h3 id="54-root-guard-root-bridge">5.4 Root Guard — захист Root Bridge від заміни</h3>
+<p>Забороняє порту ставати Root Port. Якщо на цьому порту надходить Superior BPDU (з меншим Bridge ID), порт переходить у стан <strong>root-inconsistent</strong> замість того, щоб переобрати Root Bridge</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>! Застосовується на designated-портах комутаторів distribution рівня
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>! (на портах що дивляться вниз до access рівня)
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>interface GigabitEthernet1/0/24
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a> spanning-tree guard root
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>! Перевірка
+<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a>show spanning-tree inconsistentports
+</code></pre></div>
+<h3 id="55-loop-guard-bpdu">5.5 Loop Guard — захист від петель при втраті BPDU</h3>
+<p>Якщо порт перестає отримувати BPDU (не через зміну топології, а через несправність), він може помилково перейти у Forwarding і утворити петлю. Loop Guard переводить такий порт у стан <strong>loop-inconsistent</strong> замість Forwarding</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>! Глобально (рекомендовано на uplink/trunk портах)
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>spanning-tree loopguard default
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>! На конкретному порту
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a>interface GigabitEthernet1/0/1
+<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a> spanning-tree guard loop
+<a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a>
+<a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a>! Перевірка
+<a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a>show spanning-tree inconsistentports
+</code></pre></div>
+<h3 id="56">5.6 Зведена таблиця механізмів захисту</h3>
+<table>
+<thead>
+<tr>
+<th>Механізм</th>
+<th>Де застосовувати</th>
+<th>Від чого захищає</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>PortFast</strong></td>
+<td>Access-порти (кінцеві пристрої)</td>
+<td>Затримка конвергенції</td>
+</tr>
+<tr>
+<td><strong>BPDU Guard</strong></td>
+<td>Access-порти з PortFast</td>
+<td>Підключення несанкціонованих SW</td>
+</tr>
+<tr>
+<td><strong>BPDU Filter</strong></td>
+<td>Граничні порти мережі</td>
+<td>Витік BPDU назовні</td>
+</tr>
+<tr>
+<td><strong>Root Guard</strong></td>
+<td>Downlink-порти dist/core рівня</td>
+<td>Зміна Root Bridge</td>
+</tr>
+<tr>
+<td><strong>Loop Guard</strong></td>
+<td>Uplink/trunk порти</td>
+<td>Петлі при втраті BPDU</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="6-distribution-">6 Типова конфігурація distribution-комутатора</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>! Режим Rapid PVST+
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>spanning-tree mode rapid-pvst
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>! Цей комутатор — Root Bridge для VLAN 1,10,20
+<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a>spanning-tree vlan 1,10,20 root primary
+<a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a>
+<a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a>! Вторинний Root для VLAN 30,40 (основний на іншому SW)
+<a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a>spanning-tree vlan 30,40 root secondary
+<a id="__codelineno-15-9" name="__codelineno-15-9" href="#__codelineno-15-9"></a>
+<a id="__codelineno-15-10" name="__codelineno-15-10" href="#__codelineno-15-10"></a>! PortFast + BPDU Guard глобально для access-портів
+<a id="__codelineno-15-11" name="__codelineno-15-11" href="#__codelineno-15-11"></a>spanning-tree portfast default
+<a id="__codelineno-15-12" name="__codelineno-15-12" href="#__codelineno-15-12"></a>spanning-tree portfast bpduguard default
+<a id="__codelineno-15-13" name="__codelineno-15-13" href="#__codelineno-15-13"></a>
+<a id="__codelineno-15-14" name="__codelineno-15-14" href="#__codelineno-15-14"></a>! Root Guard на downlink-портах (до access рівня)
+<a id="__codelineno-15-15" name="__codelineno-15-15" href="#__codelineno-15-15"></a>interface range GigabitEthernet1/0/1 - 20
+<a id="__codelineno-15-16" name="__codelineno-15-16" href="#__codelineno-15-16"></a> spanning-tree guard root
+<a id="__codelineno-15-17" name="__codelineno-15-17" href="#__codelineno-15-17"></a>
+<a id="__codelineno-15-18" name="__codelineno-15-18" href="#__codelineno-15-18"></a>! Loop Guard на uplink-портах (до core рівня)
+<a id="__codelineno-15-19" name="__codelineno-15-19" href="#__codelineno-15-19"></a>interface range GigabitEthernet1/0/23 - 24
+<a id="__codelineno-15-20" name="__codelineno-15-20" href="#__codelineno-15-20"></a> spanning-tree guard loop
+</code></pre></div>
+<hr />
+<blockquote>
+<p>📌 <strong>Зберегти конфігурацію:</strong> <code>copy running-config startup-config</code> або <code>wr</code></p>
+</blockquote>
+<hr />
+<div class="admonition quote">
+<p class="admonition-title">Джерело</p>
+<p>Стаття базується на офіційній документації Cisco.
+Оригінали (англійською):
+<a href="https://www.cisco.com/c/en/us/support/docs/smb/switches/cisco-small-business-300-series-managed-switches/smb5760-configure-stp-settings-on-a-switch-through-the-cli.html">Configure STP Settings through CLI</a> ·
+<a href="https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst9200/software/release/16-12/configuration_guide/lyr2/b_1612_lyr2_9200_cg/configuring_spanning_tree_protocol.html">Configuring STP — Catalyst 9200</a></p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Повернутись нагору
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      © 2026 Кафедра №21 - Bci права захищені
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://mitit.mil.gov.ua/page/faculty2" target="_blank" rel="noopener" title="mitit.mil.gov.ua" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M16.36 14c.08-.66.14-1.32.14-2s-.06-1.34-.14-2h3.38c.16.64.26 1.31.26 2s-.1 1.36-.26 2m-5.15 5.56c.6-1.11 1.06-2.31 1.38-3.56h2.95a8.03 8.03 0 0 1-4.33 3.56M14.34 14H9.66c-.1-.66-.16-1.32-.16-2s.06-1.35.16-2h4.68c.09.65.16 1.32.16 2s-.07 1.34-.16 2M12 19.96c-.83-1.2-1.5-2.53-1.91-3.96h3.82c-.41 1.43-1.08 2.76-1.91 3.96M8 8H5.08A7.92 7.92 0 0 1 9.4 4.44C8.8 5.55 8.35 6.75 8 8m-2.92 8H8c.35 1.25.8 2.45 1.4 3.56A8 8 0 0 1 5.08 16m-.82-2C4.1 13.36 4 12.69 4 12s.1-1.36.26-2h3.38c-.08.66-.14 1.32-.14 2s.06 1.34.14 2M12 4.03c.83 1.2 1.5 2.54 1.91 3.97h-3.82c.41-1.43 1.08-2.77 1.91-3.97M18.92 8h-2.95a15.7 15.7 0 0 0-1.38-3.56c1.84.63 3.37 1.9 4.33 3.56M12 2C6.47 2 2 6.5 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "content.code.copy", "search.suggest", "search.highlight"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u0421\u043a\u043e\u043f\u0456\u0439\u043e\u0432\u0430\u043d\u043e \u0432 \u0431\u0443\u0444\u0435\u0440", "clipboard.copy": "\u0421\u043a\u043e\u043f\u0456\u044e\u0432\u0430\u0442\u0438 \u0432 \u0431\u0443\u0444\u0435\u0440", "search.result.more.one": "\u0429\u0435 1 \u0437\u0431\u0456\u0433 \u043d\u0430 \u0446\u0456\u0439 \u0441\u0442\u043e\u0440\u0456\u043d\u0446\u0456", "search.result.more.other": "\u0429\u0435 # \u0437\u0431\u0456\u0433\u0456\u0432 \u043d\u0430 \u0446\u0456\u0439 \u0441\u0442\u043e\u0440\u0456\u043d\u0446\u0456", "search.result.none": "\u0417\u0431\u0456\u0433\u0456\u0432 \u043d\u0435 \u0437\u043d\u0430\u0439\u0434\u0435\u043d\u043e", "search.result.one": "\u0417\u043d\u0430\u0439\u0434\u0435\u043d\u043e 1 \u0437\u0431\u0456\u0433", "search.result.other": "\u0417\u043d\u0430\u0439\u0434\u0435\u043d\u043e # \u0437\u0431\u0456\u0433\u0456\u0432", "search.result.placeholder": "\u0420\u043e\u0437\u043f\u043e\u0447\u043d\u0456\u0442\u044c \u043f\u0438\u0441\u0430\u0442\u0438 \u0434\u043b\u044f \u043f\u043e\u0448\u0443\u043a\u0443", "search.result.term.missing": "\u041d\u0435 \u0437\u043d\u0430\u0439\u0434\u0435\u043d\u043e \u0437\u0430\u043f\u0438\u0442\u0443", "select.version": "\u041e\u0431\u0440\u0430\u0442\u0438 \u0432\u0435\u0440\u0441\u0456\u044e"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
