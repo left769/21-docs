@@ -1,0 +1,4322 @@
+
+<!doctype html>
+<html lang="uk" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="Створено колективом кафедри №21">
+      
+      
+      
+        <link rel="prev" href="../ipsec/">
+      
+      
+        <link rel="next" href="../subnet-calculator/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/logo_dep21_white.ico">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Cisco cheat sheet - Довідник кафедри Інформаційних систем та технологій</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#cisco-ios" class="md-skip">
+          Перейти до змісту
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Хедер">
+    <a href="../.." title="Довідник кафедри Інформаційних систем та технологій" class="md-header__button md-logo" aria-label="Довідник кафедри Інформаційних систем та технологій" data-md-component="logo">
+      
+  <img src="../../assets/logo_dep21_white.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Довідник кафедри Інформаційних систем та технологій
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Cisco cheat sheet
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Перейти на темну тему"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Перейти на темну тему" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="indigo"  aria-label="Перейти на світлу тему"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Перейти на світлу тему" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Пошук" placeholder="Пошук" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Шукати">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Очистити" aria-label="Очистити" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Пошук розпочато
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Вкладки" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../.." class="md-tabs__link">
+          
+  
+  
+  🏠 Головна
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+  🌐 Мережі
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../server-services/" class="md-tabs__link">
+          
+  
+  
+  🖥️ Сервіси
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Навігація" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Довідник кафедри Інформаційних систем та технологій" class="md-nav__button md-logo" aria-label="Довідник кафедри Інформаційних систем та технологій" data-md-component="logo">
+      
+  <img src="../../assets/logo_dep21_white.png" alt="logo">
+
+    </a>
+    Довідник кафедри Інформаційних систем та технологій
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🏠 Головна
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    🏠 Головна
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    👋Вступ
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../pnet/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🧪Інструкція з користування PNET Lab
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../subnet-calculator/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Калькулятор маски підмереж
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../server-services/chmod-calculator/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Калькулятор прав Linux
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🌐 Мережі
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    🌐 Мережі
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Вступ до мереж
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../IP-interfaces/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IP інтерфейси
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../vlans/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VLAN та Trunk
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../vlans-mikrotik/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VLAN в Mikrotik
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../stp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    STP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../routing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Маршрутизація
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ACL/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Контроль доступу
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cisco-nat/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NAT в Cisco
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dhcp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DHCP-сервер
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ipsec/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IPsec в Cisco
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cisco cheat sheet
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cisco cheat sheet
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Зміст">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Зміст
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1 Основи роботи
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1 Основи роботи">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 Скидання налаштувань
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-rommon" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 Процес завантаження та ROMMON
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3 Процедура відновлення пароля
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.4 Апаратне забезпечення
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#15-ios" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.5 Управління прошивкою IOS
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-ios" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2 Навігація та основи IOS
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2 Навігація та основи IOS">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 Основи командного рядка
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 Контекстна довідка
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 Рівні привілеїв користувачів
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4 Псевдоніми команд
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#25-tcl" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.5 Скрипти за допомогою TCL
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3 Робота з файловою системою
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3 Робота з файловою системою">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 Навігація файловою системою
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 Управління конфігурацією
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-scp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 Робота з SCP
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34-usb" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4 Робота з USB
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#35" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.5 Автоматизація бекапів
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4 Управління ліцензіями
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4 Управління ліцензіями">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 Типи та моделі ліцензій
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 Робота з ліцензіями
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-right-to-use-rtu" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3 Right-to-Use (RTU) Ліцензування
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5 Управління пристроєм
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5 Управління пристроєм">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 Системні налаштування
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-ntp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 Налаштування NTP
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-dns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3 Налаштування DNS
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#54-syslog" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.4 Налаштування Syslog
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#55-snmp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.5 Налаштування SNMP
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6 Основи безпеки
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6 Основи безпеки">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 Управління паролями
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-ssh" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2 Налаштування SSH
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63-tcpudp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3 Сервіси TCP/UDP
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#64-control-plane-copp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.4 Політики Control Plane (CoPP)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-aaa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7 AAA &amp; Управління доступом
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7 AAA &amp; Управління доступом">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-aaa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1 Основи AAA
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-radius" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2 Налаштування RADIUS
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#73-tacacs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.3 Налаштування TACACS+
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#74" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.4 Авторизація команд
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#75-downloadable-acls" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.5 Downloadable ACLs
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8 Протоколи управління
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8 Протоколи управління">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#81-httphttps" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.1 Управління HTTP/HTTPS
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#82-netconfrestconf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.2 Netconf/RESTCONF
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#83-grpctelemetry" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.3 gRPC/Telemetry
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#84-netconfyang" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.4 NETCONF/YANG моделі
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-ethernet" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9 Комутація Ethernet
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9 Комутація Ethernet">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#91-mac-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.1 Таблиця MAC-адрес
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#92" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.2 Налаштування портів
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#93-cdplldp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.3 CDP/LLDP
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#94-udld-loop-guard" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.4 UDLD &amp; Loop Guard
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-vlans-trunking" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10 VLANs &amp; Trunking
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10 VLANs &amp; Trunking">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#101-vlan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.1 Налаштування VLAN
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#102-vlan-trunking" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.2 VLAN Trunking
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#103-vtp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.3 Налаштування VTP
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#104-voice-vlan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.4 Voice VLAN
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#105-vlan-acls-vacls" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.5 VLAN ACLs (VACLs)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-spanning-tree-protocol" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11 Spanning Tree Protocol
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="11 Spanning Tree Protocol">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#111-stp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.1 Основи налаштування STP
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#112-mst" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.2 Налаштування MST
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#113-stp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.3 Таймери та оптимізація STP
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#114-stp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.4 Безпека STP
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-etherchannel-lacp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12 EtherChannel &amp; LACP
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="12 EtherChannel &amp; LACP">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#121-etherchannel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.1 Налаштування EtherChannel
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#122" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.2 Балансування навантаження
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#123-etherchannel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.3 Розширене налаштування EtherChannel
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#124-etherchannel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.4 Пошук несправностей в EtherChannel
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-ip" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13 IP адресація
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="13 IP адресація">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#131-ip-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.1 Налаштування IP-адрес
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#132-dhcp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.2 Сервіси DHCP
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#133-dhcp-snooping" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.3 DHCP Snooping
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#134-arp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.4 Налаштування ARP
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14 Статична маршрутизація
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="14 Статична маршрутизація">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#141" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14.1 Основи статичної маршрутизації
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#142" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14.2 Відстеження статичних маршрутів
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#143-policy-based-routing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14.3 Policy-Based Routing
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../subnet-calculator/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Калькулятор маски підмереж
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🖥️ Сервіси
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    🖥️ Сервіси
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../server-services/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Сервіси на базі OC Linux
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../server-services/ssh/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SSH
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../server-services/radius/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RADIUS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../server-services/chmod-calculator/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Калькулятор прав Linux
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Зміст">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Зміст
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1 Основи роботи
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1 Основи роботи">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 Скидання налаштувань
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-rommon" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 Процес завантаження та ROMMON
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3 Процедура відновлення пароля
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.4 Апаратне забезпечення
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#15-ios" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.5 Управління прошивкою IOS
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-ios" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2 Навігація та основи IOS
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2 Навігація та основи IOS">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 Основи командного рядка
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 Контекстна довідка
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 Рівні привілеїв користувачів
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4 Псевдоніми команд
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#25-tcl" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.5 Скрипти за допомогою TCL
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3 Робота з файловою системою
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3 Робота з файловою системою">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 Навігація файловою системою
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 Управління конфігурацією
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-scp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 Робота з SCP
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34-usb" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4 Робота з USB
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#35" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.5 Автоматизація бекапів
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4 Управління ліцензіями
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4 Управління ліцензіями">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 Типи та моделі ліцензій
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 Робота з ліцензіями
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-right-to-use-rtu" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3 Right-to-Use (RTU) Ліцензування
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5 Управління пристроєм
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5 Управління пристроєм">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 Системні налаштування
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-ntp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 Налаштування NTP
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-dns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3 Налаштування DNS
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#54-syslog" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.4 Налаштування Syslog
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#55-snmp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.5 Налаштування SNMP
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6 Основи безпеки
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6 Основи безпеки">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 Управління паролями
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-ssh" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2 Налаштування SSH
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63-tcpudp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3 Сервіси TCP/UDP
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#64-control-plane-copp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.4 Політики Control Plane (CoPP)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-aaa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7 AAA &amp; Управління доступом
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7 AAA &amp; Управління доступом">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-aaa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1 Основи AAA
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-radius" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2 Налаштування RADIUS
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#73-tacacs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.3 Налаштування TACACS+
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#74" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.4 Авторизація команд
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#75-downloadable-acls" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.5 Downloadable ACLs
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8 Протоколи управління
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8 Протоколи управління">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#81-httphttps" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.1 Управління HTTP/HTTPS
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#82-netconfrestconf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.2 Netconf/RESTCONF
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#83-grpctelemetry" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.3 gRPC/Telemetry
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#84-netconfyang" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.4 NETCONF/YANG моделі
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-ethernet" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9 Комутація Ethernet
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9 Комутація Ethernet">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#91-mac-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.1 Таблиця MAC-адрес
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#92" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.2 Налаштування портів
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#93-cdplldp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.3 CDP/LLDP
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#94-udld-loop-guard" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.4 UDLD &amp; Loop Guard
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-vlans-trunking" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10 VLANs &amp; Trunking
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10 VLANs &amp; Trunking">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#101-vlan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.1 Налаштування VLAN
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#102-vlan-trunking" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.2 VLAN Trunking
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#103-vtp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.3 Налаштування VTP
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#104-voice-vlan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.4 Voice VLAN
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#105-vlan-acls-vacls" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.5 VLAN ACLs (VACLs)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-spanning-tree-protocol" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11 Spanning Tree Protocol
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="11 Spanning Tree Protocol">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#111-stp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.1 Основи налаштування STP
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#112-mst" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.2 Налаштування MST
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#113-stp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.3 Таймери та оптимізація STP
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#114-stp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.4 Безпека STP
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-etherchannel-lacp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12 EtherChannel &amp; LACP
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="12 EtherChannel &amp; LACP">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#121-etherchannel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.1 Налаштування EtherChannel
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#122" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.2 Балансування навантаження
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#123-etherchannel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.3 Розширене налаштування EtherChannel
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#124-etherchannel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.4 Пошук несправностей в EtherChannel
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-ip" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13 IP адресація
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="13 IP адресація">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#131-ip-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.1 Налаштування IP-адрес
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#132-dhcp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.2 Сервіси DHCP
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#133-dhcp-snooping" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.3 DHCP Snooping
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#134-arp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.4 Налаштування ARP
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14 Статична маршрутизація
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="14 Статична маршрутизація">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#141" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14.1 Основи статичної маршрутизації
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#142" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14.2 Відстеження статичних маршрутів
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#143-policy-based-routing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14.3 Policy-Based Routing
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="cisco-ios">Cisco IOS — Шпаргалка команд</h1>
+<blockquote>
+<p>Курс: Комп'ютерні мережі | 2 курс</p>
+</blockquote>
+<hr />
+<h2 id="1">1 Основи роботи</h2>
+<h3 id="11">1.1 Скидання налаштувань</h3>
+<blockquote>
+<p>⚠️ Ці команди повністю видалять дані з пристрою. Завжди зберігайте резервні копії!</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>! Повне скидання (знищення всіх даних)
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>delete nvram:startup-config
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>delete flash:vlan.dat
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>erase nvram:
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>erase flash:
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>write erase
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>reload
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>! Часткове скидання (зі збереженням IOS)
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>write erase
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>delete vlan.dat
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>reload
+</code></pre></div>
+<h3 id="12-rommon">1.2 Процес завантаження та ROMMON</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>! Перервати завантаження: натисніть Ctrl+Break протягом перших 60 секунд
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>! Команди ROMMON:
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>rommon 1 &gt; confreg 0x2142                                   ! обхід завантаження startup-config
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>rommon 2 &gt; reset                                            ! перезавантаження
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>rommon 3 &gt; dir flash:                                       ! список файлів у Flash
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>rommon 4 &gt; boot flash:c2900-universalk9-mz.SPA.157-3.M.bin  ! завантажити конкретний IOS
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>rommon 5 &gt; tftpdnld                                         ! завантаження IOS з TFTP-сервера
+</code></pre></div>
+<h3 id="13">1.3 Процедура відновлення пароля</h3>
+<p><strong>Для маршрутизаторів (ISR G2/ASR):</strong></p>
+<ol>
+<li>Підключитись консольним кабелем</li>
+<li>Перезавантажте пристрій та увійдіть в ROMMON (<code>Ctrl+Break</code>)</li>
+<li><code>confreg 0x2142</code></li>
+<li><code>reset</code></li>
+<li>Пропустити початкову конфігурацію</li>
+<li><code>enable</code></li>
+<li><code>copy startup-config running-config</code></li>
+<li>Змініть паролі</li>
+<li><code>config-register 0x2102</code></li>
+<li><code>copy running-config startup-config</code></li>
+<li><code>reload</code></li>
+</ol>
+<p><strong>Для комутаторів (Catalyst):</strong></p>
+<ol>
+<li>Вимкніть пристрій</li>
+<li>Утримуйте кнопку Mode під час увімкнення комутатора</li>
+<li>Відпустіть кнопку, коли світлові індикатори почнуть мигати</li>
+<li><code>flash_init</code></li>
+<li><code>load_helper</code></li>
+<li><code>rename flash:config.text flash:config.text.old</code></li>
+<li><code>boot</code></li>
+<li><code>enable</code></li>
+<li><code>rename flash:config.text.old flash:config.text</code></li>
+<li><code>copy flash:config.text system:running-config</code></li>
+<li>Змініть паролі</li>
+<li><code>copy running-config startup-config</code></li>
+</ol>
+<h3 id="14">1.4 Апаратне забезпечення</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>! Переглянути відомості про &quot;залізо&quot;
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>show inventory                      ! перелік модулів та серійних номерів
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>show diag                           ! детальна діагностика
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>show environment                    ! температура, живлення, вентилятори
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>show module                         ! встановлені модулі
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>show idprom backplane
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>! Cisco 2960X/3650/3850 — команди для стекованих шасі
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>show switch                         ! список пристроїв у стеку
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>show switch detail                  ! детально
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>show switch neighbors               ! сусіди по стеку
+<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>switch 1 provision ws-c3650-24ps
+<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>switch 1 priority 15                ! більше значення = головний пристрій
+<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>switch 2 renumber 3
+<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a>switch 1 reload
+</code></pre></div>
+<h3 id="15-ios">1.5 Управління прошивкою IOS</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>! Перевірити поточну версію IOS
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>show version           ! версія IOS, uptime, модель пристрою
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>show boot
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>show flash:
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>dir flash:
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>! Оновити IOS через TFTP
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>copy tftp://192.168.1.10/c2900-universalk9-mz.SPA.157-3.M.bin flash:
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>boot system flash:c2900-universalk9-mz.SPA.157-3.M.bin
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>copy running-config startup-config
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>reload
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>
+<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>! Встановлення пакетів Bundle/Install (Cat3K/4K)
+<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a>archive download-sw /force-reload /overwrite tftp://192.168.1.10/cat3k_caa-universalk9.16.12.04.SPA.bin
+<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a>
+<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a>! Режим встановлення (IOS XE)
+<a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a>request platform software package install switch all file tftp://192.168.1.10/asr1000-universalk9.17.03.03.SPA.pkg
+</code></pre></div>
+<hr />
+<h2 id="2-ios">2 Навігація та основи IOS</h2>
+<h3 id="21">2.1 Основи командного рядка</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>! Скорочення команд (до унікальних символів)
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>conf t          ! configure terminal
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>sh run          ! show running-config
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>sh ip int br    ! show ip interface brief
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>wr              ! write memory (copy run start)
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>! Комбінації клавіш для редагування
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>Ctrl+A          ! перейти на початок рядка
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>Ctrl+E          ! перейти в кінець рядка
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>Ctrl+W          ! видалити попереднє слово
+<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>Esc+B           ! перейти на слово назад
+<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>Esc+F           ! перейти на слово вперед
+<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>Ctrl+R          ! повторно відобразити рядок
+<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a>Ctrl+U          ! видалити весь рядок
+<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a>Ctrl+Y          ! вставити видалений текст
+<a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a>Tab             ! автодоповнення
+<a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a>
+<a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a>! Фільтрація виводу команд
+<a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a>show running-config | include ospf      ! рядки що містять &quot;ospf&quot;
+<a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a>show running-config | section router    ! секція &quot;router&quot;
+<a id="__codelineno-4-21" name="__codelineno-4-21" href="#__codelineno-4-21"></a>show running-config | exclude !         ! без рядків-коментарів
+<a id="__codelineno-4-22" name="__codelineno-4-22" href="#__codelineno-4-22"></a>show running-config | begin interface   ! починаючи з рядка &quot;interface&quot;
+<a id="__codelineno-4-23" name="__codelineno-4-23" href="#__codelineno-4-23"></a>show running-config | count ospf        ! кількість входжень
+</code></pre></div>
+<h3 id="22">2.2 Контекстна довідка</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>?                           ! список доступних команд
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>show ?                      ! параметри команди show
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>configure ?                 ! параметри configure
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>interface gigabitEthernet 0/0/0 ?
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>show ip route &lt;Tab&gt;         ! автодоповнення
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>! Часткове доповнення
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>sh ip ro&lt;Tab&gt;               ! доповнює до &quot;show ip route&quot;
+</code></pre></div>
+<h3 id="23">2.3 Рівні привілеїв користувачів</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>! Налаштування рівнів привілеїв (0–15, де 15 = повний доступ)
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>privilege exec level 5 configure terminal
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>privilege exec level 5 show running-config
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>privilege interface level 5 shutdown
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>username admin privilege 5 secret P@ssw0rd
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>! Перегляд поточного рівня
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>show privilege
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>show privilege all
+<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a>
+<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a>! Встановити пароль для рівня та увійти
+<a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a>enable secret level 5 SuperSecret123
+<a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a>enable 5
+</code></pre></div>
+<h3 id="24">2.4 Псевдоніми команд</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>! Створення власних псевдонімів команд
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>alias exec srs show running-config | section
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>alias exec shbr show ip interface brief
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>alias exec routes show ip route
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>alias exec neighbors show cdp neighbors detail
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>alias configure config t
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>! Постійний псевдонім для резервного копіювання
+<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a>alias exec backup copy running-config tftp://192.168.1.10/
+<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a>backup R1-config.txt
+</code></pre></div>
+<h3 id="25-tcl">2.5 Скрипти за допомогою TCL</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>! Вхід в TCL-оболонку для автоматизації команд
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>tclsh
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a> puts [exec &quot;show version&quot;]
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a> foreach i {1 2 3 4 5} { puts &quot;Interface Gi0/$i&quot; }
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a> exit
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>! Одноразова TCL-команда
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>tclsh puts [exec &quot;show ip interface brief&quot;]
+</code></pre></div>
+<hr />
+<h2 id="3">3 Робота з файловою системою</h2>
+<h3 id="31">3.1 Навігація файловою системою</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>! Навігація по файловій системі
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>pwd                     ! поточна директорія
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>dir                     ! список файлів
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>dir flash:              ! вміст Flash-пам&#39;яті
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>dir nvram:              ! вміст NVRAM
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>dir usbflash0:          ! USB (якщо підключено)
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>dir sdflash:            ! SD-карта (ASR/ISR)
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>dir bootflash:          ! завантажувальна Flash
+<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a>dir system:             ! системні файли
+<a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a>
+<a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a>! Операції з файлами
+<a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a>copy source-url destination-url                 ! копіювати файл
+<a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a>copy running-config flash:backup-config         ! зберегти конфіг у Flash
+<a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a>copy flash:config.text tftp://192.168.1.10/     ! копіювати на TFTP
+<a id="__codelineno-9-15" name="__codelineno-9-15" href="#__codelineno-9-15"></a>delete flash:old-config.text                    ! видалити файл
+<a id="__codelineno-9-16" name="__codelineno-9-16" href="#__codelineno-9-16"></a>erase flash:                                    ! ⚠️ очистити всю Flash
+<a id="__codelineno-9-17" name="__codelineno-9-17" href="#__codelineno-9-17"></a>mkdir flash:backups                             ! створити директорію
+<a id="__codelineno-9-18" name="__codelineno-9-18" href="#__codelineno-9-18"></a>rmdir flash:backups                             ! видалити директорію
+</code></pre></div>
+<h3 id="32">3.2 Управління конфігурацією</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>! Архівування конфігурацій
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>archive
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>  path flash:backups/$h-config  ! $h = hostname
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>  maximum 10                    ! зберігати до 10 версій
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>  time-period 1440              ! авто-збереження кожні 24 год
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>  write-memory                  ! архівувати при wr
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>
+<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a>! Перегляд та відновлення з архіву
+<a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a>show archive
+<a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a>configure replace flash:backups/R1-config-1  ! відкат до версії
+<a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a>
+<a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a>! Відкат конфігурації
+<a id="__codelineno-10-13" name="__codelineno-10-13" href="#__codelineno-10-13"></a>configure replace flash:backup-config 10
+<a id="__codelineno-10-14" name="__codelineno-10-14" href="#__codelineno-10-14"></a>configure revert now
+<a id="__codelineno-10-15" name="__codelineno-10-15" href="#__codelineno-10-15"></a>configure confirm
+<a id="__codelineno-10-16" name="__codelineno-10-16" href="#__codelineno-10-16"></a>
+<a id="__codelineno-10-17" name="__codelineno-10-17" href="#__codelineno-10-17"></a>! Точки відновлення (IOS XE)
+<a id="__codelineno-10-18" name="__codelineno-10-18" href="#__codelineno-10-18"></a>checkpoint database
+<a id="__codelineno-10-19" name="__codelineno-10-19" href="#__codelineno-10-19"></a>show checkpoint database
+<a id="__codelineno-10-20" name="__codelineno-10-20" href="#__codelineno-10-20"></a>rollback checkpoint checkpoint_name
+</code></pre></div>
+<h3 id="33-scp">3.3 Робота з SCP</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>! Налаштувати SCP-сервер на пристрої
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>ip scp server enable
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>username admin secret admin123
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>ip ssh version 2
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>! Копіювання через SCP (зашифровано, на відміну від TFTP)
+<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a>copy running-config scp://admin@192.168.1.10/backups/R1-config
+<a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a>copy scp://admin@192.168.1.10/configs/new-config running-config
+<a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a>
+<a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a>! З Linux на маршрутизатор
+<a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a># scp R1-config admin@10.0.0.1:flash:
+</code></pre></div>
+<h3 id="34-usb">3.4 Робота з USB</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>! Перевірити стан USB
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>show usb
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>dir usbflash0:
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>! Копіювати на/з USB
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>copy running-config usbflash0:/backup-config
+<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a>copy usbflash0:/new-ios.bin flash:
+<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a>
+<a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a>! Завантажитись з USB
+<a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a>boot system usbflash0:c2900-universalk9-mz.SPA.157-3.M.bin
+</code></pre></div>
+<h3 id="35">3.5 Автоматизація бекапів</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>! EEM-скрипт для автоматичного резервного копіювання щодня о 02:00
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>event manager applet AUTO-BACKUP
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>  event timer cron cron-entry &quot;0 2 * * *&quot;
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>  action 1.0 cli command &quot;enable&quot;
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>  action 2.0 cli command &quot;copy running-config tftp://192.168.1.10/backups/$_device_name-$_event_pub_time&quot;
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>  action 3.0 syslog msg &quot;Backup completed successfully&quot;
+</code></pre></div>
+<hr />
+<h2 id="4">4 Управління ліцензіями</h2>
+<h3 id="41">4.1 Типи та моделі ліцензій</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>! Переглянути інформацію про ліцензії
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>show license
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>show license feature
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>show license udi                       ! унікальний ідентифікатор пристрою
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a>show license right-to-use
+<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a>show license tech-support
+<a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a>
+<a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a>! Smart Licensing (IOS XE)
+<a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a>show license status
+<a id="__codelineno-14-10" name="__codelineno-14-10" href="#__codelineno-14-10"></a>show license authorization
+<a id="__codelineno-14-11" name="__codelineno-14-11" href="#__codelineno-14-11"></a>license smart register idtoken XXXX-XXXX-XXXX-XXXX
+<a id="__codelineno-14-12" name="__codelineno-14-12" href="#__codelineno-14-12"></a>license smart reservation request local
+<a id="__codelineno-14-13" name="__codelineno-14-13" href="#__codelineno-14-13"></a>license smart reservation install file flash:reservation.lic
+<a id="__codelineno-14-14" name="__codelineno-14-14" href="#__codelineno-14-14"></a>
+<a id="__codelineno-14-15" name="__codelineno-14-15" href="#__codelineno-14-15"></a>! Traditional Licensing (класичний варіант)
+<a id="__codelineno-14-16" name="__codelineno-14-16" href="#__codelineno-14-16"></a>show license all
+<a id="__codelineno-14-17" name="__codelineno-14-17" href="#__codelineno-14-17"></a>license install flash:license.lic
+<a id="__codelineno-14-18" name="__codelineno-14-18" href="#__codelineno-14-18"></a>license boot level ipbasek9
+<a id="__codelineno-14-19" name="__codelineno-14-19" href="#__codelineno-14-19"></a>reload
+</code></pre></div>
+<h3 id="42">4.2 Робота з ліцензіями</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>! Зберегти ліцензію у файл
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>license save flash:all_licenses.lic
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>! Експорт/імпорт ліцензії
+<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a>license export flash:license_pa.lic
+<a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a>license import flash:new_license.lic
+<a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a>
+<a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a>! Ознайомча (Evaluation) ліцензія
+<a id="__codelineno-15-9" name="__codelineno-15-9" href="#__codelineno-15-9"></a>license accept end user agreement
+<a id="__codelineno-15-10" name="__codelineno-15-10" href="#__codelineno-15-10"></a>license boot level securityk9
+<a id="__codelineno-15-11" name="__codelineno-15-11" href="#__codelineno-15-11"></a>reload
+<a id="__codelineno-15-12" name="__codelineno-15-12" href="#__codelineno-15-12"></a>
+<a id="__codelineno-15-13" name="__codelineno-15-13" href="#__codelineno-15-13"></a>! Перевірити відповідність ліцензій
+<a id="__codelineno-15-14" name="__codelineno-15-14" href="#__codelineno-15-14"></a>show license violation
+</code></pre></div>
+<h3 id="43-right-to-use-rtu">4.3 Right-to-Use (RTU) Ліцензування</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>! Управління RTU-ліцензіями
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>license right-to-use activate ipservices
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>license right-to-use deactivate ipservices
+<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a>show license right-to-use
+<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a>license right-to-use perpetual ipservices accept
+</code></pre></div>
+<hr />
+<h2 id="5">5 Управління пристроєм</h2>
+<h3 id="51">5.1 Системні налаштування</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>! Базове налаштування пристрою
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>hostname R1-CORE
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>no ip domain-lookup                 ! вимкнути DNS-запити в CLI
+<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a>ip domain-name company.com
+<a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a>service password-encryption         ! шифрувати паролі у конфізі
+<a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a>service timestamps debug datetime msec localtime show-timezone
+<a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a>service timestamps log datetime msec localtime show-timezone
+<a id="__codelineno-17-8" name="__codelineno-17-8" href="#__codelineno-17-8"></a>logging buffered 16384 debugging
+<a id="__codelineno-17-9" name="__codelineno-17-9" href="#__codelineno-17-9"></a>logging console critical
+<a id="__codelineno-17-10" name="__codelineno-17-10" href="#__codelineno-17-10"></a>logging monitor debugging
+<a id="__codelineno-17-11" name="__codelineno-17-11" href="#__codelineno-17-11"></a>logging host 192.168.100.10
+<a id="__codelineno-17-12" name="__codelineno-17-12" href="#__codelineno-17-12"></a>logging source-interface Loopback0
+<a id="__codelineno-17-13" name="__codelineno-17-13" href="#__codelineno-17-13"></a>
+<a id="__codelineno-17-14" name="__codelineno-17-14" href="#__codelineno-17-14"></a>! Налаштування банерів
+<a id="__codelineno-17-15" name="__codelineno-17-15" href="#__codelineno-17-15"></a>banner motd ^
+<a id="__codelineno-17-16" name="__codelineno-17-16" href="#__codelineno-17-16"></a>************************************************************
+<a id="__codelineno-17-17" name="__codelineno-17-17" href="#__codelineno-17-17"></a>*              AUTHORIZED ACCESS ONLY                      *
+<a id="__codelineno-17-18" name="__codelineno-17-18" href="#__codelineno-17-18"></a>*  This system is the property of Company Inc.             *
+<a id="__codelineno-17-19" name="__codelineno-17-19" href="#__codelineno-17-19"></a>*Unauthorized access is prohibited and will be prosecuted. *
+<a id="__codelineno-17-20" name="__codelineno-17-20" href="#__codelineno-17-20"></a>************************************************************
+<a id="__codelineno-17-21" name="__codelineno-17-21" href="#__codelineno-17-21"></a>^
+<a id="__codelineno-17-22" name="__codelineno-17-22" href="#__codelineno-17-22"></a>
+<a id="__codelineno-17-23" name="__codelineno-17-23" href="#__codelineno-17-23"></a>banner login ^
+<a id="__codelineno-17-24" name="__codelineno-17-24" href="#__codelineno-17-24"></a>Please enter your credentials to access this device.
+<a id="__codelineno-17-25" name="__codelineno-17-25" href="#__codelineno-17-25"></a>Contact Network Operations for assistance.
+<a id="__codelineno-17-26" name="__codelineno-17-26" href="#__codelineno-17-26"></a>^
+<a id="__codelineno-17-27" name="__codelineno-17-27" href="#__codelineno-17-27"></a>
+<a id="__codelineno-17-28" name="__codelineno-17-28" href="#__codelineno-17-28"></a>banner exec ^
+<a id="__codelineno-17-29" name="__codelineno-17-29" href="#__codelineno-17-29"></a>Welcome to R1-CORE. You are logged in as $username.
+<a id="__codelineno-17-30" name="__codelineno-17-30" href="#__codelineno-17-30"></a>Current time: $_timenow
+<a id="__codelineno-17-31" name="__codelineno-17-31" href="#__codelineno-17-31"></a>^
+</code></pre></div>
+<h3 id="52-ntp">5.2 Налаштування NTP</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>! Сервери NTP для синхронізації часу
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>ntp server 0.pool.ntp.org prefer
+<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a>ntp server 1.pool.ntp.org
+<a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a>ntp server 2.pool.ntp.org
+<a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a>ntp server 192.168.100.10
+<a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a>
+<a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a>! Автентифікація NTP
+<a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a>ntp authenticate
+<a id="__codelineno-18-9" name="__codelineno-18-9" href="#__codelineno-18-9"></a>ntp authentication-key 1 md5 NTP-KEY-123
+<a id="__codelineno-18-10" name="__codelineno-18-10" href="#__codelineno-18-10"></a>ntp trusted-key 1
+<a id="__codelineno-18-11" name="__codelineno-18-11" href="#__codelineno-18-11"></a>ntp server 0.pool.ntp.org key 1
+<a id="__codelineno-18-12" name="__codelineno-18-12" href="#__codelineno-18-12"></a>
+<a id="__codelineno-18-13" name="__codelineno-18-13" href="#__codelineno-18-13"></a>! NTP Master/Peer
+<a id="__codelineno-18-14" name="__codelineno-18-14" href="#__codelineno-18-14"></a>ntp master 3               ! зробити пристрій NTP-сервером (stratum 3)
+<a id="__codelineno-18-15" name="__codelineno-18-15" href="#__codelineno-18-15"></a>ntp peer 192.168.1.2
+<a id="__codelineno-18-16" name="__codelineno-18-16" href="#__codelineno-18-16"></a>ntp update-calendar
+<a id="__codelineno-18-17" name="__codelineno-18-17" href="#__codelineno-18-17"></a>
+<a id="__codelineno-18-18" name="__codelineno-18-18" href="#__codelineno-18-18"></a>! Контроль доступу до NTP
+<a id="__codelineno-18-19" name="__codelineno-18-19" href="#__codelineno-18-19"></a>ntp access-group peer 10
+<a id="__codelineno-18-20" name="__codelineno-18-20" href="#__codelineno-18-20"></a>ntp access-group serve-only 20
+<a id="__codelineno-18-21" name="__codelineno-18-21" href="#__codelineno-18-21"></a>ntp access-group serve 30
+<a id="__codelineno-18-22" name="__codelineno-18-22" href="#__codelineno-18-22"></a>ntp access-group query-only 40
+<a id="__codelineno-18-23" name="__codelineno-18-23" href="#__codelineno-18-23"></a>
+<a id="__codelineno-18-24" name="__codelineno-18-24" href="#__codelineno-18-24"></a>! Перевірка
+<a id="__codelineno-18-25" name="__codelineno-18-25" href="#__codelineno-18-25"></a>show ntp associations
+<a id="__codelineno-18-26" name="__codelineno-18-26" href="#__codelineno-18-26"></a>show ntp status
+<a id="__codelineno-18-27" name="__codelineno-18-27" href="#__codelineno-18-27"></a>show ntp clock
+<a id="__codelineno-18-28" name="__codelineno-18-28" href="#__codelineno-18-28"></a>show clock detail
+</code></pre></div>
+<h3 id="53-dns">5.3 Налаштування DNS</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>! DNS-сервери
+<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>ip name-server 8.8.8.8
+<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>ip name-server 8.8.4.4
+<a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a>ip name-server 192.168.100.10
+<a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a>ip domain-name company.com
+<a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a>ip domain-list branch.company.com
+<a id="__codelineno-19-7" name="__codelineno-19-7" href="#__codelineno-19-7"></a>ip domain-list partner.com
+<a id="__codelineno-19-8" name="__codelineno-19-8" href="#__codelineno-19-8"></a>ip domain lookup source-interface Loopback0
+<a id="__codelineno-19-9" name="__codelineno-19-9" href="#__codelineno-19-9"></a>
+<a id="__codelineno-19-10" name="__codelineno-19-10" href="#__codelineno-19-10"></a>! Статичні DNS-записи (hosts)
+<a id="__codelineno-19-11" name="__codelineno-19-11" href="#__codelineno-19-11"></a>ip host router1.company.com 192.168.1.1
+<a id="__codelineno-19-12" name="__codelineno-19-12" href="#__codelineno-19-12"></a>ip host switch1 10.0.0.1 10.0.0.2
+<a id="__codelineno-19-13" name="__codelineno-19-13" href="#__codelineno-19-13"></a>ip host ftp-server 192.168.100.10
+<a id="__codelineno-19-14" name="__codelineno-19-14" href="#__codelineno-19-14"></a>
+<a id="__codelineno-19-15" name="__codelineno-19-15" href="#__codelineno-19-15"></a>! DNS Caching
+<a id="__codelineno-19-16" name="__codelineno-19-16" href="#__codelineno-19-16"></a>ip dns server
+<a id="__codelineno-19-17" name="__codelineno-19-17" href="#__codelineno-19-17"></a>ip dns cache
+<a id="__codelineno-19-18" name="__codelineno-19-18" href="#__codelineno-19-18"></a>ip dns spoofing 192.168.1.1
+<a id="__codelineno-19-19" name="__codelineno-19-19" href="#__codelineno-19-19"></a>
+<a id="__codelineno-19-20" name="__codelineno-19-20" href="#__codelineno-19-20"></a>! Перевірка
+<a id="__codelineno-19-21" name="__codelineno-19-21" href="#__codelineno-19-21"></a>show hosts
+<a id="__codelineno-19-22" name="__codelineno-19-22" href="#__codelineno-19-22"></a>nslookup router1.company.com
+<a id="__codelineno-19-23" name="__codelineno-19-23" href="#__codelineno-19-23"></a>ping router1.company.com
+</code></pre></div>
+<h3 id="54-syslog">5.4 Налаштування Syslog</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>! Налаштування Syslog-сервера
+<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>logging on
+<a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a>logging host 192.168.100.10
+<a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a>logging host 192.168.100.11
+<a id="__codelineno-20-5" name="__codelineno-20-5" href="#__codelineno-20-5"></a>logging trap debugging          ! рівень: debug/info/warning/error/critical
+<a id="__codelineno-20-6" name="__codelineno-20-6" href="#__codelineno-20-6"></a>logging facility local7
+<a id="__codelineno-20-7" name="__codelineno-20-7" href="#__codelineno-20-7"></a>logging source-interface Loopback0
+<a id="__codelineno-20-8" name="__codelineno-20-8" href="#__codelineno-20-8"></a>logging origin-id hostname
+<a id="__codelineno-20-9" name="__codelineno-20-9" href="#__codelineno-20-9"></a>logging sequence-numbers
+<a id="__codelineno-20-10" name="__codelineno-20-10" href="#__codelineno-20-10"></a>logging discriminator OSPF msg-body includes &quot;OSPF&quot;
+<a id="__codelineno-20-11" name="__codelineno-20-11" href="#__codelineno-20-11"></a>
+<a id="__codelineno-20-12" name="__codelineno-20-12" href="#__codelineno-20-12"></a>! Локальне логування (в буфер пристрою)
+<a id="__codelineno-20-13" name="__codelineno-20-13" href="#__codelineno-20-13"></a>logging buffered 16384 informational
+<a id="__codelineno-20-14" name="__codelineno-20-14" href="#__codelineno-20-14"></a>logging console warnings
+<a id="__codelineno-20-15" name="__codelineno-20-15" href="#__codelineno-20-15"></a>logging monitor debugging
+<a id="__codelineno-20-16" name="__codelineno-20-16" href="#__codelineno-20-16"></a>logging persistent url flash:logs size 4096
+<a id="__codelineno-20-17" name="__codelineno-20-17" href="#__codelineno-20-17"></a>logging history debugging
+<a id="__codelineno-20-18" name="__codelineno-20-18" href="#__codelineno-20-18"></a>
+<a id="__codelineno-20-19" name="__codelineno-20-19" href="#__codelineno-20-19"></a>! Фільтри логів
+<a id="__codelineno-20-20" name="__codelineno-20-20" href="#__codelineno-20-20"></a>logging filter OSPF ROUTER-ID 1.1.1.1
+<a id="__codelineno-20-21" name="__codelineno-20-21" href="#__codelineno-20-21"></a>logging filter BGP neighbor 192.168.1.2
+<a id="__codelineno-20-22" name="__codelineno-20-22" href="#__codelineno-20-22"></a>
+<a id="__codelineno-20-23" name="__codelineno-20-23" href="#__codelineno-20-23"></a>! Перевірка
+<a id="__codelineno-20-24" name="__codelineno-20-24" href="#__codelineno-20-24"></a>show logging
+<a id="__codelineno-20-25" name="__codelineno-20-25" href="#__codelineno-20-25"></a>show logging history
+<a id="__codelineno-20-26" name="__codelineno-20-26" href="#__codelineno-20-26"></a>show logging filter
+</code></pre></div>
+<h3 id="55-snmp">5.5 Налаштування SNMP</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>! SNMPv2c (простий, без шифрування)
+<a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a>snmp-server community RO-COMMUNITY RO 10
+<a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a>snmp-server community RW-COMMUNITY RW 20
+<a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a>snmp-server host 192.168.100.10 version 2c RO-COMMUNITY
+<a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a>snmp-server enable traps
+<a id="__codelineno-21-6" name="__codelineno-21-6" href="#__codelineno-21-6"></a>snmp-server trap-source Loopback0
+<a id="__codelineno-21-7" name="__codelineno-21-7" href="#__codelineno-21-7"></a>snmp-server queue-length 100
+<a id="__codelineno-21-8" name="__codelineno-21-8" href="#__codelineno-21-8"></a>snmp-server location &quot;Data Center Rack A1&quot;
+<a id="__codelineno-21-9" name="__codelineno-21-9" href="#__codelineno-21-9"></a>snmp-server contact &quot;Network Operations noc@company.com&quot;
+<a id="__codelineno-21-10" name="__codelineno-21-10" href="#__codelineno-21-10"></a>snmp-server chassis-id R1-CORE-ASR1001
+<a id="__codelineno-21-11" name="__codelineno-21-11" href="#__codelineno-21-11"></a>
+<a id="__codelineno-21-12" name="__codelineno-21-12" href="#__codelineno-21-12"></a>! SNMPv3 (безпечний варіант з шифруванням)
+<a id="__codelineno-21-13" name="__codelineno-21-13" href="#__codelineno-21-13"></a>snmp-server group ADMIN v3 priv read ALL write ALL
+<a id="__codelineno-21-14" name="__codelineno-21-14" href="#__codelineno-21-14"></a>snmp-server user admin1 ADMIN v3 auth sha AuthPass123 priv aes 128 PrivPass123
+<a id="__codelineno-21-15" name="__codelineno-21-15" href="#__codelineno-21-15"></a>snmp-server host 192.168.100.10 version 3 priv admin1
+<a id="__codelineno-21-16" name="__codelineno-21-16" href="#__codelineno-21-16"></a>snmp-server enable traps snmp authentication linkdown coldstart warmstart
+<a id="__codelineno-21-17" name="__codelineno-21-17" href="#__codelineno-21-17"></a>snmp-server enable traps config
+<a id="__codelineno-21-18" name="__codelineno-21-18" href="#__codelineno-21-18"></a>snmp-server enable traps entity
+<a id="__codelineno-21-19" name="__codelineno-21-19" href="#__codelineno-21-19"></a>snmp-server enable traps cpu threshold
+<a id="__codelineno-21-20" name="__codelineno-21-20" href="#__codelineno-21-20"></a>snmp-server enable traps memory threshold
+<a id="__codelineno-21-21" name="__codelineno-21-21" href="#__codelineno-21-21"></a>snmp-server enable traps ospf
+<a id="__codelineno-21-22" name="__codelineno-21-22" href="#__codelineno-21-22"></a>snmp-server enable traps bgp
+<a id="__codelineno-21-23" name="__codelineno-21-23" href="#__codelineno-21-23"></a>
+<a id="__codelineno-21-24" name="__codelineno-21-24" href="#__codelineno-21-24"></a>! SNMP Views (обмеження видимих OID)
+<a id="__codelineno-21-25" name="__codelineno-21-25" href="#__codelineno-21-25"></a>snmp-server view ALL iso included
+<a id="__codelineno-21-26" name="__codelineno-21-26" href="#__codelineno-21-26"></a>snmp-server view RESTRICTED system included
+<a id="__codelineno-21-27" name="__codelineno-21-27" href="#__codelineno-21-27"></a>snmp-server view RESTRICTED interfaces excluded
+<a id="__codelineno-21-28" name="__codelineno-21-28" href="#__codelineno-21-28"></a>
+<a id="__codelineno-21-29" name="__codelineno-21-29" href="#__codelineno-21-29"></a>! Перевірка
+<a id="__codelineno-21-30" name="__codelineno-21-30" href="#__codelineno-21-30"></a>show snmp
+<a id="__codelineno-21-31" name="__codelineno-21-31" href="#__codelineno-21-31"></a>show snmp user
+<a id="__codelineno-21-32" name="__codelineno-21-32" href="#__codelineno-21-32"></a>show snmp group
+<a id="__codelineno-21-33" name="__codelineno-21-33" href="#__codelineno-21-33"></a>show snmp host
+</code></pre></div>
+<hr />
+<h2 id="6">6 Основи безпеки</h2>
+<h3 id="61">6.1 Управління паролями</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>! Налаштування паролів
+<a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a>enable secret SuperSecret123!
+<a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a>enable algorithm-type scrypt secret EvenMoreSecret456!  ! сильніше хешування
+<a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a>username admin privilege 15 secret P@ssw0rd123!
+<a id="__codelineno-22-5" name="__codelineno-22-5" href="#__codelineno-22-5"></a>username operator privilege 5 secret 0p3rator!
+<a id="__codelineno-22-6" name="__codelineno-22-6" href="#__codelineno-22-6"></a>service password-encryption                             ! шифрувати всі паролі у конфізі
+<a id="__codelineno-22-7" name="__codelineno-22-7" href="#__codelineno-22-7"></a>security passwords min-length 10                        ! мінімальна довжина пароля
+<a id="__codelineno-22-8" name="__codelineno-22-8" href="#__codelineno-22-8"></a>login block-for 300 attempts 3 within 60                ! блокувати після 3 невдалих спроб за 60 сек
+<a id="__codelineno-22-9" name="__codelineno-22-9" href="#__codelineno-22-9"></a>login delay 2                                           ! затримка між спробами входу
+<a id="__codelineno-22-10" name="__codelineno-22-10" href="#__codelineno-22-10"></a>login on-failure log
+<a id="__codelineno-22-11" name="__codelineno-22-11" href="#__codelineno-22-11"></a>login on-success log
+<a id="__codelineno-22-12" name="__codelineno-22-12" href="#__codelineno-22-12"></a>
+<a id="__codelineno-22-13" name="__codelineno-22-13" href="#__codelineno-22-13"></a>! Налаштування ліній (console/vty)
+<a id="__codelineno-22-14" name="__codelineno-22-14" href="#__codelineno-22-14"></a>Router(config-line)# password Cons0leP@ss
+<a id="__codelineno-22-15" name="__codelineno-22-15" href="#__codelineno-22-15"></a>Router(config-line)# login local
+<a id="__codelineno-22-16" name="__codelineno-22-16" href="#__codelineno-22-16"></a>Router(config-line)# exec-timeout 5 0                   ! автовихід через 5 хв бездіяльності
+<a id="__codelineno-22-17" name="__codelineno-22-17" href="#__codelineno-22-17"></a>Router(config-line)# absolute-timeout 30                ! примусовий вихід через 30 хв
+<a id="__codelineno-22-18" name="__codelineno-22-18" href="#__codelineno-22-18"></a>Router(config-line)# session-timeout 30
+<a id="__codelineno-22-19" name="__codelineno-22-19" href="#__codelineno-22-19"></a>Router(config-line)# logout-warning 5
+<a id="__codelineno-22-20" name="__codelineno-22-20" href="#__codelineno-22-20"></a>
+<a id="__codelineno-22-21" name="__codelineno-22-21" href="#__codelineno-22-21"></a>! Заборона відновлення пароля
+<a id="__codelineno-22-22" name="__codelineno-22-22" href="#__codelineno-22-22"></a>no service password-recovery
+<a id="__codelineno-22-23" name="__codelineno-22-23" href="#__codelineno-22-23"></a>enable secret recovery SecretRecovery789!
+</code></pre></div>
+<h3 id="62-ssh">6.2 Налаштування SSH</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>! Налаштування SSH v2
+<a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a>ip ssh version 2
+<a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a>ip ssh time-out 60
+<a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a>ip ssh authentication-retries 2
+<a id="__codelineno-23-5" name="__codelineno-23-5" href="#__codelineno-23-5"></a>ip ssh maxstartups 3
+<a id="__codelineno-23-6" name="__codelineno-23-6" href="#__codelineno-23-6"></a>ip ssh logging events
+<a id="__codelineno-23-7" name="__codelineno-23-7" href="#__codelineno-23-7"></a>ip ssh server algorithm mac hmac-sha2-256 hmac-sha2-512
+<a id="__codelineno-23-8" name="__codelineno-23-8" href="#__codelineno-23-8"></a>ip ssh server algorithm encryption aes128-ctr aes192-ctr aes256-ctr
+<a id="__codelineno-23-9" name="__codelineno-23-9" href="#__codelineno-23-9"></a>ip ssh server algorithm hostkey rsa-sha2-256 rsa-sha2-512
+<a id="__codelineno-23-10" name="__codelineno-23-10" href="#__codelineno-23-10"></a>ip ssh server disable-deprecated-version 1.99
+<a id="__codelineno-23-11" name="__codelineno-23-11" href="#__codelineno-23-11"></a>ip ssh server max-sessions-per-connection 10
+<a id="__codelineno-23-12" name="__codelineno-23-12" href="#__codelineno-23-12"></a>
+<a id="__codelineno-23-13" name="__codelineno-23-13" href="#__codelineno-23-13"></a>! Автентифікація за ключем (замість пароля)
+<a id="__codelineno-23-14" name="__codelineno-23-14" href="#__codelineno-23-14"></a>crypto key generate rsa modulus 4096
+<a id="__codelineno-23-15" name="__codelineno-23-15" href="#__codelineno-23-15"></a>crypto key generate dsa modulus 2048
+<a id="__codelineno-23-16" name="__codelineno-23-16" href="#__codelineno-23-16"></a>crypto key generate ecdsa curve 256
+<a id="__codelineno-23-17" name="__codelineno-23-17" href="#__codelineno-23-17"></a>ip ssh pubkey-chain
+<a id="__codelineno-23-18" name="__codelineno-23-18" href="#__codelineno-23-18"></a>Router(config-ssh-pubkey)# username admin
+<a id="__codelineno-23-19" name="__codelineno-23-19" href="#__codelineno-23-19"></a>Router(config-ssh-pubkey)# key-hash ssh-rsa AAAA...==
+<a id="__codelineno-23-20" name="__codelineno-23-20" href="#__codelineno-23-20"></a>Router(config-ssh-pubkey)# exit
+<a id="__codelineno-23-21" name="__codelineno-23-21" href="#__codelineno-23-21"></a>
+<a id="__codelineno-23-22" name="__codelineno-23-22" href="#__codelineno-23-22"></a>! Source Interface для SSH
+<a id="__codelineno-23-23" name="__codelineno-23-23" href="#__codelineno-23-23"></a>ip ssh source-interface Loopback0
+<a id="__codelineno-23-24" name="__codelineno-23-24" href="#__codelineno-23-24"></a>ip ssh vrf MGMT
+<a id="__codelineno-23-25" name="__codelineno-23-25" href="#__codelineno-23-25"></a>
+<a id="__codelineno-23-26" name="__codelineno-23-26" href="#__codelineno-23-26"></a>! Перевірка
+<a id="__codelineno-23-27" name="__codelineno-23-27" href="#__codelineno-23-27"></a>show ip ssh
+<a id="__codelineno-23-28" name="__codelineno-23-28" href="#__codelineno-23-28"></a>show ssh
+<a id="__codelineno-23-29" name="__codelineno-23-29" href="#__codelineno-23-29"></a>show crypto key mypubkey rsa
+</code></pre></div>
+<h3 id="63-tcpudp">6.3 Сервіси TCP/UDP</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>! Вимкнути непотрібні сервіси (hardening)
+<a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a>no service tcp-small-servers
+<a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a>no service udp-small-servers
+<a id="__codelineno-24-4" name="__codelineno-24-4" href="#__codelineno-24-4"></a>no service finger
+<a id="__codelineno-24-5" name="__codelineno-24-5" href="#__codelineno-24-5"></a>no ip bootp server
+<a id="__codelineno-24-6" name="__codelineno-24-6" href="#__codelineno-24-6"></a>no ip http server
+<a id="__codelineno-24-7" name="__codelineno-24-7" href="#__codelineno-24-7"></a>no ip http secure-server
+<a id="__codelineno-24-8" name="__codelineno-24-8" href="#__codelineno-24-8"></a>no ip source-route
+<a id="__codelineno-24-9" name="__codelineno-24-9" href="#__codelineno-24-9"></a>no ip gratuitous-arps
+<a id="__codelineno-24-10" name="__codelineno-24-10" href="#__codelineno-24-10"></a>no cdp run                  ! вимкнути CDP глобально
+<a id="__codelineno-24-11" name="__codelineno-24-11" href="#__codelineno-24-11"></a>no lldp run                 ! вимкнути LLDP глобально
+<a id="__codelineno-24-12" name="__codelineno-24-12" href="#__codelineno-24-12"></a>no ip proxy-arp
+<a id="__codelineno-24-13" name="__codelineno-24-13" href="#__codelineno-24-13"></a>no ip unreachables
+<a id="__codelineno-24-14" name="__codelineno-24-14" href="#__codelineno-24-14"></a>no ip redirects
+<a id="__codelineno-24-15" name="__codelineno-24-15" href="#__codelineno-24-15"></a>no ip mask-reply
+<a id="__codelineno-24-16" name="__codelineno-24-16" href="#__codelineno-24-16"></a>
+<a id="__codelineno-24-17" name="__codelineno-24-17" href="#__codelineno-24-17"></a>! Вимкнути на конкретному інтерфейсі
+<a id="__codelineno-24-18" name="__codelineno-24-18" href="#__codelineno-24-18"></a> no cdp enable
+<a id="__codelineno-24-19" name="__codelineno-24-19" href="#__codelineno-24-19"></a> no lldp transmit
+<a id="__codelineno-24-20" name="__codelineno-24-20" href="#__codelineno-24-20"></a> no lldp receive
+<a id="__codelineno-24-21" name="__codelineno-24-21" href="#__codelineno-24-21"></a> no ip directed-broadcast
+<a id="__codelineno-24-22" name="__codelineno-24-22" href="#__codelineno-24-22"></a> no ip unreachables
+<a id="__codelineno-24-23" name="__codelineno-24-23" href="#__codelineno-24-23"></a> no ip proxy-arp
+</code></pre></div>
+<h3 id="64-control-plane-copp">6.4 Політики Control Plane (CoPP)</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>! CoPP — обмежує трафік до CPU маршрутизатора
+<a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a>class-map match-any COPP-CRITICAL
+<a id="__codelineno-25-3" name="__codelineno-25-3" href="#__codelineno-25-3"></a>Router(config-cmap)# match access-group 110
+<a id="__codelineno-25-4" name="__codelineno-25-4" href="#__codelineno-25-4"></a>Router(config-cmap)# exit
+<a id="__codelineno-25-5" name="__codelineno-25-5" href="#__codelineno-25-5"></a>
+<a id="__codelineno-25-6" name="__codelineno-25-6" href="#__codelineno-25-6"></a>class-map match-any COPP-IMPORTANT
+<a id="__codelineno-25-7" name="__codelineno-25-7" href="#__codelineno-25-7"></a>Router(config-cmap)# match access-group 120
+<a id="__codelineno-25-8" name="__codelineno-25-8" href="#__codelineno-25-8"></a>Router(config-cmap)# exit
+<a id="__codelineno-25-9" name="__codelineno-25-9" href="#__codelineno-25-9"></a>
+<a id="__codelineno-25-10" name="__codelineno-25-10" href="#__codelineno-25-10"></a>policy-map COPP-POLICY
+<a id="__codelineno-25-11" name="__codelineno-25-11" href="#__codelineno-25-11"></a> class COPP-CRITICAL
+<a id="__codelineno-25-12" name="__codelineno-25-12" href="#__codelineno-25-12"></a>  police 8000 conform-action transmit exceed-action drop
+<a id="__codelineno-25-13" name="__codelineno-25-13" href="#__codelineno-25-13"></a>  exit
+<a id="__codelineno-25-14" name="__codelineno-25-14" href="#__codelineno-25-14"></a> class COPP-IMPORTANT
+<a id="__codelineno-25-15" name="__codelineno-25-15" href="#__codelineno-25-15"></a>  police 40000 conform-action transmit exceed-action drop
+<a id="__codelineno-25-16" name="__codelineno-25-16" href="#__codelineno-25-16"></a>  exit
+<a id="__codelineno-25-17" name="__codelineno-25-17" href="#__codelineno-25-17"></a> class class-default
+<a id="__codelineno-25-18" name="__codelineno-25-18" href="#__codelineno-25-18"></a>  police 10000 conform-action transmit exceed-action drop
+<a id="__codelineno-25-19" name="__codelineno-25-19" href="#__codelineno-25-19"></a>  exit
+<a id="__codelineno-25-20" name="__codelineno-25-20" href="#__codelineno-25-20"></a> exit
+<a id="__codelineno-25-21" name="__codelineno-25-21" href="#__codelineno-25-21"></a>
+<a id="__codelineno-25-22" name="__codelineno-25-22" href="#__codelineno-25-22"></a>control-plane
+<a id="__codelineno-25-23" name="__codelineno-25-23" href="#__codelineno-25-23"></a> service-policy input COPP-POLICY
+<a id="__codelineno-25-24" name="__codelineno-25-24" href="#__codelineno-25-24"></a> exit
+<a id="__codelineno-25-25" name="__codelineno-25-25" href="#__codelineno-25-25"></a>
+<a id="__codelineno-25-26" name="__codelineno-25-26" href="#__codelineno-25-26"></a>! ACL для CoPP
+<a id="__codelineno-25-27" name="__codelineno-25-27" href="#__codelineno-25-27"></a>access-list 110 permit tcp any any eq 22
+<a id="__codelineno-25-28" name="__codelineno-25-28" href="#__codelineno-25-28"></a>access-list 110 permit tcp any any eq 23
+<a id="__codelineno-25-29" name="__codelineno-25-29" href="#__codelineno-25-29"></a>access-list 120 permit ospf any any
+<a id="__codelineno-25-30" name="__codelineno-25-30" href="#__codelineno-25-30"></a>access-list 120 permit eigrp any any
+<a id="__codelineno-25-31" name="__codelineno-25-31" href="#__codelineno-25-31"></a>access-list 120 permit pim any any
+</code></pre></div>
+<hr />
+<h2 id="7-aaa">7 AAA &amp; Управління доступом</h2>
+<h3 id="71-aaa">7.1 Основи AAA</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a>! Увімкнути AAA (Authentication, Authorization, Accounting)
+<a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a>aaa new-model
+<a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a>aaa authentication login default local
+<a id="__codelineno-26-4" name="__codelineno-26-4" href="#__codelineno-26-4"></a>aaa authentication enable default enable
+<a id="__codelineno-26-5" name="__codelineno-26-5" href="#__codelineno-26-5"></a>aaa authorization exec default local
+<a id="__codelineno-26-6" name="__codelineno-26-6" href="#__codelineno-26-6"></a>aaa accounting exec default start-stop group radius
+<a id="__codelineno-26-7" name="__codelineno-26-7" href="#__codelineno-26-7"></a>
+<a id="__codelineno-26-8" name="__codelineno-26-8" href="#__codelineno-26-8"></a>! Локальна база користувачів
+<a id="__codelineno-26-9" name="__codelineno-26-9" href="#__codelineno-26-9"></a>username admin privilege 15 algorithm-type scrypt secret AdminPass123!
+<a id="__codelineno-26-10" name="__codelineno-26-10" href="#__codelineno-26-10"></a>username operator privilege 5 secret 0p3rator!
+<a id="__codelineno-26-11" name="__codelineno-26-11" href="#__codelineno-26-11"></a>username guest privilege 1 secret GuestAccess!
+<a id="__codelineno-26-12" name="__codelineno-26-12" href="#__codelineno-26-12"></a>
+<a id="__codelineno-26-13" name="__codelineno-26-13" href="#__codelineno-26-13"></a>! Паролі для рівнів enable
+<a id="__codelineno-26-14" name="__codelineno-26-14" href="#__codelineno-26-14"></a>enable secret level 15 SuperSecret!
+<a id="__codelineno-26-15" name="__codelineno-26-15" href="#__codelineno-26-15"></a>enable secret level 5 OperatorPass
+</code></pre></div>
+<h3 id="72-radius">7.2 Налаштування RADIUS</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>! Налаштування RADIUS-серверів
+<a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a>radius server ISE-PRIMARY
+<a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a> address ipv4 192.168.100.10 auth-port 1812 acct-port 1813
+<a id="__codelineno-27-4" name="__codelineno-27-4" href="#__codelineno-27-4"></a> key RadiusKey123!
+<a id="__codelineno-27-5" name="__codelineno-27-5" href="#__codelineno-27-5"></a> retransmit 3
+<a id="__codelineno-27-6" name="__codelineno-27-6" href="#__codelineno-27-6"></a> timeout 5
+<a id="__codelineno-27-7" name="__codelineno-27-7" href="#__codelineno-27-7"></a> exit
+<a id="__codelineno-27-8" name="__codelineno-27-8" href="#__codelineno-27-8"></a>
+<a id="__codelineno-27-9" name="__codelineno-27-9" href="#__codelineno-27-9"></a>radius server ISE-SECONDARY
+<a id="__codelineno-27-10" name="__codelineno-27-10" href="#__codelineno-27-10"></a> address ipv4 192.168.100.11 auth-port 1812 acct-port 1813
+<a id="__codelineno-27-11" name="__codelineno-27-11" href="#__codelineno-27-11"></a> key RadiusKey456!
+<a id="__codelineno-27-12" name="__codelineno-27-12" href="#__codelineno-27-12"></a> exit
+<a id="__codelineno-27-13" name="__codelineno-27-13" href="#__codelineno-27-13"></a>
+<a id="__codelineno-27-14" name="__codelineno-27-14" href="#__codelineno-27-14"></a>! Група серверів RADIUS
+<a id="__codelineno-27-15" name="__codelineno-27-15" href="#__codelineno-27-15"></a>aaa group server radius ISE-GROUP
+<a id="__codelineno-27-16" name="__codelineno-27-16" href="#__codelineno-27-16"></a>Router(config-sg-radius)# server name ISE-PRIMARY
+<a id="__codelineno-27-17" name="__codelineno-27-17" href="#__codelineno-27-17"></a>Router(config-sg-radius)# server name ISE-SECONDARY
+<a id="__codelineno-27-18" name="__codelineno-27-18" href="#__codelineno-27-18"></a>Router(config-sg-radius)# exit
+<a id="__codelineno-27-19" name="__codelineno-27-19" href="#__codelineno-27-19"></a>
+<a id="__codelineno-27-20" name="__codelineno-27-20" href="#__codelineno-27-20"></a>! AAA з RADIUS
+<a id="__codelineno-27-21" name="__codelineno-27-21" href="#__codelineno-27-21"></a>aaa authentication login default group ISE-GROUP local
+<a id="__codelineno-27-22" name="__codelineno-27-22" href="#__codelineno-27-22"></a>aaa authentication enable default group ISE-GROUP enable
+<a id="__codelineno-27-23" name="__codelineno-27-23" href="#__codelineno-27-23"></a>aaa authorization exec default group ISE-GROUP local
+<a id="__codelineno-27-24" name="__codelineno-27-24" href="#__codelineno-27-24"></a>aaa accounting exec default start-stop group ISE-GROUP
+<a id="__codelineno-27-25" name="__codelineno-27-25" href="#__codelineno-27-25"></a>aaa accounting network default start-stop group ISE-GROUP
+</code></pre></div>
+<h3 id="73-tacacs">7.3 Налаштування TACACS+</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a>! Налаштування TACACS+-серверів
+<a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a>tacacs server TACACS-PRIMARY
+<a id="__codelineno-28-3" name="__codelineno-28-3" href="#__codelineno-28-3"></a> address ipv4 192.168.100.20
+<a id="__codelineno-28-4" name="__codelineno-28-4" href="#__codelineno-28-4"></a> key TacacsKey123!
+<a id="__codelineno-28-5" name="__codelineno-28-5" href="#__codelineno-28-5"></a> single-connection
+<a id="__codelineno-28-6" name="__codelineno-28-6" href="#__codelineno-28-6"></a> timeout 10
+<a id="__codelineno-28-7" name="__codelineno-28-7" href="#__codelineno-28-7"></a> exit
+<a id="__codelineno-28-8" name="__codelineno-28-8" href="#__codelineno-28-8"></a>
+<a id="__codelineno-28-9" name="__codelineno-28-9" href="#__codelineno-28-9"></a>! Група серверів TACACS+
+<a id="__codelineno-28-10" name="__codelineno-28-10" href="#__codelineno-28-10"></a>aaa group server tacacs+ TACACS-GROUP
+<a id="__codelineno-28-11" name="__codelineno-28-11" href="#__codelineno-28-11"></a> server name TACACS-PRIMARY
+<a id="__codelineno-28-12" name="__codelineno-28-12" href="#__codelineno-28-12"></a> exit
+<a id="__codelineno-28-13" name="__codelineno-28-13" href="#__codelineno-28-13"></a>
+<a id="__codelineno-28-14" name="__codelineno-28-14" href="#__codelineno-28-14"></a>! AAA з TACACS+
+<a id="__codelineno-28-15" name="__codelineno-28-15" href="#__codelineno-28-15"></a>aaa authentication login default group TACACS-GROUP local
+<a id="__codelineno-28-16" name="__codelineno-28-16" href="#__codelineno-28-16"></a>aaa authentication enable default group TACACS-GROUP enable
+<a id="__codelineno-28-17" name="__codelineno-28-17" href="#__codelineno-28-17"></a>aaa authorization commands 15 default group TACACS-GROUP local
+<a id="__codelineno-28-18" name="__codelineno-28-18" href="#__codelineno-28-18"></a>aaa authorization config-commands
+<a id="__codelineno-28-19" name="__codelineno-28-19" href="#__codelineno-28-19"></a>aaa authorization exec default group TACACS-GROUP local
+<a id="__codelineno-28-20" name="__codelineno-28-20" href="#__codelineno-28-20"></a>aaa accounting commands 15 default start-stop group TACACS-GROUP
+<a id="__codelineno-28-21" name="__codelineno-28-21" href="#__codelineno-28-21"></a>aaa accounting exec default start-stop group TACACS-GROUP
+</code></pre></div>
+<h3 id="74">7.4 Авторизація команд</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a>! Рівні авторизації команд
+<a id="__codelineno-29-2" name="__codelineno-29-2" href="#__codelineno-29-2"></a>privilege exec level 5 show running-config
+<a id="__codelineno-29-3" name="__codelineno-29-3" href="#__codelineno-29-3"></a>privilege exec level 5 show interfaces
+<a id="__codelineno-29-4" name="__codelineno-29-4" href="#__codelineno-29-4"></a>privilege exec level 10 configure terminal
+<a id="__codelineno-29-5" name="__codelineno-29-5" href="#__codelineno-29-5"></a>privilege exec level 15 reload
+<a id="__codelineno-29-6" name="__codelineno-29-6" href="#__codelineno-29-6"></a>privilege interface level 5 shutdown
+<a id="__codelineno-29-7" name="__codelineno-29-7" href="#__codelineno-29-7"></a>privilege interface level 10 ip address
+<a id="__codelineno-29-8" name="__codelineno-29-8" href="#__codelineno-29-8"></a>
+<a id="__codelineno-29-9" name="__codelineno-29-9" href="#__codelineno-29-9"></a>! CLI Views — набори дозволених команд для різних ролей
+<a id="__codelineno-29-10" name="__codelineno-29-10" href="#__codelineno-29-10"></a>parser view ROOT
+<a id="__codelineno-29-11" name="__codelineno-29-11" href="#__codelineno-29-11"></a> secret RootView123!
+<a id="__codelineno-29-12" name="__codelineno-29-12" href="#__codelineno-29-12"></a> commands exec include all show
+<a id="__codelineno-29-13" name="__codelineno-29-13" href="#__codelineno-29-13"></a> commands exec include configure
+<a id="__codelineno-29-14" name="__codelineno-29-14" href="#__codelineno-29-14"></a> commands exec include reload
+<a id="__codelineno-29-15" name="__codelineno-29-15" href="#__codelineno-29-15"></a> exit
+<a id="__codelineno-29-16" name="__codelineno-29-16" href="#__codelineno-29-16"></a>
+<a id="__codelineno-29-17" name="__codelineno-29-17" href="#__codelineno-29-17"></a>parser view OPERATOR
+<a id="__codelineno-29-18" name="__codelineno-29-18" href="#__codelineno-29-18"></a> secret OperatorView456!
+<a id="__codelineno-29-19" name="__codelineno-29-19" href="#__codelineno-29-19"></a> commands exec include show
+<a id="__codelineno-29-20" name="__codelineno-29-20" href="#__codelineno-29-20"></a> commands exec exclude show running-config  ! заборонити конкретну команду
+<a id="__codelineno-29-21" name="__codelineno-29-21" href="#__codelineno-29-21"></a> commands exec include ping
+<a id="__codelineno-29-22" name="__codelineno-29-22" href="#__codelineno-29-22"></a> commands exec include traceroute
+<a id="__codelineno-29-23" name="__codelineno-29-23" href="#__codelineno-29-23"></a> exit
+</code></pre></div>
+<h3 id="75-downloadable-acls">7.5 Downloadable ACLs</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a>! ACL, що завантажується з RADIUS після автентифікації
+<a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a>ip access-list extended DYNACL-WEBSERVER
+<a id="__codelineno-30-3" name="__codelineno-30-3" href="#__codelineno-30-3"></a> permit tcp any host 192.168.1.10 eq 80
+<a id="__codelineno-30-4" name="__codelineno-30-4" href="#__codelineno-30-4"></a> permit tcp any host 192.168.1.10 eq 443
+<a id="__codelineno-30-5" name="__codelineno-30-5" href="#__codelineno-30-5"></a> deny ip any any
+<a id="__codelineno-30-6" name="__codelineno-30-6" href="#__codelineno-30-6"></a> exit
+<a id="__codelineno-30-7" name="__codelineno-30-7" href="#__codelineno-30-7"></a>
+<a id="__codelineno-30-8" name="__codelineno-30-8" href="#__codelineno-30-8"></a>! AAA атрибут для ACL
+<a id="__codelineno-30-9" name="__codelineno-30-9" href="#__codelineno-30-9"></a>aaa authorization network default group ISE-GROUP
+</code></pre></div>
+<hr />
+<h2 id="8">8 Протоколи управління</h2>
+<h3 id="81-httphttps">8.1 Управління HTTP/HTTPS</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a>! Налаштування HTTP/HTTPS для веб-інтерфейсу
+<a id="__codelineno-31-2" name="__codelineno-31-2" href="#__codelineno-31-2"></a>ip http server
+<a id="__codelineno-31-3" name="__codelineno-31-3" href="#__codelineno-31-3"></a>ip http port 8080
+<a id="__codelineno-31-4" name="__codelineno-31-4" href="#__codelineno-31-4"></a>ip http authentication local
+<a id="__codelineno-31-5" name="__codelineno-31-5" href="#__codelineno-31-5"></a>ip http access-class 10            ! обмежити доступ ACL
+<a id="__codelineno-31-6" name="__codelineno-31-6" href="#__codelineno-31-6"></a>ip http secure-server
+<a id="__codelineno-31-7" name="__codelineno-31-7" href="#__codelineno-31-7"></a>ip http secure-port 443
+<a id="__codelineno-31-8" name="__codelineno-31-8" href="#__codelineno-31-8"></a>ip http secure-ciphersuite aes256-cbc-sha1
+<a id="__codelineno-31-9" name="__codelineno-31-9" href="#__codelineno-31-9"></a>ip http timeout-policy idle 60 life 86400 requests 100
+<a id="__codelineno-31-10" name="__codelineno-31-10" href="#__codelineno-31-10"></a>
+<a id="__codelineno-31-11" name="__codelineno-31-11" href="#__codelineno-31-11"></a>! ACL для обмеження доступу до HTTP
+<a id="__codelineno-31-12" name="__codelineno-31-12" href="#__codelineno-31-12"></a>access-list 10 permit 192.168.100.0 0.0.0.255
+<a id="__codelineno-31-13" name="__codelineno-31-13" href="#__codelineno-31-13"></a>access-list 10 deny any
+<a id="__codelineno-31-14" name="__codelineno-31-14" href="#__codelineno-31-14"></a>
+<a id="__codelineno-31-15" name="__codelineno-31-15" href="#__codelineno-31-15"></a>! Перевірка
+<a id="__codelineno-31-16" name="__codelineno-31-16" href="#__codelineno-31-16"></a>show ip http server status
+<a id="__codelineno-31-17" name="__codelineno-31-17" href="#__codelineno-31-17"></a>show ip http secure-server status
+</code></pre></div>
+<h3 id="82-netconfrestconf">8.2 Netconf/RESTCONF</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a>! NETCONF — програмне управління пристроєм (через SSH, порт 830)
+<a id="__codelineno-32-2" name="__codelineno-32-2" href="#__codelineno-32-2"></a>netconf-yang
+<a id="__codelineno-32-3" name="__codelineno-32-3" href="#__codelineno-32-3"></a>netconf-yang feature candidate-datastore
+<a id="__codelineno-32-4" name="__codelineno-32-4" href="#__codelineno-32-4"></a>netconf-yang feature notify
+<a id="__codelineno-32-5" name="__codelineno-32-5" href="#__codelineno-32-5"></a>netconf-yang feature url
+<a id="__codelineno-32-6" name="__codelineno-32-6" href="#__codelineno-32-6"></a>netconf-yang ssh port 830
+<a id="__codelineno-32-7" name="__codelineno-32-7" href="#__codelineno-32-7"></a>
+<a id="__codelineno-32-8" name="__codelineno-32-8" href="#__codelineno-32-8"></a>! RESTCONF — HTTP-API для управління пристроєм
+<a id="__codelineno-32-9" name="__codelineno-32-9" href="#__codelineno-32-9"></a>restconf
+<a id="__codelineno-32-10" name="__codelineno-32-10" href="#__codelineno-32-10"></a>ip http secure-server
+<a id="__codelineno-32-11" name="__codelineno-32-11" href="#__codelineno-32-11"></a>restconf data-entries 10000
+<a id="__codelineno-32-12" name="__codelineno-32-12" href="#__codelineno-32-12"></a>
+<a id="__codelineno-32-13" name="__codelineno-32-13" href="#__codelineno-32-13"></a>! Перевірка
+<a id="__codelineno-32-14" name="__codelineno-32-14" href="#__codelineno-32-14"></a>show netconf-yang sessions
+<a id="__codelineno-32-15" name="__codelineno-32-15" href="#__codelineno-32-15"></a>show restconf
+</code></pre></div>
+<h3 id="83-grpctelemetry">8.3 gRPC/Telemetry</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a>! gRPC — протокол для streaming-телеметрії
+<a id="__codelineno-33-2" name="__codelineno-33-2" href="#__codelineno-33-2"></a>grpc
+<a id="__codelineno-33-3" name="__codelineno-33-3" href="#__codelineno-33-3"></a> port 57400
+<a id="__codelineno-33-4" name="__codelineno-33-4" href="#__codelineno-33-4"></a> no-tls
+<a id="__codelineno-33-5" name="__codelineno-33-5" href="#__codelineno-33-5"></a> address-family ipv4
+<a id="__codelineno-33-6" name="__codelineno-33-6" href="#__codelineno-33-6"></a> max-request-total 64
+<a id="__codelineno-33-7" name="__codelineno-33-7" href="#__codelineno-33-7"></a> max-request-per-user 16
+<a id="__codelineno-33-8" name="__codelineno-33-8" href="#__codelineno-33-8"></a>
+<a id="__codelineno-33-9" name="__codelineno-33-9" href="#__codelineno-33-9"></a>! Телеметрія — потокова передача метрик на колектор
+<a id="__codelineno-33-10" name="__codelineno-33-10" href="#__codelineno-33-10"></a>telemetry ietf subscription 101
+<a id="__codelineno-33-11" name="__codelineno-33-11" href="#__codelineno-33-11"></a> encoding encode-kvgpb
+<a id="__codelineno-33-12" name="__codelineno-33-12" href="#__codelineno-33-12"></a> filter xpath /interfaces/interface/statistics
+<a id="__codelineno-33-13" name="__codelineno-33-13" href="#__codelineno-33-13"></a> source-address 192.168.1.1
+<a id="__codelineno-33-14" name="__codelineno-33-14" href="#__codelineno-33-14"></a> stream yang-push
+<a id="__codelineno-33-15" name="__codelineno-33-15" href="#__codelineno-33-15"></a> update-policy periodic 500
+<a id="__codelineno-33-16" name="__codelineno-33-16" href="#__codelineno-33-16"></a> receiver ip address 192.168.100.30 5432 protocol grpc-tcp
+</code></pre></div>
+<h3 id="84-netconfyang">8.4 NETCONF/YANG моделі</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a>! Перевірка YANG-моделей
+<a id="__codelineno-34-2" name="__codelineno-34-2" href="#__codelineno-34-2"></a>show platform software yang-management process
+<a id="__codelineno-34-3" name="__codelineno-34-3" href="#__codelineno-34-3"></a>show yang-operational memory
+<a id="__codelineno-34-4" name="__codelineno-34-4" href="#__codelineno-34-4"></a>show yang schema
+<a id="__codelineno-34-5" name="__codelineno-34-5" href="#__codelineno-34-5"></a>
+<a id="__codelineno-34-6" name="__codelineno-34-6" href="#__codelineno-34-6"></a>! Встановлення YANG-моделей
+<a id="__codelineno-34-7" name="__codelineno-34-7" href="#__codelineno-34-7"></a>copy tftp://192.168.1.10/ietf-interfaces@2014-05-08.yang flash:
+<a id="__codelineno-34-8" name="__codelineno-34-8" href="#__codelineno-34-8"></a>install add file flash:ietf-interfaces@2014-05-08.yang activate
+<a id="__codelineno-34-9" name="__codelineno-34-9" href="#__codelineno-34-9"></a>
+<a id="__codelineno-34-10" name="__codelineno-34-10" href="#__codelineno-34-10"></a>! NETCONF-операції (з Linux)
+<a id="__codelineno-34-11" name="__codelineno-34-11" href="#__codelineno-34-11"></a># netconf-console --host 10.0.0.1 --port 830 --user admin --password pass --get-config
+</code></pre></div>
+<hr />
+<h2 id="9-ethernet">9 Комутація Ethernet</h2>
+<h3 id="91-mac-">9.1 Таблиця MAC-адрес</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a>! Переглянути таблицю MAC-адрес
+<a id="__codelineno-35-2" name="__codelineno-35-2" href="#__codelineno-35-2"></a>show mac address-table
+<a id="__codelineno-35-3" name="__codelineno-35-3" href="#__codelineno-35-3"></a>show mac address-table dynamic
+<a id="__codelineno-35-4" name="__codelineno-35-4" href="#__codelineno-35-4"></a>show mac address-table aging-time
+<a id="__codelineno-35-5" name="__codelineno-35-5" href="#__codelineno-35-5"></a>show mac address-table count
+<a id="__codelineno-35-6" name="__codelineno-35-6" href="#__codelineno-35-6"></a>show mac address-table interface gigabitEthernet 1/0/1
+<a id="__codelineno-35-7" name="__codelineno-35-7" href="#__codelineno-35-7"></a>show mac address-table vlan 10
+<a id="__codelineno-35-8" name="__codelineno-35-8" href="#__codelineno-35-8"></a>show mac address-table address 0050.7966.6800
+<a id="__codelineno-35-9" name="__codelineno-35-9" href="#__codelineno-35-9"></a>
+<a id="__codelineno-35-10" name="__codelineno-35-10" href="#__codelineno-35-10"></a>! Налаштування таблиці MAC
+<a id="__codelineno-35-11" name="__codelineno-35-11" href="#__codelineno-35-11"></a>mac address-table aging-time 300                                   ! час старіння запису (сек)
+<a id="__codelineno-35-12" name="__codelineno-35-12" href="#__codelineno-35-12"></a>mac address-table learning vlan 10                                 ! дозволити навчання
+<a id="__codelineno-35-13" name="__codelineno-35-13" href="#__codelineno-35-13"></a>no mac address-table learning vlan 20                              ! заборонити навчання
+<a id="__codelineno-35-14" name="__codelineno-35-14" href="#__codelineno-35-14"></a>mac address-table static 0050.7966.6800 vlan 10 interface gi1/0/1  ! статичний запис
+<a id="__codelineno-35-15" name="__codelineno-35-15" href="#__codelineno-35-15"></a>mac address-table notification change
+<a id="__codelineno-35-16" name="__codelineno-35-16" href="#__codelineno-35-16"></a>mac address-table limit maximum 1000 vlan 10
+<a id="__codelineno-35-17" name="__codelineno-35-17" href="#__codelineno-35-17"></a>
+<a id="__codelineno-35-18" name="__codelineno-35-18" href="#__codelineno-35-18"></a>! Очистити таблицю MAC
+<a id="__codelineno-35-19" name="__codelineno-35-19" href="#__codelineno-35-19"></a>clear mac address-table dynamic
+<a id="__codelineno-35-20" name="__codelineno-35-20" href="#__codelineno-35-20"></a>clear mac address-table dynamic interface gi1/0/1
+<a id="__codelineno-35-21" name="__codelineno-35-21" href="#__codelineno-35-21"></a>clear mac address-table dynamic vlan 10
+<a id="__codelineno-35-22" name="__codelineno-35-22" href="#__codelineno-35-22"></a>clear mac address-table dynamic address 0050.7966.6800
+</code></pre></div>
+<h3 id="92">9.2 Налаштування портів</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a>! Базове налаштування порту
+<a id="__codelineno-36-2" name="__codelineno-36-2" href="#__codelineno-36-2"></a>interface gigabitEthernet 1/0/1
+<a id="__codelineno-36-3" name="__codelineno-36-3" href="#__codelineno-36-3"></a> description &quot;Connected to Server01&quot;
+<a id="__codelineno-36-4" name="__codelineno-36-4" href="#__codelineno-36-4"></a> switchport mode access
+<a id="__codelineno-36-5" name="__codelineno-36-5" href="#__codelineno-36-5"></a> switchport access vlan 10
+<a id="__codelineno-36-6" name="__codelineno-36-6" href="#__codelineno-36-6"></a> switchport voice vlan 20
+<a id="__codelineno-36-7" name="__codelineno-36-7" href="#__codelineno-36-7"></a> spanning-tree portfast           ! прискорити вхід у forwarding
+<a id="__codelineno-36-8" name="__codelineno-36-8" href="#__codelineno-36-8"></a> spanning-tree bpduguard enable   ! захист від несанкціонованих SW
+<a id="__codelineno-36-9" name="__codelineno-36-9" href="#__codelineno-36-9"></a> no shutdown
+<a id="__codelineno-36-10" name="__codelineno-36-10" href="#__codelineno-36-10"></a> exit
+<a id="__codelineno-36-11" name="__codelineno-36-11" href="#__codelineno-36-11"></a>
+<a id="__codelineno-36-12" name="__codelineno-36-12" href="#__codelineno-36-12"></a>! Швидкість та дуплекс
+<a id="__codelineno-36-13" name="__codelineno-36-13" href="#__codelineno-36-13"></a> speed 1000
+<a id="__codelineno-36-14" name="__codelineno-36-14" href="#__codelineno-36-14"></a> duplex full
+<a id="__codelineno-36-15" name="__codelineno-36-15" href="#__codelineno-36-15"></a> negotiation auto
+<a id="__codelineno-36-16" name="__codelineno-36-16" href="#__codelineno-36-16"></a> mtu 9216                         ! jumbo frames
+<a id="__codelineno-36-17" name="__codelineno-36-17" href="#__codelineno-36-17"></a>
+<a id="__codelineno-36-18" name="__codelineno-36-18" href="#__codelineno-36-18"></a>! Відновлення портів з err-disabled стану
+<a id="__codelineno-36-19" name="__codelineno-36-19" href="#__codelineno-36-19"></a>errdisable recovery cause psecure-violation
+<a id="__codelineno-36-20" name="__codelineno-36-20" href="#__codelineno-36-20"></a>errdisable recovery cause bpduguard
+<a id="__codelineno-36-21" name="__codelineno-36-21" href="#__codelineno-36-21"></a>errdisable recovery interval 30
+<a id="__codelineno-36-22" name="__codelineno-36-22" href="#__codelineno-36-22"></a>errdisable detect cause all
+<a id="__codelineno-36-23" name="__codelineno-36-23" href="#__codelineno-36-23"></a>
+<a id="__codelineno-36-24" name="__codelineno-36-24" href="#__codelineno-36-24"></a>! Шаблони інтерфейсів (застосувати однакові налаштування до багатьох портів)
+<a id="__codelineno-36-25" name="__codelineno-36-25" href="#__codelineno-36-25"></a>template USER-PORT
+<a id="__codelineno-36-26" name="__codelineno-36-26" href="#__codelineno-36-26"></a> switchport mode access
+<a id="__codelineno-36-27" name="__codelineno-36-27" href="#__codelineno-36-27"></a> switchport access vlan 10
+<a id="__codelineno-36-28" name="__codelineno-36-28" href="#__codelineno-36-28"></a> spanning-tree portfast
+<a id="__codelineno-36-29" name="__codelineno-36-29" href="#__codelineno-36-29"></a> spanning-tree bpduguard enable
+<a id="__codelineno-36-30" name="__codelineno-36-30" href="#__codelineno-36-30"></a> storm-control broadcast level 10.00
+<a id="__codelineno-36-31" name="__codelineno-36-31" href="#__codelineno-36-31"></a> service-policy input AUTOQOS-VOIP
+<a id="__codelineno-36-32" name="__codelineno-36-32" href="#__codelineno-36-32"></a> exit
+<a id="__codelineno-36-33" name="__codelineno-36-33" href="#__codelineno-36-33"></a>
+<a id="__codelineno-36-34" name="__codelineno-36-34" href="#__codelineno-36-34"></a>interface range gi1/0/1 - 24
+<a id="__codelineno-36-35" name="__codelineno-36-35" href="#__codelineno-36-35"></a> source template USER-PORT
+</code></pre></div>
+<h3 id="93-cdplldp">9.3 CDP/LLDP</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a>! CDP — виявлення сусідніх Cisco-пристроїв
+<a id="__codelineno-37-2" name="__codelineno-37-2" href="#__codelineno-37-2"></a>cdp run
+<a id="__codelineno-37-3" name="__codelineno-37-3" href="#__codelineno-37-3"></a>cdp timer 60                        ! інтервал надсилання (сек)
+<a id="__codelineno-37-4" name="__codelineno-37-4" href="#__codelineno-37-4"></a>cdp holdtime 180                    ! час утримання інформації
+<a id="__codelineno-37-5" name="__codelineno-37-5" href="#__codelineno-37-5"></a>cdp advertise-v2
+<a id="__codelineno-37-6" name="__codelineno-37-6" href="#__codelineno-37-6"></a> cdp enable
+<a id="__codelineno-37-7" name="__codelineno-37-7" href="#__codelineno-37-7"></a> no cdp enable                      ! вимкнути на порту
+<a id="__codelineno-37-8" name="__codelineno-37-8" href="#__codelineno-37-8"></a>
+<a id="__codelineno-37-9" name="__codelineno-37-9" href="#__codelineno-37-9"></a>! LLDP — стандартний протокол виявлення (будь-який виробник)
+<a id="__codelineno-37-10" name="__codelineno-37-10" href="#__codelineno-37-10"></a>lldp run
+<a id="__codelineno-37-11" name="__codelineno-37-11" href="#__codelineno-37-11"></a>lldp timer 30
+<a id="__codelineno-37-12" name="__codelineno-37-12" href="#__codelineno-37-12"></a>lldp holdtime 120
+<a id="__codelineno-37-13" name="__codelineno-37-13" href="#__codelineno-37-13"></a>lldp reinit 2
+<a id="__codelineno-37-14" name="__codelineno-37-14" href="#__codelineno-37-14"></a> lldp transmit
+<a id="__codelineno-37-15" name="__codelineno-37-15" href="#__codelineno-37-15"></a> lldp receive
+<a id="__codelineno-37-16" name="__codelineno-37-16" href="#__codelineno-37-16"></a> lldp med
+<a id="__codelineno-37-17" name="__codelineno-37-17" href="#__codelineno-37-17"></a>
+<a id="__codelineno-37-18" name="__codelineno-37-18" href="#__codelineno-37-18"></a>! Перевірка
+<a id="__codelineno-37-19" name="__codelineno-37-19" href="#__codelineno-37-19"></a>show cdp neighbors
+<a id="__codelineno-37-20" name="__codelineno-37-20" href="#__codelineno-37-20"></a>show cdp neighbors detail
+<a id="__codelineno-37-21" name="__codelineno-37-21" href="#__codelineno-37-21"></a>show cdp traffic
+<a id="__codelineno-37-22" name="__codelineno-37-22" href="#__codelineno-37-22"></a>show lldp neighbors
+<a id="__codelineno-37-23" name="__codelineno-37-23" href="#__codelineno-37-23"></a>show lldp neighbors detail
+<a id="__codelineno-37-24" name="__codelineno-37-24" href="#__codelineno-37-24"></a>show lldp traffic
+<a id="__codelineno-37-25" name="__codelineno-37-25" href="#__codelineno-37-25"></a>show lldp interface gi1/0/1
+</code></pre></div>
+<h3 id="94-udld-loop-guard">9.4 UDLD &amp; Loop Guard</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a>! UDLD — виявлення однонаправлених зв&#39;язків
+<a id="__codelineno-38-2" name="__codelineno-38-2" href="#__codelineno-38-2"></a>udld enable
+<a id="__codelineno-38-3" name="__codelineno-38-3" href="#__codelineno-38-3"></a>udld aggressive              ! агресивний режим: блокує порт при збої
+<a id="__codelineno-38-4" name="__codelineno-38-4" href="#__codelineno-38-4"></a> udld port aggressive
+<a id="__codelineno-38-5" name="__codelineno-38-5" href="#__codelineno-38-5"></a> udld disable
+<a id="__codelineno-38-6" name="__codelineno-38-6" href="#__codelineno-38-6"></a>
+<a id="__codelineno-38-7" name="__codelineno-38-7" href="#__codelineno-38-7"></a>! Loop Guard — захист від петель через втрату BPDU
+<a id="__codelineno-38-8" name="__codelineno-38-8" href="#__codelineno-38-8"></a>spanning-tree loopguard default
+<a id="__codelineno-38-9" name="__codelineno-38-9" href="#__codelineno-38-9"></a> spanning-tree guard loop
+<a id="__codelineno-38-10" name="__codelineno-38-10" href="#__codelineno-38-10"></a> spanning-tree guard root
+<a id="__codelineno-38-11" name="__codelineno-38-11" href="#__codelineno-38-11"></a>
+<a id="__codelineno-38-12" name="__codelineno-38-12" href="#__codelineno-38-12"></a>! Перевірка
+<a id="__codelineno-38-13" name="__codelineno-38-13" href="#__codelineno-38-13"></a>show udld neighbors
+<a id="__codelineno-38-14" name="__codelineno-38-14" href="#__codelineno-38-14"></a>show udld gi1/0/1
+<a id="__codelineno-38-15" name="__codelineno-38-15" href="#__codelineno-38-15"></a>show spanning-tree inconsistentports
+</code></pre></div>
+<hr />
+<h2 id="10-vlans-trunking">10 VLANs &amp; Trunking</h2>
+<h3 id="101-vlan">10.1 Налаштування VLAN</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-39-1" name="__codelineno-39-1" href="#__codelineno-39-1"></a>! Створення VLAN
+<a id="__codelineno-39-2" name="__codelineno-39-2" href="#__codelineno-39-2"></a>vlan 10
+<a id="__codelineno-39-3" name="__codelineno-39-3" href="#__codelineno-39-3"></a> name SALES
+<a id="__codelineno-39-4" name="__codelineno-39-4" href="#__codelineno-39-4"></a> state active
+<a id="__codelineno-39-5" name="__codelineno-39-5" href="#__codelineno-39-5"></a> exit
+<a id="__codelineno-39-6" name="__codelineno-39-6" href="#__codelineno-39-6"></a>
+<a id="__codelineno-39-7" name="__codelineno-39-7" href="#__codelineno-39-7"></a>vlan 20
+<a id="__codelineno-39-8" name="__codelineno-39-8" href="#__codelineno-39-8"></a> name ENGINEERING
+<a id="__codelineno-39-9" name="__codelineno-39-9" href="#__codelineno-39-9"></a> exit
+<a id="__codelineno-39-10" name="__codelineno-39-10" href="#__codelineno-39-10"></a>
+<a id="__codelineno-39-11" name="__codelineno-39-11" href="#__codelineno-39-11"></a>vlan 99
+<a id="__codelineno-39-12" name="__codelineno-39-12" href="#__codelineno-39-12"></a> name MANAGEMENT
+<a id="__codelineno-39-13" name="__codelineno-39-13" href="#__codelineno-39-13"></a> exit
+<a id="__codelineno-39-14" name="__codelineno-39-14" href="#__codelineno-39-14"></a>
+<a id="__codelineno-39-15" name="__codelineno-39-15" href="#__codelineno-39-15"></a>! Діапазон VLAN
+<a id="__codelineno-39-16" name="__codelineno-39-16" href="#__codelineno-39-16"></a>vlan 100-200
+<a id="__codelineno-39-17" name="__codelineno-39-17" href="#__codelineno-39-17"></a> name USER-VLANS
+<a id="__codelineno-39-18" name="__codelineno-39-18" href="#__codelineno-39-18"></a> exit
+<a id="__codelineno-39-19" name="__codelineno-39-19" href="#__codelineno-39-19"></a>
+<a id="__codelineno-39-20" name="__codelineno-39-20" href="#__codelineno-39-20"></a>! Extended VLANs (1006–4094)
+<a id="__codelineno-39-21" name="__codelineno-39-21" href="#__codelineno-39-21"></a>vlan 2000
+<a id="__codelineno-39-22" name="__codelineno-39-22" href="#__codelineno-39-22"></a> name EXTENDED-VLAN
+<a id="__codelineno-39-23" name="__codelineno-39-23" href="#__codelineno-39-23"></a> exit
+<a id="__codelineno-39-24" name="__codelineno-39-24" href="#__codelineno-39-24"></a>
+<a id="__codelineno-39-25" name="__codelineno-39-25" href="#__codelineno-39-25"></a>! Private VLANs — ізоляція в межах VLAN
+<a id="__codelineno-39-26" name="__codelineno-39-26" href="#__codelineno-39-26"></a>vlan 500
+<a id="__codelineno-39-27" name="__codelineno-39-27" href="#__codelineno-39-27"></a> private-vlan primary
+<a id="__codelineno-39-28" name="__codelineno-39-28" href="#__codelineno-39-28"></a> private-vlan association 501-502
+<a id="__codelineno-39-29" name="__codelineno-39-29" href="#__codelineno-39-29"></a> exit
+<a id="__codelineno-39-30" name="__codelineno-39-30" href="#__codelineno-39-30"></a>
+<a id="__codelineno-39-31" name="__codelineno-39-31" href="#__codelineno-39-31"></a>vlan 501
+<a id="__codelineno-39-32" name="__codelineno-39-32" href="#__codelineno-39-32"></a> private-vlan isolated          ! порти не бачать одне одного
+<a id="__codelineno-39-33" name="__codelineno-39-33" href="#__codelineno-39-33"></a> exit
+<a id="__codelineno-39-34" name="__codelineno-39-34" href="#__codelineno-39-34"></a>
+<a id="__codelineno-39-35" name="__codelineno-39-35" href="#__codelineno-39-35"></a>vlan 502
+<a id="__codelineno-39-36" name="__codelineno-39-36" href="#__codelineno-39-36"></a> private-vlan community         ! порти бачать одне одного
+<a id="__codelineno-39-37" name="__codelineno-39-37" href="#__codelineno-39-37"></a> exit
+</code></pre></div>
+<h3 id="102-vlan-trunking">10.2 VLAN Trunking</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-40-1" name="__codelineno-40-1" href="#__codelineno-40-1"></a>! Налаштування транк-порту (передає кілька VLAN)
+<a id="__codelineno-40-2" name="__codelineno-40-2" href="#__codelineno-40-2"></a>interface gigabitEthernet 1/0/24
+<a id="__codelineno-40-3" name="__codelineno-40-3" href="#__codelineno-40-3"></a> switchport mode trunk
+<a id="__codelineno-40-4" name="__codelineno-40-4" href="#__codelineno-40-4"></a> switchport trunk encapsulation dot1q
+<a id="__codelineno-40-5" name="__codelineno-40-5" href="#__codelineno-40-5"></a> switchport trunk native vlan 99       ! нетегований VLAN
+<a id="__codelineno-40-6" name="__codelineno-40-6" href="#__codelineno-40-6"></a> switchport trunk allowed vlan 10,20,30,99
+<a id="__codelineno-40-7" name="__codelineno-40-7" href="#__codelineno-40-7"></a> switchport trunk allowed vlan add 40-50
+<a id="__codelineno-40-8" name="__codelineno-40-8" href="#__codelineno-40-8"></a> switchport trunk allowed vlan remove 30
+<a id="__codelineno-40-9" name="__codelineno-40-9" href="#__codelineno-40-9"></a> switchport trunk pruning vlan 2-1001
+<a id="__codelineno-40-10" name="__codelineno-40-10" href="#__codelineno-40-10"></a> switchport nonegotiate               ! вимкнути DTP
+<a id="__codelineno-40-11" name="__codelineno-40-11" href="#__codelineno-40-11"></a> spanning-tree guard root
+<a id="__codelineno-40-12" name="__codelineno-40-12" href="#__codelineno-40-12"></a> exit
+<a id="__codelineno-40-13" name="__codelineno-40-13" href="#__codelineno-40-13"></a>
+<a id="__codelineno-40-14" name="__codelineno-40-14" href="#__codelineno-40-14"></a>! Dynamic Trunking Protocol (DTP)
+<a id="__codelineno-40-15" name="__codelineno-40-15" href="#__codelineno-40-15"></a> switchport mode dynamic desirable     ! активно ініціює транк
+<a id="__codelineno-40-16" name="__codelineno-40-16" href="#__codelineno-40-16"></a> switchport mode dynamic auto          ! чекає ініціативи
+<a id="__codelineno-40-17" name="__codelineno-40-17" href="#__codelineno-40-17"></a>
+<a id="__codelineno-40-18" name="__codelineno-40-18" href="#__codelineno-40-18"></a>! VLAN Translation (перетворення номерів VLAN)
+<a id="__codelineno-40-19" name="__codelineno-40-19" href="#__codelineno-40-19"></a> switchport vlan mapping 10 110
+<a id="__codelineno-40-20" name="__codelineno-40-20" href="#__codelineno-40-20"></a> switchport vlan mapping 20 120
+<a id="__codelineno-40-21" name="__codelineno-40-21" href="#__codelineno-40-21"></a>
+<a id="__codelineno-40-22" name="__codelineno-40-22" href="#__codelineno-40-22"></a>! Перевірка
+<a id="__codelineno-40-23" name="__codelineno-40-23" href="#__codelineno-40-23"></a>show interfaces trunk
+<a id="__codelineno-40-24" name="__codelineno-40-24" href="#__codelineno-40-24"></a>show interfaces gi1/0/24 switchport
+<a id="__codelineno-40-25" name="__codelineno-40-25" href="#__codelineno-40-25"></a>show interfaces gi1/0/24 trunk
+<a id="__codelineno-40-26" name="__codelineno-40-26" href="#__codelineno-40-26"></a>show vlan
+<a id="__codelineno-40-27" name="__codelineno-40-27" href="#__codelineno-40-27"></a>show vlan id 10
+<a id="__codelineno-40-28" name="__codelineno-40-28" href="#__codelineno-40-28"></a>show vlan name SALES
+</code></pre></div>
+<h3 id="103-vtp">10.3 Налаштування VTP</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-41-1" name="__codelineno-41-1" href="#__codelineno-41-1"></a>! VTP — синхронізація VLAN між комутаторами
+<a id="__codelineno-41-2" name="__codelineno-41-2" href="#__codelineno-41-2"></a>vtp domain COMPANY
+<a id="__codelineno-41-3" name="__codelineno-41-3" href="#__codelineno-41-3"></a>vtp mode server      ! server = створює/змінює VLAN
+<a id="__codelineno-41-4" name="__codelineno-41-4" href="#__codelineno-41-4"></a>vtp password VTP-Pass123!
+<a id="__codelineno-41-5" name="__codelineno-41-5" href="#__codelineno-41-5"></a>vtp version 2
+<a id="__codelineno-41-6" name="__codelineno-41-6" href="#__codelineno-41-6"></a>vtp pruning          ! не надсилати трафік VLAN туди, де їх немає
+<a id="__codelineno-41-7" name="__codelineno-41-7" href="#__codelineno-41-7"></a>vtp interface Loopback0
+<a id="__codelineno-41-8" name="__codelineno-41-8" href="#__codelineno-41-8"></a>
+<a id="__codelineno-41-9" name="__codelineno-41-9" href="#__codelineno-41-9"></a>! VTP Client (отримує VLAN від server, не може створювати)
+<a id="__codelineno-41-10" name="__codelineno-41-10" href="#__codelineno-41-10"></a>vtp mode client
+<a id="__codelineno-41-11" name="__codelineno-41-11" href="#__codelineno-41-11"></a>vtp transparent      ! не бере участі в VTP, але пропускає його
+<a id="__codelineno-41-12" name="__codelineno-41-12" href="#__codelineno-41-12"></a>
+<a id="__codelineno-41-13" name="__codelineno-41-13" href="#__codelineno-41-13"></a>! Перевірка
+<a id="__codelineno-41-14" name="__codelineno-41-14" href="#__codelineno-41-14"></a>show vtp status
+<a id="__codelineno-41-15" name="__codelineno-41-15" href="#__codelineno-41-15"></a>show vtp password
+<a id="__codelineno-41-16" name="__codelineno-41-16" href="#__codelineno-41-16"></a>show vtp counters
+<a id="__codelineno-41-17" name="__codelineno-41-17" href="#__codelineno-41-17"></a>show vlan brief
+</code></pre></div>
+<h3 id="104-voice-vlan">10.4 Voice VLAN</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-42-1" name="__codelineno-42-1" href="#__codelineno-42-1"></a>! Налаштування Voice VLAN для IP-телефонів
+<a id="__codelineno-42-2" name="__codelineno-42-2" href="#__codelineno-42-2"></a>interface gigabitEthernet 1/0/10
+<a id="__codelineno-42-3" name="__codelineno-42-3" href="#__codelineno-42-3"></a> switchport voice vlan 110
+<a id="__codelineno-42-4" name="__codelineno-42-4" href="#__codelineno-42-4"></a> switchport priority extend cos 0
+<a id="__codelineno-42-5" name="__codelineno-42-5" href="#__codelineno-42-5"></a> auto qos voip trust
+<a id="__codelineno-42-6" name="__codelineno-42-6" href="#__codelineno-42-6"></a> mls qos trust cos              ! довіряти CoS-мітці від телефону
+<a id="__codelineno-42-7" name="__codelineno-42-7" href="#__codelineno-42-7"></a> spanning-tree portfast
+<a id="__codelineno-42-8" name="__codelineno-42-8" href="#__codelineno-42-8"></a> spanning-tree bpduguard enable
+<a id="__codelineno-42-9" name="__codelineno-42-9" href="#__codelineno-42-9"></a>
+<a id="__codelineno-42-10" name="__codelineno-42-10" href="#__codelineno-42-10"></a>! LLDP-MED для IP-телефонів
+<a id="__codelineno-42-11" name="__codelineno-42-11" href="#__codelineno-42-11"></a>lldp run
+<a id="__codelineno-42-12" name="__codelineno-42-12" href="#__codelineno-42-12"></a> lldp med
+<a id="__codelineno-42-13" name="__codelineno-42-13" href="#__codelineno-42-13"></a> lldp med-tlv-select inventory-management network-policy
+</code></pre></div>
+<h3 id="105-vlan-acls-vacls">10.5 VLAN ACLs (VACLs)</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-43-1" name="__codelineno-43-1" href="#__codelineno-43-1"></a>! VACL — фільтрація трафіку всередині VLAN
+<a id="__codelineno-43-2" name="__codelineno-43-2" href="#__codelineno-43-2"></a>vlan access-map BLOCK-SERVER 10
+<a id="__codelineno-43-3" name="__codelineno-43-3" href="#__codelineno-43-3"></a> match ip address SERVER-ACL
+<a id="__codelineno-43-4" name="__codelineno-43-4" href="#__codelineno-43-4"></a> action drop
+<a id="__codelineno-43-5" name="__codelineno-43-5" href="#__codelineno-43-5"></a> exit
+<a id="__codelineno-43-6" name="__codelineno-43-6" href="#__codelineno-43-6"></a>
+<a id="__codelineno-43-7" name="__codelineno-43-7" href="#__codelineno-43-7"></a>vlan access-map BLOCK-SERVER 20
+<a id="__codelineno-43-8" name="__codelineno-43-8" href="#__codelineno-43-8"></a> action forward
+<a id="__codelineno-43-9" name="__codelineno-43-9" href="#__codelineno-43-9"></a> exit
+<a id="__codelineno-43-10" name="__codelineno-43-10" href="#__codelineno-43-10"></a>
+<a id="__codelineno-43-11" name="__codelineno-43-11" href="#__codelineno-43-11"></a>vlan filter BLOCK-SERVER vlan-list 10  ! застосувати до VLAN 10
+<a id="__codelineno-43-12" name="__codelineno-43-12" href="#__codelineno-43-12"></a>
+<a id="__codelineno-43-13" name="__codelineno-43-13" href="#__codelineno-43-13"></a>! ACL для VACL
+<a id="__codelineno-43-14" name="__codelineno-43-14" href="#__codelineno-43-14"></a>ip access-list extended SERVER-ACL
+<a id="__codelineno-43-15" name="__codelineno-43-15" href="#__codelineno-43-15"></a> deny tcp any host 192.168.10.10 eq 3389
+<a id="__codelineno-43-16" name="__codelineno-43-16" href="#__codelineno-43-16"></a> permit ip any any
+</code></pre></div>
+<hr />
+<h2 id="11-spanning-tree-protocol">11 Spanning Tree Protocol</h2>
+<h3 id="111-stp">11.1 Основи налаштування STP</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-44-1" name="__codelineno-44-1" href="#__codelineno-44-1"></a>! Вибір режиму STP
+<a id="__codelineno-44-2" name="__codelineno-44-2" href="#__codelineno-44-2"></a>spanning-tree mode rapid-pvst    ! Rapid PVST+ — рекомендовано
+<a id="__codelineno-44-3" name="__codelineno-44-3" href="#__codelineno-44-3"></a>spanning-tree mode mst           ! MST — для великих мереж
+<a id="__codelineno-44-4" name="__codelineno-44-4" href="#__codelineno-44-4"></a>spanning-tree mode pvst          ! класичний PVST
+<a id="__codelineno-44-5" name="__codelineno-44-5" href="#__codelineno-44-5"></a>
+<a id="__codelineno-44-6" name="__codelineno-44-6" href="#__codelineno-44-6"></a>! Пріоритет мосту (менше = більше шансів стати Root Bridge)
+<a id="__codelineno-44-7" name="__codelineno-44-7" href="#__codelineno-44-7"></a>spanning-tree vlan 1,10,20,30 priority 4096
+<a id="__codelineno-44-8" name="__codelineno-44-8" href="#__codelineno-44-8"></a>spanning-tree vlan 40-50 priority 8192
+<a id="__codelineno-44-9" name="__codelineno-44-9" href="#__codelineno-44-9"></a>
+<a id="__codelineno-44-10" name="__codelineno-44-10" href="#__codelineno-44-10"></a>! Захист Root Bridge
+<a id="__codelineno-44-11" name="__codelineno-44-11" href="#__codelineno-44-11"></a>spanning-tree portfast bpduguard default
+<a id="__codelineno-44-12" name="__codelineno-44-12" href="#__codelineno-44-12"></a> spanning-tree guard root
+<a id="__codelineno-44-13" name="__codelineno-44-13" href="#__codelineno-44-13"></a> spanning-tree bpdufilter enable
+<a id="__codelineno-44-14" name="__codelineno-44-14" href="#__codelineno-44-14"></a> spanning-tree bpduguard enable
+<a id="__codelineno-44-15" name="__codelineno-44-15" href="#__codelineno-44-15"></a>
+<a id="__codelineno-44-16" name="__codelineno-44-16" href="#__codelineno-44-16"></a>! Перевірка
+<a id="__codelineno-44-17" name="__codelineno-44-17" href="#__codelineno-44-17"></a>show spanning-tree
+<a id="__codelineno-44-18" name="__codelineno-44-18" href="#__codelineno-44-18"></a>show spanning-tree vlan 10
+<a id="__codelineno-44-19" name="__codelineno-44-19" href="#__codelineno-44-19"></a>show spanning-tree interface gi1/0/1
+<a id="__codelineno-44-20" name="__codelineno-44-20" href="#__codelineno-44-20"></a>show spanning-tree detail
+<a id="__codelineno-44-21" name="__codelineno-44-21" href="#__codelineno-44-21"></a>show spanning-tree inconsistentports
+<a id="__codelineno-44-22" name="__codelineno-44-22" href="#__codelineno-44-22"></a>show spanning-tree mst configuration
+</code></pre></div>
+<h3 id="112-mst">11.2 Налаштування MST</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-45-1" name="__codelineno-45-1" href="#__codelineno-45-1"></a>! Налаштування MST-регіону
+<a id="__codelineno-45-2" name="__codelineno-45-2" href="#__codelineno-45-2"></a>spanning-tree mst configuration
+<a id="__codelineno-45-3" name="__codelineno-45-3" href="#__codelineno-45-3"></a> name REGION1
+<a id="__codelineno-45-4" name="__codelineno-45-4" href="#__codelineno-45-4"></a> revision 1
+<a id="__codelineno-45-5" name="__codelineno-45-5" href="#__codelineno-45-5"></a> instance 1 vlan 10,20,30    ! прив&#39;язати VLAN до instance
+<a id="__codelineno-45-6" name="__codelineno-45-6" href="#__codelineno-45-6"></a> instance 2 vlan 40,50,60
+<a id="__codelineno-45-7" name="__codelineno-45-7" href="#__codelineno-45-7"></a> exit
+<a id="__codelineno-45-8" name="__codelineno-45-8" href="#__codelineno-45-8"></a>
+<a id="__codelineno-45-9" name="__codelineno-45-9" href="#__codelineno-45-9"></a>! Параметри MST-instance
+<a id="__codelineno-45-10" name="__codelineno-45-10" href="#__codelineno-45-10"></a>spanning-tree mst 1 priority 4096
+<a id="__codelineno-45-11" name="__codelineno-45-11" href="#__codelineno-45-11"></a>spanning-tree mst 2 priority 8192
+<a id="__codelineno-45-12" name="__codelineno-45-12" href="#__codelineno-45-12"></a>spanning-tree mst 0-2 hello-time 2
+<a id="__codelineno-45-13" name="__codelineno-45-13" href="#__codelineno-45-13"></a>spanning-tree mst 0-2 forward-time 15
+<a id="__codelineno-45-14" name="__codelineno-45-14" href="#__codelineno-45-14"></a>spanning-tree mst 0-2 max-age 20
+<a id="__codelineno-45-15" name="__codelineno-45-15" href="#__codelineno-45-15"></a>
+<a id="__codelineno-45-16" name="__codelineno-45-16" href="#__codelineno-45-16"></a>! Перевірка
+<a id="__codelineno-45-17" name="__codelineno-45-17" href="#__codelineno-45-17"></a>show spanning-tree mst
+<a id="__codelineno-45-18" name="__codelineno-45-18" href="#__codelineno-45-18"></a>show spanning-tree mst configuration
+<a id="__codelineno-45-19" name="__codelineno-45-19" href="#__codelineno-45-19"></a>show spanning-tree mst 1
+<a id="__codelineno-45-20" name="__codelineno-45-20" href="#__codelineno-45-20"></a>show spanning-tree mst interface gi1/0/1
+</code></pre></div>
+<h3 id="113-stp">11.3 Таймери та оптимізація STP</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-46-1" name="__codelineno-46-1" href="#__codelineno-46-1"></a>! Таймери STP
+<a id="__codelineno-46-2" name="__codelineno-46-2" href="#__codelineno-46-2"></a>spanning-tree vlan 1 hello-time 2      ! BPDU кожні 2 сек
+<a id="__codelineno-46-3" name="__codelineno-46-3" href="#__codelineno-46-3"></a>spanning-tree vlan 1 forward-time 15   ! затримка переходу
+<a id="__codelineno-46-4" name="__codelineno-46-4" href="#__codelineno-46-4"></a>spanning-tree vlan 1 max-age 20        ! час до визнання Root недоступним
+<a id="__codelineno-46-5" name="__codelineno-46-5" href="#__codelineno-46-5"></a>spanning-tree transmit hold-count 6
+<a id="__codelineno-46-6" name="__codelineno-46-6" href="#__codelineno-46-6"></a>
+<a id="__codelineno-46-7" name="__codelineno-46-7" href="#__codelineno-46-7"></a>! PortFast &amp; BPDU Guard
+<a id="__codelineno-46-8" name="__codelineno-46-8" href="#__codelineno-46-8"></a>spanning-tree portfast default         ! увімкнути глобально для access-портів
+<a id="__codelineno-46-9" name="__codelineno-46-9" href="#__codelineno-46-9"></a>spanning-tree portfast bpduguard default
+<a id="__codelineno-46-10" name="__codelineno-46-10" href="#__codelineno-46-10"></a> spanning-tree portfast
+<a id="__codelineno-46-11" name="__codelineno-46-11" href="#__codelineno-46-11"></a> spanning-tree portfast trunk
+<a id="__codelineno-46-12" name="__codelineno-46-12" href="#__codelineno-46-12"></a>
+<a id="__codelineno-46-13" name="__codelineno-46-13" href="#__codelineno-46-13"></a>! UplinkFast &amp; BackboneFast (тільки для PVST)
+<a id="__codelineno-46-14" name="__codelineno-46-14" href="#__codelineno-46-14"></a>spanning-tree uplinkfast               ! швидший переключення uplink
+<a id="__codelineno-46-15" name="__codelineno-46-15" href="#__codelineno-46-15"></a>spanning-tree backbonefast             ! швидше виявлення змін топології
+<a id="__codelineno-46-16" name="__codelineno-46-16" href="#__codelineno-46-16"></a>
+<a id="__codelineno-46-17" name="__codelineno-46-17" href="#__codelineno-46-17"></a>! Loop Guard
+<a id="__codelineno-46-18" name="__codelineno-46-18" href="#__codelineno-46-18"></a>spanning-tree loopguard default
+<a id="__codelineno-46-19" name="__codelineno-46-19" href="#__codelineno-46-19"></a> spanning-tree guard loop
+</code></pre></div>
+<h3 id="114-stp">11.4 Безпека STP</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-47-1" name="__codelineno-47-1" href="#__codelineno-47-1"></a>! BPDU Guard — вимкнути порт якщо прийшов BPDU (захист від зайвих SW)
+<a id="__codelineno-47-2" name="__codelineno-47-2" href="#__codelineno-47-2"></a>spanning-tree portfast bpduguard default
+<a id="__codelineno-47-3" name="__codelineno-47-3" href="#__codelineno-47-3"></a>errdisable recovery cause bpduguard
+<a id="__codelineno-47-4" name="__codelineno-47-4" href="#__codelineno-47-4"></a>errdisable recovery interval 30
+<a id="__codelineno-47-5" name="__codelineno-47-5" href="#__codelineno-47-5"></a>
+<a id="__codelineno-47-6" name="__codelineno-47-6" href="#__codelineno-47-6"></a>! BPDU Filter — не надсилати та не обробляти BPDU на порту
+<a id="__codelineno-47-7" name="__codelineno-47-7" href="#__codelineno-47-7"></a>spanning-tree portfast bpdufilter default
+<a id="__codelineno-47-8" name="__codelineno-47-8" href="#__codelineno-47-8"></a> spanning-tree bpdufilter enable
+<a id="__codelineno-47-9" name="__codelineno-47-9" href="#__codelineno-47-9"></a>
+<a id="__codelineno-47-10" name="__codelineno-47-10" href="#__codelineno-47-10"></a>! Root Guard — заборонити порту ставати root port
+<a id="__codelineno-47-11" name="__codelineno-47-11" href="#__codelineno-47-11"></a> spanning-tree guard root
+<a id="__codelineno-47-12" name="__codelineno-47-12" href="#__codelineno-47-12"></a>
+<a id="__codelineno-47-13" name="__codelineno-47-13" href="#__codelineno-47-13"></a>! TC Guard — обмежити обробку Topology Change повідомлень
+<a id="__codelineno-47-14" name="__codelineno-47-14" href="#__codelineno-47-14"></a>spanning-tree tc-guard
+<a id="__codelineno-47-15" name="__codelineno-47-15" href="#__codelineno-47-15"></a>spanning-tree tc-filter
+<a id="__codelineno-47-16" name="__codelineno-47-16" href="#__codelineno-47-16"></a>
+<a id="__codelineno-47-17" name="__codelineno-47-17" href="#__codelineno-47-17"></a>! Перевірка
+<a id="__codelineno-47-18" name="__codelineno-47-18" href="#__codelineno-47-18"></a>show spanning-tree summary
+<a id="__codelineno-47-19" name="__codelineno-47-19" href="#__codelineno-47-19"></a>show spanning-tree detail
+<a id="__codelineno-47-20" name="__codelineno-47-20" href="#__codelineno-47-20"></a>debug spanning-tree events
+</code></pre></div>
+<hr />
+<h2 id="12-etherchannel-lacp">12 EtherChannel &amp; LACP</h2>
+<h3 id="121-etherchannel">12.1 Налаштування EtherChannel</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-48-1" name="__codelineno-48-1" href="#__codelineno-48-1"></a>! LACP Configuration (рекомендовано)
+<a id="__codelineno-48-2" name="__codelineno-48-2" href="#__codelineno-48-2"></a>interface range gigabitEthernet 1/0/1-2
+<a id="__codelineno-48-3" name="__codelineno-48-3" href="#__codelineno-48-3"></a> channel-group 1 mode active    ! активно надсилає LACP PDU
+<a id="__codelineno-48-4" name="__codelineno-48-4" href="#__codelineno-48-4"></a> channel-protocol lacp
+<a id="__codelineno-48-5" name="__codelineno-48-5" href="#__codelineno-48-5"></a> lacp port-priority 1000        ! менше = вищий пріоритет
+<a id="__codelineno-48-6" name="__codelineno-48-6" href="#__codelineno-48-6"></a> lacp rate fast
+<a id="__codelineno-48-7" name="__codelineno-48-7" href="#__codelineno-48-7"></a> exit
+<a id="__codelineno-48-8" name="__codelineno-48-8" href="#__codelineno-48-8"></a>
+<a id="__codelineno-48-9" name="__codelineno-48-9" href="#__codelineno-48-9"></a>! PAgP Configuration (протокол Cisco)
+<a id="__codelineno-48-10" name="__codelineno-48-10" href="#__codelineno-48-10"></a> channel-group 1 mode desirable
+<a id="__codelineno-48-11" name="__codelineno-48-11" href="#__codelineno-48-11"></a> channel-protocol pagp
+<a id="__codelineno-48-12" name="__codelineno-48-12" href="#__codelineno-48-12"></a> pagp port-priority 1000
+<a id="__codelineno-48-13" name="__codelineno-48-13" href="#__codelineno-48-13"></a>
+<a id="__codelineno-48-14" name="__codelineno-48-14" href="#__codelineno-48-14"></a>! Static EtherChannel (без протоколу, обидва боки = on)
+<a id="__codelineno-48-15" name="__codelineno-48-15" href="#__codelineno-48-15"></a> channel-group 1 mode on
+<a id="__codelineno-48-16" name="__codelineno-48-16" href="#__codelineno-48-16"></a>
+<a id="__codelineno-48-17" name="__codelineno-48-17" href="#__codelineno-48-17"></a>! Port-Channel Interface — логічний інтерфейс для групи
+<a id="__codelineno-48-18" name="__codelineno-48-18" href="#__codelineno-48-18"></a>interface port-channel 1
+<a id="__codelineno-48-19" name="__codelineno-48-19" href="#__codelineno-48-19"></a> description &quot;Uplink to Core&quot;
+<a id="__codelineno-48-20" name="__codelineno-48-20" href="#__codelineno-48-20"></a> switchport mode trunk
+<a id="__codelineno-48-21" name="__codelineno-48-21" href="#__codelineno-48-21"></a> switchport trunk native vlan 99
+<a id="__codelineno-48-22" name="__codelineno-48-22" href="#__codelineno-48-22"></a> switchport trunk allowed vlan 10,20,30,99
+<a id="__codelineno-48-23" name="__codelineno-48-23" href="#__codelineno-48-23"></a> lacp system-priority 1000
+<a id="__codelineno-48-24" name="__codelineno-48-24" href="#__codelineno-48-24"></a> lacp system-id 0050.7966.6800
+<a id="__codelineno-48-25" name="__codelineno-48-25" href="#__codelineno-48-25"></a> exit
+</code></pre></div>
+<h3 id="122">12.2 Балансування навантаження</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-49-1" name="__codelineno-49-1" href="#__codelineno-49-1"></a>! Алгоритми балансування трафіку по каналах
+<a id="__codelineno-49-2" name="__codelineno-49-2" href="#__codelineno-49-2"></a>port-channel load-balance src-dst-ip    ! за IP-адресами
+<a id="__codelineno-49-3" name="__codelineno-49-3" href="#__codelineno-49-3"></a>port-channel load-balance src-dst-mac   ! за MAC-адресами
+<a id="__codelineno-49-4" name="__codelineno-49-4" href="#__codelineno-49-4"></a>port-channel load-balance src-dst-port  ! за TCP/UDP портами
+<a id="__codelineno-49-5" name="__codelineno-49-5" href="#__codelineno-49-5"></a>port-channel load-balance src-ip
+<a id="__codelineno-49-6" name="__codelineno-49-6" href="#__codelineno-49-6"></a>port-channel load-balance dst-ip
+<a id="__codelineno-49-7" name="__codelineno-49-7" href="#__codelineno-49-7"></a>port-channel load-balance src-mac
+<a id="__codelineno-49-8" name="__codelineno-49-8" href="#__codelineno-49-8"></a>port-channel load-balance dst-mac
+<a id="__codelineno-49-9" name="__codelineno-49-9" href="#__codelineno-49-9"></a>
+<a id="__codelineno-49-10" name="__codelineno-49-10" href="#__codelineno-49-10"></a>! Балансування на рівні VLAN
+<a id="__codelineno-49-11" name="__codelineno-49-11" href="#__codelineno-49-11"></a>vlan 10
+<a id="__codelineno-49-12" name="__codelineno-49-12" href="#__codelineno-49-12"></a> lacp load-balancing src-dst-ip
+<a id="__codelineno-49-13" name="__codelineno-49-13" href="#__codelineno-49-13"></a> exit
+<a id="__codelineno-49-14" name="__codelineno-49-14" href="#__codelineno-49-14"></a>
+<a id="__codelineno-49-15" name="__codelineno-49-15" href="#__codelineno-49-15"></a>! Перевірка
+<a id="__codelineno-49-16" name="__codelineno-49-16" href="#__codelineno-49-16"></a>show etherchannel summary
+<a id="__codelineno-49-17" name="__codelineno-49-17" href="#__codelineno-49-17"></a>show etherchannel port-channel
+<a id="__codelineno-49-18" name="__codelineno-49-18" href="#__codelineno-49-18"></a>show etherchannel load-balance
+<a id="__codelineno-49-19" name="__codelineno-49-19" href="#__codelineno-49-19"></a>show lacp neighbor
+<a id="__codelineno-49-20" name="__codelineno-49-20" href="#__codelineno-49-20"></a>show lacp internal
+<a id="__codelineno-49-21" name="__codelineno-49-21" href="#__codelineno-49-21"></a>show lacp counters
+<a id="__codelineno-49-22" name="__codelineno-49-22" href="#__codelineno-49-22"></a>show pagp neighbor
+<a id="__codelineno-49-23" name="__codelineno-49-23" href="#__codelineno-49-23"></a>show pagp internal
+</code></pre></div>
+<h3 id="123-etherchannel">12.3 Розширене налаштування EtherChannel</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-50-1" name="__codelineno-50-1" href="#__codelineno-50-1"></a>! Cross-Stack EtherChannel (StackWise)
+<a id="__codelineno-50-2" name="__codelineno-50-2" href="#__codelineno-50-2"></a>interface port-channel 10
+<a id="__codelineno-50-3" name="__codelineno-50-3" href="#__codelineno-50-3"></a> stack-port 1/1-1/2
+<a id="__codelineno-50-4" name="__codelineno-50-4" href="#__codelineno-50-4"></a> switchport mode trunk
+<a id="__codelineno-50-5" name="__codelineno-50-5" href="#__codelineno-50-5"></a> exit
+<a id="__codelineno-50-6" name="__codelineno-50-6" href="#__codelineno-50-6"></a>
+<a id="__codelineno-50-7" name="__codelineno-50-7" href="#__codelineno-50-7"></a>! VSS EtherChannel
+<a id="__codelineno-50-8" name="__codelineno-50-8" href="#__codelineno-50-8"></a>interface port-channel 100
+<a id="__codelineno-50-9" name="__codelineno-50-9" href="#__codelineno-50-9"></a> vss-port-channel
+<a id="__codelineno-50-10" name="__codelineno-50-10" href="#__codelineno-50-10"></a> switchport mode trunk
+<a id="__codelineno-50-11" name="__codelineno-50-11" href="#__codelineno-50-11"></a> exit
+<a id="__codelineno-50-12" name="__codelineno-50-12" href="#__codelineno-50-12"></a>
+<a id="__codelineno-50-13" name="__codelineno-50-13" href="#__codelineno-50-13"></a>! Мінімальна кількість активних портів
+<a id="__codelineno-50-14" name="__codelineno-50-14" href="#__codelineno-50-14"></a> lacp min-links 2
+<a id="__codelineno-50-15" name="__codelineno-50-15" href="#__codelineno-50-15"></a>port-channel min-links 2
+<a id="__codelineno-50-16" name="__codelineno-50-16" href="#__codelineno-50-16"></a>
+<a id="__codelineno-50-17" name="__codelineno-50-17" href="#__codelineno-50-17"></a>! Максимальна кількість активних портів у bundle
+<a id="__codelineno-50-18" name="__codelineno-50-18" href="#__codelineno-50-18"></a> lacp max-bundle 8
+<a id="__codelineno-50-19" name="__codelineno-50-19" href="#__codelineno-50-19"></a>
+<a id="__codelineno-50-20" name="__codelineno-50-20" href="#__codelineno-50-20"></a>! Graceful Shutdown
+<a id="__codelineno-50-21" name="__codelineno-50-21" href="#__codelineno-50-21"></a> lacp graceful-convergence
+</code></pre></div>
+<h3 id="124-etherchannel">12.4 Пошук несправностей в EtherChannel</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-51-1" name="__codelineno-51-1" href="#__codelineno-51-1"></a>! Діагностика проблем
+<a id="__codelineno-51-2" name="__codelineno-51-2" href="#__codelineno-51-2"></a>show etherchannel detail
+<a id="__codelineno-51-3" name="__codelineno-51-3" href="#__codelineno-51-3"></a>show etherchannel inconsistency  ! виявити розбіжності в налаштуваннях
+<a id="__codelineno-51-4" name="__codelineno-51-4" href="#__codelineno-51-4"></a>debug etherchannel
+<a id="__codelineno-51-5" name="__codelineno-51-5" href="#__codelineno-51-5"></a>debug lacp
+<a id="__codelineno-51-6" name="__codelineno-51-6" href="#__codelineno-51-6"></a>debug pagp
+<a id="__codelineno-51-7" name="__codelineno-51-7" href="#__codelineno-51-7"></a>
+<a id="__codelineno-51-8" name="__codelineno-51-8" href="#__codelineno-51-8"></a>! Скинути лічильники
+<a id="__codelineno-51-9" name="__codelineno-51-9" href="#__codelineno-51-9"></a>clear lacp counters
+<a id="__codelineno-51-10" name="__codelineno-51-10" href="#__codelineno-51-10"></a>clear pagp counters
+<a id="__codelineno-51-11" name="__codelineno-51-11" href="#__codelineno-51-11"></a>default interface port-channel 1  ! скинути налаштування port-channel
+<a id="__codelineno-51-12" name="__codelineno-51-12" href="#__codelineno-51-12"></a>
+<a id="__codelineno-51-13" name="__codelineno-51-13" href="#__codelineno-51-13"></a>! Перенастройка порту вручну
+<a id="__codelineno-51-14" name="__codelineno-51-14" href="#__codelineno-51-14"></a>interface gi1/0/1
+<a id="__codelineno-51-15" name="__codelineno-51-15" href="#__codelineno-51-15"></a> shutdown
+<a id="__codelineno-51-16" name="__codelineno-51-16" href="#__codelineno-51-16"></a> no channel-group
+<a id="__codelineno-51-17" name="__codelineno-51-17" href="#__codelineno-51-17"></a> no shutdown
+<a id="__codelineno-51-18" name="__codelineno-51-18" href="#__codelineno-51-18"></a> channel-group 1 mode active
+</code></pre></div>
+<hr />
+<h2 id="13-ip">13 IP адресація</h2>
+<h3 id="131-ip-">13.1 Налаштування IP-адрес</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-52-1" name="__codelineno-52-1" href="#__codelineno-52-1"></a>! Базова IP-адресація
+<a id="__codelineno-52-2" name="__codelineno-52-2" href="#__codelineno-52-2"></a>interface gigabitEthernet 0/0
+<a id="__codelineno-52-3" name="__codelineno-52-3" href="#__codelineno-52-3"></a> ip address 192.168.1.1 255.255.255.0
+<a id="__codelineno-52-4" name="__codelineno-52-4" href="#__codelineno-52-4"></a> ip address 10.0.0.1 255.255.255.0 secondary  ! другорядна адреса
+<a id="__codelineno-52-5" name="__codelineno-52-5" href="#__codelineno-52-5"></a> ip directed-broadcast
+<a id="__codelineno-52-6" name="__codelineno-52-6" href="#__codelineno-52-6"></a> ip unreachables
+<a id="__codelineno-52-7" name="__codelineno-52-7" href="#__codelineno-52-7"></a> ip redirects
+<a id="__codelineno-52-8" name="__codelineno-52-8" href="#__codelineno-52-8"></a> ip proxy-arp
+<a id="__codelineno-52-9" name="__codelineno-52-9" href="#__codelineno-52-9"></a> no shutdown
+<a id="__codelineno-52-10" name="__codelineno-52-10" href="#__codelineno-52-10"></a>
+<a id="__codelineno-52-11" name="__codelineno-52-11" href="#__codelineno-52-11"></a>! Loopback-інтерфейс (завжди активний, використовується як Router ID)
+<a id="__codelineno-52-12" name="__codelineno-52-12" href="#__codelineno-52-12"></a>interface loopback 0
+<a id="__codelineno-52-13" name="__codelineno-52-13" href="#__codelineno-52-13"></a> ip address 1.1.1.1 255.255.255.255
+<a id="__codelineno-52-14" name="__codelineno-52-14" href="#__codelineno-52-14"></a> description &quot;Router ID and Management&quot;
+<a id="__codelineno-52-15" name="__codelineno-52-15" href="#__codelineno-52-15"></a> ip ospf network point-to-point
+<a id="__codelineno-52-16" name="__codelineno-52-16" href="#__codelineno-52-16"></a>
+<a id="__codelineno-52-17" name="__codelineno-52-17" href="#__codelineno-52-17"></a>! VLSM — маски змінної довжини
+<a id="__codelineno-52-18" name="__codelineno-52-18" href="#__codelineno-52-18"></a> ip address 172.16.1.1 255.255.255.192    ! /26
+<a id="__codelineno-52-19" name="__codelineno-52-19" href="#__codelineno-52-19"></a> ip address 10.1.1.1 255.255.255.224      ! /27
+<a id="__codelineno-52-20" name="__codelineno-52-20" href="#__codelineno-52-20"></a> ip address 192.168.1.129 255.255.255.240 ! /28
+<a id="__codelineno-52-21" name="__codelineno-52-21" href="#__codelineno-52-21"></a>
+<a id="__codelineno-52-22" name="__codelineno-52-22" href="#__codelineno-52-22"></a>! IPv6
+<a id="__codelineno-52-23" name="__codelineno-52-23" href="#__codelineno-52-23"></a> ipv6 enable
+<a id="__codelineno-52-24" name="__codelineno-52-24" href="#__codelineno-52-24"></a> ipv6 address 2001:db8::1/64
+<a id="__codelineno-52-25" name="__codelineno-52-25" href="#__codelineno-52-25"></a> ipv6 address fe80::1 link-local
+<a id="__codelineno-52-26" name="__codelineno-52-26" href="#__codelineno-52-26"></a> ipv6 address autoconfig
+</code></pre></div>
+<h3 id="132-dhcp">13.2 Сервіси DHCP</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-53-1" name="__codelineno-53-1" href="#__codelineno-53-1"></a>! DHCP-сервер
+<a id="__codelineno-53-2" name="__codelineno-53-2" href="#__codelineno-53-2"></a>ip dhcp excluded-address 192.168.1.1 192.168.1.10  ! резерв для статики
+<a id="__codelineno-53-3" name="__codelineno-53-3" href="#__codelineno-53-3"></a>ip dhcp excluded-address 192.168.1.254
+<a id="__codelineno-53-4" name="__codelineno-53-4" href="#__codelineno-53-4"></a>ip dhcp pool LAN-POOL
+<a id="__codelineno-53-5" name="__codelineno-53-5" href="#__codelineno-53-5"></a> network 192.168.1.0 255.255.255.0
+<a id="__codelineno-53-6" name="__codelineno-53-6" href="#__codelineno-53-6"></a> default-router 192.168.1.1
+<a id="__codelineno-53-7" name="__codelineno-53-7" href="#__codelineno-53-7"></a> dns-server 8.8.8.8 8.8.4.4
+<a id="__codelineno-53-8" name="__codelineno-53-8" href="#__codelineno-53-8"></a> domain-name company.com
+<a id="__codelineno-53-9" name="__codelineno-53-9" href="#__codelineno-53-9"></a> lease 8                            ! оренда 8 днів
+<a id="__codelineno-53-10" name="__codelineno-53-10" href="#__codelineno-53-10"></a> option 150 ip 192.168.1.10         ! TFTP для VoIP
+<a id="__codelineno-53-11" name="__codelineno-53-11" href="#__codelineno-53-11"></a> client-identifier 0100.5056.c000.08
+<a id="__codelineno-53-12" name="__codelineno-53-12" href="#__codelineno-53-12"></a> host 192.168.1.100 255.255.255.0   ! резервування адреси
+<a id="__codelineno-53-13" name="__codelineno-53-13" href="#__codelineno-53-13"></a> exit
+<a id="__codelineno-53-14" name="__codelineno-53-14" href="#__codelineno-53-14"></a>
+<a id="__codelineno-53-15" name="__codelineno-53-15" href="#__codelineno-53-15"></a>! DHCP Relay — якщо сервер в іншій підмережі
+<a id="__codelineno-53-16" name="__codelineno-53-16" href="#__codelineno-53-16"></a> ip helper-address 192.168.100.10
+<a id="__codelineno-53-17" name="__codelineno-53-17" href="#__codelineno-53-17"></a> ip forward-protocol udp 67
+<a id="__codelineno-53-18" name="__codelineno-53-18" href="#__codelineno-53-18"></a> ip forward-protocol udp 68
+<a id="__codelineno-53-19" name="__codelineno-53-19" href="#__codelineno-53-19"></a>
+<a id="__codelineno-53-20" name="__codelineno-53-20" href="#__codelineno-53-20"></a>! Додаткові параметри DHCP
+<a id="__codelineno-53-21" name="__codelineno-53-21" href="#__codelineno-53-21"></a>ip dhcp ping timeout 100
+<a id="__codelineno-53-22" name="__codelineno-53-22" href="#__codelineno-53-22"></a>ip dhcp ping packets 2
+<a id="__codelineno-53-23" name="__codelineno-53-23" href="#__codelineno-53-23"></a>ip dhcp conflict logging
+<a id="__codelineno-53-24" name="__codelineno-53-24" href="#__codelineno-53-24"></a>ip dhcp snooping
+</code></pre></div>
+<h3 id="133-dhcp-snooping">13.3 DHCP Snooping</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-54-1" name="__codelineno-54-1" href="#__codelineno-54-1"></a>! Захист від підроблених DHCP-серверів
+<a id="__codelineno-54-2" name="__codelineno-54-2" href="#__codelineno-54-2"></a>ip dhcp snooping
+<a id="__codelineno-54-3" name="__codelineno-54-3" href="#__codelineno-54-3"></a>ip dhcp snooping vlan 10,20,30
+<a id="__codelineno-54-4" name="__codelineno-54-4" href="#__codelineno-54-4"></a>ip dhcp snooping information option
+<a id="__codelineno-54-5" name="__codelineno-54-5" href="#__codelineno-54-5"></a>ip dhcp snooping limit rate 100     ! макс. DHCP-пакетів на порту
+<a id="__codelineno-54-6" name="__codelineno-54-6" href="#__codelineno-54-6"></a>ip dhcp snooping verify mac-address
+<a id="__codelineno-54-7" name="__codelineno-54-7" href="#__codelineno-54-7"></a>ip dhcp snooping database flash:dhcp-snooping.db
+<a id="__codelineno-54-8" name="__codelineno-54-8" href="#__codelineno-54-8"></a>ip dhcp snooping database write-delay 300
+<a id="__codelineno-54-9" name="__codelineno-54-9" href="#__codelineno-54-9"></a>
+<a id="__codelineno-54-10" name="__codelineno-54-10" href="#__codelineno-54-10"></a>! Довірений/ненадійний порт
+<a id="__codelineno-54-11" name="__codelineno-54-11" href="#__codelineno-54-11"></a> ip dhcp snooping trust             ! тільки uplink до реального сервера
+<a id="__codelineno-54-12" name="__codelineno-54-12" href="#__codelineno-54-12"></a> ip dhcp snooping limit rate 50
+<a id="__codelineno-54-13" name="__codelineno-54-13" href="#__codelineno-54-13"></a> ip dhcp snooping vlan 10 information option
+<a id="__codelineno-54-14" name="__codelineno-54-14" href="#__codelineno-54-14"></a>
+<a id="__codelineno-54-15" name="__codelineno-54-15" href="#__codelineno-54-15"></a>! Перевірка
+<a id="__codelineno-54-16" name="__codelineno-54-16" href="#__codelineno-54-16"></a>show ip dhcp snooping
+<a id="__codelineno-54-17" name="__codelineno-54-17" href="#__codelineno-54-17"></a>show ip dhcp snooping binding
+<a id="__codelineno-54-18" name="__codelineno-54-18" href="#__codelineno-54-18"></a>show ip dhcp snooping statistics
+<a id="__codelineno-54-19" name="__codelineno-54-19" href="#__codelineno-54-19"></a>debug ip dhcp snooping
+</code></pre></div>
+<h3 id="134-arp">13.4 Налаштування ARP</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-55-1" name="__codelineno-55-1" href="#__codelineno-55-1"></a>! Налаштування ARP
+<a id="__codelineno-55-2" name="__codelineno-55-2" href="#__codelineno-55-2"></a>arp timeout 300                            ! час зберігання ARP-запису
+<a id="__codelineno-55-3" name="__codelineno-55-3" href="#__codelineno-55-3"></a>arp 192.168.1.100 0050.7966.6800 arpa      ! статичний ARP-запис
+<a id="__codelineno-55-4" name="__codelineno-55-4" href="#__codelineno-55-4"></a>arp proxy disable
+<a id="__codelineno-55-5" name="__codelineno-55-5" href="#__codelineno-55-5"></a>arp gratuitous ignore
+<a id="__codelineno-55-6" name="__codelineno-55-6" href="#__codelineno-55-6"></a>
+<a id="__codelineno-55-7" name="__codelineno-55-7" href="#__codelineno-55-7"></a>! Proxy ARP
+<a id="__codelineno-55-8" name="__codelineno-55-8" href="#__codelineno-55-8"></a> ip proxy-arp                            ! дозволити proxy ARP
+<a id="__codelineno-55-9" name="__codelineno-55-9" href="#__codelineno-55-9"></a> no ip proxy-arp                         ! заборонити
+<a id="__codelineno-55-10" name="__codelineno-55-10" href="#__codelineno-55-10"></a>
+<a id="__codelineno-55-11" name="__codelineno-55-11" href="#__codelineno-55-11"></a>! ARP Inspection (DAI) — захист від ARP-spoofing
+<a id="__codelineno-55-12" name="__codelineno-55-12" href="#__codelineno-55-12"></a>ip arp inspection vlan 10,20
+<a id="__codelineno-55-13" name="__codelineno-55-13" href="#__codelineno-55-13"></a>ip arp inspection validate src-mac dst-mac ip
+<a id="__codelineno-55-14" name="__codelineno-55-14" href="#__codelineno-55-14"></a>ip arp inspection log-buffer entries 32
+<a id="__codelineno-55-15" name="__codelineno-55-15" href="#__codelineno-55-15"></a>ip arp inspection log-buffer logs 1024 interval 10
+<a id="__codelineno-55-16" name="__codelineno-55-16" href="#__codelineno-55-16"></a> ip arp inspection trust                 ! довірений порт (uplink)
+<a id="__codelineno-55-17" name="__codelineno-55-17" href="#__codelineno-55-17"></a> ip arp inspection limit rate 100
+</code></pre></div>
+<hr />
+<h2 id="14_1">14 Статична маршрутизація</h2>
+<h3 id="141">14.1 Основи статичної маршрутизації</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-56-1" name="__codelineno-56-1" href="#__codelineno-56-1"></a>! Стандартні статичні маршрути
+<a id="__codelineno-56-2" name="__codelineno-56-2" href="#__codelineno-56-2"></a>ip route 192.168.2.0 255.255.255.0 10.0.0.2             ! через next-hop
+<a id="__codelineno-56-3" name="__codelineno-56-3" href="#__codelineno-56-3"></a>ip route 192.168.3.0 255.255.255.0 GigabitEthernet0/1 10.0.0.3
+<a id="__codelineno-56-4" name="__codelineno-56-4" href="#__codelineno-56-4"></a>ip route 192.168.4.0 255.255.255.0 10.0.0.4 50          ! AD=50
+<a id="__codelineno-56-5" name="__codelineno-56-5" href="#__codelineno-56-5"></a>
+<a id="__codelineno-56-6" name="__codelineno-56-6" href="#__codelineno-56-6"></a>! Default Route (маршрут за замовчуванням)
+<a id="__codelineno-56-7" name="__codelineno-56-7" href="#__codelineno-56-7"></a>ip route 0.0.0.0 0.0.0.0 203.0.113.1
+<a id="__codelineno-56-8" name="__codelineno-56-8" href="#__codelineno-56-8"></a>ip route 0.0.0.0 0.0.0.0 Dialer1
+<a id="__codelineno-56-9" name="__codelineno-56-9" href="#__codelineno-56-9"></a>
+<a id="__codelineno-56-10" name="__codelineno-56-10" href="#__codelineno-56-10"></a>! Summary Routes (зведені маршрути)
+<a id="__codelineno-56-11" name="__codelineno-56-11" href="#__codelineno-56-11"></a>ip route 172.16.0.0 255.255.0.0 10.0.0.1
+<a id="__codelineno-56-12" name="__codelineno-56-12" href="#__codelineno-56-12"></a>ip route 10.0.0.0 255.255.0.0 Null0                     ! &quot;чорна діра&quot;
+<a id="__codelineno-56-13" name="__codelineno-56-13" href="#__codelineno-56-13"></a>
+<a id="__codelineno-56-14" name="__codelineno-56-14" href="#__codelineno-56-14"></a>! Floating Static Routes (резервний маршрут з більшою AD)
+<a id="__codelineno-56-15" name="__codelineno-56-15" href="#__codelineno-56-15"></a>ip route 0.0.0.0 0.0.0.0 192.168.1.1                    ! AD=1 основний
+<a id="__codelineno-56-16" name="__codelineno-56-16" href="#__codelineno-56-16"></a>ip route 0.0.0.0 0.0.0.0 192.168.2.1 250                ! AD=250 резервний
+</code></pre></div>
+<h3 id="142">14.2 Відстеження статичних маршрутів</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-57-1" name="__codelineno-57-1" href="#__codelineno-57-1"></a>! IP SLA — зонд для відстеження досяжності
+<a id="__codelineno-57-2" name="__codelineno-57-2" href="#__codelineno-57-2"></a>ip sla 1
+<a id="__codelineno-57-3" name="__codelineno-57-3" href="#__codelineno-57-3"></a> icmp-echo 8.8.8.8 source-interface GigabitEthernet0/0
+<a id="__codelineno-57-4" name="__codelineno-57-4" href="#__codelineno-57-4"></a> timeout 1000
+<a id="__codelineno-57-5" name="__codelineno-57-5" href="#__codelineno-57-5"></a> frequency 5                                        ! ping кожні 5 сек
+<a id="__codelineno-57-6" name="__codelineno-57-6" href="#__codelineno-57-6"></a> exit
+<a id="__codelineno-57-7" name="__codelineno-57-7" href="#__codelineno-57-7"></a>
+<a id="__codelineno-57-8" name="__codelineno-57-8" href="#__codelineno-57-8"></a>ip sla schedule 1 life forever start-time now
+<a id="__codelineno-57-9" name="__codelineno-57-9" href="#__codelineno-57-9"></a>
+<a id="__codelineno-57-10" name="__codelineno-57-10" href="#__codelineno-57-10"></a>! Track-об&#39;єкт — реагує на стан SLA
+<a id="__codelineno-57-11" name="__codelineno-57-11" href="#__codelineno-57-11"></a>track 10 ip sla 1 reachability
+<a id="__codelineno-57-12" name="__codelineno-57-12" href="#__codelineno-57-12"></a> delay down 10 up 5
+<a id="__codelineno-57-13" name="__codelineno-57-13" href="#__codelineno-57-13"></a>
+<a id="__codelineno-57-14" name="__codelineno-57-14" href="#__codelineno-57-14"></a>! Маршрут зникає, якщо track=down
+<a id="__codelineno-57-15" name="__codelineno-57-15" href="#__codelineno-57-15"></a>ip route 0.0.0.0 0.0.0.0 192.168.1.1 track 10
+<a id="__codelineno-57-16" name="__codelineno-57-16" href="#__codelineno-57-16"></a>ip route 0.0.0.0 0.0.0.0 192.168.2.1 250                ! резервний
+</code></pre></div>
+<h3 id="143-policy-based-routing">14.3 Policy-Based Routing</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-58-1" name="__codelineno-58-1" href="#__codelineno-58-1"></a>! PBR — маршрутизація на основі правил (не тільки за dest. IP)
+<a id="__codelineno-58-2" name="__codelineno-58-2" href="#__codelineno-58-2"></a>access-list 100 permit tcp any any eq 80
+<a id="__codelineno-58-3" name="__codelineno-58-3" href="#__codelineno-58-3"></a>access-list 100 permit tcp any any eq 443
+<a id="__codelineno-58-4" name="__codelineno-58-4" href="#__codelineno-58-4"></a>
+<a id="__codelineno-58-5" name="__codelineno-58-5" href="#__codelineno-58-5"></a>route-map PBR-OUTBOUND permit 10
+<a id="__codelineno-58-6" name="__codelineno-58-6" href="#__codelineno-58-6"></a> match ip address 100                           ! яким трафіком
+<a id="__codelineno-58-7" name="__codelineno-58-7" href="#__codelineno-58-7"></a> set ip next-hop 192.168.1.10                   ! куди направити
+<a id="__codelineno-58-8" name="__codelineno-58-8" href="#__codelineno-58-8"></a> set interface Null0
+<a id="__codelineno-58-9" name="__codelineno-58-9" href="#__codelineno-58-9"></a> set ip dscp af41
+<a id="__codelineno-58-10" name="__codelineno-58-10" href="#__codelineno-58-10"></a> set ip precedence flash
+</code></pre></div>
+<hr />
+<blockquote>
+<p>📌 <strong>Зберегти конфігурацію:</strong> <code>copy running-config startup-config</code> або <code>wr</code>  </p>
+</blockquote>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Повернутись нагору
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      © 2026 Кафедра №21 - Bci права захищені
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://mitit.mil.gov.ua/page/faculty2" target="_blank" rel="noopener" title="mitit.mil.gov.ua" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M16.36 14c.08-.66.14-1.32.14-2s-.06-1.34-.14-2h3.38c.16.64.26 1.31.26 2s-.1 1.36-.26 2m-5.15 5.56c.6-1.11 1.06-2.31 1.38-3.56h2.95a8.03 8.03 0 0 1-4.33 3.56M14.34 14H9.66c-.1-.66-.16-1.32-.16-2s.06-1.35.16-2h4.68c.09.65.16 1.32.16 2s-.07 1.34-.16 2M12 19.96c-.83-1.2-1.5-2.53-1.91-3.96h3.82c-.41 1.43-1.08 2.76-1.91 3.96M8 8H5.08A7.92 7.92 0 0 1 9.4 4.44C8.8 5.55 8.35 6.75 8 8m-2.92 8H8c.35 1.25.8 2.45 1.4 3.56A8 8 0 0 1 5.08 16m-.82-2C4.1 13.36 4 12.69 4 12s.1-1.36.26-2h3.38c-.08.66-.14 1.32-.14 2s.06 1.34.14 2M12 4.03c.83 1.2 1.5 2.54 1.91 3.97h-3.82c.41-1.43 1.08-2.77 1.91-3.97M18.92 8h-2.95a15.7 15.7 0 0 0-1.38-3.56c1.84.63 3.37 1.9 4.33 3.56M12 2C6.47 2 2 6.5 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "content.code.copy", "search.suggest", "search.highlight"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u0421\u043a\u043e\u043f\u0456\u0439\u043e\u0432\u0430\u043d\u043e \u0432 \u0431\u0443\u0444\u0435\u0440", "clipboard.copy": "\u0421\u043a\u043e\u043f\u0456\u044e\u0432\u0430\u0442\u0438 \u0432 \u0431\u0443\u0444\u0435\u0440", "search.result.more.one": "\u0429\u0435 1 \u0437\u0431\u0456\u0433 \u043d\u0430 \u0446\u0456\u0439 \u0441\u0442\u043e\u0440\u0456\u043d\u0446\u0456", "search.result.more.other": "\u0429\u0435 # \u0437\u0431\u0456\u0433\u0456\u0432 \u043d\u0430 \u0446\u0456\u0439 \u0441\u0442\u043e\u0440\u0456\u043d\u0446\u0456", "search.result.none": "\u0417\u0431\u0456\u0433\u0456\u0432 \u043d\u0435 \u0437\u043d\u0430\u0439\u0434\u0435\u043d\u043e", "search.result.one": "\u0417\u043d\u0430\u0439\u0434\u0435\u043d\u043e 1 \u0437\u0431\u0456\u0433", "search.result.other": "\u0417\u043d\u0430\u0439\u0434\u0435\u043d\u043e # \u0437\u0431\u0456\u0433\u0456\u0432", "search.result.placeholder": "\u0420\u043e\u0437\u043f\u043e\u0447\u043d\u0456\u0442\u044c \u043f\u0438\u0441\u0430\u0442\u0438 \u0434\u043b\u044f \u043f\u043e\u0448\u0443\u043a\u0443", "search.result.term.missing": "\u041d\u0435 \u0437\u043d\u0430\u0439\u0434\u0435\u043d\u043e \u0437\u0430\u043f\u0438\u0442\u0443", "select.version": "\u041e\u0431\u0440\u0430\u0442\u0438 \u0432\u0435\u0440\u0441\u0456\u044e"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
