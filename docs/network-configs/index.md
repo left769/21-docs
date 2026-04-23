@@ -65,6 +65,14 @@
 
     [:octicons-arrow-right-24: Читати](cisco-nat.md)
 
+-   :material-vector-polyline: __IPsec VPN__
+
+    ---
+
+    Налаштування IPsec VPN на Cisco
+
+    [:octicons-arrow-right-24: Читати](ipsec.md)
+
 -   :material-calculator: __Калькулятор маски__
 
     ---
