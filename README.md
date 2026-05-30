@@ -33,6 +33,7 @@
 | [SSH](https://left769.github.io/21-docs/server-services/ssh/) | Налаштування SSH |
 | [RADIUS](https://left769.github.io/21-docs/server-services/radius/) | Налаштування сервера автентифікації |
 | [SYSLOG](https://left769.github.io/21-docs/server-services/syslog/) | Налаштування syslog-сервера |
+| [TCPdump](https://left769.github.io/21-docs/server-services/tcpdump-guide/) | Використання tcpdump |
 | [chmod-калькулятор](https://left769.github.io/21-docs/server-services/chmod-calculator/) | Калькулятор прав в Linux |
 
 ---

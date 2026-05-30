@@ -49,6 +49,14 @@
 
     *Розділ у розробці*
 
+-   :fontawesome-solid-magnifying-glass: **TCPdump**
+
+    ---
+
+    Використання утиліти tcpdump
+
+    [:octicons-arrow-right-24: Читати](tcpdump-guide.md)
+
 -   :octicons-law-16: __Chmod calc__
 
     ---

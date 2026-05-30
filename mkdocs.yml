@@ -68,6 +68,7 @@ nav:
       # - 'DHCP': server-services/dhcp-server.md
       - 'RADIUS': server-services/radius.md
       - 'SYSLOG': server-services/syslog.md
+      - 'TCPDump': server-services/tcpdump-guide.md
       - 'Калькулятор прав': server-services/chmod-calculator.md
 
 markdown_extensions:
