@@ -41,6 +41,14 @@
 
     [:octicons-arrow-right-24: Читати](routing.md)
 
+-   :material-scale-balance: __Dual WAN__
+
+    ---
+
+    Резервування провайдерів на Cisco
+
+    [:octicons-arrow-right-24: Читати](isp-failover.md)
+
 -   :material-shield-lock: __Контроль доступу (ACL)__
 
     ---

@@ -55,6 +55,7 @@ nav:
       - 'VLAN в Mikrotik': network-configs/vlans-mikrotik.md
       - 'STP': network-configs/stp.md
       - 'Маршрутизація': network-configs/routing.md
+      - 'Dual WAN': network-configs/isp-failover.md
       - 'Контроль доступу': network-configs/ACL.md
       - 'NAT в Cisco': network-configs/cisco-nat.md
       - 'DHCP-сервер': network-configs/dhcp.md

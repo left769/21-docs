@@ -231,5 +231,5 @@ tcp  203.0.113.5:10003 172.16.0.30:6200  8.8.8.8:80       8.8.8.8:80
 ---
  
 !!! quote "Джерело"
-    Стаття базується на офіційній документації Cisco TAC.
+    Стаття базується на офіційній документації Cisco TAC
     Оригінал (англійською): [Configure Network Address Translation](https://www.cisco.com/c/en/us/support/docs/ip/network-address-translation-nat/13772-12.html)
