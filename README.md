@@ -32,6 +32,7 @@
 | [Сервіси на базі Linux](https://left769.github.io/21-docs/server-services/) | Розгортання серверних сервісів |
 | [SSH](https://left769.github.io/21-docs/server-services/ssh/) | Налаштування SSH |
 | [RADIUS](https://left769.github.io/server-services/radius/) | Налаштування сервера автентифікації |
+| [SYSLOG](https://left769.github.io/server-services/syslog/) | Налаштування syslog-сервера |
 | [chmod-калькулятор](https://left769.github.io/21-docs/server-services/chmod-calculator/) | Калькулятор прав в Linux |
 
 ---
@@ -98,7 +99,6 @@ Services:
 - server-services/nfs.md
 - server-services/bind9.md
 - server-services/dhcp.md
-- server-services/syslog.md
 - server-services/ldap.md
 - server-services/git.md
 - server-services/snort.md

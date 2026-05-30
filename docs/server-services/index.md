@@ -25,6 +25,14 @@
 
     [:octicons-arrow-right-24: Читати](radius.md)
 
+-   :octicons-log-24: **Syslog**
+
+    ---
+
+    Налаштування syslog-сервера для централізованого збору логів
+
+    [:octicons-arrow-right-24: Читати](syslog.md)
+
 -   :material-dns: **DNS** 🚧
 
     ---
