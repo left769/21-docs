@@ -31,8 +31,8 @@
 |--------|------|
 | [Сервіси на базі Linux](https://left769.github.io/21-docs/server-services/) | Розгортання серверних сервісів |
 | [SSH](https://left769.github.io/21-docs/server-services/ssh/) | Налаштування SSH |
-| [RADIUS](https://left769.github.io/server-services/radius/) | Налаштування сервера автентифікації |
-| [SYSLOG](https://left769.github.io/server-services/syslog/) | Налаштування syslog-сервера |
+| [RADIUS](https://left769.github.io/21-docs/server-services/radius/) | Налаштування сервера автентифікації |
+| [SYSLOG](https://left769.github.io/21-docs/server-services/syslog/) | Налаштування syslog-сервера |
 | [chmod-калькулятор](https://left769.github.io/21-docs/server-services/chmod-calculator/) | Калькулятор прав в Linux |
 
 ---

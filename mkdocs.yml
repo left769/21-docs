@@ -67,6 +67,7 @@ nav:
       - 'SSH': server-services/ssh.md
       # - 'DHCP': server-services/dhcp-server.md
       - 'RADIUS': server-services/radius.md
+      - 'SYSLOG': server-services/syslog.md
       - 'Калькулятор прав': server-services/chmod-calculator.md
 
 markdown_extensions:
