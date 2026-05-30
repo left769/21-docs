@@ -70,7 +70,6 @@ Services:
 - server-services/dhcp.md
 - server-services/syslog.md
 - server-services/ldap.md
-- server-services/ssh.md
 - server-services/git.md
 - server-services/snort.md
 - server-services/suricata.md
