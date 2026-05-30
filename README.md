@@ -22,6 +22,7 @@
 | [Контроль доступу](https://left769.github.io/21-docs/network-configs/acl/) | ACL, фільтрація трафіку |
 | [Cisco NAT](https://left769.github.io/21-docs/network-configs/cisco-nat/) | Налаштування NAT на Cisco |
 | [Cisco DHCP](https://left769.github.io/21-docs/network-configs/dhcp/) | Налаштування DHCP-сервера на Cisco |
+| [Cisco IPsec](https://left769.github.io/21-docs/network-configs/ipsec/) | Налаштування IPsec-VPN між маршрутизаторами Cisco |
 | [Cisco IOS — Шпаргалка](https://left769.github.io/21-docs/network-configs/cisco-cheat-sheet/) | Повний довідник команд Cisco IOS |
 | [Калькулятор маски](https://left769.github.io/21-docs/network-configs/subnet-calculator/) | Зачіб визначення параметрів ІР-мереж |
 
