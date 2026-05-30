@@ -15,9 +15,15 @@
 | [Вступ до мереж](https://left769.github.io/21-docs/network-configs/) | Базові концепції та моделі OSI/TCP-IP |
 | [IP інтерфейси](https://left769.github.io/21-docs/network-configs/ip-interfaces/) | Налаштування інтерфейсів, IPv4/IPv6 |
 | [VLAN та Trunk](https://left769.github.io/21-docs/network-configs/vlans/) | Сегментація мережі, 802.1Q |
+| [VLAN в Mikrotik](https://left769.github.io/21-docs/network-configs/vlans-mikrotik/) | Налаштування VLAN на маршрутизаторі Mikrotik |
+| [STP](https://left769.github.io/21-docs/network-configs/stp/) | Налаштування STP на Cisco |
 | [Маршрутизація](https://left769.github.io/21-docs/network-configs/routing/) | Статична та динамічна маршрутизація |
+| [Dual WAN](https://left769.github.io/21-docs/network-configs/isp-failover/) | Налаштування автоматичного переключення між провайдерами в Cisco |
 | [Контроль доступу](https://left769.github.io/21-docs/network-configs/acl/) | ACL, фільтрація трафіку |
+| [Cisco NAT](https://left769.github.io/21-docs/network-configs/cisco-nat/) | Налаштування NAT на Cisco |
+| [Cisco DHCP](https://left769.github.io/21-docs/network-configs/dhcp/) | Налаштування DHCP-сервера на Cisco |
 | [Cisco IOS — Шпаргалка](https://left769.github.io/21-docs/network-configs/cisco-cheat-sheet/) | Повний довідник команд Cisco IOS |
+| [Калькулятор маски](https://left769.github.io/21-docs/network-configs/subnet-calculator/) | Зачіб визначення параметрів ІР-мереж |
 
 ### 🖥️ Сервіси Linux
 | Розділ | Опис |
@@ -25,6 +31,7 @@
 | [Сервіси на базі Linux](https://left769.github.io/21-docs/server-services/) | Розгортання серверних сервісів |
 | [SSH](https://left769.github.io/21-docs/server-services/ssh/) | Налаштування SSH |
 | [RADIUS](https://left769.github.io/server-services/radius/) | Налаштування сервера автентифікації |
+| [chmod-калькулятор](https://left769.github.io/21-docs/server-services/chmod-calculator/) | Калькулятор прав в Linux |
 
 ---
 
