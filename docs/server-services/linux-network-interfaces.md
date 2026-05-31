@@ -814,5 +814,4 @@ ip [OPTION] OBJECT COMMAND
 ---
 !!! quote "Джерело"
     Стаття базується на офіційній документації Redhat
-    Оригінал (англійською): [ip COMMAND 
-CHEAT SHEET](https://access.redhat.com/sites/default/files/attachments/rh_ip_command_cheatsheet_1214_jcs_print.pdf)
+    Оригінал (англійською): [ip COMMAND CHEAT SHEET](https://access.redhat.com/sites/default/files/attachments/rh_ip_command_cheatsheet_1214_jcs_print.pdf)
