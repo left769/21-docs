@@ -23,6 +23,7 @@
 | [Cisco NAT](https://left769.github.io/21-docs/network-configs/cisco-nat/) | Налаштування NAT на Cisco |
 | [Cisco DHCP](https://left769.github.io/21-docs/network-configs/dhcp/) | Налаштування DHCP-сервера на Cisco |
 | [Cisco IPsec](https://left769.github.io/21-docs/network-configs/ipsec/) | Налаштування IPsec-VPN між маршрутизаторами Cisco |
+| [OSPF](https://left769.github.io/21-docs/network-configs/ospf/) | Налаштування OSPFv2 на Cisco |
 | [Cisco IOS — Шпаргалка](https://left769.github.io/21-docs/network-configs/cisco-cheat-sheet/) | Повний довідник команд Cisco IOS |
 | [Калькулятор маски](https://left769.github.io/21-docs/network-configs/subnet-calculator/) | Зачіб визначення параметрів ІР-мереж |
 
@@ -85,8 +86,6 @@ mkdocs serve
 
 Network:
 ```bash
-- network-configs/ipsec.md
-- network-configs/ospf.md
 - network-configs/bgp.md
 - network-configs/mikrotik-cheat-sheet.md
 - network-configs/mikrotik-ovpn.md

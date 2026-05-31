@@ -52,7 +52,6 @@
 Network:
 
 ```bash
-- network-configs/ospf.md
 - network-configs/bgp.md
 - network-configs/mikrotik-cheat-sheet.md
 - network-configs/mikrotik-ovpn.md

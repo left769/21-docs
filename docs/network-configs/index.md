@@ -105,6 +105,14 @@
 
     [:octicons-arrow-right-24: Читати](stp.md)
 
+-   :material-graph-outline: __OSPF__
+
+    ---
+
+    Налаштування OSPFv2
+
+    [:octicons-arrow-right-24: Читати](ospf.md)
+
 </div>
 
 ---

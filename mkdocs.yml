@@ -60,6 +60,7 @@ nav:
       - 'NAT в Cisco': network-configs/cisco-nat.md
       - 'DHCP-сервер': network-configs/dhcp.md
       - 'IPsec в Cisco': network-configs/ipsec.md
+      - 'OSPF': network-configs/ospf.md
       - 'Cisco cheat sheet': network-configs/cisco-cheat-sheet.md
       - 'Калькулятор маски підмереж': network-configs/subnet-calculator.md
   - 🖥️ Сервіси:
