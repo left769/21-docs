@@ -30,6 +30,7 @@
 | Розділ | Опис |
 |--------|------|
 | [Сервіси на базі Linux](https://left769.github.io/21-docs/server-services/) | Розгортання серверних сервісів |
+| [IP addr](https://left769.github.io/21-docs/server-services/linux-network-interfaces/) | Мережеві налаштування в Linux |
 | [SSH](https://left769.github.io/21-docs/server-services/ssh/) | Налаштування SSH |
 | [RADIUS](https://left769.github.io/21-docs/server-services/radius/) | Налаштування сервера автентифікації |
 | [SYSLOG](https://left769.github.io/21-docs/server-services/syslog/) | Налаштування syslog-сервера |

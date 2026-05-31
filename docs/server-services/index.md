@@ -17,6 +17,14 @@
 
     [:octicons-arrow-right-24: Читати](ssh.md)
 
+-   :material-ethernet: **IP addr**
+
+    ---
+
+    Налаштування мережі в Linux
+
+    [:octicons-arrow-right-24: Читати](linux-network-interfaces.md)
+
 -   :material-key-wireless: **RADIUS**
 
     ---
