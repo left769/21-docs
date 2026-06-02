@@ -25,7 +25,7 @@
 
     [:octicons-arrow-right-24: Читати](linux-network-interfaces.md)
 
--   :material-key-wireless: **RADIUS**
+-   :material-badge-account-horizontal-outline: **RADIUS**
 
     ---
 
