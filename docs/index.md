@@ -15,7 +15,7 @@
 
     Налаштування мережевого обладнання (Cisco, Mikrotik та інші): інтерфейси, VLAN, маршрутизація, ACL та повна шпаргалка команд IOS
 
-    [:octicons-arrow-right-24: Перейти до розділу](https://left769.github.io/21-docs/network-configs/)
+    [:octicons-arrow-right-24: Перейти до розділу](network-configs/)
 
 -   :simple-linux: __Сервіси Linux__
 
@@ -23,7 +23,7 @@
 
     Розгортання та налаштування сервісів на базі ОС Linux: RADIUS, DHCP, DNS та інші
 
-    [:octicons-arrow-right-24: Перейти до розділу](https://left769.github.io/21-docs/server-services/)
+    [:octicons-arrow-right-24: Перейти до розділу](server-services/)
 
 </div>
 
