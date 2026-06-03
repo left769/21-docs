@@ -41,6 +41,14 @@
 
     [:octicons-arrow-right-24: Читати](syslog.md)
 
+-   [:simple-firewalla:] **iptables**
+
+    ---
+
+    Налаштування фаєрволу iptables
+
+    [:octicons-arrow-right-24: Читати](iptables.md)
+
 -   :material-dns: **DNS** 🚧
 
     ---

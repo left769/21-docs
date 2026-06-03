@@ -35,6 +35,7 @@
 | [SSH](https://left769.github.io/21-docs/server-services/ssh/) | Налаштування SSH |
 | [RADIUS](https://left769.github.io/21-docs/server-services/radius/) | Налаштування сервера автентифікації |
 | [SYSLOG](https://left769.github.io/21-docs/server-services/syslog/) | Налаштування syslog-сервера |
+| [iptables](https://left769.github.io/21-docs/server-services/iptables/) | Налаштування хостового фаєрволу |
 | [TCPdump](https://left769.github.io/21-docs/server-services/tcpdump-guide/) | Використання tcpdump |
 | [chmod-калькулятор](https://left769.github.io/21-docs/server-services/chmod-calculator/) | Калькулятор прав в Linux |
 
@@ -104,7 +105,6 @@ Services:
 - server-services/git.md
 - server-services/snort.md
 - server-services/suricata.md
-- server-services/iptables.md
 - server-services/nmap.md
 - server-services/certbot.md
 - server-services/netbox.md

@@ -72,7 +72,6 @@ Services:
 - server-services/git.md
 - server-services/snort.md
 - server-services/suricata.md
-- server-services/iptables.md
 - server-services/nmap.md
 - server-services/certbot.md
 - server-services/netbox.md
