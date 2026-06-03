@@ -41,7 +41,7 @@
 
     [:octicons-arrow-right-24: Читати](syslog.md)
 
--   [:simple-firewalla:] **iptables**
+-   :simple-firewalla: **iptables**
 
     ---
 
