@@ -1,0 +1,2762 @@
+
+<!doctype html>
+<html lang="uk" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="Створено колективом кафедри №21">
+      
+      
+      
+        <link rel="prev" href="../ipsec/">
+      
+      
+        <link rel="next" href="../cisco-cheat-sheet/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/logo_dep21_white.ico">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>OSPF - Довідник кафедри Інформаційних систем та технологій</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#ospfv2-" class="md-skip">
+          Перейти до змісту
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Хедер">
+    <a href="../.." title="Довідник кафедри Інформаційних систем та технологій" class="md-header__button md-logo" aria-label="Довідник кафедри Інформаційних систем та технологій" data-md-component="logo">
+      
+  <img src="../../assets/logo_dep21_white.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Довідник кафедри Інформаційних систем та технологій
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              OSPF
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Перейти на темну тему"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Перейти на темну тему" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="indigo"  aria-label="Перейти на світлу тему"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Перейти на світлу тему" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Пошук" placeholder="Пошук" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Шукати">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Очистити" aria-label="Очистити" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Пошук розпочато
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Вкладки" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../.." class="md-tabs__link">
+          
+  
+  
+  🏠 Головна
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+  🌐 Мережі
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../server-services/" class="md-tabs__link">
+          
+  
+  
+  🖥️ Сервіси
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Навігація" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Довідник кафедри Інформаційних систем та технологій" class="md-nav__button md-logo" aria-label="Довідник кафедри Інформаційних систем та технологій" data-md-component="logo">
+      
+  <img src="../../assets/logo_dep21_white.png" alt="logo">
+
+    </a>
+    Довідник кафедри Інформаційних систем та технологій
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🏠 Головна
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    🏠 Головна
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    👋Вступ
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../pnet/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🧪Інструкція з користування PNET Lab
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../subnet-calculator/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Калькулятор маски підмереж
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../server-services/chmod-calculator/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Калькулятор прав Linux
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🌐 Мережі
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    🌐 Мережі
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Вступ до мереж
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../IP-interfaces/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IP інтерфейси
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../vlans/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VLAN та Trunk
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../vlans-mikrotik/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VLAN в Mikrotik
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../stp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    STP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../routing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Маршрутизація
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../isp-failover/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dual WAN
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ACL/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Контроль доступу
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cisco-nat/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NAT в Cisco
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dhcp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DHCP-сервер
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ipsec/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IPsec в Cisco
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OSPF
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OSPF
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Зміст">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Зміст
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-ospf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1 Принцип роботи OSPF
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1 Принцип роботи OSPF">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 Алгоритм роботи (покроково)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-ospf-cost" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 Метрика OSPF - Cost
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-router-id-rid" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3 Вибір Router ID (RID)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-drbdr-designated-router-backup-dr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.4 DR/BDR - Designated Router / Backup DR
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#15-lsa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.5 Типи LSA
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-single-area-ospf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2 Однозонна конфігурація (Single Area OSPF)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2 Однозонна конфігурація (Single Area OSPF)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 Базове налаштування на всіх маршрутизаторах
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-cost" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 Налаштування cost на інтерфейсі
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-hellodead" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 Налаштування таймерів Hello/Dead
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-passive-interface" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4 Пасивні інтерфейси (passive-interface)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#25-ospf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.5 Аутентифікація OSPF
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3 Передача маршруту за замовчуванням
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-multi-area-ospf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4 Багатозонна конфігурація (Multi-Area OSPF)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4 Багатозонна конфігурація (Multi-Area OSPF)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-abr-r1-area-0-area-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 Налаштування ABR (R1 - Area 0 + Area 1)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-abr-r2-area-0-area-2-nssa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 Налаштування ABR (R2 - Area 0 + Area 2 NSSA)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-area-1-r3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3 Налаштування внутрішнього маршрутизатора Area 1 (R3)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44-nssa-asbr-r5-area-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.4 NSSA ASBR (R5) - передача зовнішніх маршрутів в Area 2
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-route-summarization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5 Агрегація маршрутів (Route Summarization)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5 Агрегація маршрутів (Route Summarization)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-abr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 Агрегація між зонами (на ABR)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-asbr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 Агрегація зовнішніх маршрутів (на ASBR)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-stub-nssa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6 Stub та NSSA зони
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6 Stub та NSSA зони">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-stub-area-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 Stub Area - зона без зовнішніх маршрутів
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-nssa-not-so-stubby-area" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2 NSSA - Not-So-Stubby Area
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-virtual-link-area-0" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7 Virtual Link - з'єднання незв'язаних зон через Area 0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-ospf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8 Редистрибуція маршрутів у OSPF
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-ospf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9 Налаштування типу мережі OSPF
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10 Перевірка та діагностика
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10 Перевірка та діагностика">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#101-show-ip-ospf-neighbor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.1 Приклад виводу show ip ospf neighbor
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#102" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.2 Типові проблеми сусідства
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-debug-ospf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11 Debug OSPF
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-spf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12 Оптимізація таймерів SPF
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cisco-cheat-sheet/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cisco cheat sheet
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../subnet-calculator/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Калькулятор маски підмереж
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🖥️ Сервіси
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    🖥️ Сервіси
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../server-services/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Сервіси на базі OC Linux
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../server-services/linux-network-interfaces/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ip addr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../server-services/ssh/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SSH
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../server-services/radius/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RADIUS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../server-services/syslog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SYSLOG
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../server-services/iptables/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    iptables
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../server-services/tcpdump-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    TCPDump
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../server-services/apt-cacher-ng/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    APT Cacher
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../server-services/chmod-calculator/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Калькулятор прав Linux
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Зміст">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Зміст
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-ospf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1 Принцип роботи OSPF
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1 Принцип роботи OSPF">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 Алгоритм роботи (покроково)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-ospf-cost" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 Метрика OSPF - Cost
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-router-id-rid" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3 Вибір Router ID (RID)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-drbdr-designated-router-backup-dr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.4 DR/BDR - Designated Router / Backup DR
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#15-lsa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.5 Типи LSA
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-single-area-ospf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2 Однозонна конфігурація (Single Area OSPF)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2 Однозонна конфігурація (Single Area OSPF)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 Базове налаштування на всіх маршрутизаторах
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-cost" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 Налаштування cost на інтерфейсі
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-hellodead" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 Налаштування таймерів Hello/Dead
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-passive-interface" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4 Пасивні інтерфейси (passive-interface)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#25-ospf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.5 Аутентифікація OSPF
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3 Передача маршруту за замовчуванням
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-multi-area-ospf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4 Багатозонна конфігурація (Multi-Area OSPF)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4 Багатозонна конфігурація (Multi-Area OSPF)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-abr-r1-area-0-area-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 Налаштування ABR (R1 - Area 0 + Area 1)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-abr-r2-area-0-area-2-nssa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 Налаштування ABR (R2 - Area 0 + Area 2 NSSA)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-area-1-r3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3 Налаштування внутрішнього маршрутизатора Area 1 (R3)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44-nssa-asbr-r5-area-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.4 NSSA ASBR (R5) - передача зовнішніх маршрутів в Area 2
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-route-summarization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5 Агрегація маршрутів (Route Summarization)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5 Агрегація маршрутів (Route Summarization)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-abr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 Агрегація між зонами (на ABR)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-asbr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 Агрегація зовнішніх маршрутів (на ASBR)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-stub-nssa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6 Stub та NSSA зони
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6 Stub та NSSA зони">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-stub-area-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 Stub Area - зона без зовнішніх маршрутів
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-nssa-not-so-stubby-area" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2 NSSA - Not-So-Stubby Area
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-virtual-link-area-0" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7 Virtual Link - з'єднання незв'язаних зон через Area 0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-ospf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8 Редистрибуція маршрутів у OSPF
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-ospf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9 Налаштування типу мережі OSPF
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10 Перевірка та діагностика
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10 Перевірка та діагностика">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#101-show-ip-ospf-neighbor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.1 Приклад виводу show ip ospf neighbor
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#102" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.2 Типові проблеми сусідства
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-debug-ospf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11 Debug OSPF
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-spf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12 Оптимізація таймерів SPF
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="ospfv2-">OSPFv2 - Повна шпаргалка з налаштування</h1>
+<blockquote>
+<p>Курс: Комп'ютерні мережі | 2-3 курс</p>
+</blockquote>
+<hr />
+<h2 id="1-ospf">1 Принцип роботи OSPF</h2>
+<p><strong>OSPF (Open Shortest Path First)</strong> - протокол динамічної маршрутизації стану каналу (Link-State). На відміну від дистанційно-векторних протоколів (RIP, EIGRP), кожен маршрутизатор OSPF будує повну топологічну карту мережі та самостійно розраховує найкоротший шлях до кожної підмережі за алгоритмом Дейкстри (SPF)</p>
+<h3 id="11">1.1 Алгоритм роботи (покроково)</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>1. Встановлення сусідства (adjacency)
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>   └─ маршрутизатори обмінюються Hello-пакетами
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>   └─ погоджують параметри: Area ID, Hello/Dead timer, MTU, аутентифікація
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>2. Обмін LSA (Link-State Advertisement)
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>   └─ кожен маршрутизатор описує свої канали та сусідів у LSA
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>   └─ LSA поширюються по всій зоні → формується LSDB
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>3. Побудова топологічної карти (LSDB - Link-State Database)
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>   └─ всі маршрутизатори зони мають ідентичну LSDB
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>4. Розрахунок SPF-дерева (Dijkstra)
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>   └─ кожен маршрутизатор незалежно обраховує найкоротший шлях
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>   └─ результат → таблиця маршрутизації (RIB)
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>5. Підтримка актуальності
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>   └─ Hello-пакети кожні 10 сек (P2P) або 10 сек (broadcast)
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>   └─ Dead interval: 40 сек - якщо немає Hello → сусід &quot;мертвий&quot;
+<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>   └─ При змінах топології → flood нових LSA → перерахунок SPF
+</code></pre></div>
+<h3 id="12-ospf-cost">1.2 Метрика OSPF - Cost</h3>
+<p>OSPF використовує <strong>cost</strong> як метрику. Менший cost = кращий шлях</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>Cost = Reference Bandwidth / Interface Bandwidth
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>Reference Bandwidth за замовчуванням: 100 Mbps (100 000 Kbps)
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>FastEthernet (100 Mbps):  100 / 100  = 1
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>GigabitEthernet (1 Gbps): 100 / 1000 = 0.1 → округлюється до 1 (!)
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>10GigabitEthernet:        100 / 10000 = 0.01 → також 1 (!)
+</code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">Проблема з reference-bandwidth за замовчуванням</p>
+<p>В мережах з Gigabit та 10G інтерфейсами всі отримують cost=1 - OSPF не розрізняє їх. Завжди змінюй reference-bandwidth на відповідне значення для твоєї мережі (наприклад 10000 для 10G)</p>
+</div>
+<h3 id="13-router-id-rid">1.3 Вибір Router ID (RID)</h3>
+<p>RID - унікальний ідентифікатор маршрутизатора в OSPF. Вибирається автоматично:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>Пріоритет вибору RID:
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>1. Вручну налаштований: router-id X.X.X.X  ← завжди використовуй!
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>2. Найвища IP-адреса loopback-інтерфейсу
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>3. Найвища IP-адреса фізичного інтерфейсу
+</code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">Завжди налаштовуй RID вручну</p>
+<p>Без явного <code>router-id</code> RID може змінитись при зміні IP-адрес або додаванні інтерфейсів. Це призводить до перебудови сусідства і нестабільності мережі</p>
+</div>
+<h3 id="14-drbdr-designated-router-backup-dr">1.4 DR/BDR - Designated Router / Backup DR</h3>
+<p>На broadcast-мережах (Ethernet) OSPF обирає DR та BDR для зменшення кількості LSA-обмінів.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>Без DR/BDR: N*(N-1)/2 adjacency (n=5 → 10 з&#39;єднань)
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>З DR/BDR:   (N-1)*2 adjacency  (n=5 → 8 з&#39;єднань)
+</code></pre></div>
+<blockquote>
+<p>📁 Схема Area 0 з DR/BDR: <code>assets/network-configs_ospf_1.svg</code></p>
+</blockquote>
+<p><img alt="Схема мережі OSPF single area" src="../../assets/network-configs_ospf_1.svg" /></p>
+<p><strong>Вибір DR/BDR:</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>1. Найвищий OSPF Priority (за замовчуванням: 1, діапазон: 0–255)
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>   Priority = 0 → маршрутизатор ніколи не стане DR/BDR
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>2. При рівному Priority - перемагає найвищий Router ID
+</code></pre></div>
+<div class="admonition info">
+<p class="admonition-title">DR/BDR не змінюються автоматично</p>
+<p>Якщо з'явився маршрутизатор з вищим пріоритетом - DR не змінюється до наступного перезапуску OSPF або команди <code>clear ip ospf process</code>. OSPF DR/BDR - "non-preemptive"</p>
+</div>
+<h3 id="15-lsa">1.5 Типи LSA</h3>
+<table>
+<thead>
+<tr>
+<th>Тип</th>
+<th>Назва</th>
+<th>Генерує</th>
+<th>Поширення</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Router LSA</td>
+<td>Кожен маршрутизатор</td>
+<td>В межах зони</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Network LSA</td>
+<td>DR</td>
+<td>В межах зони</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Summary LSA</td>
+<td>ABR</td>
+<td>Між зонами (з Area 0)</td>
+</tr>
+<tr>
+<td>4</td>
+<td>ASBR Summary LSA</td>
+<td>ABR</td>
+<td>Між зонами</td>
+</tr>
+<tr>
+<td>5</td>
+<td>AS External LSA</td>
+<td>ASBR</td>
+<td>По всьому OSPF-домену</td>
+</tr>
+<tr>
+<td>7</td>
+<td>NSSA External LSA</td>
+<td>ASBR в NSSA</td>
+<td>Тільки в NSSA зоні</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="2-single-area-ospf">2 Однозонна конфігурація (Single Area OSPF)</h2>
+<blockquote>
+<p>📁 Схема: <code>assets/network-configs_ospf_1.svg</code></p>
+</blockquote>
+<p><img alt="Схема мережі OSPF single area" src="../../assets/network-configs_ospf_1.svg" />
+Всі маршрутизатори - Area 0</p>
+<h3 id="21">2.1 Базове налаштування на всіх маршрутизаторах</h3>
+<p><strong>R1 (буде DR - найвищий пріоритет):</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>! Налаштування loopback для стабільного RID
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>interface Loopback0
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a> ip address 1.1.1.1 255.255.255.255
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>! Запуск OSPF
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>router ospf 1
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a> router-id 1.1.1.1
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a> ! Оголосити всі інтерфейси в Area 0 (маска 0.0.0.255 = /24 підмережі)
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a> network 10.0.0.0 0.0.255.255 area 0
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a> network 1.1.1.1 0.0.0.0 area 0
+<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a> ! Reference bandwidth для коректного cost на GigabitEthernet
+<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a> auto-cost reference-bandwidth 1000
+<a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a>
+<a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a>! Підвищити пріоритет щоб стати DR
+<a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a>interface GigabitEthernet0/0
+<a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a> ip ospf priority 255
+</code></pre></div>
+<p><strong>R2 (буде BDR):</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>interface Loopback0
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a> ip address 2.2.2.2 255.255.255.255
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>router ospf 1
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a> router-id 2.2.2.2
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a> network 10.0.0.0 0.0.255.255 area 0
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a> network 2.2.2.2 0.0.0.0 area 0
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a> auto-cost reference-bandwidth 1000
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>
+<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a>interface GigabitEthernet0/0
+<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a> ip ospf priority 100           ! Другий за пріоритетом → BDR
+</code></pre></div>
+<p><strong>R3, R4 (DROTHER):</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>interface Loopback0
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a> ip address 3.3.3.3 255.255.255.255  ! (або 4.4.4.4 для R4)
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>router ospf 1
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a> router-id 3.3.3.3
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a> network 10.0.0.0 0.0.255.255 area 0
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a> network 3.3.3.3 0.0.0.0 area 0
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a> auto-cost reference-bandwidth 1000
+<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a> ! Пріоритет 1 за замовчуванням — не стануть DR/BDR
+</code></pre></div>
+<h3 id="22-cost">2.2 Налаштування cost на інтерфейсі</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>! Спосіб 1 — вручну задати cost на інтерфейсі
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>interface GigabitEthernet0/1
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a> ip ospf cost 10
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>! Спосіб 2 — змінити глобальну reference-bandwidth (рекомендовано)
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>router ospf 1
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a> auto-cost reference-bandwidth 1000    ! Mbps (для мережі з 1G посиланнями)
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a> auto-cost reference-bandwidth 10000   ! Mbps (для мережі з 10G посиланнями)
+</code></pre></div>
+<h3 id="23-hellodead">2.3 Налаштування таймерів Hello/Dead</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>! На інтерфейсі (повинні збігатись на обох кінцях каналу!)
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>interface GigabitEthernet0/0
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a> ip ospf hello-interval 10      ! за замовчуванням: 10 сек (Broadcast)
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a> ip ospf dead-interval 40       ! за замовчуванням: 40 сек
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>! Прискорений варіант (для швидкої конвергенції)
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>interface GigabitEthernet0/0
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a> ip ospf hello-interval 2
+<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a> ip ospf dead-interval 8
+<a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a>
+<a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a>! BFD (Bidirectional Forwarding Detection) — найшвидше виявлення
+<a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a>interface GigabitEthernet0/0
+<a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a> ip ospf bfd
+</code></pre></div>
+<h3 id="24-passive-interface">2.4 Пасивні інтерфейси (passive-interface)</h3>
+<p>Інтерфейси до кінцевих пристроїв (LAN) не повинні надсилати OSPF Hello. Оголошувати підмережу - так, шукати сусідів - ні.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>router ospf 1
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a> ! Зробити всі інтерфейси пасивними за замовчуванням
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a> passive-interface default
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a> ! Вибірково увімкнути OSPF на інтерфейсах до сусідів
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a> no passive-interface GigabitEthernet0/0
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a> no passive-interface GigabitEthernet0/1
+</code></pre></div>
+<h3 id="25-ospf">2.5 Аутентифікація OSPF</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>! MD5 аутентифікація на інтерфейсі (рекомендовано)
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>interface GigabitEthernet0/0
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a> ip ospf authentication message-digest
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a> ip ospf message-digest-key 1 md5 StrongPassword123
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>! Або — аутентифікація для всієї зони (в процесі OSPF)
+<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a>router ospf 1
+<a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a> area 0 authentication message-digest
+<a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a>
+<a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a>! SHA-256 (IOS XE 16.x+)
+<a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a>router ospf 1
+<a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a> area 0 authentication key-chain OSPF-KEYCHAIN
+<a id="__codelineno-11-13" name="__codelineno-11-13" href="#__codelineno-11-13"></a>key chain OSPF-KEYCHAIN
+<a id="__codelineno-11-14" name="__codelineno-11-14" href="#__codelineno-11-14"></a> key 1
+<a id="__codelineno-11-15" name="__codelineno-11-15" href="#__codelineno-11-15"></a>  key-string StrongPassword123
+<a id="__codelineno-11-16" name="__codelineno-11-16" href="#__codelineno-11-16"></a>  cryptographic-algorithm hmac-sha-256
+</code></pre></div>
+<hr />
+<h2 id="3">3 Передача маршруту за замовчуванням</h2>
+<p>Маршрутизатор з виходом в Інтернет (ASBR) передає default route решті маршрутизаторів OSPF</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>! R1 підключений до Інтернету через статичний маршрут
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>ip route 0.0.0.0 0.0.0.0 203.0.113.1
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>! Передати default route в OSPF
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>router ospf 1
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a> default-information originate              ! тільки якщо є 0.0.0.0/0 в таблиці
+<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a> ! або:
+<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a> default-information originate always       ! передавати завжди (навіть без маршруту)
+<a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a> ! з метрикою та типом:
+<a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a> default-information originate always metric 100 metric-type 1
+</code></pre></div>
+<div class="admonition info">
+<p class="admonition-title">metric-type 1 vs 2</p>
+<p><strong>Type 1 (E1):</strong> зовнішня метрика + внутрішня OSPF cost. Враховує відстань до ASBR.
+<strong>Type 2 (E2):</strong> тільки зовнішня метрика (за замовчуванням). Не змінюється при поширенні по домену. E1 кращий при кількох точках виходу в Інтернет</p>
+</div>
+<hr />
+<h2 id="4-multi-area-ospf">4 Багатозонна конфігурація (Multi-Area OSPF)</h2>
+<blockquote>
+<p>📁 Схема: <code>assets/network-configs_ospf_2.svg</code></p>
+</blockquote>
+<p><img alt="Схема мережі OSPF single area" src="../../assets/network-configs_ospf_2.svg" /></p>
+<h3 id="41-abr-r1-area-0-area-1">4.1 Налаштування ABR (R1 - Area 0 + Area 1)</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>interface Loopback0
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a> ip address 1.1.1.1 255.255.255.255
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>! Інтерфейс до Area 0
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>interface GigabitEthernet0/0
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a> ip address 10.0.12.1 255.255.255.252
+<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a> ip ospf 1 area 0               ! альтернативний спосіб оголошення (per-interface)
+<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a>
+<a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a>! Інтерфейс до Area 1
+<a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a>interface GigabitEthernet0/1
+<a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a> ip address 10.1.13.1 255.255.255.252
+<a id="__codelineno-13-12" name="__codelineno-13-12" href="#__codelineno-13-12"></a> ip ospf 1 area 1
+<a id="__codelineno-13-13" name="__codelineno-13-13" href="#__codelineno-13-13"></a>
+<a id="__codelineno-13-14" name="__codelineno-13-14" href="#__codelineno-13-14"></a>router ospf 1
+<a id="__codelineno-13-15" name="__codelineno-13-15" href="#__codelineno-13-15"></a> router-id 1.1.1.1
+<a id="__codelineno-13-16" name="__codelineno-13-16" href="#__codelineno-13-16"></a> network 1.1.1.1 0.0.0.0 area 0
+<a id="__codelineno-13-17" name="__codelineno-13-17" href="#__codelineno-13-17"></a> auto-cost reference-bandwidth 1000
+<a id="__codelineno-13-18" name="__codelineno-13-18" href="#__codelineno-13-18"></a> passive-interface default
+<a id="__codelineno-13-19" name="__codelineno-13-19" href="#__codelineno-13-19"></a> no passive-interface GigabitEthernet0/0
+<a id="__codelineno-13-20" name="__codelineno-13-20" href="#__codelineno-13-20"></a> no passive-interface GigabitEthernet0/1
+</code></pre></div>
+<h3 id="42-abr-r2-area-0-area-2-nssa">4.2 Налаштування ABR (R2 - Area 0 + Area 2 NSSA)</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>interface Loopback0
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a> ip address 2.2.2.2 255.255.255.255
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>interface GigabitEthernet0/0
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a> ip address 10.0.12.2 255.255.255.252
+<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a>
+<a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a>interface GigabitEthernet0/1
+<a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a> ip address 10.2.25.1 255.255.255.252
+<a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a>
+<a id="__codelineno-14-10" name="__codelineno-14-10" href="#__codelineno-14-10"></a>router ospf 1
+<a id="__codelineno-14-11" name="__codelineno-14-11" href="#__codelineno-14-11"></a> router-id 2.2.2.2
+<a id="__codelineno-14-12" name="__codelineno-14-12" href="#__codelineno-14-12"></a> network 2.2.2.2 0.0.0.0 area 0
+<a id="__codelineno-14-13" name="__codelineno-14-13" href="#__codelineno-14-13"></a> network 10.0.12.0 0.0.0.3 area 0
+<a id="__codelineno-14-14" name="__codelineno-14-14" href="#__codelineno-14-14"></a> network 10.2.25.0 0.0.0.3 area 2
+<a id="__codelineno-14-15" name="__codelineno-14-15" href="#__codelineno-14-15"></a> area 2 nssa                    ! оголосити Area 2 як NSSA
+<a id="__codelineno-14-16" name="__codelineno-14-16" href="#__codelineno-14-16"></a> auto-cost reference-bandwidth 1000
+</code></pre></div>
+<h3 id="43-area-1-r3">4.3 Налаштування внутрішнього маршрутизатора Area 1 (R3)</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>interface Loopback0
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a> ip address 3.3.3.3 255.255.255.255
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>interface GigabitEthernet0/0
+<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a> ip address 10.1.13.2 255.255.255.252
+<a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a>
+<a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a>interface GigabitEthernet0/1
+<a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a> ip address 10.1.34.1 255.255.255.252
+<a id="__codelineno-15-9" name="__codelineno-15-9" href="#__codelineno-15-9"></a>
+<a id="__codelineno-15-10" name="__codelineno-15-10" href="#__codelineno-15-10"></a>router ospf 1
+<a id="__codelineno-15-11" name="__codelineno-15-11" href="#__codelineno-15-11"></a> router-id 3.3.3.3
+<a id="__codelineno-15-12" name="__codelineno-15-12" href="#__codelineno-15-12"></a> network 3.3.3.3 0.0.0.0 area 1
+<a id="__codelineno-15-13" name="__codelineno-15-13" href="#__codelineno-15-13"></a> network 10.1.0.0 0.0.255.255 area 1
+<a id="__codelineno-15-14" name="__codelineno-15-14" href="#__codelineno-15-14"></a> auto-cost reference-bandwidth 1000
+</code></pre></div>
+<h3 id="44-nssa-asbr-r5-area-2">4.4 NSSA ASBR (R5) - передача зовнішніх маршрутів в Area 2</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>interface Loopback0
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a> ip address 5.5.5.5 255.255.255.255
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>
+<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a>router ospf 1
+<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a> router-id 5.5.5.5
+<a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a> network 5.5.5.5 0.0.0.0 area 2
+<a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a> network 10.2.0.0 0.0.255.255 area 2
+<a id="__codelineno-16-8" name="__codelineno-16-8" href="#__codelineno-16-8"></a> area 2 nssa
+<a id="__codelineno-16-9" name="__codelineno-16-9" href="#__codelineno-16-9"></a> ! Редистрибуція зовнішніх маршрутів у NSSA (LSA Type 7)
+<a id="__codelineno-16-10" name="__codelineno-16-10" href="#__codelineno-16-10"></a> redistribute connected subnets metric 20 metric-type 1
+<a id="__codelineno-16-11" name="__codelineno-16-11" href="#__codelineno-16-11"></a> redistribute static subnets
+</code></pre></div>
+<hr />
+<h2 id="5-route-summarization">5 Агрегація маршрутів (Route Summarization)</h2>
+<h3 id="51-abr">5.1 Агрегація між зонами (на ABR)</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>! R1 — ABR між Area 0 та Area 1
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>! Замість передачі 10.1.10.0/24, 10.1.20.0/24, 10.1.30.0/24 →
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>! передати один агрегований маршрут 10.1.0.0/16
+<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a>
+<a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a>router ospf 1
+<a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a> area 1 range 10.1.0.0 255.255.0.0            ! агрегація при передачі з Area 1 в Area 0
+<a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a> area 1 range 10.1.0.0 255.255.0.0 cost 50    ! з явним cost
+<a id="__codelineno-17-8" name="__codelineno-17-8" href="#__codelineno-17-8"></a>
+<a id="__codelineno-17-9" name="__codelineno-17-9" href="#__codelineno-17-9"></a>! Для Area 2:
+<a id="__codelineno-17-10" name="__codelineno-17-10" href="#__codelineno-17-10"></a> area 2 range 10.2.0.0 255.255.0.0
+</code></pre></div>
+<h3 id="52-asbr">5.2 Агрегація зовнішніх маршрутів (на ASBR)</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>router ospf 1
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a> summary-address 172.16.0.0 255.255.0.0       ! агрегація перед редистрибуцією
+</code></pre></div>
+<hr />
+<h2 id="6-stub-nssa">6 Stub та NSSA зони</h2>
+<h3 id="61-stub-area-">6.1 Stub Area - зона без зовнішніх маршрутів</h3>
+<p>У stub-зоні блокуються LSA Type 5 (External). ABR надсилає замість них один default route.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>! На ABR (R1) та всіх маршрутизаторах Area 1 — параметр повинен збігатись!
+<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>router ospf 1
+<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a> area 1 stub
+<a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a>
+<a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a>! Totally Stub — блокує і LSA Type 3 (Summary), тільки default route
+<a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a>! Налаштовується ТІЛЬКИ на ABR:
+<a id="__codelineno-19-7" name="__codelineno-19-7" href="#__codelineno-19-7"></a>router ospf 1
+<a id="__codelineno-19-8" name="__codelineno-19-8" href="#__codelineno-19-8"></a> area 1 stub no-summary
+<a id="__codelineno-19-9" name="__codelineno-19-9" href="#__codelineno-19-9"></a>! На внутрішніх маршрутизаторах Area 1 — тільки:
+<a id="__codelineno-19-10" name="__codelineno-19-10" href="#__codelineno-19-10"></a> area 1 stub
+</code></pre></div>
+<h3 id="62-nssa-not-so-stubby-area">6.2 NSSA - Not-So-Stubby Area</h3>
+<p>NSSA дозволяє мати локальний ASBR (зовнішні маршрути через LSA Type 7), але блокує LSA Type 5 з інших зон.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>! На ABR (R2) та всіх маршрутизаторах Area 2:
+<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>router ospf 1
+<a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a> area 2 nssa
+<a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a>
+<a id="__codelineno-20-5" name="__codelineno-20-5" href="#__codelineno-20-5"></a>! Totally NSSA (тільки на ABR):
+<a id="__codelineno-20-6" name="__codelineno-20-6" href="#__codelineno-20-6"></a>router ospf 1
+<a id="__codelineno-20-7" name="__codelineno-20-7" href="#__codelineno-20-7"></a> area 2 nssa no-summary
+<a id="__codelineno-20-8" name="__codelineno-20-8" href="#__codelineno-20-8"></a>
+<a id="__codelineno-20-9" name="__codelineno-20-9" href="#__codelineno-20-9"></a>! NSSA з автоматичним default route від ABR:
+<a id="__codelineno-20-10" name="__codelineno-20-10" href="#__codelineno-20-10"></a>router ospf 1
+<a id="__codelineno-20-11" name="__codelineno-20-11" href="#__codelineno-20-11"></a> area 2 nssa default-information-originate
+</code></pre></div>
+<hr />
+<h2 id="7-virtual-link-area-0">7 Virtual Link - з'єднання незв'язаних зон через Area 0</h2>
+<p>Virtual Link використовується коли нова зона не має прямого з'єднання з Area 0.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>Ситуація:
+<a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a>[Area 0 · R1]──[Area 1 · R2]──[Area 2 · R3]
+<a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a>                                ← Area 2 не підключена до Area 0!
+<a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a>
+<a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a>Рішення — Virtual Link між R2 та R3 через Area 1:
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>! На R2 (transit area = Area 1, peer RID = 3.3.3.3)
+<a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a>router ospf 1
+<a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a> area 1 virtual-link 3.3.3.3
+<a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a>
+<a id="__codelineno-22-5" name="__codelineno-22-5" href="#__codelineno-22-5"></a>! На R3 (transit area = Area 1, peer RID = 2.2.2.2)
+<a id="__codelineno-22-6" name="__codelineno-22-6" href="#__codelineno-22-6"></a>router ospf 1
+<a id="__codelineno-22-7" name="__codelineno-22-7" href="#__codelineno-22-7"></a> area 1 virtual-link 2.2.2.2
+<a id="__codelineno-22-8" name="__codelineno-22-8" href="#__codelineno-22-8"></a>
+<a id="__codelineno-22-9" name="__codelineno-22-9" href="#__codelineno-22-9"></a>! Virtual Link з аутентифікацією:
+<a id="__codelineno-22-10" name="__codelineno-22-10" href="#__codelineno-22-10"></a>router ospf 1
+<a id="__codelineno-22-11" name="__codelineno-22-11" href="#__codelineno-22-11"></a> area 1 virtual-link 3.3.3.3 authentication message-digest \
+<a id="__codelineno-22-12" name="__codelineno-22-12" href="#__codelineno-22-12"></a>         message-digest-key 1 md5 VLinkPass
+</code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">Virtual Link - тимчасове рішення</p>
+<p>Virtual Link вирішує проблему але не є кращою практикою. По можливості перепроєктуй топологію щоб всі зони мали фізичне з'єднання з Area 0.</p>
+</div>
+<hr />
+<h2 id="8-ospf">8 Редистрибуція маршрутів у OSPF</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>! Редистрибуція статичних маршрутів
+<a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a>router ospf 1
+<a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a> redistribute static subnets metric 20 metric-type 1
+<a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a>
+<a id="__codelineno-23-5" name="__codelineno-23-5" href="#__codelineno-23-5"></a>! Редистрибуція підключених інтерфейсів
+<a id="__codelineno-23-6" name="__codelineno-23-6" href="#__codelineno-23-6"></a>router ospf 1
+<a id="__codelineno-23-7" name="__codelineno-23-7" href="#__codelineno-23-7"></a> redistribute connected subnets
+<a id="__codelineno-23-8" name="__codelineno-23-8" href="#__codelineno-23-8"></a>
+<a id="__codelineno-23-9" name="__codelineno-23-9" href="#__codelineno-23-9"></a>! Редистрибуція з іншого OSPF-процесу
+<a id="__codelineno-23-10" name="__codelineno-23-10" href="#__codelineno-23-10"></a>router ospf 1
+<a id="__codelineno-23-11" name="__codelineno-23-11" href="#__codelineno-23-11"></a> redistribute ospf 2 subnets metric 30
+<a id="__codelineno-23-12" name="__codelineno-23-12" href="#__codelineno-23-12"></a>
+<a id="__codelineno-23-13" name="__codelineno-23-13" href="#__codelineno-23-13"></a>! Редистрибуція BGP
+<a id="__codelineno-23-14" name="__codelineno-23-14" href="#__codelineno-23-14"></a>router ospf 1
+<a id="__codelineno-23-15" name="__codelineno-23-15" href="#__codelineno-23-15"></a> redistribute bgp 65000 subnets metric 100 metric-type 1
+<a id="__codelineno-23-16" name="__codelineno-23-16" href="#__codelineno-23-16"></a>
+<a id="__codelineno-23-17" name="__codelineno-23-17" href="#__codelineno-23-17"></a>! Редистрибуція з route-map (фільтрація)
+<a id="__codelineno-23-18" name="__codelineno-23-18" href="#__codelineno-23-18"></a>router ospf 1
+<a id="__codelineno-23-19" name="__codelineno-23-19" href="#__codelineno-23-19"></a> redistribute static subnets route-map STATIC-TO-OSPF
+<a id="__codelineno-23-20" name="__codelineno-23-20" href="#__codelineno-23-20"></a>
+<a id="__codelineno-23-21" name="__codelineno-23-21" href="#__codelineno-23-21"></a>route-map STATIC-TO-OSPF permit 10
+<a id="__codelineno-23-22" name="__codelineno-23-22" href="#__codelineno-23-22"></a> match ip address prefix-list ALLOWED-NETS
+<a id="__codelineno-23-23" name="__codelineno-23-23" href="#__codelineno-23-23"></a>
+<a id="__codelineno-23-24" name="__codelineno-23-24" href="#__codelineno-23-24"></a>ip prefix-list ALLOWED-NETS seq 10 permit 172.16.0.0/16 le 24
+</code></pre></div>
+<hr />
+<h2 id="9-ospf">9 Налаштування типу мережі OSPF</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>! Типи мережі та їх особливості:
+<a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a>! broadcast (Ethernet за замовчуванням) — є DR/BDR
+<a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a>! point-to-point (Serial, Loopback) — немає DR/BDR, один сусід
+<a id="__codelineno-24-4" name="__codelineno-24-4" href="#__codelineno-24-4"></a>! non-broadcast (Frame Relay) — є DR/BDR, сусіди вручну
+<a id="__codelineno-24-5" name="__codelineno-24-5" href="#__codelineno-24-5"></a>! point-to-multipoint — немає DR/BDR, автовизначення сусідів
+<a id="__codelineno-24-6" name="__codelineno-24-6" href="#__codelineno-24-6"></a>
+<a id="__codelineno-24-7" name="__codelineno-24-7" href="#__codelineno-24-7"></a>! Змінити тип мережі (наприклад P2P між двома роутерами на Ethernet)
+<a id="__codelineno-24-8" name="__codelineno-24-8" href="#__codelineno-24-8"></a>interface GigabitEthernet0/0
+<a id="__codelineno-24-9" name="__codelineno-24-9" href="#__codelineno-24-9"></a> ip ospf network point-to-point    ! прибирає DR/BDR — прискорює конвергенцію
+<a id="__codelineno-24-10" name="__codelineno-24-10" href="#__codelineno-24-10"></a>
+<a id="__codelineno-24-11" name="__codelineno-24-11" href="#__codelineno-24-11"></a>! На serial-інтерфейсах
+<a id="__codelineno-24-12" name="__codelineno-24-12" href="#__codelineno-24-12"></a>interface Serial0/0
+<a id="__codelineno-24-13" name="__codelineno-24-13" href="#__codelineno-24-13"></a> ip ospf network point-to-point    ! за замовчуванням і так P2P
+</code></pre></div>
+<hr />
+<h2 id="10">10 Перевірка та діагностика</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>! Стан OSPF процесу та загальна інформація
+<a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a>show ip ospf
+<a id="__codelineno-25-3" name="__codelineno-25-3" href="#__codelineno-25-3"></a>show ip ospf 1
+<a id="__codelineno-25-4" name="__codelineno-25-4" href="#__codelineno-25-4"></a>
+<a id="__codelineno-25-5" name="__codelineno-25-5" href="#__codelineno-25-5"></a>! Список сусідів
+<a id="__codelineno-25-6" name="__codelineno-25-6" href="#__codelineno-25-6"></a>show ip ospf neighbor
+<a id="__codelineno-25-7" name="__codelineno-25-7" href="#__codelineno-25-7"></a>show ip ospf neighbor detail
+<a id="__codelineno-25-8" name="__codelineno-25-8" href="#__codelineno-25-8"></a>
+<a id="__codelineno-25-9" name="__codelineno-25-9" href="#__codelineno-25-9"></a>! Таблиця маршрутизації (тільки OSPF-маршрути)
+<a id="__codelineno-25-10" name="__codelineno-25-10" href="#__codelineno-25-10"></a>show ip route ospf
+<a id="__codelineno-25-11" name="__codelineno-25-11" href="#__codelineno-25-11"></a>show ip route ospf | include O
+<a id="__codelineno-25-12" name="__codelineno-25-12" href="#__codelineno-25-12"></a>
+<a id="__codelineno-25-13" name="__codelineno-25-13" href="#__codelineno-25-13"></a>! LSDB — Link-State Database
+<a id="__codelineno-25-14" name="__codelineno-25-14" href="#__codelineno-25-14"></a>show ip ospf database
+<a id="__codelineno-25-15" name="__codelineno-25-15" href="#__codelineno-25-15"></a>show ip ospf database router              ! LSA Type 1
+<a id="__codelineno-25-16" name="__codelineno-25-16" href="#__codelineno-25-16"></a>show ip ospf database network             ! LSA Type 2
+<a id="__codelineno-25-17" name="__codelineno-25-17" href="#__codelineno-25-17"></a>show ip ospf database summary             ! LSA Type 3
+<a id="__codelineno-25-18" name="__codelineno-25-18" href="#__codelineno-25-18"></a>show ip ospf database external            ! LSA Type 5
+<a id="__codelineno-25-19" name="__codelineno-25-19" href="#__codelineno-25-19"></a>show ip ospf database nssa-external       ! LSA Type 7
+<a id="__codelineno-25-20" name="__codelineno-25-20" href="#__codelineno-25-20"></a>
+<a id="__codelineno-25-21" name="__codelineno-25-21" href="#__codelineno-25-21"></a>! Інтерфейси OSPF
+<a id="__codelineno-25-22" name="__codelineno-25-22" href="#__codelineno-25-22"></a>show ip ospf interface
+<a id="__codelineno-25-23" name="__codelineno-25-23" href="#__codelineno-25-23"></a>show ip ospf interface GigabitEthernet0/0
+<a id="__codelineno-25-24" name="__codelineno-25-24" href="#__codelineno-25-24"></a>show ip ospf interface brief
+<a id="__codelineno-25-25" name="__codelineno-25-25" href="#__codelineno-25-25"></a>
+<a id="__codelineno-25-26" name="__codelineno-25-26" href="#__codelineno-25-26"></a>! Статистика DR/BDR виборів
+<a id="__codelineno-25-27" name="__codelineno-25-27" href="#__codelineno-25-27"></a>show ip ospf election
+<a id="__codelineno-25-28" name="__codelineno-25-28" href="#__codelineno-25-28"></a>
+<a id="__codelineno-25-29" name="__codelineno-25-29" href="#__codelineno-25-29"></a>! Вартість (cost) шляхів
+<a id="__codelineno-25-30" name="__codelineno-25-30" href="#__codelineno-25-30"></a>show ip ospf border-routers
+<a id="__codelineno-25-31" name="__codelineno-25-31" href="#__codelineno-25-31"></a>
+<a id="__codelineno-25-32" name="__codelineno-25-32" href="#__codelineno-25-32"></a>! Агреговані маршрути
+<a id="__codelineno-25-33" name="__codelineno-25-33" href="#__codelineno-25-33"></a>show ip ospf summary-address
+<a id="__codelineno-25-34" name="__codelineno-25-34" href="#__codelineno-25-34"></a>
+<a id="__codelineno-25-35" name="__codelineno-25-35" href="#__codelineno-25-35"></a>! Virtual Links
+<a id="__codelineno-25-36" name="__codelineno-25-36" href="#__codelineno-25-36"></a>show ip ospf virtual-links
+</code></pre></div>
+<h3 id="101-show-ip-ospf-neighbor">10.1 Приклад виводу show ip ospf neighbor</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a>Router# show ip ospf neighbor
+<a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a>Neighbor ID  Pri   State     Dead Time  Address       Interface
+<a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a>2.2.2.2      100   FULL/BDR  00:00:38   10.0.12.2     Gi0/0
+<a id="__codelineno-26-4" name="__codelineno-26-4" href="#__codelineno-26-4"></a>3.3.3.3      1     FULL/DROTHER 00:00:35 10.0.13.2   Gi0/1
+<a id="__codelineno-26-5" name="__codelineno-26-5" href="#__codelineno-26-5"></a>4.4.4.4      1     FULL/DROTHER 00:00:37 10.0.14.2   Gi0/2
+</code></pre></div>
+<h3 id="102">10.2 Типові проблеми сусідства</h3>
+<table>
+<thead>
+<tr>
+<th>Стан</th>
+<th>Проблема</th>
+<th>Рішення</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>INIT</code></td>
+<td>Hello отримані, але RID відсутній у них</td>
+<td>Перевірити мережеву доступність (ACL, MTU)</td>
+</tr>
+<tr>
+<td><code>2-WAY</code></td>
+<td>Нормально для DROTHER-DROTHER</td>
+<td>Не проблема</td>
+</tr>
+<tr>
+<td><code>EXSTART</code></td>
+<td>Проблема MTU</td>
+<td><code>ip ospf mtu-ignore</code> на інтерфейсі</td>
+</tr>
+<tr>
+<td><code>EXCHANGE</code></td>
+<td>Дублікати RID</td>
+<td>Перевірити унікальність <code>router-id</code></td>
+</tr>
+<tr>
+<td><code>LOADING</code></td>
+<td>Проблема з LSA</td>
+<td><code>clear ip ospf process</code></td>
+</tr>
+<tr>
+<td>Немає сусіда</td>
+<td>Різні Area ID, таймери або аутентифікація</td>
+<td>Порівняти конфіги на обох кінцях</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="11-debug-ospf">11 Debug OSPF</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>! Базові події OSPF
+<a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a>debug ip ospf events
+<a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a>debug ip ospf adj                  ! adjacency events (рекомендовано для troubleshooting)
+<a id="__codelineno-27-4" name="__codelineno-27-4" href="#__codelineno-27-4"></a>debug ip ospf hello                ! hello packets (багато виводу!)
+<a id="__codelineno-27-5" name="__codelineno-27-5" href="#__codelineno-27-5"></a>debug ip ospf flooding             ! LSA flooding
+<a id="__codelineno-27-6" name="__codelineno-27-6" href="#__codelineno-27-6"></a>debug ip ospf spf                  ! SPF calculation events
+<a id="__codelineno-27-7" name="__codelineno-27-7" href="#__codelineno-27-7"></a>debug ip ospf spf statistic        ! статистика SPF
+<a id="__codelineno-27-8" name="__codelineno-27-8" href="#__codelineno-27-8"></a>
+<a id="__codelineno-27-9" name="__codelineno-27-9" href="#__codelineno-27-9"></a>! Зупинити debug
+<a id="__codelineno-27-10" name="__codelineno-27-10" href="#__codelineno-27-10"></a>no debug all
+<a id="__codelineno-27-11" name="__codelineno-27-11" href="#__codelineno-27-11"></a>undebug all
+<a id="__codelineno-27-12" name="__codelineno-27-12" href="#__codelineno-27-12"></a>
+<a id="__codelineno-27-13" name="__codelineno-27-13" href="#__codelineno-27-13"></a>! Фільтрований debug (тільки для конкретного сусіда)
+<a id="__codelineno-27-14" name="__codelineno-27-14" href="#__codelineno-27-14"></a>debug ip ospf adj | include 2.2.2.2
+</code></pre></div>
+<div class="admonition danger">
+<p class="admonition-title">Debug на продуктивних маршрутизаторах</p>
+<p><code>debug ip ospf hello</code> генерує пакети кожні 10 секунд на кожен інтерфейс. При великій кількості сусідів — може перевантажити CPU. Завжди застосовуй <code>| include</code> фільтр або вмикай debug на короткий час.</p>
+</div>
+<hr />
+<h2 id="12-spf">12 Оптимізація таймерів SPF</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a>! Throttle SPF — контроль частоти перерахунку SPF
+<a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a>router ospf 1
+<a id="__codelineno-28-3" name="__codelineno-28-3" href="#__codelineno-28-3"></a> timers throttle spf 500 1000 10000
+<a id="__codelineno-28-4" name="__codelineno-28-4" href="#__codelineno-28-4"></a> ! spf-start: 500 мс — затримка першого SPF після події
+<a id="__codelineno-28-5" name="__codelineno-28-5" href="#__codelineno-28-5"></a> ! spf-hold:  1000 мс — мінімальна затримка між SPF
+<a id="__codelineno-28-6" name="__codelineno-28-6" href="#__codelineno-28-6"></a> ! spf-max:   10000 мс — максимальна затримка
+<a id="__codelineno-28-7" name="__codelineno-28-7" href="#__codelineno-28-7"></a>
+<a id="__codelineno-28-8" name="__codelineno-28-8" href="#__codelineno-28-8"></a>! Throttle LSA — контроль частоти генерації LSA
+<a id="__codelineno-28-9" name="__codelineno-28-9" href="#__codelineno-28-9"></a>router ospf 1
+<a id="__codelineno-28-10" name="__codelineno-28-10" href="#__codelineno-28-10"></a> timers throttle lsa all 0 5000 5000
+<a id="__codelineno-28-11" name="__codelineno-28-11" href="#__codelineno-28-11"></a> ! start: 0 — одразу генерувати перший LSA
+<a id="__codelineno-28-12" name="__codelineno-28-12" href="#__codelineno-28-12"></a> ! hold: 5000 мс — затримка між повторними LSA
+<a id="__codelineno-28-13" name="__codelineno-28-13" href="#__codelineno-28-13"></a> ! max: 5000 мс — максимальна затримка
+<a id="__codelineno-28-14" name="__codelineno-28-14" href="#__codelineno-28-14"></a>
+<a id="__codelineno-28-15" name="__codelineno-28-15" href="#__codelineno-28-15"></a>! Incremental SPF (тільки перераховує змінену частину дерева)
+<a id="__codelineno-28-16" name="__codelineno-28-16" href="#__codelineno-28-16"></a>router ospf 1
+<a id="__codelineno-28-17" name="__codelineno-28-17" href="#__codelineno-28-17"></a> ispf
+</code></pre></div>
+<hr />
+<blockquote>
+<p>📌 <strong>Зберегти конфігурацію:</strong> <code>copy running-config startup-config</code> або <code>write memory</code></p>
+</blockquote>
+<hr />
+<div class="admonition quote">
+<p class="admonition-title">Джерело</p>
+<p>Стаття базується на офіційній документації Cisco.
+Оригінал (англійською): <a href="https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/iproute_ospf/configuration/xe-16/iro-xe-16-book/iro-cfg.html">IP Routing: OSPF Configuration Guide</a></p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Повернутись нагору
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      © 2026 Кафедра №21 - Bci права захищені
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://mitit.mil.gov.ua/page/faculty2" target="_blank" rel="noopener" title="mitit.mil.gov.ua" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M16.36 14c.08-.66.14-1.32.14-2s-.06-1.34-.14-2h3.38c.16.64.26 1.31.26 2s-.1 1.36-.26 2m-5.15 5.56c.6-1.11 1.06-2.31 1.38-3.56h2.95a8.03 8.03 0 0 1-4.33 3.56M14.34 14H9.66c-.1-.66-.16-1.32-.16-2s.06-1.35.16-2h4.68c.09.65.16 1.32.16 2s-.07 1.34-.16 2M12 19.96c-.83-1.2-1.5-2.53-1.91-3.96h3.82c-.41 1.43-1.08 2.76-1.91 3.96M8 8H5.08A7.92 7.92 0 0 1 9.4 4.44C8.8 5.55 8.35 6.75 8 8m-2.92 8H8c.35 1.25.8 2.45 1.4 3.56A8 8 0 0 1 5.08 16m-.82-2C4.1 13.36 4 12.69 4 12s.1-1.36.26-2h3.38c-.08.66-.14 1.32-.14 2s.06 1.34.14 2M12 4.03c.83 1.2 1.5 2.54 1.91 3.97h-3.82c.41-1.43 1.08-2.77 1.91-3.97M18.92 8h-2.95a15.7 15.7 0 0 0-1.38-3.56c1.84.63 3.37 1.9 4.33 3.56M12 2C6.47 2 2 6.5 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "content.code.copy", "search.suggest", "search.highlight"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u0421\u043a\u043e\u043f\u0456\u0439\u043e\u0432\u0430\u043d\u043e \u0432 \u0431\u0443\u0444\u0435\u0440", "clipboard.copy": "\u0421\u043a\u043e\u043f\u0456\u044e\u0432\u0430\u0442\u0438 \u0432 \u0431\u0443\u0444\u0435\u0440", "search.result.more.one": "\u0429\u0435 1 \u0437\u0431\u0456\u0433 \u043d\u0430 \u0446\u0456\u0439 \u0441\u0442\u043e\u0440\u0456\u043d\u0446\u0456", "search.result.more.other": "\u0429\u0435 # \u0437\u0431\u0456\u0433\u0456\u0432 \u043d\u0430 \u0446\u0456\u0439 \u0441\u0442\u043e\u0440\u0456\u043d\u0446\u0456", "search.result.none": "\u0417\u0431\u0456\u0433\u0456\u0432 \u043d\u0435 \u0437\u043d\u0430\u0439\u0434\u0435\u043d\u043e", "search.result.one": "\u0417\u043d\u0430\u0439\u0434\u0435\u043d\u043e 1 \u0437\u0431\u0456\u0433", "search.result.other": "\u0417\u043d\u0430\u0439\u0434\u0435\u043d\u043e # \u0437\u0431\u0456\u0433\u0456\u0432", "search.result.placeholder": "\u0420\u043e\u0437\u043f\u043e\u0447\u043d\u0456\u0442\u044c \u043f\u0438\u0441\u0430\u0442\u0438 \u0434\u043b\u044f \u043f\u043e\u0448\u0443\u043a\u0443", "search.result.term.missing": "\u041d\u0435 \u0437\u043d\u0430\u0439\u0434\u0435\u043d\u043e \u0437\u0430\u043f\u0438\u0442\u0443", "select.version": "\u041e\u0431\u0440\u0430\u0442\u0438 \u0432\u0435\u0440\u0441\u0456\u044e"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

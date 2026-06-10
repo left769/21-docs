@@ -1,0 +1,2393 @@
+
+<!doctype html>
+<html lang="uk" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="Створено колективом кафедри №21">
+      
+      
+      
+        <link rel="prev" href="../ssh/">
+      
+      
+        <link rel="next" href="../syslog/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/logo_dep21_white.ico">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>RADIUS - Довідник кафедри Інформаційних систем та технологій</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#radius" class="md-skip">
+          Перейти до змісту
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Хедер">
+    <a href="../.." title="Довідник кафедри Інформаційних систем та технологій" class="md-header__button md-logo" aria-label="Довідник кафедри Інформаційних систем та технологій" data-md-component="logo">
+      
+  <img src="../../assets/logo_dep21_white.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Довідник кафедри Інформаційних систем та технологій
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              RADIUS
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Перейти на темну тему"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Перейти на темну тему" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="indigo"  aria-label="Перейти на світлу тему"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Перейти на світлу тему" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Пошук" placeholder="Пошук" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Шукати">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Очистити" aria-label="Очистити" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Пошук розпочато
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Вкладки" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../.." class="md-tabs__link">
+          
+  
+  
+  🏠 Головна
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../network-configs/" class="md-tabs__link">
+          
+  
+  
+  🌐 Мережі
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+  🖥️ Сервіси
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Навігація" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Довідник кафедри Інформаційних систем та технологій" class="md-nav__button md-logo" aria-label="Довідник кафедри Інформаційних систем та технологій" data-md-component="logo">
+      
+  <img src="../../assets/logo_dep21_white.png" alt="logo">
+
+    </a>
+    Довідник кафедри Інформаційних систем та технологій
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🏠 Головна
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    🏠 Головна
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    👋Вступ
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../pnet/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🧪Інструкція з користування PNET Lab
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network-configs/subnet-calculator/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Калькулятор маски підмереж
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chmod-calculator/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Калькулятор прав Linux
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🌐 Мережі
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    🌐 Мережі
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network-configs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Вступ до мереж
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network-configs/IP-interfaces/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IP інтерфейси
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network-configs/vlans/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VLAN та Trunk
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network-configs/vlans-mikrotik/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VLAN в Mikrotik
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network-configs/stp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    STP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network-configs/routing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Маршрутизація
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network-configs/isp-failover/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dual WAN
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network-configs/ACL/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Контроль доступу
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network-configs/cisco-nat/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NAT в Cisco
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network-configs/dhcp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DHCP-сервер
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network-configs/ipsec/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IPsec в Cisco
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network-configs/ospf/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OSPF
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network-configs/cisco-cheat-sheet/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cisco cheat sheet
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network-configs/subnet-calculator/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Калькулятор маски підмереж
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🖥️ Сервіси
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    🖥️ Сервіси
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Сервіси на базі OC Linux
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../linux-network-interfaces/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ip addr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ssh/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SSH
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RADIUS
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RADIUS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Зміст">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Зміст
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-radius-aaa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1 Протокол RADIUS та принцип AAA
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-freeradius" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2 Розгортання FreeRADIUS
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2 Розгортання FreeRADIUS">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 Встановлення
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 Структура конфігурації
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-eaptls-8021x" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 Генерація сертифікатів (для EAP/TLS, 802.1X)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3 Налаштування користувачів
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3 Налаштування користувачів">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-nas-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 Налаштування NAS-клієнтів
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 Перезапуск та тестування
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4 Налаштування мережевих пристроїв
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4 Налаштування мережевих пристроїв">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-cisco-ios-aaa-ssh" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 Cisco IOS — базова AAA для SSH
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-cisco-ios-radius" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 Cisco IOS — резервна локальна автентифікація при недоступності RADIUS
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-cisco-ios-radius" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3 Cisco IOS — налаштування таймаутів RADIUS
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44-mikrotik-routeros" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.4 MikroTik RouterOS
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-cisco-ios-radius-8021x-port-based-authentication" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5 Cisco IOS — RADIUS для 802.1X (Port-Based Authentication)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5 Cisco IOS — RADIUS для 802.1X (Port-Based Authentication)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-mab-mac-authentication-bypass-8021x" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 MAB (MAC Authentication Bypass) — для пристроїв без 802.1X
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-vlan-radius" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 Динамічне призначення VLAN через RADIUS
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-freeradius-mysql" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6 Налаштування FreeRADIUS для роботи з базою даних (MySQL)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7 Перевірка та діагностика
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7 Перевірка та діагностика">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1 Типові помилки
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../syslog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SYSLOG
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../iptables/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    iptables
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tcpdump-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    TCPDump
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../apt-cacher-ng/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    APT Cacher
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chmod-calculator/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Калькулятор прав Linux
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Зміст">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Зміст
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-radius-aaa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1 Протокол RADIUS та принцип AAA
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-freeradius" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2 Розгортання FreeRADIUS
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2 Розгортання FreeRADIUS">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 Встановлення
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 Структура конфігурації
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-eaptls-8021x" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 Генерація сертифікатів (для EAP/TLS, 802.1X)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3 Налаштування користувачів
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3 Налаштування користувачів">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-nas-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 Налаштування NAS-клієнтів
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 Перезапуск та тестування
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4 Налаштування мережевих пристроїв
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4 Налаштування мережевих пристроїв">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-cisco-ios-aaa-ssh" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 Cisco IOS — базова AAA для SSH
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-cisco-ios-radius" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 Cisco IOS — резервна локальна автентифікація при недоступності RADIUS
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-cisco-ios-radius" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3 Cisco IOS — налаштування таймаутів RADIUS
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44-mikrotik-routeros" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.4 MikroTik RouterOS
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-cisco-ios-radius-8021x-port-based-authentication" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5 Cisco IOS — RADIUS для 802.1X (Port-Based Authentication)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5 Cisco IOS — RADIUS для 802.1X (Port-Based Authentication)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-mab-mac-authentication-bypass-8021x" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 MAB (MAC Authentication Bypass) — для пристроїв без 802.1X
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-vlan-radius" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 Динамічне призначення VLAN через RADIUS
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-freeradius-mysql" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6 Налаштування FreeRADIUS для роботи з базою даних (MySQL)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7 Перевірка та діагностика
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7 Перевірка та діагностика">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1 Типові помилки
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="radius">Розгортання та налаштування RADIUS сервера</h1>
+<blockquote>
+<p>Курс: Безпека електронно-комунікаційних мереж | 4 курс</p>
+</blockquote>
+<hr />
+<h2 id="1-radius-aaa">1 Протокол RADIUS та принцип AAA</h2>
+<p><strong>RADIUS (Remote Authentication Dial-In User Service)</strong> - мережевий протокол (RFC 2865/2866) для централізованої аутентифікації, авторизації та обліку (AAA) при доступі до мережевого обладнання</p>
+<h2 id="_1"><img alt="Схема взаємодії" src="../../assets/server-services_radius_1.svg" /></h2>
+<table>
+<thead>
+<tr>
+<th>Компонент</th>
+<th>Функція</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Authentication</strong></td>
+<td>Хто ти? Перевірка логіна/пароля або сертифіката</td>
+</tr>
+<tr>
+<td><strong>Authorization</strong></td>
+<td>Що ти можеш? Визначення привілеїв (privilege level)</td>
+</tr>
+<tr>
+<td><strong>Accounting</strong></td>
+<td>Що ти робив? Запис сесій, команд, часу підключення</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Порти:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Порт</th>
+<th>Призначення</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>UDP/1812</code></td>
+<td>Authentication та Authorization</td>
+</tr>
+<tr>
+<td><code>UDP/1813</code></td>
+<td>Accounting</td>
+</tr>
+<tr>
+<td><code>UDP/1645</code></td>
+<td>Authentication (застарілий, сумісність)</td>
+</tr>
+<tr>
+<td><code>UDP/1646</code></td>
+<td>Accounting (застарілий, сумісність)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="2-freeradius">2 Розгортання FreeRADIUS</h2>
+<h3 id="21">2.1 Встановлення</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># Оновити систему та встановити FreeRADIUS</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>apt<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>apt<span class="w"> </span>upgrade<span class="w"> </span>-y
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>freeradius<span class="w"> </span>freeradius-utils
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="c1"># Запуск та автозавантаження</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>systemctl<span class="w"> </span>start<span class="w"> </span>freeradius
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>freeradius
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>systemctl<span class="w"> </span>status<span class="w"> </span>freeradius
+</code></pre></div>
+<h3 id="22">2.2 Структура конфігурації</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>/etc/freeradius/3.0/
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>├── radiusd.conf          ← головний конфіг (порти, логування, модулі)
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>├── clients.conf          ← NAS-клієнти (мережеве обладнання)
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>├── users                 ← локальні користувачі
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>├── mods-enabled/         ← увімкнені модулі (symlinks)
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>├── mods-available/       ← доступні модулі
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>├── sites-enabled/        ← увімкнені virtual servers
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>│   └── default           ← основний virtual server
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>└── certs/                ← сертифікати для EAP/TLS
+</code></pre></div>
+<h3 id="23-eaptls-8021x">2.3 Генерація сертифікатів (для EAP/TLS, 802.1X)</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nb">cd</span><span class="w"> </span>/etc/freeradius/3.0/certs/
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>chmod<span class="w"> </span>+x<span class="w"> </span>bootstrap
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>./bootstrap
+</code></pre></div>
+<hr />
+<h2 id="3">3 Налаштування користувачів</h2>
+<p>Файл: <code>/etc/freeradius/3.0/users</code></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a># Формат: username  Attribute := &quot;value&quot;, Attribute2 = &quot;value2&quot;
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a># Базовий користувач для адміністрування обладнання
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>admin   Cleartext-Password := &quot;P@$$w0rd&quot;
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>        Service-Type = NAS-Prompt-User,
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>        Cisco-AVPair = &quot;shell:priv-lvl=15&quot;
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a># Звичайний оператор (privilege level 5)
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>operator   Cleartext-Password := &quot;Op3r@t0r&quot;
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>           Service-Type = NAS-Prompt-User,
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>           Cisco-AVPair = &quot;shell:priv-lvl=5&quot;
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>
+<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a># Користувач тільки для читання (privilege level 1)
+<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a>readonly   Cleartext-Password := &quot;Readonly1&quot;
+<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a>           Service-Type = NAS-Prompt-User,
+<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a>           Cisco-AVPair = &quot;shell:priv-lvl=1&quot;
+</code></pre></div>
+<div class="admonition info">
+<p class="admonition-title">Cisco-AVPair shell:priv-lvl</p>
+<p><code>priv-lvl=15</code> — повний доступ (enable рівень).
+<code>priv-lvl=1</code> — тільки базові команди (<code>show</code>).
+<code>priv-lvl=5</code> — користувацький рівень (визначається через <code>privilege</code> команди на Cisco)</p>
+</div>
+<h3 id="31-nas-">3.1 Налаштування NAS-клієнтів</h3>
+<p>Файл: <code>/etc/freeradius/3.0/clients.conf</code></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a># Один конкретний пристрій
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>client cisco-r1 {
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>    ipaddr      = 10.60.254.1
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>    secret      = C!sc0123
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>    shortname   = cisco-r1
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>    nastype     = cisco
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>}
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a># Підмережа з мережевим обладнанням (Management VLAN)
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>client management-vlan {
+<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>    ipaddr      = 10.60.254.0/24
+<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>    secret      = Str0ngSecret!
+<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>    shortname   = mgmt-network
+<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a>}
+<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a>
+<a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a># MikroTik
+<a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a>client mikrotik-r1 {
+<a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a>    ipaddr      = 10.60.254.2
+<a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a>    secret      = Mikr0t!k
+<a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a>    shortname   = mikrotik-r1
+<a id="__codelineno-4-21" name="__codelineno-4-21" href="#__codelineno-4-21"></a>    nastype     = other
+<a id="__codelineno-4-22" name="__codelineno-4-22" href="#__codelineno-4-22"></a>}
+</code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">Secret — спільний ключ</p>
+<p>Secret повинен збігатись на NAS і в <code>clients.conf</code>. Використовуй різні secrets для різних пристроїв — якщо один пристрій скомпрометований, решта залишаться захищеними</p>
+</div>
+<h3 id="32">3.2 Перезапуск та тестування</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1"># Перезапустити після змін конфігурації</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>systemctl<span class="w"> </span>restart<span class="w"> </span>freeradius
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="c1"># Зупинити сервіс та запустити в debug-режимі</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>systemctl<span class="w"> </span>stop<span class="w"> </span>freeradius
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>freeradius<span class="w"> </span>-X
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="c1"># Тестування автентифікації через radtest</span>
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>radtest<span class="w"> </span>admin<span class="w"> </span>P@<span class="nv">$$</span>w0rd<span class="w"> </span><span class="m">127</span>.0.0.1<span class="w"> </span><span class="m">0</span><span class="w"> </span>testing123
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="c1"># Параметри: username password server nas-port-number secret</span>
+<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>
+<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a><span class="c1"># Тестування з конкретного NAS IP</span>
+<a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a>radtest<span class="w"> </span>admin<span class="w"> </span>P@<span class="nv">$$</span>w0rd<span class="w"> </span><span class="m">10</span>.60.254.101<span class="w"> </span><span class="m">0</span><span class="w"> </span>C!sc0123<span class="w"> </span>-x
+<a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a>
+<a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a><span class="c1"># Очікуваний успішний результат:</span>
+<a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a><span class="c1"># Received Access-Accept Id 0 from 127.0.0.1:1812 to 0.0.0.0:0 length 20</span>
+</code></pre></div>
+<hr />
+<h2 id="4">4 Налаштування мережевих пристроїв</h2>
+<h3 id="41-cisco-ios-aaa-ssh">4.1 Cisco IOS — базова AAA для SSH</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>! Увімкнути AAA (обов&#39;язковий перший крок)
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>aaa new-model
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>! Authentication: спочатку RADIUS, потім локальна БД як резерв
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>aaa authentication login default group radius local
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>! Authorization: привілеї визначаються RADIUS, резерв — локальна
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>aaa authorization exec default group radius local if-authenticated
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>
+<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a>! Accounting: запис подій початку/завершення сесії
+<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a>aaa accounting exec default start-stop group radius
+<a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a>
+<a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a>! Налаштування RADIUS-сервера (IOS 15+)
+<a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a>radius server RAD1
+<a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a> address ipv4 10.60.254.101 auth-port 1812 acct-port 1813
+<a id="__codelineno-6-16" name="__codelineno-6-16" href="#__codelineno-6-16"></a> key C!sc0123
+<a id="__codelineno-6-17" name="__codelineno-6-17" href="#__codelineno-6-17"></a> timeout 5
+<a id="__codelineno-6-18" name="__codelineno-6-18" href="#__codelineno-6-18"></a> retransmit 3
+<a id="__codelineno-6-19" name="__codelineno-6-19" href="#__codelineno-6-19"></a>
+<a id="__codelineno-6-20" name="__codelineno-6-20" href="#__codelineno-6-20"></a>! Додати резервний RADIUS-сервер
+<a id="__codelineno-6-21" name="__codelineno-6-21" href="#__codelineno-6-21"></a>radius server RAD2
+<a id="__codelineno-6-22" name="__codelineno-6-22" href="#__codelineno-6-22"></a> address ipv4 10.60.254.102 auth-port 1812 acct-port 1813
+<a id="__codelineno-6-23" name="__codelineno-6-23" href="#__codelineno-6-23"></a> key C!sc0123
+<a id="__codelineno-6-24" name="__codelineno-6-24" href="#__codelineno-6-24"></a>
+<a id="__codelineno-6-25" name="__codelineno-6-25" href="#__codelineno-6-25"></a>! Об&#39;єднати сервери в групу
+<a id="__codelineno-6-26" name="__codelineno-6-26" href="#__codelineno-6-26"></a>aaa group server radius RADIUS-SERVERS
+<a id="__codelineno-6-27" name="__codelineno-6-27" href="#__codelineno-6-27"></a> server name RAD1
+<a id="__codelineno-6-28" name="__codelineno-6-28" href="#__codelineno-6-28"></a> server name RAD2
+<a id="__codelineno-6-29" name="__codelineno-6-29" href="#__codelineno-6-29"></a>
+<a id="__codelineno-6-30" name="__codelineno-6-30" href="#__codelineno-6-30"></a>! Використовувати групу в AAA
+<a id="__codelineno-6-31" name="__codelineno-6-31" href="#__codelineno-6-31"></a>aaa authentication login default group RADIUS-SERVERS local
+<a id="__codelineno-6-32" name="__codelineno-6-32" href="#__codelineno-6-32"></a>aaa authorization exec default group RADIUS-SERVERS local if-authenticated
+<a id="__codelineno-6-33" name="__codelineno-6-33" href="#__codelineno-6-33"></a>
+<a id="__codelineno-6-34" name="__codelineno-6-34" href="#__codelineno-6-34"></a>! SSH налаштування
+<a id="__codelineno-6-35" name="__codelineno-6-35" href="#__codelineno-6-35"></a>ip domain-name company.local
+<a id="__codelineno-6-36" name="__codelineno-6-36" href="#__codelineno-6-36"></a>crypto key generate rsa modulus 2048
+<a id="__codelineno-6-37" name="__codelineno-6-37" href="#__codelineno-6-37"></a>ip ssh version 2
+<a id="__codelineno-6-38" name="__codelineno-6-38" href="#__codelineno-6-38"></a>
+<a id="__codelineno-6-39" name="__codelineno-6-39" href="#__codelineno-6-39"></a>line vty 0 4
+<a id="__codelineno-6-40" name="__codelineno-6-40" href="#__codelineno-6-40"></a> login authentication default
+<a id="__codelineno-6-41" name="__codelineno-6-41" href="#__codelineno-6-41"></a> transport input ssh
+<a id="__codelineno-6-42" name="__codelineno-6-42" href="#__codelineno-6-42"></a> exec-timeout 10 0
+</code></pre></div>
+<h3 id="42-cisco-ios-radius">4.2 Cisco IOS — резервна локальна автентифікація при недоступності RADIUS</h3>
+<p><strong>Ключовий момент:</strong> слово <code>local</code> в кінці рядка <code>aaa authentication login default group radius local</code> вже забезпечує fallback. Якщо всі RADIUS-сервери недоступні — IOS автоматично перемикається на локальну базу користувачів.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>! Локальний користувач-резерв (обов&#39;язково створити!)
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>username admin privilege 15 secret Loc@lP@$$w0rd
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>username operator privilege 5 secret Op3r@t0r
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>! AAA з явним fallback
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>aaa authentication login default group radius local
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>!                                               ↑
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>!                              fallback на локальну базу якщо RADIUS недоступний
+<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a>
+<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a>! Додатково — окремий метод тільки для console (без RADIUS)
+<a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a>aaa authentication login CONSOLE-AUTH local
+<a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a>line con 0
+<a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a> login authentication CONSOLE-AUTH
+<a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a> exec-timeout 30 0
+</code></pre></div>
+<div class="admonition danger">
+<p class="admonition-title">Обов'язково створи локального адміна!</p>
+<p>Без локального fallback-користувача при недоступному RADIUS-сервері ти втратиш доступ до пристрою. Завжди створюй <code>username admin privilege 15 secret</code> і перевіряй що <code>local</code> є в рядку AAA.</p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">Поведінка fallback</p>
+<p><code>local</code> — використовує локальну базу якщо RADIUS <strong>недоступний</strong> (timeout).
+<code>local</code> НЕ використовується якщо RADIUS відповів <strong>Access-Reject</strong> (невірний пароль). В такому разі вхід просто відхиляється.</p>
+</div>
+<h3 id="43-cisco-ios-radius">4.3 Cisco IOS — налаштування таймаутів RADIUS</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>! Глобальні таймаути (застарілий метод)
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>radius-server timeout 5
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>radius-server retransmit 2
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>radius-server deadtime 10      ! хвилини — не звертатись до мертвого сервера
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>! Нові команди (IOS 15+, в конфігурації сервера):
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>radius server RAD1
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a> address ipv4 10.60.254.101 auth-port 1812 acct-port 1813
+<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a> key C!sc0123
+<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a> timeout 5                     ! сек очікувати відповідь
+<a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a> retransmit 2                  ! кількість повторних спроб
+<a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a>
+<a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a>! Deadtime — не звертатись до недоступного сервера N хвилин
+<a id="__codelineno-8-14" name="__codelineno-8-14" href="#__codelineno-8-14"></a>aaa group server radius RADIUS-SERVERS
+<a id="__codelineno-8-15" name="__codelineno-8-15" href="#__codelineno-8-15"></a> server name RAD1
+<a id="__codelineno-8-16" name="__codelineno-8-16" href="#__codelineno-8-16"></a> server name RAD2
+<a id="__codelineno-8-17" name="__codelineno-8-17" href="#__codelineno-8-17"></a> deadtime 5                    ! 5 хвилин пропускати недоступний сервер
+</code></pre></div>
+<h3 id="44-mikrotik-routeros">4.4 MikroTik RouterOS</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a># Додати RADIUS-сервер
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>/radius
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>add address=10.60.254.101 \
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>    secret=C!sc0123 \
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>    service=login \
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>    authentication-port=1812 \
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>    accounting-port=1813 \
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>    timeout=5000 \
+<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a>    comment=&quot;Primary RADIUS&quot;
+<a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a>
+<a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a># Резервний RADIUS-сервер
+<a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a>/radius
+<a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a>add address=10.60.254.102 \
+<a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a>    secret=C!sc0123 \
+<a id="__codelineno-9-15" name="__codelineno-9-15" href="#__codelineno-9-15"></a>    service=login \
+<a id="__codelineno-9-16" name="__codelineno-9-16" href="#__codelineno-9-16"></a>    authentication-port=1812 \
+<a id="__codelineno-9-17" name="__codelineno-9-17" href="#__codelineno-9-17"></a>    accounting-port=1813 \
+<a id="__codelineno-9-18" name="__codelineno-9-18" href="#__codelineno-9-18"></a>    timeout=5000 \
+<a id="__codelineno-9-19" name="__codelineno-9-19" href="#__codelineno-9-19"></a>    comment=&quot;Backup RADIUS&quot;
+<a id="__codelineno-9-20" name="__codelineno-9-20" href="#__codelineno-9-20"></a>
+<a id="__codelineno-9-21" name="__codelineno-9-21" href="#__codelineno-9-21"></a># Увімкнути RADIUS для входу в систему
+<a id="__codelineno-9-22" name="__codelineno-9-22" href="#__codelineno-9-22"></a>/radius incoming
+<a id="__codelineno-9-23" name="__codelineno-9-23" href="#__codelineno-9-23"></a>set accept=yes
+<a id="__codelineno-9-24" name="__codelineno-9-24" href="#__codelineno-9-24"></a>
+<a id="__codelineno-9-25" name="__codelineno-9-25" href="#__codelineno-9-25"></a># Налаштування AAA
+<a id="__codelineno-9-26" name="__codelineno-9-26" href="#__codelineno-9-26"></a>/user aaa
+<a id="__codelineno-9-27" name="__codelineno-9-27" href="#__codelineno-9-27"></a>set use-radius=yes \
+<a id="__codelineno-9-28" name="__codelineno-9-28" href="#__codelineno-9-28"></a>    accounting=yes \
+<a id="__codelineno-9-29" name="__codelineno-9-29" href="#__codelineno-9-29"></a>    interim-update=5m
+<a id="__codelineno-9-30" name="__codelineno-9-30" href="#__codelineno-9-30"></a>
+<a id="__codelineno-9-31" name="__codelineno-9-31" href="#__codelineno-9-31"></a># Резервний локальний користувач (fallback)
+<a id="__codelineno-9-32" name="__codelineno-9-32" href="#__codelineno-9-32"></a>/user
+<a id="__codelineno-9-33" name="__codelineno-9-33" href="#__codelineno-9-33"></a>add name=localadmin \
+<a id="__codelineno-9-34" name="__codelineno-9-34" href="#__codelineno-9-34"></a>    password=Loc@lP@$$w0rd \
+<a id="__codelineno-9-35" name="__codelineno-9-35" href="#__codelineno-9-35"></a>    group=full \
+<a id="__codelineno-9-36" name="__codelineno-9-36" href="#__codelineno-9-36"></a>    comment=&quot;Local fallback if RADIUS unavailable&quot;
+</code></pre></div>
+<div class="admonition info">
+<p class="admonition-title">MikroTik failover поведінка</p>
+<p>MikroTik автоматично перемикається на локальних користувачів якщо всі RADIUS-сервери не відповідають. Порядок перевірки: спочатку всі RADIUS-сервери зі списку по черзі, потім — локальна база <code>/user</code>.</p>
+</div>
+<hr />
+<h2 id="5-cisco-ios-radius-8021x-port-based-authentication">5 Cisco IOS — RADIUS для 802.1X (Port-Based Authentication)</h2>
+<p>802.1X — стандарт аутентифікації на рівні порту комутатора. Кінцевий пристрій (PC) повинен автентифікуватись через RADIUS перш ніж отримає доступ до мережі.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>Схема: [PC (Supplicant)] ──EAP──► [SW (Authenticator)] ──RADIUS──► [FreeRADIUS (Auth Server)]
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>! Увімкнути dot1x глобально
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>aaa new-model
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>dot1x system-auth-control
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>! AAA для 802.1X
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>aaa authentication dot1x default group radius
+<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a>aaa authorization network default group radius
+<a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a>
+<a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a>! RADIUS-сервер
+<a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a>radius server RAD1
+<a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a> address ipv4 10.60.254.101 auth-port 1812 acct-port 1813
+<a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a> key C!sc0123
+<a id="__codelineno-11-13" name="__codelineno-11-13" href="#__codelineno-11-13"></a>
+<a id="__codelineno-11-14" name="__codelineno-11-14" href="#__codelineno-11-14"></a>! Налаштування порту (access port для кінцевих пристроїв)
+<a id="__codelineno-11-15" name="__codelineno-11-15" href="#__codelineno-11-15"></a>interface GigabitEthernet0/1
+<a id="__codelineno-11-16" name="__codelineno-11-16" href="#__codelineno-11-16"></a> switchport mode access
+<a id="__codelineno-11-17" name="__codelineno-11-17" href="#__codelineno-11-17"></a> switchport access vlan 10
+<a id="__codelineno-11-18" name="__codelineno-11-18" href="#__codelineno-11-18"></a> authentication port-control auto          ! увімкнути 802.1X
+<a id="__codelineno-11-19" name="__codelineno-11-19" href="#__codelineno-11-19"></a> dot1x pae authenticator
+<a id="__codelineno-11-20" name="__codelineno-11-20" href="#__codelineno-11-20"></a> authentication host-mode single-host      ! один пристрій на порту
+<a id="__codelineno-11-21" name="__codelineno-11-21" href="#__codelineno-11-21"></a> authentication order dot1x mab           ! спочатку 802.1X, потім MAB
+<a id="__codelineno-11-22" name="__codelineno-11-22" href="#__codelineno-11-22"></a> authentication priority dot1x mab
+<a id="__codelineno-11-23" name="__codelineno-11-23" href="#__codelineno-11-23"></a> spanning-tree portfast
+</code></pre></div>
+<h3 id="51-mab-mac-authentication-bypass-8021x">5.1 MAB (MAC Authentication Bypass) — для пристроїв без 802.1X</h3>
+<p>Принтери, IP-камери, IoT-пристрої не підтримують 802.1X. MAB автентифікує їх за MAC-адресою.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>interface GigabitEthernet0/2
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a> switchport mode access
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a> authentication port-control auto
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a> mab                                       ! увімкнути MAB
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a> dot1x pae authenticator
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a> authentication order mab dot1x           ! спочатку MAB, потім 802.1X
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="c1"># На FreeRADIUS — додати MAC-адресу до users</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="c1"># (MAC вводиться без роздільників, у нижньому регістрі)</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="c1"># Файл: /etc/freeradius/3.0/users</span>
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="m">001122334455</span><span class="w">  </span>Cleartext-Password<span class="w"> </span>:<span class="o">=</span><span class="w"> </span><span class="s2">&quot;001122334455&quot;</span>
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a><span class="w">              </span>Service-Type<span class="w"> </span><span class="o">=</span><span class="w"> </span>Call-Check,
+<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a><span class="w">              </span>Tunnel-Type<span class="w"> </span><span class="o">=</span><span class="w"> </span>VLAN,
+<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a><span class="w">              </span>Tunnel-Medium-Type<span class="w"> </span><span class="o">=</span><span class="w"> </span>IEEE-802,
+<a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a><span class="w">              </span>Tunnel-Private-Group-Id<span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;20&quot;</span><span class="w">     </span><span class="c1"># VLAN для цього пристрою</span>
+</code></pre></div>
+<h3 id="52-vlan-radius">5.2 Динамічне призначення VLAN через RADIUS</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="c1"># Файл: /etc/freeradius/3.0/users</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="c1"># Користувач отримає VLAN 10 (Users)</span>
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>john<span class="w">   </span>Cleartext-Password<span class="w"> </span>:<span class="o">=</span><span class="w"> </span><span class="s2">&quot;Password123&quot;</span>
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a><span class="w">       </span>Tunnel-Type<span class="w"> </span><span class="o">=</span><span class="w"> </span>VLAN,
+<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a><span class="w">       </span>Tunnel-Medium-Type<span class="w"> </span><span class="o">=</span><span class="w"> </span>IEEE-802,
+<a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a><span class="w">       </span>Tunnel-Private-Group-Id<span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;10&quot;</span>
+<a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a>
+<a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a><span class="c1"># Адміністратор отримає VLAN 100 (Management)</span>
+<a id="__codelineno-14-10" name="__codelineno-14-10" href="#__codelineno-14-10"></a>admin<span class="w">   </span>Cleartext-Password<span class="w"> </span>:<span class="o">=</span><span class="w"> </span><span class="s2">&quot;AdminPass&quot;</span>
+<a id="__codelineno-14-11" name="__codelineno-14-11" href="#__codelineno-14-11"></a><span class="w">        </span>Tunnel-Type<span class="w"> </span><span class="o">=</span><span class="w"> </span>VLAN,
+<a id="__codelineno-14-12" name="__codelineno-14-12" href="#__codelineno-14-12"></a><span class="w">        </span>Tunnel-Medium-Type<span class="w"> </span><span class="o">=</span><span class="w"> </span>IEEE-802,
+<a id="__codelineno-14-13" name="__codelineno-14-13" href="#__codelineno-14-13"></a><span class="w">        </span>Tunnel-Private-Group-Id<span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;100&quot;</span>
+</code></pre></div>
+<hr />
+<h2 id="6-freeradius-mysql">6 Налаштування FreeRADIUS для роботи з базою даних (MySQL)</h2>
+<p>Для великих мереж зберігання користувачів у файлі <code>users</code> стає незручним. FreeRADIUS підтримує SQL-бази даних.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="c1"># Встановити пакет</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>freeradius-mysql<span class="w"> </span>libmysqlclient-dev<span class="w"> </span>mysql-server
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="c1"># Налаштувати базу даних</span>
+<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a>mysql<span class="w"> </span>-u<span class="w"> </span>root<span class="w"> </span>-p<span class="w"> </span><span class="s">&lt;&lt;EOF</span>
+<a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a><span class="s">CREATE DATABASE radius;</span>
+<a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a><span class="s">CREATE USER &#39;radius&#39;@&#39;localhost&#39; IDENTIFIED BY &#39;radpass&#39;;</span>
+<a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a><span class="s">GRANT ALL PRIVILEGES ON radius.* TO &#39;radius&#39;@&#39;localhost&#39;;</span>
+<a id="__codelineno-15-9" name="__codelineno-15-9" href="#__codelineno-15-9"></a><span class="s">FLUSH PRIVILEGES;</span>
+<a id="__codelineno-15-10" name="__codelineno-15-10" href="#__codelineno-15-10"></a><span class="s">EOF</span>
+<a id="__codelineno-15-11" name="__codelineno-15-11" href="#__codelineno-15-11"></a>
+<a id="__codelineno-15-12" name="__codelineno-15-12" href="#__codelineno-15-12"></a><span class="c1"># Імпортувати схему</span>
+<a id="__codelineno-15-13" name="__codelineno-15-13" href="#__codelineno-15-13"></a>mysql<span class="w"> </span>-u<span class="w"> </span>radius<span class="w"> </span>-p<span class="w"> </span>radius<span class="w"> </span>&lt;<span class="w"> </span>/etc/freeradius/3.0/mods-config/sql/main/mysql/schema.sql
+<a id="__codelineno-15-14" name="__codelineno-15-14" href="#__codelineno-15-14"></a>
+<a id="__codelineno-15-15" name="__codelineno-15-15" href="#__codelineno-15-15"></a><span class="c1"># Увімкнути модуль SQL</span>
+<a id="__codelineno-15-16" name="__codelineno-15-16" href="#__codelineno-15-16"></a>ln<span class="w"> </span>-s<span class="w"> </span>/etc/freeradius/3.0/mods-available/sql<span class="w"> </span>/etc/freeradius/3.0/mods-enabled/sql
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a># Файл: /etc/freeradius/3.0/mods-enabled/sql
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>sql {
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>    dialect = &quot;mysql&quot;
+<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a>    driver = &quot;rlm_sql_mysql&quot;
+<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a>    server = &quot;localhost&quot;
+<a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a>    port = 3306
+<a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a>    login = &quot;radius&quot;
+<a id="__codelineno-16-8" name="__codelineno-16-8" href="#__codelineno-16-8"></a>    password = &quot;radpass&quot;
+<a id="__codelineno-16-9" name="__codelineno-16-9" href="#__codelineno-16-9"></a>    radius_db = &quot;radius&quot;
+<a id="__codelineno-16-10" name="__codelineno-16-10" href="#__codelineno-16-10"></a>    read_clients = yes
+<a id="__codelineno-16-11" name="__codelineno-16-11" href="#__codelineno-16-11"></a>    client_table = &quot;nas&quot;
+<a id="__codelineno-16-12" name="__codelineno-16-12" href="#__codelineno-16-12"></a>}
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="c1"># Додати користувача через SQL</span>
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>mysql<span class="w"> </span>-u<span class="w"> </span>radius<span class="w"> </span>-p<span class="w"> </span>radius<span class="w"> </span><span class="s">&lt;&lt;EOF</span>
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="s">INSERT INTO radcheck (username, attribute, op, value)</span>
+<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a><span class="s">VALUES (&#39;admin&#39;, &#39;Cleartext-Password&#39;, &#39;:=&#39;, &#39;P@$$w0rd&#39;);</span>
+<a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a>
+<a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a><span class="s">INSERT INTO radreply (username, attribute, op, value)</span>
+<a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a><span class="s">VALUES (&#39;admin&#39;, &#39;Cisco-AVPair&#39;, &#39;=&#39;, &#39;shell:priv-lvl=15&#39;);</span>
+<a id="__codelineno-17-8" name="__codelineno-17-8" href="#__codelineno-17-8"></a>
+<a id="__codelineno-17-9" name="__codelineno-17-9" href="#__codelineno-17-9"></a><span class="s">INSERT INTO radreply (username, attribute, op, value)</span>
+<a id="__codelineno-17-10" name="__codelineno-17-10" href="#__codelineno-17-10"></a><span class="s">VALUES (&#39;admin&#39;, &#39;Service-Type&#39;, &#39;=&#39;, &#39;NAS-Prompt-User&#39;);</span>
+<a id="__codelineno-17-11" name="__codelineno-17-11" href="#__codelineno-17-11"></a><span class="s">EOF</span>
+</code></pre></div>
+<hr />
+<h2 id="7">7 Перевірка та діагностика</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="c1"># Debug-режим FreeRADIUS (зупинити сервіс спочатку!)</span>
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>systemctl<span class="w"> </span>stop<span class="w"> </span>freeradius
+<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a>freeradius<span class="w"> </span>-X<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s2">&quot;Login|REJECT|ACCEPT|ERROR&quot;</span>
+<a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a>
+<a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a><span class="c1"># Тестування конкретного користувача</span>
+<a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a>radtest<span class="w"> </span>admin<span class="w"> </span>P@<span class="nv">$$</span>w0rd<span class="w"> </span><span class="m">127</span>.0.0.1<span class="w"> </span><span class="m">0</span><span class="w"> </span>testing123
+<a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a>
+<a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a><span class="c1"># Тестування з NAS IP (важливо для перевірки clients.conf)</span>
+<a id="__codelineno-18-9" name="__codelineno-18-9" href="#__codelineno-18-9"></a>radtest<span class="w"> </span>-n<span class="w"> </span><span class="m">1</span><span class="w"> </span>admin<span class="w"> </span>P@<span class="nv">$$</span>w0rd<span class="w"> </span><span class="m">10</span>.60.254.101<span class="w"> </span><span class="m">0</span><span class="w"> </span>C!sc0123
+<a id="__codelineno-18-10" name="__codelineno-18-10" href="#__codelineno-18-10"></a>
+<a id="__codelineno-18-11" name="__codelineno-18-11" href="#__codelineno-18-11"></a><span class="c1"># Тестування accounting</span>
+<a id="__codelineno-18-12" name="__codelineno-18-12" href="#__codelineno-18-12"></a>radclient<span class="w"> </span><span class="m">10</span>.60.254.101:1813<span class="w"> </span>acct<span class="w"> </span>C!sc0123<span class="w"> </span><span class="s">&lt;&lt;EOF</span>
+<a id="__codelineno-18-13" name="__codelineno-18-13" href="#__codelineno-18-13"></a><span class="s">Acct-Status-Type = Start</span>
+<a id="__codelineno-18-14" name="__codelineno-18-14" href="#__codelineno-18-14"></a><span class="s">User-Name = admin</span>
+<a id="__codelineno-18-15" name="__codelineno-18-15" href="#__codelineno-18-15"></a><span class="s">NAS-IP-Address = 10.60.254.1</span>
+<a id="__codelineno-18-16" name="__codelineno-18-16" href="#__codelineno-18-16"></a><span class="s">Acct-Session-Id = test-session-001</span>
+<a id="__codelineno-18-17" name="__codelineno-18-17" href="#__codelineno-18-17"></a><span class="s">EOF</span>
+<a id="__codelineno-18-18" name="__codelineno-18-18" href="#__codelineno-18-18"></a>
+<a id="__codelineno-18-19" name="__codelineno-18-19" href="#__codelineno-18-19"></a><span class="c1"># Перегляд логів</span>
+<a id="__codelineno-18-20" name="__codelineno-18-20" href="#__codelineno-18-20"></a>tail<span class="w"> </span>-f<span class="w"> </span>/var/log/freeradius/radius.log
+<a id="__codelineno-18-21" name="__codelineno-18-21" href="#__codelineno-18-21"></a>
+<a id="__codelineno-18-22" name="__codelineno-18-22" href="#__codelineno-18-22"></a><span class="c1"># На Cisco — перевірити стан RADIUS</span>
+<a id="__codelineno-18-23" name="__codelineno-18-23" href="#__codelineno-18-23"></a>show<span class="w"> </span>aaa<span class="w"> </span>servers
+<a id="__codelineno-18-24" name="__codelineno-18-24" href="#__codelineno-18-24"></a>show<span class="w"> </span>radius<span class="w"> </span>statistics
+<a id="__codelineno-18-25" name="__codelineno-18-25" href="#__codelineno-18-25"></a>show<span class="w"> </span>radius<span class="w"> </span>server-groups
+<a id="__codelineno-18-26" name="__codelineno-18-26" href="#__codelineno-18-26"></a>debug<span class="w"> </span>radius<span class="w"> </span>authentication
+<a id="__codelineno-18-27" name="__codelineno-18-27" href="#__codelineno-18-27"></a>debug<span class="w"> </span>radius<span class="w"> </span>accounting
+<a id="__codelineno-18-28" name="__codelineno-18-28" href="#__codelineno-18-28"></a>no<span class="w"> </span>debug<span class="w"> </span>all
+</code></pre></div>
+<h3 id="71">7.1 Типові помилки</h3>
+<table>
+<thead>
+<tr>
+<th>Помилка</th>
+<th>Причина</th>
+<th>Рішення</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Access-Reject</code></td>
+<td>Невірний пароль або користувач</td>
+<td>Перевірити запис у <code>users</code></td>
+</tr>
+<tr>
+<td><code>No response</code></td>
+<td>NAS не в <code>clients.conf</code> або невірний secret</td>
+<td>Додати клієнт, перевірити IP</td>
+</tr>
+<tr>
+<td><code>Connection refused</code></td>
+<td>FreeRADIUS не запущений або закритий порт</td>
+<td><code>systemctl status freeradius</code>, <code>ufw allow 1812/udp</code></td>
+</tr>
+<tr>
+<td>Cisco: <code>%AAA-I-CONNECT</code></td>
+<td>Успішне підключення через RADIUS</td>
+<td>Норма</td>
+</tr>
+<tr>
+<td>Cisco: <code>%AAA-I-DISCONNECT</code></td>
+<td>Відключення — записано в Accounting</td>
+<td>Норма</td>
+</tr>
+<tr>
+<td>MikroTik: <code>timeout</code></td>
+<td>RADIUS не відповідає</td>
+<td>Перевірити IP, secret, firewall</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<blockquote>
+<p>📌 <strong>Після кожної зміни конфігурації FreeRADIUS:</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>systemctl<span class="w"> </span>restart<span class="w"> </span>freeradius<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>radtest<span class="w"> </span>admin<span class="w"> </span>P@<span class="nv">$$</span>w0rd<span class="w"> </span><span class="m">127</span>.0.0.1<span class="w"> </span><span class="m">0</span><span class="w"> </span>testing123
+</code></pre></div></p>
+</blockquote>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Повернутись нагору
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      © 2026 Кафедра №21 - Bci права захищені
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://mitit.mil.gov.ua/page/faculty2" target="_blank" rel="noopener" title="mitit.mil.gov.ua" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M16.36 14c.08-.66.14-1.32.14-2s-.06-1.34-.14-2h3.38c.16.64.26 1.31.26 2s-.1 1.36-.26 2m-5.15 5.56c.6-1.11 1.06-2.31 1.38-3.56h2.95a8.03 8.03 0 0 1-4.33 3.56M14.34 14H9.66c-.1-.66-.16-1.32-.16-2s.06-1.35.16-2h4.68c.09.65.16 1.32.16 2s-.07 1.34-.16 2M12 19.96c-.83-1.2-1.5-2.53-1.91-3.96h3.82c-.41 1.43-1.08 2.76-1.91 3.96M8 8H5.08A7.92 7.92 0 0 1 9.4 4.44C8.8 5.55 8.35 6.75 8 8m-2.92 8H8c.35 1.25.8 2.45 1.4 3.56A8 8 0 0 1 5.08 16m-.82-2C4.1 13.36 4 12.69 4 12s.1-1.36.26-2h3.38c-.08.66-.14 1.32-.14 2s.06 1.34.14 2M12 4.03c.83 1.2 1.5 2.54 1.91 3.97h-3.82c.41-1.43 1.08-2.77 1.91-3.97M18.92 8h-2.95a15.7 15.7 0 0 0-1.38-3.56c1.84.63 3.37 1.9 4.33 3.56M12 2C6.47 2 2 6.5 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "content.code.copy", "search.suggest", "search.highlight"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u0421\u043a\u043e\u043f\u0456\u0439\u043e\u0432\u0430\u043d\u043e \u0432 \u0431\u0443\u0444\u0435\u0440", "clipboard.copy": "\u0421\u043a\u043e\u043f\u0456\u044e\u0432\u0430\u0442\u0438 \u0432 \u0431\u0443\u0444\u0435\u0440", "search.result.more.one": "\u0429\u0435 1 \u0437\u0431\u0456\u0433 \u043d\u0430 \u0446\u0456\u0439 \u0441\u0442\u043e\u0440\u0456\u043d\u0446\u0456", "search.result.more.other": "\u0429\u0435 # \u0437\u0431\u0456\u0433\u0456\u0432 \u043d\u0430 \u0446\u0456\u0439 \u0441\u0442\u043e\u0440\u0456\u043d\u0446\u0456", "search.result.none": "\u0417\u0431\u0456\u0433\u0456\u0432 \u043d\u0435 \u0437\u043d\u0430\u0439\u0434\u0435\u043d\u043e", "search.result.one": "\u0417\u043d\u0430\u0439\u0434\u0435\u043d\u043e 1 \u0437\u0431\u0456\u0433", "search.result.other": "\u0417\u043d\u0430\u0439\u0434\u0435\u043d\u043e # \u0437\u0431\u0456\u0433\u0456\u0432", "search.result.placeholder": "\u0420\u043e\u0437\u043f\u043e\u0447\u043d\u0456\u0442\u044c \u043f\u0438\u0441\u0430\u0442\u0438 \u0434\u043b\u044f \u043f\u043e\u0448\u0443\u043a\u0443", "search.result.term.missing": "\u041d\u0435 \u0437\u043d\u0430\u0439\u0434\u0435\u043d\u043e \u0437\u0430\u043f\u0438\u0442\u0443", "select.version": "\u041e\u0431\u0440\u0430\u0442\u0438 \u0432\u0435\u0440\u0441\u0456\u044e"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

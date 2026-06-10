@@ -1,0 +1,4259 @@
+
+<!doctype html>
+<html lang="uk" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="Створено колективом кафедри №21">
+      
+      
+      
+        <link rel="prev" href="../iptables/">
+      
+      
+        <link rel="next" href="../apt-cacher-ng/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/logo_dep21_white.ico">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>TCPDump - Довідник кафедри Інформаційних систем та технологій</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#tcpdump-" class="md-skip">
+          Перейти до змісту
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Хедер">
+    <a href="../.." title="Довідник кафедри Інформаційних систем та технологій" class="md-header__button md-logo" aria-label="Довідник кафедри Інформаційних систем та технологій" data-md-component="logo">
+      
+  <img src="../../assets/logo_dep21_white.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Довідник кафедри Інформаційних систем та технологій
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              TCPDump
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Перейти на темну тему"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Перейти на темну тему" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="indigo"  aria-label="Перейти на світлу тему"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Перейти на світлу тему" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Пошук" placeholder="Пошук" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Шукати">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Очистити" aria-label="Очистити" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Пошук розпочато
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Вкладки" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../.." class="md-tabs__link">
+          
+  
+  
+  🏠 Головна
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../network-configs/" class="md-tabs__link">
+          
+  
+  
+  🌐 Мережі
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+  🖥️ Сервіси
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Навігація" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Довідник кафедри Інформаційних систем та технологій" class="md-nav__button md-logo" aria-label="Довідник кафедри Інформаційних систем та технологій" data-md-component="logo">
+      
+  <img src="../../assets/logo_dep21_white.png" alt="logo">
+
+    </a>
+    Довідник кафедри Інформаційних систем та технологій
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🏠 Головна
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    🏠 Головна
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    👋Вступ
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../pnet/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🧪Інструкція з користування PNET Lab
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network-configs/subnet-calculator/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Калькулятор маски підмереж
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chmod-calculator/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Калькулятор прав Linux
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🌐 Мережі
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    🌐 Мережі
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network-configs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Вступ до мереж
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network-configs/IP-interfaces/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IP інтерфейси
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network-configs/vlans/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VLAN та Trunk
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network-configs/vlans-mikrotik/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VLAN в Mikrotik
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network-configs/stp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    STP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network-configs/routing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Маршрутизація
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network-configs/isp-failover/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dual WAN
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network-configs/ACL/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Контроль доступу
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network-configs/cisco-nat/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NAT в Cisco
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network-configs/dhcp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DHCP-сервер
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network-configs/ipsec/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IPsec в Cisco
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network-configs/ospf/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OSPF
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network-configs/cisco-cheat-sheet/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cisco cheat sheet
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network-configs/subnet-calculator/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Калькулятор маски підмереж
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🖥️ Сервіси
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    🖥️ Сервіси
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Сервіси на базі OC Linux
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../linux-network-interfaces/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ip addr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ssh/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SSH
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../radius/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RADIUS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../syslog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SYSLOG
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../iptables/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    iptables
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    TCPDump
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    TCPDump
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Зміст">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Зміст
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📋 Зміст
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Встановлення
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Встановлення">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        За операційною системою
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="За операційною системою">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ubuntu" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔵 Ubuntu
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#centosalma" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🟠 Centos/Alma
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Перевірка встановлення
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Основні поняття
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Основні поняття">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Що таке пакет?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tcpdump" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Навіщо потрібен TCPDump?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tcpdump_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Протоколи, які підтримує TCPDump
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Швидкий старт
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Швидкий старт">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Найпростіша команда
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Зупинення захоплення
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Параметри захоплення
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Параметри захоплення">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Вибір інтерфейсу
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Вибір інтерфейсу">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Захопити з усіх інтерфейсів
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Захопити з конкретного інтерфейсу
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Показати доступні інтерфейси
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Контроль кількості пакетів
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Контроль кількості пакетів">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Захопити тільки перші 10 пакетів
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#100" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Захопити 100 пакетів
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Збереження в файл
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Збереження в файл">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Зберегти захоплення
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#50" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Зберегти перші 50 пакетів
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Читання збереженого файлу
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Опції виводу
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Опції виводу">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Форматування виводу
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Форматування виводу">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-ascii" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. ASCII формат
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-hex" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. HEX формат
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-hex-ascii" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. HEX + ASCII
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-hex" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. HEX з заголовками
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_18" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Контроль деталізації
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Контроль деталізації">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_19" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Мінімальна інформація
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_20" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Базова деталізація
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Розширена інформація
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Дуже розширена інформація
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Максимальна деталізація
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_24" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Інші опції
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_25" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Фільтрація трафіку
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Фільтрація трафіку">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_26" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Фільтрація за протоколами
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Фільтрація за протоколами">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tcp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Захопити тільки TCP пакети
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#udp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Захопити тільки UDP пакети
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#icmp-ping" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Захопити тільки ICMP пакети (ping)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ipv6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Захопити тільки IPv6
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_27" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Фільтрація за портами
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Фільтрація за портами">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_28" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Трафік на конкретному порту
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_29" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Трафік на кількох портах
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_30" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Трафік в діапазоні портів
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_31" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Вхідний трафік на порт
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Вихідний трафік з порту
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ip" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Фільтрація за IP адресами
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Фільтрація за IP адресами">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_33" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Весь трафік з конкретного хоста
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_34" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Трафік від конкретного хоста
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_35" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Трафік до конкретного хоста
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_36" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Трафік між двома хостами
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_37" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Фільтрація за підмережами
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Фільтрація за підмережами">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_38" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Весь трафік з підмережі
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_39" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Трафік з конкретної підмережі
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_40" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Трафік до конкретної підмережі
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_41" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Фільтрація за типами трафіку
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Фільтрація за типами трафіку">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#broadcast-ethernet" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Broadcast пакети (для Ethernet)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#broadcast-ip" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Broadcast пакети (для IP)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#multicast" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Multicast пакети
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_42" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Фільтрація за розміром пакета
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Фільтрація за розміром пакета">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Пакети менші за 32 байти
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1000" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Пакети більші за 1000 байтів
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#64" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Пакети розміром рівно 64 байти
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_43" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Практичні сценарії
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Практичні сценарії">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Сценарій 1: Налагодження веб-сервера
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-ssh" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Сценарій 2: Моніторинг SSH підключень
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-dns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Сценарій 3: Аналіз DNS запитів
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-ip" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Сценарій 4: Захоплення трафіку конкретного IP
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Сценарій 5: Перевірка подвійного шифрування
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Сценарій 6: Знаходження повільної мережі
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_44" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Логічні оператори
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Логічні оператори">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#and" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Оператор AND
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#or" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Оператор OR
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#not-except" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Оператор NOT (EXCEPT)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_45" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Комбіновані вирази
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lifehacks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lifehacks
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Lifehacks">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_46" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        💾 Запис та аналіз в реальному часі
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_47" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔄 Фільтрування після захоплення
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_48" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🎯 Екстра деталізація для налагодження
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_49" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📊 Статистика трафіку
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_50" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🛡️ Виявлення сканування портів
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mtu" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔍 Перевірка MTU проблем
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_51" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ⏱️ Моніторинг в реальному часі з повільним оновленням
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_52" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🎓 Навчання та демонстрація
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_53" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Усунення неполадок
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Усунення неполадок">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#permission-denied" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ❌ Помилка: "Permission denied"
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#no-such-device" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ❌ Помилка: "No such device"
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#device-not-up" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ❌ Помилка: "Device not up"
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_54" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ❌ Нема даних/пакетів
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_55" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Шпаргалка для швидкого використання
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../apt-cacher-ng/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    APT Cacher
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chmod-calculator/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Калькулятор прав Linux
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Зміст">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Зміст
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📋 Зміст
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Встановлення
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Встановлення">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        За операційною системою
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="За операційною системою">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ubuntu" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔵 Ubuntu
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#centosalma" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🟠 Centos/Alma
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Перевірка встановлення
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Основні поняття
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Основні поняття">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Що таке пакет?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tcpdump" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Навіщо потрібен TCPDump?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tcpdump_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Протоколи, які підтримує TCPDump
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Швидкий старт
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Швидкий старт">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Найпростіша команда
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Зупинення захоплення
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Параметри захоплення
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Параметри захоплення">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Вибір інтерфейсу
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Вибір інтерфейсу">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Захопити з усіх інтерфейсів
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Захопити з конкретного інтерфейсу
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Показати доступні інтерфейси
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Контроль кількості пакетів
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Контроль кількості пакетів">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Захопити тільки перші 10 пакетів
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#100" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Захопити 100 пакетів
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Збереження в файл
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Збереження в файл">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Зберегти захоплення
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#50" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Зберегти перші 50 пакетів
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Читання збереженого файлу
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Опції виводу
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Опції виводу">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Форматування виводу
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Форматування виводу">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-ascii" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. ASCII формат
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-hex" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. HEX формат
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-hex-ascii" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. HEX + ASCII
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-hex" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. HEX з заголовками
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_18" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Контроль деталізації
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Контроль деталізації">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_19" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Мінімальна інформація
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_20" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Базова деталізація
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Розширена інформація
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Дуже розширена інформація
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Максимальна деталізація
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_24" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Інші опції
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_25" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Фільтрація трафіку
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Фільтрація трафіку">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_26" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Фільтрація за протоколами
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Фільтрація за протоколами">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tcp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Захопити тільки TCP пакети
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#udp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Захопити тільки UDP пакети
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#icmp-ping" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Захопити тільки ICMP пакети (ping)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ipv6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Захопити тільки IPv6
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_27" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Фільтрація за портами
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Фільтрація за портами">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_28" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Трафік на конкретному порту
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_29" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Трафік на кількох портах
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_30" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Трафік в діапазоні портів
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_31" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Вхідний трафік на порт
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Вихідний трафік з порту
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ip" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Фільтрація за IP адресами
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Фільтрація за IP адресами">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_33" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Весь трафік з конкретного хоста
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_34" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Трафік від конкретного хоста
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_35" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Трафік до конкретного хоста
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_36" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Трафік між двома хостами
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_37" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Фільтрація за підмережами
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Фільтрація за підмережами">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_38" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Весь трафік з підмережі
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_39" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Трафік з конкретної підмережі
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_40" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Трафік до конкретної підмережі
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_41" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Фільтрація за типами трафіку
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Фільтрація за типами трафіку">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#broadcast-ethernet" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Broadcast пакети (для Ethernet)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#broadcast-ip" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Broadcast пакети (для IP)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#multicast" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Multicast пакети
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_42" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Фільтрація за розміром пакета
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Фільтрація за розміром пакета">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Пакети менші за 32 байти
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1000" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Пакети більші за 1000 байтів
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#64" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Пакети розміром рівно 64 байти
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_43" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Практичні сценарії
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Практичні сценарії">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Сценарій 1: Налагодження веб-сервера
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-ssh" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Сценарій 2: Моніторинг SSH підключень
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-dns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Сценарій 3: Аналіз DNS запитів
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-ip" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Сценарій 4: Захоплення трафіку конкретного IP
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Сценарій 5: Перевірка подвійного шифрування
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Сценарій 6: Знаходження повільної мережі
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_44" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Логічні оператори
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Логічні оператори">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#and" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Оператор AND
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#or" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Оператор OR
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#not-except" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Оператор NOT (EXCEPT)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_45" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Комбіновані вирази
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lifehacks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lifehacks
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Lifehacks">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_46" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        💾 Запис та аналіз в реальному часі
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_47" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔄 Фільтрування після захоплення
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_48" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🎯 Екстра деталізація для налагодження
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_49" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📊 Статистика трафіку
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_50" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🛡️ Виявлення сканування портів
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mtu" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔍 Перевірка MTU проблем
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_51" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ⏱️ Моніторинг в реальному часі з повільним оновленням
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_52" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🎓 Навчання та демонстрація
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_53" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Усунення неполадок
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Усунення неполадок">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#permission-denied" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ❌ Помилка: "Permission denied"
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#no-such-device" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ❌ Помилка: "No such device"
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#device-not-up" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ❌ Помилка: "Device not up"
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_54" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ❌ Нема даних/пакетів
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_55" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Шпаргалка для швидкого використання
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="tcpdump-">TCPdump - посібник з аналізу мережевого трафіку</h1>
+<blockquote>
+<p><strong>TCPdump</strong> - це потужна утиліта командного рядка для захоплення та аналізу мережевих пакетів. Вона дозволяє відслідковувати, налагоджувати та аналізувати мережевий трафік у реальному часі</p>
+</blockquote>
+<hr />
+<h2 id="_1">📋 Зміст</h2>
+<ol>
+<li><a href="#встановлення">Встановлення</a></li>
+<li><a href="#основні-поняття">Основні поняття</a></li>
+<li><a href="#швидкий-старт">Швидкий старт</a></li>
+<li><a href="#параметри-захоплення">Параметри захоплення</a></li>
+<li><a href="#опції-виводу">Опції виводу</a></li>
+<li><a href="#фільтрація-трафіку">Фільтрація трафіку</a></li>
+<li><a href="#практичні-сценарії">Практичні сценарії</a></li>
+<li><a href="#логічні-оператори">Логічні оператори</a></li>
+<li><a href="#lifehacks">Лайфхаки</a></li>
+</ol>
+<hr />
+<h2 id="_2">Встановлення</h2>
+<h3 id="_3">За операційною системою</h3>
+<h4 id="ubuntu">🔵 Ubuntu</h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>apt-get<span class="w"> </span>install<span class="w"> </span>tcpdump
+</code></pre></div>
+<h4 id="centosalma">🟠 Centos/Alma</h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>dnf<span class="w"> </span>install<span class="w"> </span>tcpdump
+</code></pre></div>
+<h3 id="_4">Перевірка встановлення</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>tcpdump<span class="w"> </span>--version
+</code></pre></div>
+<hr />
+<h2 id="_5">Основні поняття</h2>
+<h3 id="_6">Що таке пакет?</h3>
+<p>Пакет - це одиниця даних, яка передається через мережу. Він складається з:
+- <strong>Заголовку</strong> - містить інформацію про джерело, призначення, протокол
+- <strong>Корисного навантаження (payload)</strong> - власне дані
+- <strong>Трейлеру (checksum)</strong> - для перевірки цілісності</p>
+<h3 id="tcpdump">Навіщо потрібен TCPDump?</h3>
+<ul>
+<li>🔍 <strong>Налагодження мережі</strong> - виявлення проблем з підключенням</li>
+<li>📊 <strong>Моніторинг трафіку</strong> - аналіз типів пакетів</li>
+<li>🛡️ <strong>Безпека</strong> - виявлення підозрілої активності</li>
+<li>📈 <strong>Оптимізація</strong> - аналіз продуктивності мережі</li>
+</ul>
+<h3 id="tcpdump_1">Протоколи, які підтримує TCPDump</h3>
+<ul>
+<li><strong>IP</strong>: IPv4, IPv6</li>
+<li><strong>Транспортні</strong>: TCP, UDP</li>
+<li><strong>ICMP</strong>: ping, traceroute</li>
+<li><strong>Інші</strong>: DHCP, DNS, HTTP, FTP та багато інших</li>
+</ul>
+<hr />
+<h2 id="_7">Швидкий старт</h2>
+<h3 id="_8">Найпростіша команда</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># Захопити всі пакети з інтерфейсу eth0</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>tcpdump<span class="w"> </span>-i<span class="w"> </span>eth0
+</code></pre></div>
+<p>Результат:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>12:34:56.789456 IP 192.168.1.100.52145 &gt; 8.8.8.8.53: 
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>17945+ [1au] A? google.com. (43)
+</code></pre></div></p>
+<h3 id="_9">Зупинення захоплення</h3>
+<p>Натисніть <strong>Ctrl+C</strong> щоб завершити</p>
+<hr />
+<h2 id="_10">Параметри захоплення</h2>
+<h3 id="1">1. Вибір інтерфейсу</h3>
+<h4 id="_11">Захопити з усіх інтерфейсів</h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>tcpdump<span class="w"> </span>-i<span class="w"> </span>any
+</code></pre></div>
+<blockquote>
+<p>💡 Корисно, коли не знаєте на якому інтерфейсі потрібна активність</p>
+</blockquote>
+<h4 id="_12">Захопити з конкретного інтерфейсу</h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>tcpdump<span class="w"> </span>-i<span class="w"> </span>eth0
+</code></pre></div>
+<h4 id="_13">Показати доступні інтерфейси</h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>tcpdump<span class="w"> </span>-D
+</code></pre></div>
+<p>Результат:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>1.eth0
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>2.wlan0
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>3.lo [Loopback]
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>4.any
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>...
+</code></pre></div></p>
+<h3 id="2">2. Контроль кількості пакетів</h3>
+<h4 id="10">Захопити тільки перші 10 пакетів</h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>tcpdump<span class="w"> </span>-i<span class="w"> </span>eth0<span class="w"> </span>-c<span class="w"> </span><span class="m">10</span>
+</code></pre></div>
+<blockquote>
+<p>Команда завершиться автоматично після 10 пакетів</p>
+</blockquote>
+<h4 id="100">Захопити 100 пакетів</h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>tcpdump<span class="w"> </span>-i<span class="w"> </span>eth0<span class="w"> </span>-c<span class="w"> </span><span class="m">100</span>
+</code></pre></div>
+<h3 id="3">3. Збереження в файл</h3>
+<h4 id="_14">Зберегти захоплення</h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>tcpdump<span class="w"> </span>-i<span class="w"> </span>eth0<span class="w"> </span>-w<span class="w"> </span>capture.pcap
+</code></pre></div>
+<blockquote>
+<p>📝 Формат PCAP - стандартний для аналізу пакетів</p>
+</blockquote>
+<h4 id="50">Зберегти перші 50 пакетів</h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>tcpdump<span class="w"> </span>-i<span class="w"> </span>eth0<span class="w"> </span>-c<span class="w"> </span><span class="m">50</span><span class="w"> </span>-w<span class="w"> </span>capture.pcap
+</code></pre></div>
+<h4 id="_15">Читання збереженого файлу</h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>tcpdump<span class="w"> </span>-r<span class="w"> </span>capture.pcap
+</code></pre></div>
+<hr />
+<h2 id="_16">Опції виводу</h2>
+<h3 id="_17">Форматування виводу</h3>
+<h4 id="1-ascii">1. ASCII формат</h4>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>tcpdump<span class="w"> </span>-i<span class="w"> </span>eth0<span class="w"> </span>-A
+</code></pre></div>
+Показує дані пакета у вигляді текста (якщо можливо)</p>
+<p><strong>Приклад:</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>GET / HTTP/1.1
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>Host: google.com
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>User-Agent: curl/7.68.0
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>...
+</code></pre></div></p>
+<h4 id="2-hex">2. HEX формат</h4>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>tcpdump<span class="w"> </span>-i<span class="w"> </span>eth0<span class="w"> </span>-x
+</code></pre></div>
+Показує дані у шістнадцятковому форматі</p>
+<p><strong>Приклад:</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>0x0000: 4500 0052 3f9e 4000 4006 2b91 c0a8 0164
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>0x0010: 0808 0808 cb91 0035 8d2d 00a6 0000 0000
+</code></pre></div></p>
+<h4 id="3-hex-ascii">3. HEX + ASCII</h4>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>tcpdump<span class="w"> </span>-i<span class="w"> </span>eth0<span class="w"> </span>-X
+</code></pre></div>
+Комбінація обох форматів</p>
+<h4 id="4-hex">4. HEX з заголовками</h4>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>tcpdump<span class="w"> </span>-i<span class="w"> </span>eth0<span class="w"> </span>-XX
+</code></pre></div>
+Включає також Link-layer заголовки</p>
+<h3 id="_18">Контроль деталізації</h3>
+<h4 id="_19">Мінімальна інформація</h4>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>tcpdump<span class="w"> </span>-i<span class="w"> </span>eth0<span class="w"> </span>-q
+</code></pre></div>
+Показує тільки найважливіше</p>
+<h4 id="_20">Базова деталізація</h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>tcpdump<span class="w"> </span>-i<span class="w"> </span>eth0
+</code></pre></div>
+<h4 id="_21">Розширена інформація</h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>tcpdump<span class="w"> </span>-i<span class="w"> </span>eth0<span class="w"> </span>-v
+</code></pre></div>
+<h4 id="_22">Дуже розширена інформація</h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>tcpdump<span class="w"> </span>-i<span class="w"> </span>eth0<span class="w"> </span>-vv
+</code></pre></div>
+<h4 id="_23">Максимальна деталізація</h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>tcpdump<span class="w"> </span>-i<span class="w"> </span>eth0<span class="w"> </span>-vvv
+</code></pre></div>
+<h3 id="_24">Інші опції</h3>
+<table>
+<thead>
+<tr>
+<th>Опція</th>
+<th>Опис</th>
+<th>Приклад</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>-n</code></td>
+<td>Не резолвити хостнейми</td>
+<td><code>tcpdump -n -i eth0</code></td>
+</tr>
+<tr>
+<td><code>-nn</code></td>
+<td>Не вказувати назви сервісів замість портів</td>
+<td><code>tcpdump -nn -i eth0</code></td>
+</tr>
+<tr>
+<td><code>-t</code></td>
+<td>Не показувати час пакета</td>
+<td><code>tcpdump -t -i eth0</code></td>
+</tr>
+<tr>
+<td><code>-e</code></td>
+<td>Показати заголовки Ethernet</td>
+<td><code>tcpdump -e -i eth0</code></td>
+</tr>
+<tr>
+<td><code>-S</code></td>
+<td>Показати порядкові номери в точному форматі</td>
+<td><code>tcpdump -S -i eth0</code></td>
+</tr>
+<tr>
+<td><code>-p</code></td>
+<td>Не використовувати promiscuous режим</td>
+<td><code>tcpdump -p -i eth0</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="_25">Фільтрація трафіку</h2>
+<blockquote>
+<p>🎯 Фільтрація дозволяє зосередитися на потрібному трафіку та ігнорувати інше</p>
+</blockquote>
+<h3 id="_26">Фільтрація за протоколами</h3>
+<h4 id="tcp">Захопити тільки TCP пакети</h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>tcpdump<span class="w"> </span>-i<span class="w"> </span>eth0<span class="w"> </span>tcp
+</code></pre></div>
+<h4 id="udp">Захопити тільки UDP пакети</h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a>tcpdump<span class="w"> </span>-i<span class="w"> </span>eth0<span class="w"> </span>udp
+</code></pre></div>
+<h4 id="icmp-ping">Захопити тільки ICMP пакети (ping)</h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>tcpdump<span class="w"> </span>-i<span class="w"> </span>eth0<span class="w"> </span>icmp
+</code></pre></div>
+<h4 id="ipv6">Захопити тільки IPv6</h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a>tcpdump<span class="w"> </span>-i<span class="w"> </span>eth0<span class="w"> </span>ipv6
+</code></pre></div>
+<h3 id="_27">Фільтрація за портами</h3>
+<h4 id="_28">Трафік на конкретному порту</h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a>tcpdump<span class="w"> </span>-i<span class="w"> </span>eth0<span class="w"> </span>port<span class="w"> </span><span class="m">80</span>
+</code></pre></div>
+<blockquote>
+<p>Захопиться весь трафік на порту 80 (HTTP), незалежно від напрямку</p>
+</blockquote>
+<h4 id="_29">Трафік на кількох портах</h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a>tcpdump<span class="w"> </span>-i<span class="w"> </span>eth0<span class="w"> </span>port<span class="w"> </span><span class="m">80</span><span class="w"> </span>or<span class="w"> </span>port<span class="w"> </span><span class="m">443</span>
+</code></pre></div>
+<h4 id="_30">Трафік в діапазоні портів</h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a>tcpdump<span class="w"> </span>-i<span class="w"> </span>eth0<span class="w"> </span>portrange<span class="w"> </span><span class="m">6000</span>-6100
+</code></pre></div>
+<h4 id="_31">Вхідний трафік на порт</h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a>tcpdump<span class="w"> </span>-i<span class="w"> </span>eth0<span class="w"> </span>dst<span class="w"> </span>port<span class="w"> </span><span class="m">22</span>
+</code></pre></div>
+<blockquote>
+<p>Только пакети до SSH сервера</p>
+</blockquote>
+<h4 id="_32">Вихідний трафік з порту</h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a>tcpdump<span class="w"> </span>-i<span class="w"> </span>eth0<span class="w"> </span>src<span class="w"> </span>port<span class="w"> </span><span class="m">3306</span>
+</code></pre></div>
+<blockquote>
+<p>Тільки пакети з MySQL сервера</p>
+</blockquote>
+<h3 id="ip">Фільтрація за IP адресами</h3>
+<h4 id="_33">Весь трафік з конкретного хоста</h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a>tcpdump<span class="w"> </span>-i<span class="w"> </span>eth0<span class="w"> </span>host<span class="w"> </span><span class="m">192</span>.168.1.100
+</code></pre></div>
+<h4 id="_34">Трафік від конкретного хоста</h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a>tcpdump<span class="w"> </span>-i<span class="w"> </span>eth0<span class="w"> </span>src<span class="w"> </span>host<span class="w"> </span><span class="m">192</span>.168.1.100
+</code></pre></div>
+<h4 id="_35">Трафік до конкретного хоста</h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a>tcpdump<span class="w"> </span>-i<span class="w"> </span>eth0<span class="w"> </span>dst<span class="w"> </span>host<span class="w"> </span><span class="m">8</span>.8.8.8
+</code></pre></div>
+<h4 id="_36">Трафік між двома хостами</h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a>tcpdump<span class="w"> </span>-i<span class="w"> </span>eth0<span class="w"> </span>host<span class="w"> </span><span class="m">192</span>.168.1.100<span class="w"> </span>and<span class="w"> </span>host<span class="w"> </span><span class="m">8</span>.8.8.8
+</code></pre></div>
+<h3 id="_37">Фільтрація за підмережами</h3>
+<h4 id="_38">Весь трафік з підмережі</h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a>tcpdump<span class="w"> </span>-i<span class="w"> </span>eth0<span class="w"> </span>net<span class="w"> </span><span class="m">192</span>.168.1.0/24
+</code></pre></div>
+<h4 id="_39">Трафік з конкретної підмережі</h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-39-1" name="__codelineno-39-1" href="#__codelineno-39-1"></a>tcpdump<span class="w"> </span>-i<span class="w"> </span>eth0<span class="w"> </span>src<span class="w"> </span>net<span class="w"> </span><span class="m">10</span>.0.0.0/8
+</code></pre></div>
+<h4 id="_40">Трафік до конкретної підмережі</h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-40-1" name="__codelineno-40-1" href="#__codelineno-40-1"></a>tcpdump<span class="w"> </span>-i<span class="w"> </span>eth0<span class="w"> </span>dst<span class="w"> </span>net<span class="w"> </span><span class="m">172</span>.16.0.0/12
+</code></pre></div>
+<h3 id="_41">Фільтрація за типами трафіку</h3>
+<h4 id="broadcast-ethernet">Broadcast пакети (для Ethernet)</h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-41-1" name="__codelineno-41-1" href="#__codelineno-41-1"></a>tcpdump<span class="w"> </span>-i<span class="w"> </span>eth0<span class="w"> </span>ether<span class="w"> </span>broadcast
+</code></pre></div>
+<h4 id="broadcast-ip">Broadcast пакети (для IP)</h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-42-1" name="__codelineno-42-1" href="#__codelineno-42-1"></a>tcpdump<span class="w"> </span>-i<span class="w"> </span>eth0<span class="w"> </span>ip<span class="w"> </span>broadcast
+</code></pre></div>
+<h4 id="multicast">Multicast пакети</h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-43-1" name="__codelineno-43-1" href="#__codelineno-43-1"></a>tcpdump<span class="w"> </span>-i<span class="w"> </span>eth0<span class="w"> </span>multicast
+</code></pre></div>
+<h3 id="_42">Фільтрація за розміром пакета</h3>
+<h4 id="32">Пакети менші за 32 байти</h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-44-1" name="__codelineno-44-1" href="#__codelineno-44-1"></a>tcpdump<span class="w"> </span>-i<span class="w"> </span>eth0<span class="w"> </span>less<span class="w"> </span><span class="m">32</span>
+</code></pre></div>
+<h4 id="1000">Пакети більші за 1000 байтів</h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-45-1" name="__codelineno-45-1" href="#__codelineno-45-1"></a>tcpdump<span class="w"> </span>-i<span class="w"> </span>eth0<span class="w"> </span>greater<span class="w"> </span><span class="m">1000</span>
+</code></pre></div>
+<h4 id="64">Пакети розміром рівно 64 байти</h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-46-1" name="__codelineno-46-1" href="#__codelineno-46-1"></a>tcpdump<span class="w"> </span>-i<span class="w"> </span>eth0<span class="w"> </span><span class="s2">&quot;ip[2:2] == 64&quot;</span>
+</code></pre></div>
+<hr />
+<h2 id="_43">Практичні сценарії</h2>
+<h3 id="1-">Сценарій 1: Налагодження веб-сервера</h3>
+<p><strong>Завдання:</strong> Знайти всі HTTP запити до вашого вебсервера на порту 8080</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-47-1" name="__codelineno-47-1" href="#__codelineno-47-1"></a>tcpdump<span class="w"> </span>-i<span class="w"> </span>eth0<span class="w"> </span>-n<span class="w"> </span>-A<span class="w"> </span>tcp<span class="w"> </span>port<span class="w"> </span><span class="m">8080</span>
+</code></pre></div>
+<p><strong>Що буде видно:</strong>
+- Всі TCP пакети на порту 8080
+- <code>-n</code> — без розв'язування DNS (швидше)
+- <code>-A</code> — у текстовому форматі щоб бачити HTTP запити</p>
+<p><strong>Приклад виводу:</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-48-1" name="__codelineno-48-1" href="#__codelineno-48-1"></a>GET /api/users HTTP/1.1
+<a id="__codelineno-48-2" name="__codelineno-48-2" href="#__codelineno-48-2"></a>Host: example.com
+<a id="__codelineno-48-3" name="__codelineno-48-3" href="#__codelineno-48-3"></a>User-Agent: Mozilla/5.0
+<a id="__codelineno-48-4" name="__codelineno-48-4" href="#__codelineno-48-4"></a>...
+</code></pre></div></p>
+<hr />
+<h3 id="2-ssh">Сценарій 2: Моніторинг SSH підключень</h3>
+<p><strong>Завдання:</strong> Перевірити хто намагається підключитися по SSH</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-49-1" name="__codelineno-49-1" href="#__codelineno-49-1"></a>tcpdump<span class="w"> </span>-i<span class="w"> </span>eth0<span class="w"> </span>-nn<span class="w"> </span>dst<span class="w"> </span>port<span class="w"> </span><span class="m">22</span>
+</code></pre></div>
+<p><strong>Що буде видно:</strong>
+- Весь трафік до SSH сервера (порт 22)
+- <code>-nn</code> — показує реальні IP адреси і портів без розв'язування</p>
+<p><strong>Як читати:</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-50-1" name="__codelineno-50-1" href="#__codelineno-50-1"></a>12:34:56.789456 IP 203.0.113.50.53241 &gt; 192.168.1.1.22: Flags [S], seq 1234567890
+</code></pre></div>
+- <strong>203.0.113.50</strong> — клієнт підключається
+- <strong>192.168.1.1.22</strong> — ваш SSH сервер</p>
+<hr />
+<h3 id="3-dns">Сценарій 3: Аналіз DNS запитів</h3>
+<p><strong>Завдання:</strong> Побачити які домени запитуються у вашій мережі</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-51-1" name="__codelineno-51-1" href="#__codelineno-51-1"></a>tcpdump<span class="w"> </span>-i<span class="w"> </span>eth0<span class="w"> </span>-n<span class="w"> </span>udp<span class="w"> </span>port<span class="w"> </span><span class="m">53</span>
+</code></pre></div>
+<p><strong>Що буде видно:</strong>
+- Всі DNS запити (на порту 53)
+- Назви доменів що запитуються</p>
+<p><strong>Приклад:</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-52-1" name="__codelineno-52-1" href="#__codelineno-52-1"></a>12:34:56.789456 IP 192.168.1.100.45123 &gt; 8.8.8.8.53: 
+<a id="__codelineno-52-2" name="__codelineno-52-2" href="#__codelineno-52-2"></a>45678+ A? google.com. (27)
+</code></pre></div></p>
+<hr />
+<h3 id="4-ip">Сценарій 4: Захоплення трафіку конкретного IP</h3>
+<p><strong>Завдання:</strong> Аналізувати весь трафік од конкретного комп'ютера</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-53-1" name="__codelineno-53-1" href="#__codelineno-53-1"></a>tcpdump<span class="w"> </span>-i<span class="w"> </span>eth0<span class="w"> </span>-n<span class="w"> </span>host<span class="w"> </span><span class="m">192</span>.168.1.100<span class="w"> </span>-w<span class="w"> </span>traffic.pcap
+</code></pre></div>
+<p><strong>Що буде видно:</strong>
+- Все що робить цей комп'ютер в мережі
+- Результат збережеться в файл <code>traffic.pcap</code></p>
+<p><strong>Потім аналізувати:</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-54-1" name="__codelineno-54-1" href="#__codelineno-54-1"></a>tcpdump<span class="w"> </span>-r<span class="w"> </span>traffic.pcap<span class="w"> </span>-vv
+</code></pre></div></p>
+<hr />
+<h3 id="5">Сценарій 5: Перевірка подвійного шифрування</h3>
+<p><strong>Завдання:</strong> Переконатися що HTTPS тільки шифрований трафік</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-55-1" name="__codelineno-55-1" href="#__codelineno-55-1"></a>tcpdump<span class="w"> </span>-i<span class="w"> </span>eth0<span class="w"> </span>-n<span class="w"> </span>-A<span class="w"> </span>tcp<span class="w"> </span>port<span class="w"> </span><span class="m">443</span>
+</code></pre></div>
+<p><strong>Що чекати:</strong>
+- Трафік має бути нечитаємим (бінарний/криптографічний)
+- Не мають бути видимі дані HTTP</p>
+<p><strong>Якщо видно HTTP текст - це проблема!</strong> 🚨</p>
+<hr />
+<h3 id="6">Сценарій 6: Знаходження повільної мережі</h3>
+<p><strong>Завдання:</strong> Знайти великі передачі даних</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-56-1" name="__codelineno-56-1" href="#__codelineno-56-1"></a>tcpdump<span class="w"> </span>-i<span class="w"> </span>eth0<span class="w"> </span>-n<span class="w"> </span><span class="s2">&quot;ip[2:2] &gt; 1400&quot;</span>
+</code></pre></div>
+<p><strong>Що буде видно:</strong>
+- Тільки пакети більші за 1400 байтів
+- Може вказати на видалення файлів або хідання</p>
+<hr />
+<h2 id="_44">Логічні оператори</h2>
+<blockquote>
+<p>💡 Комбінюйте умови для більш точної фільтрації</p>
+</blockquote>
+<h3 id="and">Оператор AND</h3>
+<p><strong>Синтаксис:</strong> <code>and</code> або <code>&amp;&amp;</code></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-57-1" name="__codelineno-57-1" href="#__codelineno-57-1"></a><span class="c1"># TCP трафік на порту 80 з конкретного хоста</span>
+<a id="__codelineno-57-2" name="__codelineno-57-2" href="#__codelineno-57-2"></a>tcpdump<span class="w"> </span>-i<span class="w"> </span>eth0<span class="w"> </span>host<span class="w"> </span><span class="m">192</span>.168.1.100<span class="w"> </span>and<span class="w"> </span>tcp<span class="w"> </span>port<span class="w"> </span><span class="m">80</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-58-1" name="__codelineno-58-1" href="#__codelineno-58-1"></a><span class="c1"># UDP пакети на DNS порту з конкретної підмережі</span>
+<a id="__codelineno-58-2" name="__codelineno-58-2" href="#__codelineno-58-2"></a>tcpdump<span class="w"> </span>-i<span class="w"> </span>eth0<span class="w"> </span>src<span class="w"> </span>net<span class="w"> </span><span class="m">192</span>.168.1.0/24<span class="w"> </span>and<span class="w"> </span>udp<span class="w"> </span>port<span class="w"> </span><span class="m">53</span>
+</code></pre></div>
+<h3 id="or">Оператор OR</h3>
+<p><strong>Синтаксис:</strong> <code>or</code> або <code>||</code></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-59-1" name="__codelineno-59-1" href="#__codelineno-59-1"></a><span class="c1"># Трафік на HTTP або HTTPS портах</span>
+<a id="__codelineno-59-2" name="__codelineno-59-2" href="#__codelineno-59-2"></a>tcpdump<span class="w"> </span>-i<span class="w"> </span>eth0<span class="w"> </span>tcp<span class="w"> </span>port<span class="w"> </span><span class="m">80</span><span class="w"> </span>or<span class="w"> </span>tcp<span class="w"> </span>port<span class="w"> </span><span class="m">443</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-60-1" name="__codelineno-60-1" href="#__codelineno-60-1"></a><span class="c1"># SSH або RDP підключення</span>
+<a id="__codelineno-60-2" name="__codelineno-60-2" href="#__codelineno-60-2"></a>tcpdump<span class="w"> </span>-i<span class="w"> </span>eth0<span class="w"> </span>tcp<span class="w"> </span>port<span class="w"> </span><span class="m">22</span><span class="w"> </span>or<span class="w"> </span>tcp<span class="w"> </span>port<span class="w"> </span><span class="m">3389</span>
+</code></pre></div>
+<h3 id="not-except">Оператор NOT (EXCEPT)</h3>
+<p><strong>Синтаксис:</strong> <code>not</code> або <code>!</code></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-61-1" name="__codelineno-61-1" href="#__codelineno-61-1"></a><span class="c1"># Весь трафік крім ICMP (ping)</span>
+<a id="__codelineno-61-2" name="__codelineno-61-2" href="#__codelineno-61-2"></a>tcpdump<span class="w"> </span>-i<span class="w"> </span>eth0<span class="w"> </span>not<span class="w"> </span>icmp
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-62-1" name="__codelineno-62-1" href="#__codelineno-62-1"></a><span class="c1"># Весь TCP трафік крім SSH</span>
+<a id="__codelineno-62-2" name="__codelineno-62-2" href="#__codelineno-62-2"></a>tcpdump<span class="w"> </span>-i<span class="w"> </span>eth0<span class="w"> </span>tcp<span class="w"> </span>and<span class="w"> </span>not<span class="w"> </span>port<span class="w"> </span><span class="m">22</span>
+</code></pre></div>
+<h3 id="_45">Комбіновані вирази</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-63-1" name="__codelineno-63-1" href="#__codelineno-63-1"></a><span class="c1"># TCP на портах 80 або 443, але не від конкретного IP</span>
+<a id="__codelineno-63-2" name="__codelineno-63-2" href="#__codelineno-63-2"></a>tcpdump<span class="w"> </span>-i<span class="w"> </span>eth0<span class="w"> </span><span class="o">(</span>tcp<span class="w"> </span>port<span class="w"> </span><span class="m">80</span><span class="w"> </span>or<span class="w"> </span>tcp<span class="w"> </span>port<span class="w"> </span><span class="m">443</span><span class="o">)</span><span class="w"> </span>and<span class="w"> </span>not<span class="w"> </span>src<span class="w"> </span><span class="m">192</span>.168.1.200
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-64-1" name="__codelineno-64-1" href="#__codelineno-64-1"></a><span class="c1"># HTTPS трафік до конкретної підмережі, крім multicast</span>
+<a id="__codelineno-64-2" name="__codelineno-64-2" href="#__codelineno-64-2"></a>tcpdump<span class="w"> </span>-i<span class="w"> </span>eth0<span class="w"> </span>tcp<span class="w"> </span>port<span class="w"> </span><span class="m">443</span><span class="w"> </span>and<span class="w"> </span>dst<span class="w"> </span>net<span class="w"> </span><span class="m">10</span>.0.0.0/8<span class="w"> </span>and<span class="w"> </span>not<span class="w"> </span>multicast
+</code></pre></div>
+<hr />
+<h2 id="lifehacks">Lifehacks</h2>
+<h3 id="_46">💾 Запис та аналіз в реальному часі</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-65-1" name="__codelineno-65-1" href="#__codelineno-65-1"></a><span class="c1"># Запис в файл і одночасно показ на екрані</span>
+<a id="__codelineno-65-2" name="__codelineno-65-2" href="#__codelineno-65-2"></a>tcpdump<span class="w"> </span>-i<span class="w"> </span>eth0<span class="w"> </span>-U<span class="w"> </span>-w<span class="w"> </span>-<span class="w"> </span><span class="p">|</span><span class="w"> </span>tee<span class="w"> </span>capture.pcap<span class="w"> </span><span class="p">|</span><span class="w"> </span>tcpdump<span class="w"> </span>-r<span class="w"> </span>-<span class="w"> </span>-v
+</code></pre></div>
+<h3 id="_47">🔄 Фільтрування після захоплення</h3>
+<p><strong>Крок 1:</strong> Запишіть весь трафік
+<div class="highlight"><pre><span></span><code><a id="__codelineno-66-1" name="__codelineno-66-1" href="#__codelineno-66-1"></a>tcpdump<span class="w"> </span>-i<span class="w"> </span>eth0<span class="w"> </span>-w<span class="w"> </span>full-capture.pcap
+</code></pre></div></p>
+<p><strong>Крок 2:</strong> Потім фільтруйте при читанні
+<div class="highlight"><pre><span></span><code><a id="__codelineno-67-1" name="__codelineno-67-1" href="#__codelineno-67-1"></a>tcpdump<span class="w"> </span>-r<span class="w"> </span>full-capture.pcap<span class="w"> </span>tcp<span class="w"> </span>port<span class="w"> </span><span class="m">443</span>
+</code></pre></div></p>
+<h3 id="_48">🎯 Екстра деталізація для налагодження</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-68-1" name="__codelineno-68-1" href="#__codelineno-68-1"></a><span class="c1"># Максимальна інформація</span>
+<a id="__codelineno-68-2" name="__codelineno-68-2" href="#__codelineno-68-2"></a>tcpdump<span class="w"> </span>-i<span class="w"> </span>eth0<span class="w"> </span>-vvv<span class="w"> </span>-A<span class="w"> </span>-e<span class="w"> </span>-s<span class="w"> </span><span class="m">0</span>
+</code></pre></div>
+<p><strong>Що означає:</strong>
+- <code>-vvv</code> — максимум деталізації
+- <code>-A</code> — ASCII формат
+- <code>-e</code> — Ethernet заголовки
+- <code>-s 0</code> — захопити весь пакет (не обрізувати)</p>
+<h3 id="_49">📊 Статистика трафіку</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-69-1" name="__codelineno-69-1" href="#__codelineno-69-1"></a><span class="c1"># Збережіть пакети в файл</span>
+<a id="__codelineno-69-2" name="__codelineno-69-2" href="#__codelineno-69-2"></a>tcpdump<span class="w"> </span>-i<span class="w"> </span>eth0<span class="w"> </span>-c<span class="w"> </span><span class="m">10000</span><span class="w"> </span>-w<span class="w"> </span>stats.pcap
+<a id="__codelineno-69-3" name="__codelineno-69-3" href="#__codelineno-69-3"></a>
+<a id="__codelineno-69-4" name="__codelineno-69-4" href="#__codelineno-69-4"></a><span class="c1"># Потім аналізуйте (потрібна утиліта tshark)</span>
+<a id="__codelineno-69-5" name="__codelineno-69-5" href="#__codelineno-69-5"></a>tshark<span class="w"> </span>-r<span class="w"> </span>stats.pcap<span class="w"> </span>-q<span class="w"> </span>-z<span class="w"> </span>io,phs
+</code></pre></div>
+<h3 id="_50">🛡️ Виявлення сканування портів</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-70-1" name="__codelineno-70-1" href="#__codelineno-70-1"></a><span class="c1"># SYN флаги без завершення з&#39;єднання</span>
+<a id="__codelineno-70-2" name="__codelineno-70-2" href="#__codelineno-70-2"></a>tcpdump<span class="w"> </span>-i<span class="w"> </span>eth0<span class="w"> </span><span class="s2">&quot;tcp[tcpflags] &amp; tcp-syn != 0&quot;</span><span class="w"> </span>-n
+</code></pre></div>
+<h3 id="mtu">🔍 Перевірка MTU проблем</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-71-1" name="__codelineno-71-1" href="#__codelineno-71-1"></a><span class="c1"># Пакети з Don&#39;t Fragment флагом</span>
+<a id="__codelineno-71-2" name="__codelineno-71-2" href="#__codelineno-71-2"></a>tcpdump<span class="w"> </span>-i<span class="w"> </span>eth0<span class="w"> </span><span class="s2">&quot;ip[6] &amp; 0x40 != 0&quot;</span><span class="w"> </span>-n
+</code></pre></div>
+<h3 id="_51">⏱️ Моніторинг в реальному часі з повільним оновленням</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-72-1" name="__codelineno-72-1" href="#__codelineno-72-1"></a><span class="c1"># Захопити і показати медленно для читання</span>
+<a id="__codelineno-72-2" name="__codelineno-72-2" href="#__codelineno-72-2"></a><span class="k">while</span><span class="w"> </span>true<span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-72-3" name="__codelineno-72-3" href="#__codelineno-72-3"></a><span class="w">  </span>tcpdump<span class="w"> </span>-i<span class="w"> </span>eth0<span class="w"> </span>-c<span class="w"> </span><span class="m">1</span><span class="w"> </span>-n
+<a id="__codelineno-72-4" name="__codelineno-72-4" href="#__codelineno-72-4"></a><span class="w">  </span>sleep<span class="w"> </span><span class="m">1</span>
+<a id="__codelineno-72-5" name="__codelineno-72-5" href="#__codelineno-72-5"></a><span class="k">done</span>
+</code></pre></div>
+<h3 id="_52">🎓 Навчання та демонстрація</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-73-1" name="__codelineno-73-1" href="#__codelineno-73-1"></a><span class="c1"># Простий HTTP запит для роз&#39;яснення</span>
+<a id="__codelineno-73-2" name="__codelineno-73-2" href="#__codelineno-73-2"></a>tcpdump<span class="w"> </span>-i<span class="w"> </span>eth0<span class="w"> </span>-A<span class="w"> </span>tcp<span class="w"> </span>port<span class="w"> </span><span class="m">80</span>
+<a id="__codelineno-73-3" name="__codelineno-73-3" href="#__codelineno-73-3"></a>
+<a id="__codelineno-73-4" name="__codelineno-73-4" href="#__codelineno-73-4"></a><span class="c1"># Потім в іншому терміналі:</span>
+<a id="__codelineno-73-5" name="__codelineno-73-5" href="#__codelineno-73-5"></a>curl<span class="w"> </span>http://example.com
+</code></pre></div>
+<hr />
+<h2 id="_53">Усунення неполадок</h2>
+<h3 id="permission-denied">❌ Помилка: "Permission denied"</h3>
+<p><strong>Причина:</strong> Недостатньо прав доступу</p>
+<p><strong>Рішення:</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-74-1" name="__codelineno-74-1" href="#__codelineno-74-1"></a><span class="c1"># Запустіть з sudo</span>
+<a id="__codelineno-74-2" name="__codelineno-74-2" href="#__codelineno-74-2"></a>sudo<span class="w"> </span>tcpdump<span class="w"> </span>-i<span class="w"> </span>eth0
+<a id="__codelineno-74-3" name="__codelineno-74-3" href="#__codelineno-74-3"></a>
+<a id="__codelineno-74-4" name="__codelineno-74-4" href="#__codelineno-74-4"></a><span class="c1"># Або додайте користувача до групи pcap</span>
+<a id="__codelineno-74-5" name="__codelineno-74-5" href="#__codelineno-74-5"></a>sudo<span class="w"> </span>usermod<span class="w"> </span>-a<span class="w"> </span>-G<span class="w"> </span>pcap<span class="w"> </span><span class="nv">$USER</span>
+<a id="__codelineno-74-6" name="__codelineno-74-6" href="#__codelineno-74-6"></a><span class="c1"># Потім перезавантажте сеанс</span>
+</code></pre></div></p>
+<h3 id="no-such-device">❌ Помилка: "No such device"</h3>
+<p><strong>Причина:</strong> Неправильна назва інтерфейсу</p>
+<p><strong>Рішення:</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-75-1" name="__codelineno-75-1" href="#__codelineno-75-1"></a><span class="c1"># Знайдіть правильну назву</span>
+<a id="__codelineno-75-2" name="__codelineno-75-2" href="#__codelineno-75-2"></a>tcpdump<span class="w"> </span>-D
+<a id="__codelineno-75-3" name="__codelineno-75-3" href="#__codelineno-75-3"></a>
+<a id="__codelineno-75-4" name="__codelineno-75-4" href="#__codelineno-75-4"></a><span class="c1"># Потім використовуйте правильну</span>
+<a id="__codelineno-75-5" name="__codelineno-75-5" href="#__codelineno-75-5"></a>tcpdump<span class="w"> </span>-i<span class="w"> </span>wlan0
+</code></pre></div></p>
+<h3 id="device-not-up">❌ Помилка: "Device not up"</h3>
+<p><strong>Причина:</strong> Мережевий інтерфейс вимкнений</p>
+<p><strong>Рішення:</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-76-1" name="__codelineno-76-1" href="#__codelineno-76-1"></a><span class="c1"># Перевірте статус</span>
+<a id="__codelineno-76-2" name="__codelineno-76-2" href="#__codelineno-76-2"></a>ip<span class="w"> </span>link<span class="w"> </span>show
+<a id="__codelineno-76-3" name="__codelineno-76-3" href="#__codelineno-76-3"></a>
+<a id="__codelineno-76-4" name="__codelineno-76-4" href="#__codelineno-76-4"></a><span class="c1"># Увімкніть інтерфейс</span>
+<a id="__codelineno-76-5" name="__codelineno-76-5" href="#__codelineno-76-5"></a>sudo<span class="w"> </span>ip<span class="w"> </span>link<span class="w"> </span><span class="nb">set</span><span class="w"> </span>eth0<span class="w"> </span>up
+</code></pre></div></p>
+<h3 id="_54">❌ Нема даних/пакетів</h3>
+<p><strong>Можливі причини:</strong>
+1. Невірна фільтрація — в даний час немає трафіку на цьому фільтрі
+2. Вибрано неправильний інтерфейс — перевірте <code>tcpdump -D</code>
+3. Firewall блокує — перевірте правила</p>
+<p><strong>Рішення:</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-77-1" name="__codelineno-77-1" href="#__codelineno-77-1"></a><span class="c1"># Спробуйте захопити весь трафік</span>
+<a id="__codelineno-77-2" name="__codelineno-77-2" href="#__codelineno-77-2"></a>tcpdump<span class="w"> </span>-i<span class="w"> </span>any<span class="w"> </span>-c<span class="w"> </span><span class="m">100</span>
+<a id="__codelineno-77-3" name="__codelineno-77-3" href="#__codelineno-77-3"></a>
+<a id="__codelineno-77-4" name="__codelineno-77-4" href="#__codelineno-77-4"></a><span class="c1"># Або збільшіть тайм-аут</span>
+<a id="__codelineno-77-5" name="__codelineno-77-5" href="#__codelineno-77-5"></a>sudo<span class="w"> </span>timeout<span class="w"> </span><span class="m">30</span><span class="w"> </span>tcpdump<span class="w"> </span>-i<span class="w"> </span>eth0
+</code></pre></div></p>
+<hr />
+<h2 id="_55">Шпаргалка для швидкого використання</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-78-1" name="__codelineno-78-1" href="#__codelineno-78-1"></a><span class="c1"># 1. Базове захоплення</span>
+<a id="__codelineno-78-2" name="__codelineno-78-2" href="#__codelineno-78-2"></a>sudo<span class="w"> </span>tcpdump<span class="w"> </span>-i<span class="w"> </span>eth0
+<a id="__codelineno-78-3" name="__codelineno-78-3" href="#__codelineno-78-3"></a>
+<a id="__codelineno-78-4" name="__codelineno-78-4" href="#__codelineno-78-4"></a><span class="c1"># 2. Зберегти в файл</span>
+<a id="__codelineno-78-5" name="__codelineno-78-5" href="#__codelineno-78-5"></a>sudo<span class="w"> </span>tcpdump<span class="w"> </span>-i<span class="w"> </span>eth0<span class="w"> </span>-w<span class="w"> </span>capture.pcap
+<a id="__codelineno-78-6" name="__codelineno-78-6" href="#__codelineno-78-6"></a>
+<a id="__codelineno-78-7" name="__codelineno-78-7" href="#__codelineno-78-7"></a><span class="c1"># 3. Прочитати файл</span>
+<a id="__codelineno-78-8" name="__codelineno-78-8" href="#__codelineno-78-8"></a>tcpdump<span class="w"> </span>-r<span class="w"> </span>capture.pcap
+<a id="__codelineno-78-9" name="__codelineno-78-9" href="#__codelineno-78-9"></a>
+<a id="__codelineno-78-10" name="__codelineno-78-10" href="#__codelineno-78-10"></a><span class="c1"># 4. HTTP трафік</span>
+<a id="__codelineno-78-11" name="__codelineno-78-11" href="#__codelineno-78-11"></a>sudo<span class="w"> </span>tcpdump<span class="w"> </span>-i<span class="w"> </span>eth0<span class="w"> </span>-A<span class="w"> </span>tcp<span class="w"> </span>port<span class="w"> </span><span class="m">80</span>
+<a id="__codelineno-78-12" name="__codelineno-78-12" href="#__codelineno-78-12"></a>
+<a id="__codelineno-78-13" name="__codelineno-78-13" href="#__codelineno-78-13"></a><span class="c1"># 5. DNS запити</span>
+<a id="__codelineno-78-14" name="__codelineno-78-14" href="#__codelineno-78-14"></a>sudo<span class="w"> </span>tcpdump<span class="w"> </span>-i<span class="w"> </span>eth0<span class="w"> </span>-n<span class="w"> </span>udp<span class="w"> </span>port<span class="w"> </span><span class="m">53</span>
+<a id="__codelineno-78-15" name="__codelineno-78-15" href="#__codelineno-78-15"></a>
+<a id="__codelineno-78-16" name="__codelineno-78-16" href="#__codelineno-78-16"></a><span class="c1"># 6. SSH підключення</span>
+<a id="__codelineno-78-17" name="__codelineno-78-17" href="#__codelineno-78-17"></a>sudo<span class="w"> </span>tcpdump<span class="w"> </span>-i<span class="w"> </span>eth0<span class="w"> </span>-n<span class="w"> </span>dst<span class="w"> </span>port<span class="w"> </span><span class="m">22</span>
+<a id="__codelineno-78-18" name="__codelineno-78-18" href="#__codelineno-78-18"></a>
+<a id="__codelineno-78-19" name="__codelineno-78-19" href="#__codelineno-78-19"></a><span class="c1"># 7. Конкретний IP</span>
+<a id="__codelineno-78-20" name="__codelineno-78-20" href="#__codelineno-78-20"></a>sudo<span class="w"> </span>tcpdump<span class="w"> </span>-i<span class="w"> </span>eth0<span class="w"> </span>host<span class="w"> </span><span class="m">192</span>.168.1.100
+<a id="__codelineno-78-21" name="__codelineno-78-21" href="#__codelineno-78-21"></a>
+<a id="__codelineno-78-22" name="__codelineno-78-22" href="#__codelineno-78-22"></a><span class="c1"># 8. Конкретна підмережа</span>
+<a id="__codelineno-78-23" name="__codelineno-78-23" href="#__codelineno-78-23"></a>sudo<span class="w"> </span>tcpdump<span class="w"> </span>-i<span class="w"> </span>eth0<span class="w"> </span>net<span class="w"> </span><span class="m">192</span>.168.1.0/24
+<a id="__codelineno-78-24" name="__codelineno-78-24" href="#__codelineno-78-24"></a>
+<a id="__codelineno-78-25" name="__codelineno-78-25" href="#__codelineno-78-25"></a><span class="c1"># 9. Без ICMP</span>
+<a id="__codelineno-78-26" name="__codelineno-78-26" href="#__codelineno-78-26"></a>sudo<span class="w"> </span>tcpdump<span class="w"> </span>-i<span class="w"> </span>eth0<span class="w"> </span>not<span class="w"> </span>icmp
+<a id="__codelineno-78-27" name="__codelineno-78-27" href="#__codelineno-78-27"></a>
+<a id="__codelineno-78-28" name="__codelineno-78-28" href="#__codelineno-78-28"></a><span class="c1"># 10. Максимальна деталізація</span>
+<a id="__codelineno-78-29" name="__codelineno-78-29" href="#__codelineno-78-29"></a>sudo<span class="w"> </span>tcpdump<span class="w"> </span>-i<span class="w"> </span>eth0<span class="w"> </span>-vvv<span class="w"> </span>-A<span class="w"> </span>-e<span class="w"> </span>-s<span class="w"> </span><span class="m">0</span>
+</code></pre></div>
+<hr />
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Повернутись нагору
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      © 2026 Кафедра №21 - Bci права захищені
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://mitit.mil.gov.ua/page/faculty2" target="_blank" rel="noopener" title="mitit.mil.gov.ua" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M16.36 14c.08-.66.14-1.32.14-2s-.06-1.34-.14-2h3.38c.16.64.26 1.31.26 2s-.1 1.36-.26 2m-5.15 5.56c.6-1.11 1.06-2.31 1.38-3.56h2.95a8.03 8.03 0 0 1-4.33 3.56M14.34 14H9.66c-.1-.66-.16-1.32-.16-2s.06-1.35.16-2h4.68c.09.65.16 1.32.16 2s-.07 1.34-.16 2M12 19.96c-.83-1.2-1.5-2.53-1.91-3.96h3.82c-.41 1.43-1.08 2.76-1.91 3.96M8 8H5.08A7.92 7.92 0 0 1 9.4 4.44C8.8 5.55 8.35 6.75 8 8m-2.92 8H8c.35 1.25.8 2.45 1.4 3.56A8 8 0 0 1 5.08 16m-.82-2C4.1 13.36 4 12.69 4 12s.1-1.36.26-2h3.38c-.08.66-.14 1.32-.14 2s.06 1.34.14 2M12 4.03c.83 1.2 1.5 2.54 1.91 3.97h-3.82c.41-1.43 1.08-2.77 1.91-3.97M18.92 8h-2.95a15.7 15.7 0 0 0-1.38-3.56c1.84.63 3.37 1.9 4.33 3.56M12 2C6.47 2 2 6.5 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "content.code.copy", "search.suggest", "search.highlight"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u0421\u043a\u043e\u043f\u0456\u0439\u043e\u0432\u0430\u043d\u043e \u0432 \u0431\u0443\u0444\u0435\u0440", "clipboard.copy": "\u0421\u043a\u043e\u043f\u0456\u044e\u0432\u0430\u0442\u0438 \u0432 \u0431\u0443\u0444\u0435\u0440", "search.result.more.one": "\u0429\u0435 1 \u0437\u0431\u0456\u0433 \u043d\u0430 \u0446\u0456\u0439 \u0441\u0442\u043e\u0440\u0456\u043d\u0446\u0456", "search.result.more.other": "\u0429\u0435 # \u0437\u0431\u0456\u0433\u0456\u0432 \u043d\u0430 \u0446\u0456\u0439 \u0441\u0442\u043e\u0440\u0456\u043d\u0446\u0456", "search.result.none": "\u0417\u0431\u0456\u0433\u0456\u0432 \u043d\u0435 \u0437\u043d\u0430\u0439\u0434\u0435\u043d\u043e", "search.result.one": "\u0417\u043d\u0430\u0439\u0434\u0435\u043d\u043e 1 \u0437\u0431\u0456\u0433", "search.result.other": "\u0417\u043d\u0430\u0439\u0434\u0435\u043d\u043e # \u0437\u0431\u0456\u0433\u0456\u0432", "search.result.placeholder": "\u0420\u043e\u0437\u043f\u043e\u0447\u043d\u0456\u0442\u044c \u043f\u0438\u0441\u0430\u0442\u0438 \u0434\u043b\u044f \u043f\u043e\u0448\u0443\u043a\u0443", "search.result.term.missing": "\u041d\u0435 \u0437\u043d\u0430\u0439\u0434\u0435\u043d\u043e \u0437\u0430\u043f\u0438\u0442\u0443", "select.version": "\u041e\u0431\u0440\u0430\u0442\u0438 \u0432\u0435\u0440\u0441\u0456\u044e"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

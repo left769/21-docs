@@ -1,0 +1,2720 @@
+
+<!doctype html>
+<html lang="uk" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="Створено колективом кафедри №21">
+      
+      
+      
+        <link rel="prev" href="../radius/">
+      
+      
+        <link rel="next" href="../iptables/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/logo_dep21_white.ico">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>SYSLOG - Довідник кафедри Інформаційних систем та технологій</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#rsyslog-" class="md-skip">
+          Перейти до змісту
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Хедер">
+    <a href="../.." title="Довідник кафедри Інформаційних систем та технологій" class="md-header__button md-logo" aria-label="Довідник кафедри Інформаційних систем та технологій" data-md-component="logo">
+      
+  <img src="../../assets/logo_dep21_white.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Довідник кафедри Інформаційних систем та технологій
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              SYSLOG
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Перейти на темну тему"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Перейти на темну тему" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="indigo"  aria-label="Перейти на світлу тему"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Перейти на світлу тему" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Пошук" placeholder="Пошук" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Шукати">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Очистити" aria-label="Очистити" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Пошук розпочато
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Вкладки" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../.." class="md-tabs__link">
+          
+  
+  
+  🏠 Головна
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../network-configs/" class="md-tabs__link">
+          
+  
+  
+  🌐 Мережі
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+  🖥️ Сервіси
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Навігація" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Довідник кафедри Інформаційних систем та технологій" class="md-nav__button md-logo" aria-label="Довідник кафедри Інформаційних систем та технологій" data-md-component="logo">
+      
+  <img src="../../assets/logo_dep21_white.png" alt="logo">
+
+    </a>
+    Довідник кафедри Інформаційних систем та технологій
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🏠 Головна
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    🏠 Головна
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    👋Вступ
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../pnet/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🧪Інструкція з користування PNET Lab
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network-configs/subnet-calculator/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Калькулятор маски підмереж
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chmod-calculator/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Калькулятор прав Linux
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🌐 Мережі
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    🌐 Мережі
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network-configs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Вступ до мереж
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network-configs/IP-interfaces/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IP інтерфейси
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network-configs/vlans/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VLAN та Trunk
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network-configs/vlans-mikrotik/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VLAN в Mikrotik
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network-configs/stp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    STP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network-configs/routing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Маршрутизація
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network-configs/isp-failover/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dual WAN
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network-configs/ACL/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Контроль доступу
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network-configs/cisco-nat/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NAT в Cisco
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network-configs/dhcp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DHCP-сервер
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network-configs/ipsec/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IPsec в Cisco
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network-configs/ospf/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OSPF
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network-configs/cisco-cheat-sheet/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cisco cheat sheet
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network-configs/subnet-calculator/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Калькулятор маски підмереж
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🖥️ Сервіси
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    🖥️ Сервіси
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Сервіси на базі OC Linux
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../linux-network-interfaces/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ip addr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ssh/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SSH
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../radius/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RADIUS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SYSLOG
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SYSLOG
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Зміст">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Зміст
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-syslog" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1 Протокол Syslog
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-syslog-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2 Структура Syslog-повідомлення
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2 Структура Syslog-повідомлення">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-cisco-ios" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 Приклад реального повідомлення з Cisco IOS
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 Розбір полів
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-facility-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 Facility - джерело повідомлення
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-severity-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4 Severity - рівень важливості
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-rsyslog" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3 Встановлення та базова конфігурація Rsyslog
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3 Встановлення та базова конфігурація Rsyslog">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 Встановлення
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 Структура конфігурації
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4 Активація мережевих модулів (прийом логів по мережі)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5 Визначення директорій та файлів для збереження логів
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5 Визначення директорій та файлів для збереження логів">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 Рекомендована структура директорій
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 Налаштування шаблону імені файлу (динамічні файли)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6 Кастомні правила фільтрації та збереження
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6 Кастомні правила фільтрації та збереження">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-ip-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 Фільтрація за IP-адресою
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-hostname" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2 Фільтрація за hostname
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63-facility-severity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3 Фільтрація за facility та severity (тип повідомлення)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#64-regex" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.4 Фільтрація за вмістом повідомлення (regex)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#65" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.5 Комплексне правило з кількома умовами
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-relay-siem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7 Пересилання логів на інший сервер (relay / SIEM)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-logrotate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8 Налаштування logrotate
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-remote-logging" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9 Налаштування remote logging на мережевому обладнанні
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9 Налаштування remote logging на мережевому обладнанні">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#91-cisco-ios" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.1 Cisco IOS
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#92-mikrotik-routeros" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.2 MikroTik RouterOS
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-debug" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10 Debug та діагностика
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10 Debug та діагностика">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#101-rsyslog" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.1 Перевірка rsyslog
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#102" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.2 Перевірка мережевого прийому
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#103" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.3 Перевірка прийому логів з конкретного пристрою
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#104" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.4 Типові проблеми
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../iptables/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    iptables
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tcpdump-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    TCPDump
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../apt-cacher-ng/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    APT Cacher
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chmod-calculator/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Калькулятор прав Linux
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Зміст">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Зміст
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-syslog" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1 Протокол Syslog
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-syslog-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2 Структура Syslog-повідомлення
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2 Структура Syslog-повідомлення">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-cisco-ios" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 Приклад реального повідомлення з Cisco IOS
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 Розбір полів
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-facility-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 Facility - джерело повідомлення
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-severity-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4 Severity - рівень важливості
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-rsyslog" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3 Встановлення та базова конфігурація Rsyslog
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3 Встановлення та базова конфігурація Rsyslog">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 Встановлення
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 Структура конфігурації
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4 Активація мережевих модулів (прийом логів по мережі)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5 Визначення директорій та файлів для збереження логів
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5 Визначення директорій та файлів для збереження логів">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 Рекомендована структура директорій
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 Налаштування шаблону імені файлу (динамічні файли)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6 Кастомні правила фільтрації та збереження
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6 Кастомні правила фільтрації та збереження">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-ip-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 Фільтрація за IP-адресою
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-hostname" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2 Фільтрація за hostname
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63-facility-severity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3 Фільтрація за facility та severity (тип повідомлення)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#64-regex" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.4 Фільтрація за вмістом повідомлення (regex)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#65" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.5 Комплексне правило з кількома умовами
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-relay-siem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7 Пересилання логів на інший сервер (relay / SIEM)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-logrotate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8 Налаштування logrotate
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-remote-logging" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9 Налаштування remote logging на мережевому обладнанні
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9 Налаштування remote logging на мережевому обладнанні">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#91-cisco-ios" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.1 Cisco IOS
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#92-mikrotik-routeros" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.2 MikroTik RouterOS
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-debug" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10 Debug та діагностика
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10 Debug та діагностика">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#101-rsyslog" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.1 Перевірка rsyslog
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#102" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.2 Перевірка мережевого прийому
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#103" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.3 Перевірка прийому логів з конкретного пристрою
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#104" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.4 Типові проблеми
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="rsyslog-">Rsyslog - мережевий сервер логів</h1>
+<blockquote>
+<p>Курс: Безпека комп'ютерних мереж | 3 курс</p>
+</blockquote>
+<hr />
+<h2 id="1-syslog">1 Протокол Syslog</h2>
+<p><strong>Syslog</strong> - стандартний протокол (RFC 5424) для передачі журналів подій між пристроями по мережі. Маршрутизатори, комутатори, сервери, міжмережеві екрани - всі вони можуть надсилати повідомлення на централізований <strong>syslog-сервер</strong> по UDP/514 або TCP/514</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Cisco Router  ──┐
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>MikroTik      ──┤──► Rsyslog Server ──► SIEM / Архів
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>Linux Server  ──┘     (UDP/TCP 514)
+</code></pre></div>
+<p><strong>Rsyslog</strong> - найпоширеніша реалізація syslog-сервера для Linux. Підтримує прийом подій по мережі, гнучку фільтрацію, збереження у файли, бази даних та пересилання на інші сервери</p>
+<hr />
+<h2 id="2-syslog-">2 Структура Syslog-повідомлення</h2>
+<h3 id="21-cisco-ios">2.1 Приклад реального повідомлення з Cisco IOS</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>&lt;189&gt;Oct 15 08:23:11 R1 %SEC_LOGIN-5-LOGIN_SUCCESS: Login Success [user: admin] [Source: 192.168.1.10] [localport: 22] at 08:23:11 UTC Mon Oct 15 2024
+</code></pre></div>
+<h3 id="22">2.2 Розбір полів</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>&lt;189&gt;  Oct 15  08:23:11  R1  %SEC_LOGIN-5-LOGIN_SUCCESS: Login Success ...
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>  │       │        │      │         │
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>  │       │        │      │         └─ Message text
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>  │       │        │      └─ Hostname (source device)
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>  │       │        └─ Timestamp
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>  │       └─ Date
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>  └─ Priority = (Facility × 8) + Severity
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Поле</th>
+<th>Значення</th>
+<th>Опис</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;189&gt;</code></td>
+<td>Priority</td>
+<td>PRI = Facility(23) × 8 + Severity(5) = 189</td>
+</tr>
+<tr>
+<td><code>Oct 15 08:23:11</code></td>
+<td>Timestamp</td>
+<td>Час події на пристрої</td>
+</tr>
+<tr>
+<td><code>R1</code></td>
+<td>Hostname</td>
+<td>Ім'я пристрою-відправника</td>
+</tr>
+<tr>
+<td><code>%SEC_LOGIN-5-LOGIN_SUCCESS</code></td>
+<td>Mnemonic</td>
+<td>Cisco-специфічний ідентифікатор: <code>%FACILITY-SEVERITY-MNEMONIC</code></td>
+</tr>
+<tr>
+<td>Текст після <code>:</code></td>
+<td>Message</td>
+<td>Детальний опис події</td>
+</tr>
+</tbody>
+</table>
+<h3 id="23-facility-">2.3 Facility - джерело повідомлення</h3>
+<table>
+<thead>
+<tr>
+<th>Код</th>
+<th>Keyword</th>
+<th>Призначення</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td><code>kern</code></td>
+<td>Повідомлення ядра Linux</td>
+</tr>
+<tr>
+<td>1</td>
+<td><code>user</code></td>
+<td>Повідомлення від користувацьких процесів</td>
+</tr>
+<tr>
+<td>2</td>
+<td><code>mail</code></td>
+<td>Поштова система</td>
+</tr>
+<tr>
+<td>3</td>
+<td><code>daemon</code></td>
+<td>Системні демони</td>
+</tr>
+<tr>
+<td>4</td>
+<td><code>auth</code></td>
+<td>Аутентифікація та безпека</td>
+</tr>
+<tr>
+<td>5</td>
+<td><code>syslog</code></td>
+<td>Внутрішні повідомлення syslog</td>
+</tr>
+<tr>
+<td>6</td>
+<td><code>lpr</code></td>
+<td>Принтери</td>
+</tr>
+<tr>
+<td>7</td>
+<td><code>news</code></td>
+<td>Мережеві новини (NNTP)</td>
+</tr>
+<tr>
+<td>10</td>
+<td><code>authpriv</code></td>
+<td>Приватні повідомлення аутентифікації</td>
+</tr>
+<tr>
+<td>16–23</td>
+<td><code>local0</code>–<code>local7</code></td>
+<td>Призначені для користувача. <strong>Cisco і MikroTik використовують <code>local7</code> за замовчуванням</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="24-severity-">2.4 Severity - рівень важливості</h3>
+<table>
+<thead>
+<tr>
+<th>Рівень</th>
+<th>Keyword</th>
+<th>Опис</th>
+<th>Приклад</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td><code>emerg</code></td>
+<td>Система непрацездатна</td>
+<td>Критична помилка ядра</td>
+</tr>
+<tr>
+<td>1</td>
+<td><code>alert</code></td>
+<td>Негайна дія</td>
+<td>Зламаний RAID</td>
+</tr>
+<tr>
+<td>2</td>
+<td><code>crit</code></td>
+<td>Критичний стан</td>
+<td>Hardware failure</td>
+</tr>
+<tr>
+<td>3</td>
+<td><code>err</code></td>
+<td>Помилки</td>
+<td>Помилки інтерфейсу</td>
+</tr>
+<tr>
+<td>4</td>
+<td><code>warning</code></td>
+<td>Попередження</td>
+<td>Link down</td>
+</tr>
+<tr>
+<td>5</td>
+<td><code>notice</code></td>
+<td>Важливі нормальні події</td>
+<td>Вхід користувача</td>
+</tr>
+<tr>
+<td>6</td>
+<td><code>info</code></td>
+<td>Інформаційні</td>
+<td>DHCP lease</td>
+</tr>
+<tr>
+<td>7</td>
+<td><code>debug</code></td>
+<td>Налагоджувальні</td>
+<td>Детальний трейс</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition info">
+<p class="admonition-title">Як читати рівні severity</p>
+<p>Правила типу <code>*.warning</code> означають <strong>warning і вище по важливості</strong> — тобто 0 (emerg), 1 (alert), 2 (crit), 3 (err), 4 (warning). Чим менший номер — тим критичніше</p>
+</div>
+<hr />
+<h2 id="3-rsyslog">3 Встановлення та базова конфігурація Rsyslog</h2>
+<h3 id="31">3.1 Встановлення</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># Ubuntu/Debian</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>apt<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>rsyslog<span class="w"> </span>-y
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="c1"># CentOS/RHEL</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>dnf<span class="w"> </span>install<span class="w"> </span>rsyslog<span class="w"> </span>-y
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="c1"># Запуск та автозавантаження</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>systemctl<span class="w"> </span>start<span class="w"> </span>rsyslog
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>rsyslog
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>systemctl<span class="w"> </span>status<span class="w"> </span>rsyslog
+</code></pre></div>
+<h3 id="32">3.2 Структура конфігурації</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>/etc/rsyslog.conf          ← головний конфіг (модулі, глобальні параметри)
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>/etc/rsyslog.d/            ← директорія для кастомних правил (*.conf)
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>/var/log/                  ← директорія для логів за замовчуванням
+</code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">Кастомні правила - в /etc/rsyslog.d/</p>
+<p>Не редагуй <code>/etc/rsyslog.conf</code> для додавання своїх правил. Натомість створюй окремі файли у <code>/etc/rsyslog.d/</code>. При оновленні пакету головний конфіг може перезаписатись, а файли в <code>rsyslog.d/</code> залишаться. Порядок завантаження файлів - алфавітний, тому іменуй їх з числовим префіксом: <code>10-network.conf</code>, <code>20-security.conf</code></p>
+</div>
+<hr />
+<h2 id="4">4 Активація мережевих модулів (прийом логів по мережі)</h2>
+<p>Відредагуй <code>/etc/rsyslog.conf</code> - розкоментуй або додай відповідні рядки:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1"># Завжди завантажуємо базові модулі</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>module<span class="o">(</span><span class="nv">load</span><span class="o">=</span><span class="s2">&quot;imuxsock&quot;</span><span class="o">)</span><span class="w">    </span><span class="c1"># локальний /dev/log (системні логи)</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>module<span class="o">(</span><span class="nv">load</span><span class="o">=</span><span class="s2">&quot;imklog&quot;</span><span class="o">)</span><span class="w">      </span><span class="c1"># логи ядра (dmesg)</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="c1"># UDP - для Cisco, MikroTik та більшості мережевого обладнання</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>module<span class="o">(</span><span class="nv">load</span><span class="o">=</span><span class="s2">&quot;imudp&quot;</span><span class="o">)</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>input<span class="o">(</span><span class="nv">type</span><span class="o">=</span><span class="s2">&quot;imudp&quot;</span><span class="w"> </span><span class="nv">port</span><span class="o">=</span><span class="s2">&quot;514&quot;</span><span class="o">)</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="c1"># TCP - для надійної доставки (Linux-сервери, rsyslog → rsyslog)</span>
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>module<span class="o">(</span><span class="nv">load</span><span class="o">=</span><span class="s2">&quot;imtcp&quot;</span><span class="o">)</span>
+<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>input<span class="o">(</span><span class="nv">type</span><span class="o">=</span><span class="s2">&quot;imtcp&quot;</span><span class="w"> </span><span class="nv">port</span><span class="o">=</span><span class="s2">&quot;514&quot;</span><span class="o">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1"># Відкрити порти у firewall</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>ufw<span class="w"> </span>allow<span class="w"> </span><span class="m">514</span>/udp
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>ufw<span class="w"> </span>allow<span class="w"> </span><span class="m">514</span>/tcp
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="c1"># або через firewalld</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>firewall-cmd<span class="w"> </span>--permanent<span class="w"> </span>--add-port<span class="o">=</span><span class="m">514</span>/udp
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>firewall-cmd<span class="w"> </span>--permanent<span class="w"> </span>--add-port<span class="o">=</span><span class="m">514</span>/tcp
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>firewall-cmd<span class="w"> </span>--reload
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1"># Перевірити що сервер слухає на порту</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>ss<span class="w"> </span>-ulnp<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="m">514</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>ss<span class="w"> </span>-tlnp<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="m">514</span>
+</code></pre></div>
+<hr />
+<h2 id="5">5 Визначення директорій та файлів для збереження логів</h2>
+<h3 id="51">5.1 Рекомендована структура директорій</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>/var/log/
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>├── remote/                      ← всі логи з мережевих пристроїв
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>│   ├── routers/
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>│   │   ├── cisco-r1.log
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>│   │   └── mikrotik-r2.log
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>│   ├── switches/
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>│   │   └── cisco-sw1.log
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>│   └── servers/
+<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a>│       ├── web-server.log
+<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a>│       └── db-server.log
+<a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a>├── security/                    ← події безпеки (окремо для SIEM)
+<a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a>│   ├── auth.log
+<a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a>│   ├── firewall.log
+<a id="__codelineno-8-14" name="__codelineno-8-14" href="#__codelineno-8-14"></a>│   └── ids.log
+<a id="__codelineno-8-15" name="__codelineno-8-15" href="#__codelineno-8-15"></a>└── syslog                       ← загальний журнал (стандартний)
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="c1"># Створити директорії</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>mkdir<span class="w"> </span>-p<span class="w"> </span>/var/log/remote/<span class="o">{</span>routers,switches,servers<span class="o">}</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>mkdir<span class="w"> </span>-p<span class="w"> </span>/var/log/security
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="c1"># Права доступу</span>
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>chown<span class="w"> </span>-R<span class="w"> </span>syslog:adm<span class="w"> </span>/var/log/remote<span class="w"> </span>/var/log/security
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>chmod<span class="w"> </span>-R<span class="w"> </span><span class="m">750</span><span class="w"> </span>/var/log/remote<span class="w"> </span>/var/log/security
+</code></pre></div>
+<h3 id="52">5.2 Налаштування шаблону імені файлу (динамічні файли)</h3>
+<p>Додай у <code>/etc/rsyslog.conf</code> або в окремий файл:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a># Шаблон: зберігати лог кожного хоста у свій файл
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a># /var/log/remote/routers/192.168.1.1.log або /var/log/remote/routers/R1.log
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>template(name=&quot;RemoteHostLog&quot; type=&quot;string&quot;
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>         string=&quot;/var/log/remote/%HOSTNAME%.log&quot;)
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>template(name=&quot;RemoteIPLog&quot; type=&quot;string&quot;
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>         string=&quot;/var/log/remote/%FROMHOST-IP%.log&quot;)
+<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a>
+<a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a># Шаблон з датою (зручно для ротації)
+<a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a>template(name=&quot;DailyRemoteLog&quot; type=&quot;string&quot;
+<a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a>         string=&quot;/var/log/remote/%HOSTNAME%/%$YEAR%-%$MONTH%-%$DAY%.log&quot;)
+</code></pre></div>
+<hr />
+<h2 id="6">6 Кастомні правила фільтрації та збереження</h2>
+<p>Всі кастомні правила рекомендується розміщувати в <code>/etc/rsyslog.d/</code></p>
+<h3 id="61-ip-">6.1 Фільтрація за IP-адресою</h3>
+<p>Файл: <code>/etc/rsyslog.d/10-by-ip.conf</code></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a># Логи з конкретного IP - в окремий файл
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>if $FROMHOST-IP == &#39;192.168.1.1&#39; then /var/log/remote/routers/cisco-r1.log
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>if $FROMHOST-IP == &#39;192.168.1.2&#39; then /var/log/remote/routers/mikrotik-r2.log
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>if $FROMHOST-IP == &#39;192.168.2.1&#39; then /var/log/remote/switches/cisco-sw1.log
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a># Логи з підмережі маршрутизаторів - в загальний файл роутерів
+<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a>if $FROMHOST-IP startswith &#39;192.168.1.&#39; then /var/log/remote/routers/all-routers.log
+<a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a>
+<a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a># Зупинити обробку після запису (&amp; stop - не дублювати в інші правила)
+<a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a>if $FROMHOST-IP == &#39;192.168.1.1&#39; then {
+<a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a>    /var/log/remote/routers/cisco-r1.log
+<a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a>    stop
+<a id="__codelineno-11-13" name="__codelineno-11-13" href="#__codelineno-11-13"></a>}
+</code></pre></div>
+<h3 id="62-hostname">6.2 Фільтрація за hostname</h3>
+<p>Файл: <code>/etc/rsyslog.d/11-by-hostname.conf</code></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a># За точним іменем хоста
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>if $HOSTNAME == &#39;R1&#39; then /var/log/remote/routers/cisco-r1.log
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>if $HOSTNAME == &#39;MikroTik&#39; then /var/log/remote/routers/mikrotik.log
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a># За шаблоном імені (всі хости що починаються на SW-)
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>if $HOSTNAME startswith &#39;SW-&#39; then /var/log/remote/switches/all-switches.log
+<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a>if $HOSTNAME startswith &#39;SRV-&#39; then /var/log/remote/servers/all-servers.log
+</code></pre></div>
+<h3 id="63-facility-severity">6.3 Фільтрація за facility та severity (тип повідомлення)</h3>
+<p>Файл: <code>/etc/rsyslog.d/20-by-type.conf</code></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a># Всі повідомлення аутентифікації (auth та authpriv)
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>auth,authpriv.*                 /var/log/security/auth.log
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a># Повідомлення від local7 (Cisco/MikroTik за замовчуванням)
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>local7.*                        /var/log/remote/network-devices.log
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>
+<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a># Тільки критичні та вище — з будь-якого джерела
+<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a>*.crit                          /var/log/security/critical.log
+<a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a>
+<a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a># Повідомлення рівня warning і вище з мережевих пристроїв
+<a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a>if ($syslogfacility-text == &#39;local7&#39;) and ($syslogseverity &lt;= 4) then {
+<a id="__codelineno-13-12" name="__codelineno-13-12" href="#__codelineno-13-12"></a>    /var/log/security/network-warnings.log
+<a id="__codelineno-13-13" name="__codelineno-13-13" href="#__codelineno-13-13"></a>}
+<a id="__codelineno-13-14" name="__codelineno-13-14" href="#__codelineno-13-14"></a>
+<a id="__codelineno-13-15" name="__codelineno-13-15" href="#__codelineno-13-15"></a># Ігнорувати debug-повідомлення (зекономити місце)
+<a id="__codelineno-13-16" name="__codelineno-13-16" href="#__codelineno-13-16"></a>*.debug                         stop
+</code></pre></div>
+<h3 id="64-regex">6.4 Фільтрація за вмістом повідомлення (regex)</h3>
+<p>Файл: <code>/etc/rsyslog.d/30-security-events.conf</code></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a># Повідомлення про вхід/вихід користувачів (Cisco LOGIN/LOGOUT)
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>if $msg contains &#39;LOGIN_SUCCESS&#39; or $msg contains &#39;LOGIN_FAILED&#39; then {
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>    /var/log/security/logins.log
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>}
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a>
+<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a># Cisco ACL deny — блокований трафік
+<a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a>if $msg contains &#39;%SEC-6-IPACCESSLOGP&#39; or $msg contains &#39;%SEC-6-IPACCESSLOGS&#39; then {
+<a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a>    /var/log/security/firewall.log
+<a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a>}
+<a id="__codelineno-14-10" name="__codelineno-14-10" href="#__codelineno-14-10"></a>
+<a id="__codelineno-14-11" name="__codelineno-14-11" href="#__codelineno-14-11"></a># Interface down/up події
+<a id="__codelineno-14-12" name="__codelineno-14-12" href="#__codelineno-14-12"></a>if $msg contains &#39;changed state to down&#39; or $msg contains &#39;changed state to up&#39; then {
+<a id="__codelineno-14-13" name="__codelineno-14-13" href="#__codelineno-14-13"></a>    /var/log/remote/interface-events.log
+<a id="__codelineno-14-14" name="__codelineno-14-14" href="#__codelineno-14-14"></a>}
+<a id="__codelineno-14-15" name="__codelineno-14-15" href="#__codelineno-14-15"></a>
+<a id="__codelineno-14-16" name="__codelineno-14-16" href="#__codelineno-14-16"></a># Помилки конфігурації Cisco
+<a id="__codelineno-14-17" name="__codelineno-14-17" href="#__codelineno-14-17"></a>if $msg contains &#39;%SYS-5-CONFIG_I&#39; then {
+<a id="__codelineno-14-18" name="__codelineno-14-18" href="#__codelineno-14-18"></a>    /var/log/security/config-changes.log
+<a id="__codelineno-14-19" name="__codelineno-14-19" href="#__codelineno-14-19"></a>}
+</code></pre></div>
+<h3 id="65">6.5 Комплексне правило з кількома умовами</h3>
+<p>Файл: <code>/etc/rsyslog.d/40-complex.conf</code></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a># Всі події безпеки з мережевих пристроїв (local7, severity 0-5) — у security-лог
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>if ($syslogfacility-text == &#39;local7&#39;) and \
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>   ($syslogseverity &lt;= 5) and \
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>   ($FROMHOST-IP startswith &#39;192.168.&#39;) \
+<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a>then {
+<a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a>    action(type=&quot;omfile&quot; file=&quot;/var/log/security/network-security.log&quot;
+<a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a>           template=&quot;RSYSLOG_TraditionalFileFormat&quot;)
+<a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a>}
+<a id="__codelineno-15-9" name="__codelineno-15-9" href="#__codelineno-15-9"></a>
+<a id="__codelineno-15-10" name="__codelineno-15-10" href="#__codelineno-15-10"></a># Зберегти в файл за хостом І у загальний security-файл (без stop — обидва спрацюють)
+<a id="__codelineno-15-11" name="__codelineno-15-11" href="#__codelineno-15-11"></a>if $FROMHOST-IP == &#39;192.168.1.1&#39; then /var/log/remote/routers/cisco-r1.log
+<a id="__codelineno-15-12" name="__codelineno-15-12" href="#__codelineno-15-12"></a>if $syslogfacility-text == &#39;local7&#39; and $syslogseverity &lt;= 4
+<a id="__codelineno-15-13" name="__codelineno-15-13" href="#__codelineno-15-13"></a>    then /var/log/security/network-warnings.log
+</code></pre></div>
+<hr />
+<h2 id="7-relay-siem">7 Пересилання логів на інший сервер (relay / SIEM)</h2>
+<p>Типова ситуація: локальний rsyslog зберігає копію подій у файл <strong>і одночасно пересилає їх</strong> на SIEM або центральний лог-сервер відділу кібербезпеки</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>[Cisco/MikroTik] ──UDP──► [Rsyslog Server] ──TCP──► [SIEM / Central Syslog]
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>                                  │
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>                                  └──► /var/log/remote/ (локальна копія)
+</code></pre></div>
+<p>Файл: <code>/etc/rsyslog.d/99-forward.conf</code></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a># Варіант 1 - пересилати ВСЕ на SIEM по TCP (надійно)
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>*.* action(type=&quot;omfwd&quot;
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>           target=&quot;10.0.0.100&quot;
+<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a>           port=&quot;514&quot;
+<a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a>           protocol=&quot;tcp&quot;
+<a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a>           action.resumeRetryCount=&quot;100&quot;
+<a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a>           queue.type=&quot;linkedList&quot;
+<a id="__codelineno-17-8" name="__codelineno-17-8" href="#__codelineno-17-8"></a>           queue.size=&quot;10000&quot;)
+<a id="__codelineno-17-9" name="__codelineno-17-9" href="#__codelineno-17-9"></a>
+<a id="__codelineno-17-10" name="__codelineno-17-10" href="#__codelineno-17-10"></a># Варіант 2 - пересилати тільки security-події на SIEM
+<a id="__codelineno-17-11" name="__codelineno-17-11" href="#__codelineno-17-11"></a>if ($syslogfacility-text == &#39;local7&#39;) or \
+<a id="__codelineno-17-12" name="__codelineno-17-12" href="#__codelineno-17-12"></a>   ($syslogfacility-text == &#39;auth&#39;) or \
+<a id="__codelineno-17-13" name="__codelineno-17-13" href="#__codelineno-17-13"></a>   ($syslogfacility-text == &#39;authpriv&#39;) \
+<a id="__codelineno-17-14" name="__codelineno-17-14" href="#__codelineno-17-14"></a>then {
+<a id="__codelineno-17-15" name="__codelineno-17-15" href="#__codelineno-17-15"></a>    action(type=&quot;omfwd&quot;
+<a id="__codelineno-17-16" name="__codelineno-17-16" href="#__codelineno-17-16"></a>           target=&quot;10.0.0.100&quot;
+<a id="__codelineno-17-17" name="__codelineno-17-17" href="#__codelineno-17-17"></a>           port=&quot;6514&quot;
+<a id="__codelineno-17-18" name="__codelineno-17-18" href="#__codelineno-17-18"></a>           protocol=&quot;tcp&quot;
+<a id="__codelineno-17-19" name="__codelineno-17-19" href="#__codelineno-17-19"></a>           action.resumeRetryCount=&quot;50&quot;
+<a id="__codelineno-17-20" name="__codelineno-17-20" href="#__codelineno-17-20"></a>           queue.type=&quot;linkedList&quot;
+<a id="__codelineno-17-21" name="__codelineno-17-21" href="#__codelineno-17-21"></a>           queue.size=&quot;5000&quot;
+<a id="__codelineno-17-22" name="__codelineno-17-22" href="#__codelineno-17-22"></a>           queue.filename=&quot;siem-queue&quot;
+<a id="__codelineno-17-23" name="__codelineno-17-23" href="#__codelineno-17-23"></a>           queue.saveOnShutdown=&quot;on&quot;)
+<a id="__codelineno-17-24" name="__codelineno-17-24" href="#__codelineno-17-24"></a>}
+<a id="__codelineno-17-25" name="__codelineno-17-25" href="#__codelineno-17-25"></a>
+<a id="__codelineno-17-26" name="__codelineno-17-26" href="#__codelineno-17-26"></a># Варіант 3 - зберегти локально І переслати (без stop між правилами)
+<a id="__codelineno-17-27" name="__codelineno-17-27" href="#__codelineno-17-27"></a>auth,authpriv.*   /var/log/security/auth.log
+<a id="__codelineno-17-28" name="__codelineno-17-28" href="#__codelineno-17-28"></a>auth,authpriv.*   action(type=&quot;omfwd&quot; target=&quot;10.0.0.100&quot; port=&quot;514&quot; protocol=&quot;tcp&quot;)
+</code></pre></div>
+<div class="admonition info">
+<p class="admonition-title">Черга (queue) при пересиланні</p>
+<p><code>queue.type="linkedList"</code> і <code>queue.size="10000"</code> - буфер повідомлень на випадок недоступності SIEM. Якщо SIEM тимчасово не відповідає, rsyslog буде зберігати події в пам'яті (або на диску з <code>queue.filename</code>) і надішле їх коли з'єднання відновиться. Без черги події при недоступності SIEM втрачаються</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">queue.saveOnShutdown</p>
+<p><code>queue.saveOnShutdown="on"</code> - зберігає чергу на диск при зупинці rsyslog. При наступному запуску черга відновлюється і всі буферизовані події надсилаються. Необхідно вказати <code>queue.filename</code> для цього режиму</p>
+</div>
+<hr />
+<h2 id="8-logrotate">8 Налаштування logrotate</h2>
+<p>Без ротації лог-файли будуть рости необмежено і заповнять диск</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="c1"># Перевірити наявний конфіг (зазвичай вже є)</span>
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>cat<span class="w"> </span>/etc/logrotate.d/rsyslog
+</code></pre></div>
+<p>Файл: <code>/etc/logrotate.d/remote-logs</code></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>/var/log/remote/**/*.log
+<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>/var/log/security/*.log
+<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>{
+<a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a>    daily                    # ротувати щодня
+<a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a>    rotate 90                # зберігати 90 файлів (3 місяці)
+<a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a>    compress                 # стиснути старі файли (gzip)
+<a id="__codelineno-19-7" name="__codelineno-19-7" href="#__codelineno-19-7"></a>    delaycompress            # стискати не відразу, а при наступній ротації
+<a id="__codelineno-19-8" name="__codelineno-19-8" href="#__codelineno-19-8"></a>    missingok                # не повідомляти про помилку якщо файл відсутній
+<a id="__codelineno-19-9" name="__codelineno-19-9" href="#__codelineno-19-9"></a>    notifempty               # не ротувати порожні файли
+<a id="__codelineno-19-10" name="__codelineno-19-10" href="#__codelineno-19-10"></a>    create 0640 syslog adm  # права на новий файл
+<a id="__codelineno-19-11" name="__codelineno-19-11" href="#__codelineno-19-11"></a>    sharedscripts            # виконати postrotate один раз для всіх файлів
+<a id="__codelineno-19-12" name="__codelineno-19-12" href="#__codelineno-19-12"></a>    postrotate
+<a id="__codelineno-19-13" name="__codelineno-19-13" href="#__codelineno-19-13"></a>        /usr/lib/rsyslog/rsyslog-rotate   # надіслати HUP сигнал rsyslog
+<a id="__codelineno-19-14" name="__codelineno-19-14" href="#__codelineno-19-14"></a>    endscript
+<a id="__codelineno-19-15" name="__codelineno-19-15" href="#__codelineno-19-15"></a>}
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="c1"># Перевірити конфігурацію logrotate (без реального виконання)</span>
+<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>logrotate<span class="w"> </span>-d<span class="w"> </span>/etc/logrotate.d/remote-logs
+<a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a>
+<a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a><span class="c1"># Примусова ротація (для тесту)</span>
+<a id="__codelineno-20-5" name="__codelineno-20-5" href="#__codelineno-20-5"></a>logrotate<span class="w"> </span>-f<span class="w"> </span>/etc/logrotate.d/remote-logs
+<a id="__codelineno-20-6" name="__codelineno-20-6" href="#__codelineno-20-6"></a>
+<a id="__codelineno-20-7" name="__codelineno-20-7" href="#__codelineno-20-7"></a><span class="c1"># Перевірити стан ротації</span>
+<a id="__codelineno-20-8" name="__codelineno-20-8" href="#__codelineno-20-8"></a>cat<span class="w"> </span>/var/lib/logrotate/status<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>remote
+</code></pre></div>
+<hr />
+<h2 id="9-remote-logging">9 Налаштування remote logging на мережевому обладнанні</h2>
+<h3 id="91-cisco-ios">9.1 Cisco IOS</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>! Вказати адресу syslog-сервера
+<a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a>logging host 192.168.100.10
+<a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a>
+<a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a>! Або з вказанням протоколу та порту (IOS 12.4+)
+<a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a>logging host 192.168.100.10 transport tcp port 514
+<a id="__codelineno-21-6" name="__codelineno-21-6" href="#__codelineno-21-6"></a>logging host 192.168.100.10 transport udp port 514
+<a id="__codelineno-21-7" name="__codelineno-21-7" href="#__codelineno-21-7"></a>
+<a id="__codelineno-21-8" name="__codelineno-21-8" href="#__codelineno-21-8"></a>! Рівень повідомлень що надсилаються (informational = 0-6)
+<a id="__codelineno-21-9" name="__codelineno-21-9" href="#__codelineno-21-9"></a>logging trap informational
+<a id="__codelineno-21-10" name="__codelineno-21-10" href="#__codelineno-21-10"></a>
+<a id="__codelineno-21-11" name="__codelineno-21-11" href="#__codelineno-21-11"></a>! Facility (local7 за замовчуванням, можна змінити)
+<a id="__codelineno-21-12" name="__codelineno-21-12" href="#__codelineno-21-12"></a>logging facility local7
+<a id="__codelineno-21-13" name="__codelineno-21-13" href="#__codelineno-21-13"></a>
+<a id="__codelineno-21-14" name="__codelineno-21-14" href="#__codelineno-21-14"></a>! Включити timestamp у повідомленнях
+<a id="__codelineno-21-15" name="__codelineno-21-15" href="#__codelineno-21-15"></a>service timestamps log datetime msec localtime show-timezone
+<a id="__codelineno-21-16" name="__codelineno-21-16" href="#__codelineno-21-16"></a>
+<a id="__codelineno-21-17" name="__codelineno-21-17" href="#__codelineno-21-17"></a>! Включити source-interface (щоб лог завжди йшов з одного IP)
+<a id="__codelineno-21-18" name="__codelineno-21-18" href="#__codelineno-21-18"></a>logging source-interface Loopback0
+<a id="__codelineno-21-19" name="__codelineno-21-19" href="#__codelineno-21-19"></a>
+<a id="__codelineno-21-20" name="__codelineno-21-20" href="#__codelineno-21-20"></a>! Увімкнути буфер локальних логів
+<a id="__codelineno-21-21" name="__codelineno-21-21" href="#__codelineno-21-21"></a>logging buffered 16384 informational
+<a id="__codelineno-21-22" name="__codelineno-21-22" href="#__codelineno-21-22"></a>
+<a id="__codelineno-21-23" name="__codelineno-21-23" href="#__codelineno-21-23"></a>! Перевірка
+<a id="__codelineno-21-24" name="__codelineno-21-24" href="#__codelineno-21-24"></a>show logging
+</code></pre></div>
+<h3 id="92-mikrotik-routeros">9.2 MikroTik RouterOS</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a># Додати remote syslog action
+<a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a>/system logging action
+<a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a>add name=remote-syslog \
+<a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a>    target=remote \
+<a id="__codelineno-22-5" name="__codelineno-22-5" href="#__codelineno-22-5"></a>    remote=192.168.100.10 \
+<a id="__codelineno-22-6" name="__codelineno-22-6" href="#__codelineno-22-6"></a>    remote-port=514 \
+<a id="__codelineno-22-7" name="__codelineno-22-7" href="#__codelineno-22-7"></a>    src-address=0.0.0.0 \
+<a id="__codelineno-22-8" name="__codelineno-22-8" href="#__codelineno-22-8"></a>    bsd-syslog=yes \
+<a id="__codelineno-22-9" name="__codelineno-22-9" href="#__codelineno-22-9"></a>    syslog-facility=local7 \
+<a id="__codelineno-22-10" name="__codelineno-22-10" href="#__codelineno-22-10"></a>    syslog-severity=auto
+<a id="__codelineno-22-11" name="__codelineno-22-11" href="#__codelineno-22-11"></a>
+<a id="__codelineno-22-12" name="__codelineno-22-12" href="#__codelineno-22-12"></a># Призначити всі топіки до remote action
+<a id="__codelineno-22-13" name="__codelineno-22-13" href="#__codelineno-22-13"></a>/system logging
+<a id="__codelineno-22-14" name="__codelineno-22-14" href="#__codelineno-22-14"></a>add topics=info    action=remote-syslog
+<a id="__codelineno-22-15" name="__codelineno-22-15" href="#__codelineno-22-15"></a>add topics=warning action=remote-syslog
+<a id="__codelineno-22-16" name="__codelineno-22-16" href="#__codelineno-22-16"></a>add topics=error   action=remote-syslog
+<a id="__codelineno-22-17" name="__codelineno-22-17" href="#__codelineno-22-17"></a>add topics=critical action=remote-syslog
+<a id="__codelineno-22-18" name="__codelineno-22-18" href="#__codelineno-22-18"></a>add topics=firewall action=remote-syslog
+<a id="__codelineno-22-19" name="__codelineno-22-19" href="#__codelineno-22-19"></a>
+<a id="__codelineno-22-20" name="__codelineno-22-20" href="#__codelineno-22-20"></a># Перевірка
+<a id="__codelineno-22-21" name="__codelineno-22-21" href="#__codelineno-22-21"></a>/system logging print
+<a id="__codelineno-22-22" name="__codelineno-22-22" href="#__codelineno-22-22"></a>/system logging action print
+<a id="__codelineno-22-23" name="__codelineno-22-23" href="#__codelineno-22-23"></a>/log print
+</code></pre></div>
+<hr />
+<h2 id="10-debug">10 Debug та діагностика</h2>
+<h3 id="101-rsyslog">10.1 Перевірка rsyslog</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="c1"># Статус сервісу</span>
+<a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a>systemctl<span class="w"> </span>status<span class="w"> </span>rsyslog
+<a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a>
+<a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a><span class="c1"># Перевірити конфігурацію на помилки (обов&#39;язково після кожної зміни!)</span>
+<a id="__codelineno-23-5" name="__codelineno-23-5" href="#__codelineno-23-5"></a>rsyslogd<span class="w"> </span>-N1<span class="w">              </span><span class="c1"># перевірка синтаксису</span>
+<a id="__codelineno-23-6" name="__codelineno-23-6" href="#__codelineno-23-6"></a>rsyslogd<span class="w"> </span>-N2<span class="w">              </span><span class="c1"># більш детальна перевірка</span>
+<a id="__codelineno-23-7" name="__codelineno-23-7" href="#__codelineno-23-7"></a>
+<a id="__codelineno-23-8" name="__codelineno-23-8" href="#__codelineno-23-8"></a><span class="c1"># Переглянути власні логи rsyslog</span>
+<a id="__codelineno-23-9" name="__codelineno-23-9" href="#__codelineno-23-9"></a>journalctl<span class="w"> </span>-u<span class="w"> </span>rsyslog<span class="w"> </span>-f
+<a id="__codelineno-23-10" name="__codelineno-23-10" href="#__codelineno-23-10"></a>tail<span class="w"> </span>-f<span class="w"> </span>/var/log/syslog<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>rsyslog
+<a id="__codelineno-23-11" name="__codelineno-23-11" href="#__codelineno-23-11"></a>
+<a id="__codelineno-23-12" name="__codelineno-23-12" href="#__codelineno-23-12"></a><span class="c1"># Перезапустити після змін конфігурації</span>
+<a id="__codelineno-23-13" name="__codelineno-23-13" href="#__codelineno-23-13"></a>systemctl<span class="w"> </span>restart<span class="w"> </span>rsyslog
+<a id="__codelineno-23-14" name="__codelineno-23-14" href="#__codelineno-23-14"></a><span class="c1"># або м&#39;який перезапуск (без втрати поточних з&#39;єднань)</span>
+<a id="__codelineno-23-15" name="__codelineno-23-15" href="#__codelineno-23-15"></a>systemctl<span class="w"> </span>reload<span class="w"> </span>rsyslog
+</code></pre></div>
+<h3 id="102">10.2 Перевірка мережевого прийому</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="c1"># Слухати вхідні UDP syslog-пакети (до запуску rsyslog або для діагностики)</span>
+<a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a>tcpdump<span class="w"> </span>-i<span class="w"> </span>any<span class="w"> </span>udp<span class="w"> </span>port<span class="w"> </span><span class="m">514</span><span class="w"> </span>-nn<span class="w"> </span>-A
+<a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a>
+<a id="__codelineno-24-4" name="__codelineno-24-4" href="#__codelineno-24-4"></a><span class="c1"># Перевірити що rsyslog слухає на порту</span>
+<a id="__codelineno-24-5" name="__codelineno-24-5" href="#__codelineno-24-5"></a>ss<span class="w"> </span>-ulnp<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="m">514</span>
+<a id="__codelineno-24-6" name="__codelineno-24-6" href="#__codelineno-24-6"></a>ss<span class="w"> </span>-tlnp<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="m">514</span>
+<a id="__codelineno-24-7" name="__codelineno-24-7" href="#__codelineno-24-7"></a>
+<a id="__codelineno-24-8" name="__codelineno-24-8" href="#__codelineno-24-8"></a><span class="c1"># Надіслати тестове повідомлення з поточного хоста</span>
+<a id="__codelineno-24-9" name="__codelineno-24-9" href="#__codelineno-24-9"></a>logger<span class="w"> </span>-p<span class="w"> </span>local7.info<span class="w"> </span><span class="s2">&quot;Test message from </span><span class="k">$(</span>hostname<span class="k">)</span><span class="s2">&quot;</span>
+<a id="__codelineno-24-10" name="__codelineno-24-10" href="#__codelineno-24-10"></a>logger<span class="w"> </span>-p<span class="w"> </span>auth.warning<span class="w"> </span><span class="s2">&quot;Test auth warning&quot;</span>
+<a id="__codelineno-24-11" name="__codelineno-24-11" href="#__codelineno-24-11"></a>
+<a id="__codelineno-24-12" name="__codelineno-24-12" href="#__codelineno-24-12"></a><span class="c1"># Надіслати тестове повідомлення на конкретний syslog-сервер (netcat)</span>
+<a id="__codelineno-24-13" name="__codelineno-24-13" href="#__codelineno-24-13"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;&lt;134&gt;Oct 15 08:00:00 testhost TEST: hello syslog&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>nc<span class="w"> </span>-u<span class="w"> </span><span class="m">192</span>.168.100.10<span class="w"> </span><span class="m">514</span>
+</code></pre></div>
+<h3 id="103">10.3 Перевірка прийому логів з конкретного пристрою</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="c1"># Стежити за надходженням логів у реальному часі</span>
+<a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a>tail<span class="w"> </span>-f<span class="w"> </span>/var/log/remote/routers/cisco-r1.log
+<a id="__codelineno-25-3" name="__codelineno-25-3" href="#__codelineno-25-3"></a>
+<a id="__codelineno-25-4" name="__codelineno-25-4" href="#__codelineno-25-4"></a><span class="c1"># Фільтрувати за IP-адресою в загальному syslog</span>
+<a id="__codelineno-25-5" name="__codelineno-25-5" href="#__codelineno-25-5"></a>tail<span class="w"> </span>-f<span class="w"> </span>/var/log/syslog<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s1">&#39;192.168.1.1&#39;</span>
+<a id="__codelineno-25-6" name="__codelineno-25-6" href="#__codelineno-25-6"></a>
+<a id="__codelineno-25-7" name="__codelineno-25-7" href="#__codelineno-25-7"></a><span class="c1"># Переглянути кількість повідомлень від кожного хоста за останню годину</span>
+<a id="__codelineno-25-8" name="__codelineno-25-8" href="#__codelineno-25-8"></a>grep<span class="w"> </span><span class="s2">&quot;</span><span class="k">$(</span>date<span class="w"> </span><span class="s1">&#39;+%b %e %H&#39;</span><span class="k">)</span><span class="s2">&quot;</span><span class="w"> </span>/var/log/syslog<span class="w"> </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span><span class="s1">&#39;{print $4}&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sort<span class="w"> </span><span class="p">|</span><span class="w"> </span>uniq<span class="w"> </span>-c<span class="w"> </span><span class="p">|</span><span class="w"> </span>sort<span class="w"> </span>-rn
+<a id="__codelineno-25-9" name="__codelineno-25-9" href="#__codelineno-25-9"></a>
+<a id="__codelineno-25-10" name="__codelineno-25-10" href="#__codelineno-25-10"></a><span class="c1"># Переглянути розмір лог-файлів</span>
+<a id="__codelineno-25-11" name="__codelineno-25-11" href="#__codelineno-25-11"></a>du<span class="w"> </span>-sh<span class="w"> </span>/var/log/remote/**
+<a id="__codelineno-25-12" name="__codelineno-25-12" href="#__codelineno-25-12"></a>ls<span class="w"> </span>-lh<span class="w"> </span>/var/log/remote/routers/
+</code></pre></div>
+<h3 id="104">10.4 Типові проблеми</h3>
+<table>
+<thead>
+<tr>
+<th>Симптом</th>
+<th>Причина</th>
+<th>Рішення</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Логи не надходять</td>
+<td>Порт 514 закритий</td>
+<td><code>ufw allow 514/udp</code></td>
+</tr>
+<tr>
+<td>Файл не створюється</td>
+<td>Немає директорії або прав</td>
+<td><code>mkdir -p /var/log/remote &amp;&amp; chown syslog:adm /var/log/remote</code></td>
+</tr>
+<tr>
+<td>Синтаксична помилка</td>
+<td>Помилка у конфізі</td>
+<td><code>rsyslogd -N1</code></td>
+</tr>
+<tr>
+<td>Дублювання записів</td>
+<td>Правило без <code>stop</code></td>
+<td>Додати <code>stop</code> після запису у файл</td>
+</tr>
+<tr>
+<td>Логи йдуть у <code>/var/log/syslog</code> замість потрібного файлу</td>
+<td>Правило не спрацьовує</td>
+<td>Перевірити синтаксис умови та назву facility</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<blockquote>
+<p>📌 <strong>Після кожної зміни конфігурації:</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a>rsyslogd<span class="w"> </span>-N1<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>rsyslog
+</code></pre></div></p>
+</blockquote>
+<hr />
+<div class="admonition quote">
+<p class="admonition-title">Джерела</p>
+<p><a href="https://docs.rsyslog.com/doc/configuration/index.html">Rsyslog Documentation</a> ·
+<a href="https://datatracker.ietf.org/doc/html/rfc5424">RFC 5424 — The Syslog Protocol</a> ·
+<a href="https://www.cisco.com/c/en/us/td/docs/iosxr/cisco8000/system-monitoring/24xx/configuration/guide/b-system-monitoring-cg-cisco8k-24xx/implementing-system-logging.html">Cisco IOS Logging</a></p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Повернутись нагору
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      © 2026 Кафедра №21 - Bci права захищені
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://mitit.mil.gov.ua/page/faculty2" target="_blank" rel="noopener" title="mitit.mil.gov.ua" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M16.36 14c.08-.66.14-1.32.14-2s-.06-1.34-.14-2h3.38c.16.64.26 1.31.26 2s-.1 1.36-.26 2m-5.15 5.56c.6-1.11 1.06-2.31 1.38-3.56h2.95a8.03 8.03 0 0 1-4.33 3.56M14.34 14H9.66c-.1-.66-.16-1.32-.16-2s.06-1.35.16-2h4.68c.09.65.16 1.32.16 2s-.07 1.34-.16 2M12 19.96c-.83-1.2-1.5-2.53-1.91-3.96h3.82c-.41 1.43-1.08 2.76-1.91 3.96M8 8H5.08A7.92 7.92 0 0 1 9.4 4.44C8.8 5.55 8.35 6.75 8 8m-2.92 8H8c.35 1.25.8 2.45 1.4 3.56A8 8 0 0 1 5.08 16m-.82-2C4.1 13.36 4 12.69 4 12s.1-1.36.26-2h3.38c-.08.66-.14 1.32-.14 2s.06 1.34.14 2M12 4.03c.83 1.2 1.5 2.54 1.91 3.97h-3.82c.41-1.43 1.08-2.77 1.91-3.97M18.92 8h-2.95a15.7 15.7 0 0 0-1.38-3.56c1.84.63 3.37 1.9 4.33 3.56M12 2C6.47 2 2 6.5 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "content.code.copy", "search.suggest", "search.highlight"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u0421\u043a\u043e\u043f\u0456\u0439\u043e\u0432\u0430\u043d\u043e \u0432 \u0431\u0443\u0444\u0435\u0440", "clipboard.copy": "\u0421\u043a\u043e\u043f\u0456\u044e\u0432\u0430\u0442\u0438 \u0432 \u0431\u0443\u0444\u0435\u0440", "search.result.more.one": "\u0429\u0435 1 \u0437\u0431\u0456\u0433 \u043d\u0430 \u0446\u0456\u0439 \u0441\u0442\u043e\u0440\u0456\u043d\u0446\u0456", "search.result.more.other": "\u0429\u0435 # \u0437\u0431\u0456\u0433\u0456\u0432 \u043d\u0430 \u0446\u0456\u0439 \u0441\u0442\u043e\u0440\u0456\u043d\u0446\u0456", "search.result.none": "\u0417\u0431\u0456\u0433\u0456\u0432 \u043d\u0435 \u0437\u043d\u0430\u0439\u0434\u0435\u043d\u043e", "search.result.one": "\u0417\u043d\u0430\u0439\u0434\u0435\u043d\u043e 1 \u0437\u0431\u0456\u0433", "search.result.other": "\u0417\u043d\u0430\u0439\u0434\u0435\u043d\u043e # \u0437\u0431\u0456\u0433\u0456\u0432", "search.result.placeholder": "\u0420\u043e\u0437\u043f\u043e\u0447\u043d\u0456\u0442\u044c \u043f\u0438\u0441\u0430\u0442\u0438 \u0434\u043b\u044f \u043f\u043e\u0448\u0443\u043a\u0443", "search.result.term.missing": "\u041d\u0435 \u0437\u043d\u0430\u0439\u0434\u0435\u043d\u043e \u0437\u0430\u043f\u0438\u0442\u0443", "select.version": "\u041e\u0431\u0440\u0430\u0442\u0438 \u0432\u0435\u0440\u0441\u0456\u044e"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

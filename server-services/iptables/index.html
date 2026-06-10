@@ -1,0 +1,2556 @@
+
+<!doctype html>
+<html lang="uk" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="Створено колективом кафедри №21">
+      
+      
+      
+        <link rel="prev" href="../syslog/">
+      
+      
+        <link rel="next" href="../tcpdump-guide/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/logo_dep21_white.ico">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>iptables - Довідник кафедри Інформаційних систем та технологій</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#iptables" class="md-skip">
+          Перейти до змісту
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Хедер">
+    <a href="../.." title="Довідник кафедри Інформаційних систем та технологій" class="md-header__button md-logo" aria-label="Довідник кафедри Інформаційних систем та технологій" data-md-component="logo">
+      
+  <img src="../../assets/logo_dep21_white.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Довідник кафедри Інформаційних систем та технологій
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              iptables
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Перейти на темну тему"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Перейти на темну тему" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="indigo"  aria-label="Перейти на світлу тему"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Перейти на світлу тему" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Пошук" placeholder="Пошук" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Шукати">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Очистити" aria-label="Очистити" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Пошук розпочато
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Вкладки" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../.." class="md-tabs__link">
+          
+  
+  
+  🏠 Головна
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../network-configs/" class="md-tabs__link">
+          
+  
+  
+  🌐 Мережі
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+  🖥️ Сервіси
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Навігація" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Довідник кафедри Інформаційних систем та технологій" class="md-nav__button md-logo" aria-label="Довідник кафедри Інформаційних систем та технологій" data-md-component="logo">
+      
+  <img src="../../assets/logo_dep21_white.png" alt="logo">
+
+    </a>
+    Довідник кафедри Інформаційних систем та технологій
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🏠 Головна
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    🏠 Головна
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    👋Вступ
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../pnet/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🧪Інструкція з користування PNET Lab
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network-configs/subnet-calculator/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Калькулятор маски підмереж
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chmod-calculator/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Калькулятор прав Linux
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🌐 Мережі
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    🌐 Мережі
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network-configs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Вступ до мереж
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network-configs/IP-interfaces/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IP інтерфейси
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network-configs/vlans/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VLAN та Trunk
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network-configs/vlans-mikrotik/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VLAN в Mikrotik
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network-configs/stp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    STP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network-configs/routing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Маршрутизація
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network-configs/isp-failover/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dual WAN
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network-configs/ACL/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Контроль доступу
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network-configs/cisco-nat/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NAT в Cisco
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network-configs/dhcp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DHCP-сервер
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network-configs/ipsec/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IPsec в Cisco
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network-configs/ospf/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OSPF
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network-configs/cisco-cheat-sheet/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cisco cheat sheet
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network-configs/subnet-calculator/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Калькулятор маски підмереж
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🖥️ Сервіси
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    🖥️ Сервіси
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Сервіси на базі OC Linux
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../linux-network-interfaces/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ip addr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ssh/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SSH
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../radius/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RADIUS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../syslog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SYSLOG
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    iptables
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    iptables
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Зміст">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Зміст
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-iptables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1 Архітектура iptables
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1 Архітектура iptables">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-tables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 Таблиці (Tables)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-chains" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 Ланцюжки (Chains) та їх призначення
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-targets" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3 Дії (Targets)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2 Базова фільтрація — захист самої системи
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2 Базова фільтрація — захист самої системи">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-iptables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 Структура команди iptables
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 Базовий набір правил для захисту сервера
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-ip-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 Фільтрація за IP-адресою
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-rate-limiting-brute-force" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4 Обмеження Rate Limiting (захист від brute-force)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#25" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.5 Захист від розповсюджених атак
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#26" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.6 Перегляд та управління правилами
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3 Збереження та автозавантаження правил
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-linux" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4 Linux як шлюз між мережами (два інтерфейси)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4 Linux як шлюз між мережами (два інтерфейси)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-ip-forwarding" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 Увімкнути IP Forwarding (обов'язково!)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-forward" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 Базова фільтрація трафіку між мережами (FORWARD)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-vlan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3 Фільтрація між VLAN / сегментами мережі
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-nat" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5 NAT — трансляція адрес
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5 NAT — трансляція адрес">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-masquerade-lan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 MASQUERADE — вихід LAN в Інтернет
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-snat-static-nat" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 SNAT — Static NAT (фіксована публічна адреса)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-dnat-destination-nat-port-forwarding" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3 DNAT — Destination NAT / Проброс портів (Port Forwarding)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#54-pat-port-address-translation-ip" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.4 PAT — Port Address Translation (один IP, різні порти)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#55-hairpin-nat-lan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.5 Hairpin NAT (доступ до публічної адреси зсередини LAN)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6 Повна конфігурація шлюзу
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7 Логування та діагностика
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7 Логування та діагностика">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1 Типові помилки
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tcpdump-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    TCPDump
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../apt-cacher-ng/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    APT Cacher
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chmod-calculator/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Калькулятор прав Linux
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Зміст">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Зміст
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-iptables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1 Архітектура iptables
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1 Архітектура iptables">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-tables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 Таблиці (Tables)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-chains" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 Ланцюжки (Chains) та їх призначення
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-targets" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3 Дії (Targets)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2 Базова фільтрація — захист самої системи
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2 Базова фільтрація — захист самої системи">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-iptables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 Структура команди iptables
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 Базовий набір правил для захисту сервера
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-ip-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 Фільтрація за IP-адресою
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-rate-limiting-brute-force" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4 Обмеження Rate Limiting (захист від brute-force)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#25" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.5 Захист від розповсюджених атак
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#26" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.6 Перегляд та управління правилами
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3 Збереження та автозавантаження правил
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-linux" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4 Linux як шлюз між мережами (два інтерфейси)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4 Linux як шлюз між мережами (два інтерфейси)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-ip-forwarding" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 Увімкнути IP Forwarding (обов'язково!)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-forward" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 Базова фільтрація трафіку між мережами (FORWARD)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-vlan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3 Фільтрація між VLAN / сегментами мережі
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-nat" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5 NAT — трансляція адрес
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5 NAT — трансляція адрес">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-masquerade-lan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 MASQUERADE — вихід LAN в Інтернет
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-snat-static-nat" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 SNAT — Static NAT (фіксована публічна адреса)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-dnat-destination-nat-port-forwarding" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3 DNAT — Destination NAT / Проброс портів (Port Forwarding)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#54-pat-port-address-translation-ip" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.4 PAT — Port Address Translation (один IP, різні порти)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#55-hairpin-nat-lan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.5 Hairpin NAT (доступ до публічної адреси зсередини LAN)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6 Повна конфігурація шлюзу
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7 Логування та діагностика
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7 Логування та діагностика">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1 Типові помилки
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="iptables">iptables — Шпаргалка</h1>
+<blockquote>
+<p>Курс: Безпека комп'ютерних мереж | 4 курс</p>
+</blockquote>
+<hr />
+<h2 id="1-iptables">1 Архітектура iptables</h2>
+<p><strong>iptables</strong> - утиліта управління фільтрацією пакетів у Linux через підсистему <strong>Netfilter</strong> ядра. Кожен пакет проходить через ланцюжки правил (chains) в певному порядку залежно від напрямку руху</p>
+<blockquote>
+<p>📁 Схема проходження пакетів: <code>assets/server-services_iptables_1.svg</code>
+<img alt="Packet Flow" src="../../assets/server-services_iptables_1.svg" /></p>
+</blockquote>
+<h3 id="11-tables">1.1 Таблиці (Tables)</h3>
+<table>
+<thead>
+<tr>
+<th>Таблиця</th>
+<th>Призначення</th>
+<th>Ланцюжки</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>filter</strong></td>
+<td>Фільтрація пакетів (за замовчуванням)</td>
+<td>INPUT, OUTPUT, FORWARD</td>
+</tr>
+<tr>
+<td><strong>nat</strong></td>
+<td>Трансляція адрес</td>
+<td>PREROUTING, OUTPUT, POSTROUTING</td>
+</tr>
+<tr>
+<td><strong>mangle</strong></td>
+<td>Зміна заголовків пакетів (TOS, TTL)</td>
+<td>Всі</td>
+</tr>
+<tr>
+<td><strong>raw</strong></td>
+<td>Обхід connection tracking</td>
+<td>PREROUTING, OUTPUT</td>
+</tr>
+</tbody>
+</table>
+<h3 id="12-chains">1.2 Ланцюжки (Chains) та їх призначення</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>PREROUTING  → пакет щойно прийшов на інтерфейс, ще до маршрутизації
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>              (тут: DNAT, зміна destination)
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>INPUT       → пакет призначений для самого хоста
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>              (тут: захист системи — дозволити/заблокувати вхідні)
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>FORWARD     → пакет проходить через хост транзитом (шлюз)
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>              (тут: фільтрація між мережами)
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>OUTPUT      → пакет створений локальним процесом, виходить назовні
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>              (тут: обмеження вихідного трафіку)
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>POSTROUTING → пакет вже маршрутизований, виходить на інтерфейс
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>              (тут: SNAT, MASQUERADE)
+</code></pre></div>
+<h3 id="13-targets">1.3 Дії (Targets)</h3>
+<table>
+<thead>
+<tr>
+<th>Target</th>
+<th>Дія</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ACCEPT</code></td>
+<td>Пропустити пакет</td>
+</tr>
+<tr>
+<td><code>DROP</code></td>
+<td>Мовчки відкинути (відправник не знає)</td>
+</tr>
+<tr>
+<td><code>REJECT</code></td>
+<td>Відкинути з повідомленням про помилку</td>
+</tr>
+<tr>
+<td><code>LOG</code></td>
+<td>Записати у системний журнал і продовжити</td>
+</tr>
+<tr>
+<td><code>DNAT</code></td>
+<td>Змінити destination IP/port</td>
+</tr>
+<tr>
+<td><code>SNAT</code></td>
+<td>Змінити source IP/port</td>
+</tr>
+<tr>
+<td><code>MASQUERADE</code></td>
+<td>SNAT з динамічним IP (для DHCP-інтерфейсів)</td>
+</tr>
+<tr>
+<td><code>RETURN</code></td>
+<td>Повернутись до батьківського ланцюжка</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="2">2 Базова фільтрація — захист самої системи</h2>
+<blockquote>
+<p>📁 Схема: <code>assets/iptables-packet-flow.svg</code> — пакети для самого хоста проходять через INPUT
+<img alt="Packet Flow" src="../../assets/server-services_iptables_1.svg" /></p>
+</blockquote>
+<h3 id="21-iptables">2.1 Структура команди iptables</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>iptables<span class="w"> </span>-t<span class="w"> </span>&lt;таблиця&gt;<span class="w"> </span>-A<span class="w"> </span>&lt;ланцюжок&gt;<span class="w"> </span>&lt;умови&gt;<span class="w"> </span>-j<span class="w"> </span>&lt;дія&gt;
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="c1"># Параметри:</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="c1"># -t       таблиця (filter за замовчуванням)</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="c1"># -A       додати правило в кінець (Append)</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="c1"># -I       вставити правило на початок (Insert)</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="c1"># -D       видалити правило (Delete)</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="c1"># -R       замінити правило (Replace)</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="c1"># -L       переглянути правила (List)</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="c1"># -F       очистити ланцюжок (Flush)</span>
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="c1"># -P       встановити політику за замовчуванням (Policy)</span>
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="c1"># -n       не розв&#39;язувати імена (numeric)</span>
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="c1"># -v       детальний вивід (verbose)</span>
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="c1"># --line-numbers  показати номери рядків</span>
+</code></pre></div>
+<h3 id="22">2.2 Базовий набір правил для захисту сервера</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="ch">#!/bin/bash</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="c1"># /etc/iptables/rules.sh — базова фільтрація</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="c1"># --- Очистити всі правила ---</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>iptables<span class="w"> </span>-F
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>iptables<span class="w"> </span>-X
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>iptables<span class="w"> </span>-Z
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="c1"># --- Політика за замовчуванням: DROP all, дозволяємо вибірково ---</span>
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>iptables<span class="w"> </span>-P<span class="w"> </span>INPUT<span class="w"> </span>DROP
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>iptables<span class="w"> </span>-P<span class="w"> </span>FORWARD<span class="w"> </span>DROP
+<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>iptables<span class="w"> </span>-P<span class="w"> </span>OUTPUT<span class="w"> </span>ACCEPT<span class="w">          </span><span class="c1"># вихідний трафік дозволено</span>
+<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>
+<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="c1"># --- Дозволити loopback (localhost) ---</span>
+<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a>iptables<span class="w"> </span>-A<span class="w"> </span>INPUT<span class="w"> </span>-i<span class="w"> </span>lo<span class="w"> </span>-j<span class="w"> </span>ACCEPT
+<a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a>
+<a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a><span class="c1"># --- Дозволити вже встановлені з&#39;єднання (ESTABLISHED, RELATED) ---</span>
+<a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a><span class="c1"># Це ключове правило — дозволяє відповіді на наші запити</span>
+<a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a>iptables<span class="w"> </span>-A<span class="w"> </span>INPUT<span class="w"> </span>-m<span class="w"> </span>conntrack<span class="w"> </span>--ctstate<span class="w"> </span>ESTABLISHED,RELATED<span class="w"> </span>-j<span class="w"> </span>ACCEPT
+<a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a>
+<a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a><span class="c1"># --- Дозволити ICMP (ping) ---</span>
+<a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a>iptables<span class="w"> </span>-A<span class="w"> </span>INPUT<span class="w"> </span>-p<span class="w"> </span>icmp<span class="w"> </span>--icmp-type<span class="w"> </span>echo-request<span class="w"> </span>-j<span class="w"> </span>ACCEPT
+<a id="__codelineno-2-23" name="__codelineno-2-23" href="#__codelineno-2-23"></a>
+<a id="__codelineno-2-24" name="__codelineno-2-24" href="#__codelineno-2-24"></a><span class="c1"># --- Дозволити SSH (порт 22) ---</span>
+<a id="__codelineno-2-25" name="__codelineno-2-25" href="#__codelineno-2-25"></a>iptables<span class="w"> </span>-A<span class="w"> </span>INPUT<span class="w"> </span>-p<span class="w"> </span>tcp<span class="w"> </span>--dport<span class="w"> </span><span class="m">22</span><span class="w"> </span>-j<span class="w"> </span>ACCEPT
+<a id="__codelineno-2-26" name="__codelineno-2-26" href="#__codelineno-2-26"></a>
+<a id="__codelineno-2-27" name="__codelineno-2-27" href="#__codelineno-2-27"></a><span class="c1"># --- Дозволити HTTP та HTTPS ---</span>
+<a id="__codelineno-2-28" name="__codelineno-2-28" href="#__codelineno-2-28"></a>iptables<span class="w"> </span>-A<span class="w"> </span>INPUT<span class="w"> </span>-p<span class="w"> </span>tcp<span class="w"> </span>--dport<span class="w"> </span><span class="m">80</span><span class="w"> </span>-j<span class="w"> </span>ACCEPT
+<a id="__codelineno-2-29" name="__codelineno-2-29" href="#__codelineno-2-29"></a>iptables<span class="w"> </span>-A<span class="w"> </span>INPUT<span class="w"> </span>-p<span class="w"> </span>tcp<span class="w"> </span>--dport<span class="w"> </span><span class="m">443</span><span class="w"> </span>-j<span class="w"> </span>ACCEPT
+<a id="__codelineno-2-30" name="__codelineno-2-30" href="#__codelineno-2-30"></a>
+<a id="__codelineno-2-31" name="__codelineno-2-31" href="#__codelineno-2-31"></a><span class="c1"># --- Логувати та відкинути решту ---</span>
+<a id="__codelineno-2-32" name="__codelineno-2-32" href="#__codelineno-2-32"></a>iptables<span class="w"> </span>-A<span class="w"> </span>INPUT<span class="w"> </span>-j<span class="w"> </span>LOG<span class="w"> </span>--log-prefix<span class="w"> </span><span class="s2">&quot;iptables-DROP: &quot;</span><span class="w"> </span>--log-level<span class="w"> </span><span class="m">4</span>
+<a id="__codelineno-2-33" name="__codelineno-2-33" href="#__codelineno-2-33"></a>iptables<span class="w"> </span>-A<span class="w"> </span>INPUT<span class="w"> </span>-j<span class="w"> </span>DROP
+</code></pre></div>
+<h3 id="23-ip-">2.3 Фільтрація за IP-адресою</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># Заблокувати конкретний IP повністю</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>iptables<span class="w"> </span>-A<span class="w"> </span>INPUT<span class="w"> </span>-s<span class="w"> </span><span class="m">1</span>.2.3.4<span class="w"> </span>-j<span class="w"> </span>DROP
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="c1"># Заблокувати підмережу</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>iptables<span class="w"> </span>-A<span class="w"> </span>INPUT<span class="w"> </span>-s<span class="w"> </span><span class="m">10</span>.10.10.0/24<span class="w"> </span>-j<span class="w"> </span>DROP
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="c1"># Дозволити SSH тільки з адміністративної мережі</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>iptables<span class="w"> </span>-A<span class="w"> </span>INPUT<span class="w"> </span>-p<span class="w"> </span>tcp<span class="w"> </span>--dport<span class="w"> </span><span class="m">22</span><span class="w"> </span>-s<span class="w"> </span><span class="m">192</span>.168.100.0/24<span class="w"> </span>-j<span class="w"> </span>ACCEPT
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>iptables<span class="w"> </span>-A<span class="w"> </span>INPUT<span class="w"> </span>-p<span class="w"> </span>tcp<span class="w"> </span>--dport<span class="w"> </span><span class="m">22</span><span class="w"> </span>-j<span class="w"> </span>DROP<span class="w">              </span><span class="c1"># решта — DROP</span>
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="c1"># Заблокувати вихідні з&#39;єднання на конкретний IP</span>
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>iptables<span class="w"> </span>-A<span class="w"> </span>OUTPUT<span class="w"> </span>-d<span class="w"> </span><span class="m">203</span>.0.113.1<span class="w"> </span>-j<span class="w"> </span>DROP
+</code></pre></div>
+<h3 id="24-rate-limiting-brute-force">2.4 Обмеження Rate Limiting (захист від brute-force)</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1"># Обмежити SSH: не більше 3 нових з&#39;єднань за 60 секунд з одного IP</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>iptables<span class="w"> </span>-A<span class="w"> </span>INPUT<span class="w"> </span>-p<span class="w"> </span>tcp<span class="w"> </span>--dport<span class="w"> </span><span class="m">22</span><span class="w"> </span>-m<span class="w"> </span>state<span class="w"> </span>--state<span class="w"> </span>NEW<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span>-m<span class="w"> </span>recent<span class="w"> </span>--set<span class="w"> </span>--name<span class="w"> </span>SSH-LIMIT
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>iptables<span class="w"> </span>-A<span class="w"> </span>INPUT<span class="w"> </span>-p<span class="w"> </span>tcp<span class="w"> </span>--dport<span class="w"> </span><span class="m">22</span><span class="w"> </span>-m<span class="w"> </span>state<span class="w"> </span>--state<span class="w"> </span>NEW<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">    </span>-m<span class="w"> </span>recent<span class="w"> </span>--update<span class="w"> </span>--seconds<span class="w"> </span><span class="m">60</span><span class="w"> </span>--hitcount<span class="w"> </span><span class="m">4</span><span class="w"> </span>--name<span class="w"> </span>SSH-LIMIT<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">    </span>-j<span class="w"> </span>LOG<span class="w"> </span>--log-prefix<span class="w"> </span><span class="s2">&quot;SSH-BRUTE-FORCE: &quot;</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>iptables<span class="w"> </span>-A<span class="w"> </span>INPUT<span class="w"> </span>-p<span class="w"> </span>tcp<span class="w"> </span>--dport<span class="w"> </span><span class="m">22</span><span class="w"> </span>-m<span class="w"> </span>state<span class="w"> </span>--state<span class="w"> </span>NEW<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="w">    </span>-m<span class="w"> </span>recent<span class="w"> </span>--update<span class="w"> </span>--seconds<span class="w"> </span><span class="m">60</span><span class="w"> </span>--hitcount<span class="w"> </span><span class="m">4</span><span class="w"> </span>--name<span class="w"> </span>SSH-LIMIT<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="w">    </span>-j<span class="w"> </span>DROP
+<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>
+<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a><span class="c1"># Захист від SYN-flood</span>
+<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a>iptables<span class="w"> </span>-A<span class="w"> </span>INPUT<span class="w"> </span>-p<span class="w"> </span>tcp<span class="w"> </span>--syn<span class="w"> </span>-m<span class="w"> </span>limit<span class="w"> </span>--limit<span class="w"> </span><span class="m">1</span>/s<span class="w"> </span>--limit-burst<span class="w"> </span><span class="m">3</span><span class="w"> </span>-j<span class="w"> </span>ACCEPT
+<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a>iptables<span class="w"> </span>-A<span class="w"> </span>INPUT<span class="w"> </span>-p<span class="w"> </span>tcp<span class="w"> </span>--syn<span class="w"> </span>-j<span class="w"> </span>DROP
+<a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a>
+<a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a><span class="c1"># Захист від ICMP-flood (ping)</span>
+<a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a>iptables<span class="w"> </span>-A<span class="w"> </span>INPUT<span class="w"> </span>-p<span class="w"> </span>icmp<span class="w"> </span>--icmp-type<span class="w"> </span>echo-request<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a><span class="w">    </span>-m<span class="w"> </span>limit<span class="w"> </span>--limit<span class="w"> </span><span class="m">1</span>/s<span class="w"> </span>-j<span class="w"> </span>ACCEPT
+<a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a>iptables<span class="w"> </span>-A<span class="w"> </span>INPUT<span class="w"> </span>-p<span class="w"> </span>icmp<span class="w"> </span>--icmp-type<span class="w"> </span>echo-request<span class="w"> </span>-j<span class="w"> </span>DROP
+</code></pre></div>
+<h3 id="25">2.5 Захист від розповсюджених атак</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1"># Відкинути невалідні пакети (не належать жодній сесії)</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>iptables<span class="w"> </span>-A<span class="w"> </span>INPUT<span class="w"> </span>-m<span class="w"> </span>conntrack<span class="w"> </span>--ctstate<span class="w"> </span>INVALID<span class="w"> </span>-j<span class="w"> </span>DROP
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="c1"># Захист від Null-scan (пакети без прапорців TCP)</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>iptables<span class="w"> </span>-A<span class="w"> </span>INPUT<span class="w"> </span>-p<span class="w"> </span>tcp<span class="w"> </span>--tcp-flags<span class="w"> </span>ALL<span class="w"> </span>NONE<span class="w"> </span>-j<span class="w"> </span>DROP
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="c1"># Захист від XMAS-scan (всі прапорці встановлені)</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>iptables<span class="w"> </span>-A<span class="w"> </span>INPUT<span class="w"> </span>-p<span class="w"> </span>tcp<span class="w"> </span>--tcp-flags<span class="w"> </span>ALL<span class="w"> </span>ALL<span class="w"> </span>-j<span class="w"> </span>DROP
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="c1"># Захист від SYN+RST комбінації (неможлива в нормальному трафіку)</span>
+<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>iptables<span class="w"> </span>-A<span class="w"> </span>INPUT<span class="w"> </span>-p<span class="w"> </span>tcp<span class="w"> </span>--tcp-flags<span class="w"> </span>SYN,RST<span class="w"> </span>SYN,RST<span class="w"> </span>-j<span class="w"> </span>DROP
+<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a>
+<a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a><span class="c1"># Відкинути фрагментовані пакети</span>
+<a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a>iptables<span class="w"> </span>-A<span class="w"> </span>INPUT<span class="w"> </span>-f<span class="w"> </span>-j<span class="w"> </span>DROP
+</code></pre></div>
+<h3 id="26">2.6 Перегляд та управління правилами</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1"># Переглянути всі правила з лічильниками</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>iptables<span class="w"> </span>-L<span class="w"> </span>-v<span class="w"> </span>-n
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>iptables<span class="w"> </span>-L<span class="w"> </span>INPUT<span class="w"> </span>-v<span class="w"> </span>-n<span class="w"> </span>--line-numbers<span class="w">     </span><span class="c1"># з номерами рядків</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="c1"># Переглянути таблицю nat</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>iptables<span class="w"> </span>-t<span class="w"> </span>nat<span class="w"> </span>-L<span class="w"> </span>-v<span class="w"> </span>-n
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="c1"># Видалити правило за номером рядка (наприклад рядок 3 в INPUT)</span>
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>iptables<span class="w"> </span>-D<span class="w"> </span>INPUT<span class="w"> </span><span class="m">3</span>
+<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a>
+<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a><span class="c1"># Видалити конкретне правило</span>
+<a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a>iptables<span class="w"> </span>-D<span class="w"> </span>INPUT<span class="w"> </span>-p<span class="w"> </span>tcp<span class="w"> </span>--dport<span class="w"> </span><span class="m">80</span><span class="w"> </span>-j<span class="w"> </span>ACCEPT
+<a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a>
+<a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a><span class="c1"># Очистити всі правила</span>
+<a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a>iptables<span class="w"> </span>-F<span class="w">          </span><span class="c1"># filter table</span>
+<a id="__codelineno-6-16" name="__codelineno-6-16" href="#__codelineno-6-16"></a>iptables<span class="w"> </span>-t<span class="w"> </span>nat<span class="w"> </span>-F<span class="w">   </span><span class="c1"># nat table</span>
+<a id="__codelineno-6-17" name="__codelineno-6-17" href="#__codelineno-6-17"></a>
+<a id="__codelineno-6-18" name="__codelineno-6-18" href="#__codelineno-6-18"></a><span class="c1"># Скинути лічильники</span>
+<a id="__codelineno-6-19" name="__codelineno-6-19" href="#__codelineno-6-19"></a>iptables<span class="w"> </span>-Z
+</code></pre></div>
+<hr />
+<h2 id="3">3 Збереження та автозавантаження правил</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1"># Ubuntu/Debian — зберегти поточні правила</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>iptables-persistent
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>netfilter-persistent<span class="w"> </span>save
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="c1"># Або вручну</span>
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>iptables-save<span class="w"> </span>&gt;<span class="w"> </span>/etc/iptables/rules.v4
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>ip6tables-save<span class="w"> </span>&gt;<span class="w"> </span>/etc/iptables/rules.v6
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>
+<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="c1"># Відновити правила</span>
+<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a>iptables-restore<span class="w"> </span>&lt;<span class="w"> </span>/etc/iptables/rules.v4
+<a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a>
+<a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a><span class="c1"># CentOS/RHEL</span>
+<a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a>service<span class="w"> </span>iptables<span class="w"> </span>save
+<a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a><span class="c1"># або</span>
+<a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a>iptables-save<span class="w"> </span>&gt;<span class="w"> </span>/etc/sysconfig/iptables
+</code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">Автозавантаження через systemd</p>
+<p>З пакетом <code>iptables-persistent</code> правила автоматично відновлюються при кожному завантаженні системи з файлу <code>/etc/iptables/rules.v4</code></p>
+</div>
+<hr />
+<h2 id="4-linux">4 Linux як шлюз між мережами (два інтерфейси)</h2>
+<blockquote>
+<p>📁 Схема шлюзу з NAT: <code>../assets/server-services_iptables_2.svg</code>
+<img alt="Packet Flow" src="../../assets/server-services_iptables_2.svg" /></p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>[LAN 192.168.1.0/24] ──eth0──► [Linux Gateway] ──eth1──► [Internet 203.0.113.5]
+</code></pre></div>
+<h3 id="41-ip-forwarding">4.1 Увімкнути IP Forwarding (обов'язково!)</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="c1"># Тимчасово (до перезавантаження)</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="nb">echo</span><span class="w"> </span><span class="m">1</span><span class="w"> </span>&gt;<span class="w"> </span>/proc/sys/net/ipv4/ip_forward
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="c1"># Постійно</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;net.ipv4.ip_forward = 1&quot;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>/etc/sysctl.conf
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>sysctl<span class="w"> </span>-p
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a><span class="c1"># Перевірити</span>
+<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a>sysctl<span class="w"> </span>net.ipv4.ip_forward
+<a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a>cat<span class="w"> </span>/proc/sys/net/ipv4/ip_forward<span class="w">   </span><span class="c1"># має бути 1</span>
+</code></pre></div>
+<h3 id="42-forward">4.2 Базова фільтрація трафіку між мережами (FORWARD)</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="c1"># Скинути FORWARD за замовчуванням</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>iptables<span class="w"> </span>-P<span class="w"> </span>FORWARD<span class="w"> </span>DROP
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="c1"># Дозволити встановлені/пов&#39;язані з&#39;єднання (STATEFUL)</span>
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>iptables<span class="w"> </span>-A<span class="w"> </span>FORWARD<span class="w"> </span>-m<span class="w"> </span>conntrack<span class="w"> </span>--ctstate<span class="w"> </span>ESTABLISHED,RELATED<span class="w"> </span>-j<span class="w"> </span>ACCEPT
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="c1"># Дозволити трафік з LAN → Internet (eth0 → eth1)</span>
+<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a>iptables<span class="w"> </span>-A<span class="w"> </span>FORWARD<span class="w"> </span>-i<span class="w"> </span>eth0<span class="w"> </span>-o<span class="w"> </span>eth1<span class="w"> </span>-j<span class="w"> </span>ACCEPT
+<a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a>
+<a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a><span class="c1"># Заблокувати трафік з Internet → LAN (eth1 → eth0) якщо не встановлено</span>
+<a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a>iptables<span class="w"> </span>-A<span class="w"> </span>FORWARD<span class="w"> </span>-i<span class="w"> </span>eth1<span class="w"> </span>-o<span class="w"> </span>eth0<span class="w"> </span>-m<span class="w"> </span>conntrack<span class="w"> </span>--ctstate<span class="w"> </span>NEW<span class="w"> </span>-j<span class="w"> </span>DROP
+<a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a>
+<a id="__codelineno-10-13" name="__codelineno-10-13" href="#__codelineno-10-13"></a><span class="c1"># Дозволити конкретні сервіси з Internet → LAN (наприклад до сервера)</span>
+<a id="__codelineno-10-14" name="__codelineno-10-14" href="#__codelineno-10-14"></a>iptables<span class="w"> </span>-A<span class="w"> </span>FORWARD<span class="w"> </span>-i<span class="w"> </span>eth1<span class="w"> </span>-o<span class="w"> </span>eth0<span class="w"> </span>-p<span class="w"> </span>tcp<span class="w"> </span>--dport<span class="w"> </span><span class="m">80</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-10-15" name="__codelineno-10-15" href="#__codelineno-10-15"></a><span class="w">    </span>-d<span class="w"> </span><span class="m">192</span>.168.1.100<span class="w"> </span>-j<span class="w"> </span>ACCEPT
+</code></pre></div>
+<h3 id="43-vlan">4.3 Фільтрація між VLAN / сегментами мережі</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="c1"># Топологія: eth0=LAN, eth0.10=VLAN10(users), eth0.20=VLAN20(servers)</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="c1"># Заборонити трафік між VLAN Users і VLAN Servers крім HTTP/HTTPS</span>
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>iptables<span class="w"> </span>-A<span class="w"> </span>FORWARD<span class="w"> </span>-i<span class="w"> </span>eth0.10<span class="w"> </span>-o<span class="w"> </span>eth0.20<span class="w"> </span>-p<span class="w"> </span>tcp<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="w">    </span>--dport<span class="w"> </span><span class="m">80</span><span class="w"> </span>-j<span class="w"> </span>ACCEPT
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>iptables<span class="w"> </span>-A<span class="w"> </span>FORWARD<span class="w"> </span>-i<span class="w"> </span>eth0.10<span class="w"> </span>-o<span class="w"> </span>eth0.20<span class="w"> </span>-p<span class="w"> </span>tcp<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="w">    </span>--dport<span class="w"> </span><span class="m">443</span><span class="w"> </span>-j<span class="w"> </span>ACCEPT
+<a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a>iptables<span class="w"> </span>-A<span class="w"> </span>FORWARD<span class="w"> </span>-i<span class="w"> </span>eth0.10<span class="w"> </span>-o<span class="w"> </span>eth0.20<span class="w"> </span>-j<span class="w"> </span>DROP
+<a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a>
+<a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a><span class="c1"># VLAN Servers може ходити в Internet</span>
+<a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a>iptables<span class="w"> </span>-A<span class="w"> </span>FORWARD<span class="w"> </span>-i<span class="w"> </span>eth0.20<span class="w"> </span>-o<span class="w"> </span>eth1<span class="w"> </span>-j<span class="w"> </span>ACCEPT
+<a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a>
+<a id="__codelineno-11-13" name="__codelineno-11-13" href="#__codelineno-11-13"></a><span class="c1"># Заборонити VLAN Users пінгувати сервери</span>
+<a id="__codelineno-11-14" name="__codelineno-11-14" href="#__codelineno-11-14"></a>iptables<span class="w"> </span>-A<span class="w"> </span>FORWARD<span class="w"> </span>-i<span class="w"> </span>eth0.10<span class="w"> </span>-o<span class="w"> </span>eth0.20<span class="w"> </span>-p<span class="w"> </span>icmp<span class="w"> </span>-j<span class="w"> </span>DROP
+</code></pre></div>
+<hr />
+<h2 id="5-nat">5 NAT — трансляція адрес</h2>
+<blockquote>
+<p>📁 Схема: <code>assets/server-services_iptables_2.svg</code>
+<img alt="Packet Flow" src="../../assets/server-services_iptables_2.svg" /></p>
+</blockquote>
+<h3 id="51-masquerade-lan">5.1 MASQUERADE — вихід LAN в Інтернет</h3>
+<p>Використовується коли IP на WAN-інтерфейсі <strong>динамічний</strong> (DHCP від провайдера)</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="c1"># Всі пристрої LAN виходять через один динамічний IP на eth1</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>iptables<span class="w"> </span>-t<span class="w"> </span>nat<span class="w"> </span>-A<span class="w"> </span>POSTROUTING<span class="w"> </span>-s<span class="w"> </span><span class="m">192</span>.168.1.0/24<span class="w"> </span>-o<span class="w"> </span>eth1<span class="w"> </span>-j<span class="w"> </span>MASQUERADE
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="c1"># Перевірити</span>
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>iptables<span class="w"> </span>-t<span class="w"> </span>nat<span class="w"> </span>-L<span class="w"> </span>POSTROUTING<span class="w"> </span>-v<span class="w"> </span>-n
+</code></pre></div>
+<h3 id="52-snat-static-nat">5.2 SNAT — Static NAT (фіксована публічна адреса)</h3>
+<p>Використовується коли IP на WAN-інтерфейсі <strong>статичний</strong>. Ефективніше ніж MASQUERADE — не перевіряє IP щоразу</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="c1"># Замінити source IP на фіксований 203.0.113.5</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>iptables<span class="w"> </span>-t<span class="w"> </span>nat<span class="w"> </span>-A<span class="w"> </span>POSTROUTING<span class="w"> </span>-s<span class="w"> </span><span class="m">192</span>.168.1.0/24<span class="w"> </span>-o<span class="w"> </span>eth1<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="w">    </span>-j<span class="w"> </span>SNAT<span class="w"> </span>--to-source<span class="w"> </span><span class="m">203</span>.0.113.5
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="c1"># SNAT для конкретного хоста на іншу адресу</span>
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>iptables<span class="w"> </span>-t<span class="w"> </span>nat<span class="w"> </span>-A<span class="w"> </span>POSTROUTING<span class="w"> </span>-s<span class="w"> </span><span class="m">192</span>.168.1.50<span class="w"> </span>-o<span class="w"> </span>eth1<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a><span class="w">    </span>-j<span class="w"> </span>SNAT<span class="w"> </span>--to-source<span class="w"> </span><span class="m">203</span>.0.113.10
+</code></pre></div>
+<h3 id="53-dnat-destination-nat-port-forwarding">5.3 DNAT — Destination NAT / Проброс портів (Port Forwarding)</h3>
+<p>Перенаправляє вхідні підключення до внутрішнього сервера</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="c1"># Пробросити HTTP (80) ззовні → на внутрішній сервер :8080</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="c1"># Запит: src=1.2.3.4 dst=203.0.113.5:80</span>
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="c1"># Після DNAT: src=1.2.3.4 dst=192.168.1.100:8080</span>
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>iptables<span class="w"> </span>-t<span class="w"> </span>nat<span class="w"> </span>-A<span class="w"> </span>PREROUTING<span class="w"> </span>-i<span class="w"> </span>eth1<span class="w"> </span>-p<span class="w"> </span>tcp<span class="w"> </span>--dport<span class="w"> </span><span class="m">80</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a><span class="w">    </span>-j<span class="w"> </span>DNAT<span class="w"> </span>--to-destination<span class="w"> </span><span class="m">192</span>.168.1.100:8080
+<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a>
+<a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a><span class="c1"># Дозволити цей трафік пройти через FORWARD</span>
+<a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a>iptables<span class="w"> </span>-A<span class="w"> </span>FORWARD<span class="w"> </span>-i<span class="w"> </span>eth1<span class="w"> </span>-o<span class="w"> </span>eth0<span class="w"> </span>-p<span class="w"> </span>tcp<span class="w"> </span>--dport<span class="w"> </span><span class="m">8080</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a><span class="w">    </span>-d<span class="w"> </span><span class="m">192</span>.168.1.100<span class="w"> </span>-j<span class="w"> </span>ACCEPT
+<a id="__codelineno-14-10" name="__codelineno-14-10" href="#__codelineno-14-10"></a>
+<a id="__codelineno-14-11" name="__codelineno-14-11" href="#__codelineno-14-11"></a><span class="c1"># Пробросити HTTPS (443)</span>
+<a id="__codelineno-14-12" name="__codelineno-14-12" href="#__codelineno-14-12"></a>iptables<span class="w"> </span>-t<span class="w"> </span>nat<span class="w"> </span>-A<span class="w"> </span>PREROUTING<span class="w"> </span>-i<span class="w"> </span>eth1<span class="w"> </span>-p<span class="w"> </span>tcp<span class="w"> </span>--dport<span class="w"> </span><span class="m">443</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-14-13" name="__codelineno-14-13" href="#__codelineno-14-13"></a><span class="w">    </span>-j<span class="w"> </span>DNAT<span class="w"> </span>--to-destination<span class="w"> </span><span class="m">192</span>.168.1.100:443
+<a id="__codelineno-14-14" name="__codelineno-14-14" href="#__codelineno-14-14"></a>
+<a id="__codelineno-14-15" name="__codelineno-14-15" href="#__codelineno-14-15"></a><span class="c1"># Пробросити SSH на нестандартному порту (2222 → внутрішній :22)</span>
+<a id="__codelineno-14-16" name="__codelineno-14-16" href="#__codelineno-14-16"></a>iptables<span class="w"> </span>-t<span class="w"> </span>nat<span class="w"> </span>-A<span class="w"> </span>PREROUTING<span class="w"> </span>-i<span class="w"> </span>eth1<span class="w"> </span>-p<span class="w"> </span>tcp<span class="w"> </span>--dport<span class="w"> </span><span class="m">2222</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-14-17" name="__codelineno-14-17" href="#__codelineno-14-17"></a><span class="w">    </span>-j<span class="w"> </span>DNAT<span class="w"> </span>--to-destination<span class="w"> </span><span class="m">192</span>.168.1.50:22
+<a id="__codelineno-14-18" name="__codelineno-14-18" href="#__codelineno-14-18"></a>
+<a id="__codelineno-14-19" name="__codelineno-14-19" href="#__codelineno-14-19"></a><span class="c1"># Пробросити RDP (3389) до конкретного ПК</span>
+<a id="__codelineno-14-20" name="__codelineno-14-20" href="#__codelineno-14-20"></a>iptables<span class="w"> </span>-t<span class="w"> </span>nat<span class="w"> </span>-A<span class="w"> </span>PREROUTING<span class="w"> </span>-i<span class="w"> </span>eth1<span class="w"> </span>-p<span class="w"> </span>tcp<span class="w"> </span>--dport<span class="w"> </span><span class="m">3389</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-14-21" name="__codelineno-14-21" href="#__codelineno-14-21"></a><span class="w">    </span>-j<span class="w"> </span>DNAT<span class="w"> </span>--to-destination<span class="w"> </span><span class="m">192</span>.168.1.30:3389
+</code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">DNAT потребує MASQUERADE або SNAT</p>
+<p>Без правила в POSTROUTING відповідь від внутрішнього сервера буде йти напряму до клієнта (не через шлюз), і клієнт відкине пакет з невідомою IP-адресою. MASQUERADE в POSTROUTING вирішує це</p>
+</div>
+<h3 id="54-pat-port-address-translation-ip">5.4 PAT — Port Address Translation (один IP, різні порти)</h3>
+<p>По суті PAT = MASQUERADE або SNAT з портами. В iptables PAT реалізується автоматично при використанні MASQUERADE/SNAT — ядро відстежує трансляції по портах</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="c1"># PAT з конкретним діапазоном портів</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>iptables<span class="w"> </span>-t<span class="w"> </span>nat<span class="w"> </span>-A<span class="w"> </span>POSTROUTING<span class="w"> </span>-s<span class="w"> </span><span class="m">192</span>.168.1.0/24<span class="w"> </span>-o<span class="w"> </span>eth1<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="w">    </span>-j<span class="w"> </span>SNAT<span class="w"> </span>--to-source<span class="w"> </span><span class="m">203</span>.0.113.5:10000-20000
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="c1">#                                    ↑ діапазон портів для трансляцій</span>
+</code></pre></div>
+<h3 id="55-hairpin-nat-lan">5.5 Hairpin NAT (доступ до публічної адреси зсередини LAN)</h3>
+<p>Ситуація: внутрішній сервер має DNAT, і клієнти з LAN хочуть звертатись до нього через публічний IP</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="c1"># Клієнт з 192.168.1.x звертається до 203.0.113.5:80</span>
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="c1"># Потрібно: DNAT + MASQUERADE для трафіку що повертається всередину LAN</span>
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>
+<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a>iptables<span class="w"> </span>-t<span class="w"> </span>nat<span class="w"> </span>-A<span class="w"> </span>PREROUTING<span class="w"> </span>-d<span class="w"> </span><span class="m">203</span>.0.113.5<span class="w"> </span>-p<span class="w"> </span>tcp<span class="w"> </span>--dport<span class="w"> </span><span class="m">80</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a><span class="w">    </span>-j<span class="w"> </span>DNAT<span class="w"> </span>--to-destination<span class="w"> </span><span class="m">192</span>.168.1.100:8080
+<a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a>
+<a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a><span class="c1"># Masquerade для трафіку LAN→LAN через шлюз</span>
+<a id="__codelineno-16-8" name="__codelineno-16-8" href="#__codelineno-16-8"></a>iptables<span class="w"> </span>-t<span class="w"> </span>nat<span class="w"> </span>-A<span class="w"> </span>POSTROUTING<span class="w"> </span>-s<span class="w"> </span><span class="m">192</span>.168.1.0/24<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-16-9" name="__codelineno-16-9" href="#__codelineno-16-9"></a><span class="w">    </span>-d<span class="w"> </span><span class="m">192</span>.168.1.100<span class="w"> </span>-p<span class="w"> </span>tcp<span class="w"> </span>--dport<span class="w"> </span><span class="m">8080</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-16-10" name="__codelineno-16-10" href="#__codelineno-16-10"></a><span class="w">    </span>-j<span class="w"> </span>MASQUERADE
+</code></pre></div>
+<hr />
+<h2 id="6">6 Повна конфігурація шлюзу</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="ch">#!/bin/bash</span>
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="c1"># /etc/iptables/gateway-rules.sh</span>
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="c1"># Шлюз: eth0=LAN(192.168.1.0/24), eth1=WAN(203.0.113.5)</span>
+<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a>
+<a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a><span class="nv">LAN_IF</span><span class="o">=</span><span class="s2">&quot;eth0&quot;</span>
+<a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a><span class="nv">WAN_IF</span><span class="o">=</span><span class="s2">&quot;eth1&quot;</span>
+<a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a><span class="nv">LAN_NET</span><span class="o">=</span><span class="s2">&quot;192.168.1.0/24&quot;</span>
+<a id="__codelineno-17-8" name="__codelineno-17-8" href="#__codelineno-17-8"></a><span class="nv">WAN_IP</span><span class="o">=</span><span class="s2">&quot;203.0.113.5&quot;</span>
+<a id="__codelineno-17-9" name="__codelineno-17-9" href="#__codelineno-17-9"></a><span class="nv">INT_SERVER</span><span class="o">=</span><span class="s2">&quot;192.168.1.100&quot;</span>
+<a id="__codelineno-17-10" name="__codelineno-17-10" href="#__codelineno-17-10"></a>
+<a id="__codelineno-17-11" name="__codelineno-17-11" href="#__codelineno-17-11"></a><span class="c1"># IP Forwarding</span>
+<a id="__codelineno-17-12" name="__codelineno-17-12" href="#__codelineno-17-12"></a><span class="nb">echo</span><span class="w"> </span><span class="m">1</span><span class="w"> </span>&gt;<span class="w"> </span>/proc/sys/net/ipv4/ip_forward
+<a id="__codelineno-17-13" name="__codelineno-17-13" href="#__codelineno-17-13"></a>
+<a id="__codelineno-17-14" name="__codelineno-17-14" href="#__codelineno-17-14"></a><span class="c1"># --- Очистити ---</span>
+<a id="__codelineno-17-15" name="__codelineno-17-15" href="#__codelineno-17-15"></a>iptables<span class="w"> </span>-F<span class="p">;</span><span class="w"> </span>iptables<span class="w"> </span>-X<span class="p">;</span><span class="w"> </span>iptables<span class="w"> </span>-Z
+<a id="__codelineno-17-16" name="__codelineno-17-16" href="#__codelineno-17-16"></a>iptables<span class="w"> </span>-t<span class="w"> </span>nat<span class="w"> </span>-F<span class="p">;</span><span class="w"> </span>iptables<span class="w"> </span>-t<span class="w"> </span>nat<span class="w"> </span>-X
+<a id="__codelineno-17-17" name="__codelineno-17-17" href="#__codelineno-17-17"></a>iptables<span class="w"> </span>-t<span class="w"> </span>mangle<span class="w"> </span>-F
+<a id="__codelineno-17-18" name="__codelineno-17-18" href="#__codelineno-17-18"></a>
+<a id="__codelineno-17-19" name="__codelineno-17-19" href="#__codelineno-17-19"></a><span class="c1"># --- Політики за замовчуванням ---</span>
+<a id="__codelineno-17-20" name="__codelineno-17-20" href="#__codelineno-17-20"></a>iptables<span class="w"> </span>-P<span class="w"> </span>INPUT<span class="w"> </span>DROP
+<a id="__codelineno-17-21" name="__codelineno-17-21" href="#__codelineno-17-21"></a>iptables<span class="w"> </span>-P<span class="w"> </span>FORWARD<span class="w"> </span>DROP
+<a id="__codelineno-17-22" name="__codelineno-17-22" href="#__codelineno-17-22"></a>iptables<span class="w"> </span>-P<span class="w"> </span>OUTPUT<span class="w"> </span>ACCEPT
+<a id="__codelineno-17-23" name="__codelineno-17-23" href="#__codelineno-17-23"></a>
+<a id="__codelineno-17-24" name="__codelineno-17-24" href="#__codelineno-17-24"></a><span class="c1"># ===================== INPUT (захист шлюзу) =====================</span>
+<a id="__codelineno-17-25" name="__codelineno-17-25" href="#__codelineno-17-25"></a>iptables<span class="w"> </span>-A<span class="w"> </span>INPUT<span class="w"> </span>-i<span class="w"> </span>lo<span class="w"> </span>-j<span class="w"> </span>ACCEPT
+<a id="__codelineno-17-26" name="__codelineno-17-26" href="#__codelineno-17-26"></a>iptables<span class="w"> </span>-A<span class="w"> </span>INPUT<span class="w"> </span>-m<span class="w"> </span>conntrack<span class="w"> </span>--ctstate<span class="w"> </span>ESTABLISHED,RELATED<span class="w"> </span>-j<span class="w"> </span>ACCEPT
+<a id="__codelineno-17-27" name="__codelineno-17-27" href="#__codelineno-17-27"></a>iptables<span class="w"> </span>-A<span class="w"> </span>INPUT<span class="w"> </span>-m<span class="w"> </span>conntrack<span class="w"> </span>--ctstate<span class="w"> </span>INVALID<span class="w"> </span>-j<span class="w"> </span>DROP
+<a id="__codelineno-17-28" name="__codelineno-17-28" href="#__codelineno-17-28"></a>
+<a id="__codelineno-17-29" name="__codelineno-17-29" href="#__codelineno-17-29"></a><span class="c1"># SSH тільки з LAN</span>
+<a id="__codelineno-17-30" name="__codelineno-17-30" href="#__codelineno-17-30"></a>iptables<span class="w"> </span>-A<span class="w"> </span>INPUT<span class="w"> </span>-i<span class="w"> </span><span class="nv">$LAN_IF</span><span class="w"> </span>-p<span class="w"> </span>tcp<span class="w"> </span>--dport<span class="w"> </span><span class="m">22</span><span class="w"> </span>-j<span class="w"> </span>ACCEPT
+<a id="__codelineno-17-31" name="__codelineno-17-31" href="#__codelineno-17-31"></a>
+<a id="__codelineno-17-32" name="__codelineno-17-32" href="#__codelineno-17-32"></a><span class="c1"># DNS (якщо шлюз є DNS-резолвером для LAN)</span>
+<a id="__codelineno-17-33" name="__codelineno-17-33" href="#__codelineno-17-33"></a>iptables<span class="w"> </span>-A<span class="w"> </span>INPUT<span class="w"> </span>-i<span class="w"> </span><span class="nv">$LAN_IF</span><span class="w"> </span>-p<span class="w"> </span>udp<span class="w"> </span>--dport<span class="w"> </span><span class="m">53</span><span class="w"> </span>-j<span class="w"> </span>ACCEPT
+<a id="__codelineno-17-34" name="__codelineno-17-34" href="#__codelineno-17-34"></a>iptables<span class="w"> </span>-A<span class="w"> </span>INPUT<span class="w"> </span>-i<span class="w"> </span><span class="nv">$LAN_IF</span><span class="w"> </span>-p<span class="w"> </span>tcp<span class="w"> </span>--dport<span class="w"> </span><span class="m">53</span><span class="w"> </span>-j<span class="w"> </span>ACCEPT
+<a id="__codelineno-17-35" name="__codelineno-17-35" href="#__codelineno-17-35"></a>
+<a id="__codelineno-17-36" name="__codelineno-17-36" href="#__codelineno-17-36"></a><span class="c1"># DHCP</span>
+<a id="__codelineno-17-37" name="__codelineno-17-37" href="#__codelineno-17-37"></a>iptables<span class="w"> </span>-A<span class="w"> </span>INPUT<span class="w"> </span>-i<span class="w"> </span><span class="nv">$LAN_IF</span><span class="w"> </span>-p<span class="w"> </span>udp<span class="w"> </span>--dport<span class="w"> </span><span class="m">67</span><span class="w"> </span>-j<span class="w"> </span>ACCEPT
+<a id="__codelineno-17-38" name="__codelineno-17-38" href="#__codelineno-17-38"></a>
+<a id="__codelineno-17-39" name="__codelineno-17-39" href="#__codelineno-17-39"></a><span class="c1"># ICMP з LAN</span>
+<a id="__codelineno-17-40" name="__codelineno-17-40" href="#__codelineno-17-40"></a>iptables<span class="w"> </span>-A<span class="w"> </span>INPUT<span class="w"> </span>-i<span class="w"> </span><span class="nv">$LAN_IF</span><span class="w"> </span>-p<span class="w"> </span>icmp<span class="w"> </span>-j<span class="w"> </span>ACCEPT
+<a id="__codelineno-17-41" name="__codelineno-17-41" href="#__codelineno-17-41"></a>
+<a id="__codelineno-17-42" name="__codelineno-17-42" href="#__codelineno-17-42"></a><span class="c1"># Логування та DROP</span>
+<a id="__codelineno-17-43" name="__codelineno-17-43" href="#__codelineno-17-43"></a>iptables<span class="w"> </span>-A<span class="w"> </span>INPUT<span class="w"> </span>-j<span class="w"> </span>LOG<span class="w"> </span>--log-prefix<span class="w"> </span><span class="s2">&quot;GW-INPUT-DROP: &quot;</span><span class="w"> </span>--log-level<span class="w"> </span><span class="m">4</span>
+<a id="__codelineno-17-44" name="__codelineno-17-44" href="#__codelineno-17-44"></a>iptables<span class="w"> </span>-A<span class="w"> </span>INPUT<span class="w"> </span>-j<span class="w"> </span>DROP
+<a id="__codelineno-17-45" name="__codelineno-17-45" href="#__codelineno-17-45"></a>
+<a id="__codelineno-17-46" name="__codelineno-17-46" href="#__codelineno-17-46"></a><span class="c1"># ===================== FORWARD (між мережами) =====================</span>
+<a id="__codelineno-17-47" name="__codelineno-17-47" href="#__codelineno-17-47"></a>iptables<span class="w"> </span>-A<span class="w"> </span>FORWARD<span class="w"> </span>-m<span class="w"> </span>conntrack<span class="w"> </span>--ctstate<span class="w"> </span>ESTABLISHED,RELATED<span class="w"> </span>-j<span class="w"> </span>ACCEPT
+<a id="__codelineno-17-48" name="__codelineno-17-48" href="#__codelineno-17-48"></a>iptables<span class="w"> </span>-A<span class="w"> </span>FORWARD<span class="w"> </span>-m<span class="w"> </span>conntrack<span class="w"> </span>--ctstate<span class="w"> </span>INVALID<span class="w"> </span>-j<span class="w"> </span>DROP
+<a id="__codelineno-17-49" name="__codelineno-17-49" href="#__codelineno-17-49"></a>
+<a id="__codelineno-17-50" name="__codelineno-17-50" href="#__codelineno-17-50"></a><span class="c1"># LAN → Internet: дозволити тільки HTTP/HTTPS/DNS</span>
+<a id="__codelineno-17-51" name="__codelineno-17-51" href="#__codelineno-17-51"></a>iptables<span class="w"> </span>-A<span class="w"> </span>FORWARD<span class="w"> </span>-i<span class="w"> </span><span class="nv">$LAN_IF</span><span class="w"> </span>-o<span class="w"> </span><span class="nv">$WAN_IF</span><span class="w"> </span>-p<span class="w"> </span>tcp<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-17-52" name="__codelineno-17-52" href="#__codelineno-17-52"></a><span class="w">    </span>-m<span class="w"> </span>multiport<span class="w"> </span>--dports<span class="w"> </span><span class="m">80</span>,443<span class="w"> </span>-j<span class="w"> </span>ACCEPT
+<a id="__codelineno-17-53" name="__codelineno-17-53" href="#__codelineno-17-53"></a>iptables<span class="w"> </span>-A<span class="w"> </span>FORWARD<span class="w"> </span>-i<span class="w"> </span><span class="nv">$LAN_IF</span><span class="w"> </span>-o<span class="w"> </span><span class="nv">$WAN_IF</span><span class="w"> </span>-p<span class="w"> </span>udp<span class="w"> </span>--dport<span class="w"> </span><span class="m">53</span><span class="w"> </span>-j<span class="w"> </span>ACCEPT
+<a id="__codelineno-17-54" name="__codelineno-17-54" href="#__codelineno-17-54"></a>iptables<span class="w"> </span>-A<span class="w"> </span>FORWARD<span class="w"> </span>-i<span class="w"> </span><span class="nv">$LAN_IF</span><span class="w"> </span>-o<span class="w"> </span><span class="nv">$WAN_IF</span><span class="w"> </span>-p<span class="w"> </span>tcp<span class="w"> </span>--dport<span class="w"> </span><span class="m">53</span><span class="w"> </span>-j<span class="w"> </span>ACCEPT
+<a id="__codelineno-17-55" name="__codelineno-17-55" href="#__codelineno-17-55"></a>iptables<span class="w"> </span>-A<span class="w"> </span>FORWARD<span class="w"> </span>-i<span class="w"> </span><span class="nv">$LAN_IF</span><span class="w"> </span>-o<span class="w"> </span><span class="nv">$WAN_IF</span><span class="w"> </span>-p<span class="w"> </span>icmp<span class="w"> </span>-j<span class="w"> </span>ACCEPT
+<a id="__codelineno-17-56" name="__codelineno-17-56" href="#__codelineno-17-56"></a>
+<a id="__codelineno-17-57" name="__codelineno-17-57" href="#__codelineno-17-57"></a><span class="c1"># Internet → внутрішній сервер (тільки HTTP, для DNAT)</span>
+<a id="__codelineno-17-58" name="__codelineno-17-58" href="#__codelineno-17-58"></a>iptables<span class="w"> </span>-A<span class="w"> </span>FORWARD<span class="w"> </span>-i<span class="w"> </span><span class="nv">$WAN_IF</span><span class="w"> </span>-o<span class="w"> </span><span class="nv">$LAN_IF</span><span class="w"> </span>-p<span class="w"> </span>tcp<span class="w"> </span>--dport<span class="w"> </span><span class="m">8080</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-17-59" name="__codelineno-17-59" href="#__codelineno-17-59"></a><span class="w">    </span>-d<span class="w"> </span><span class="nv">$INT_SERVER</span><span class="w"> </span>-j<span class="w"> </span>ACCEPT
+<a id="__codelineno-17-60" name="__codelineno-17-60" href="#__codelineno-17-60"></a>
+<a id="__codelineno-17-61" name="__codelineno-17-61" href="#__codelineno-17-61"></a><span class="c1"># Логування та DROP</span>
+<a id="__codelineno-17-62" name="__codelineno-17-62" href="#__codelineno-17-62"></a>iptables<span class="w"> </span>-A<span class="w"> </span>FORWARD<span class="w"> </span>-j<span class="w"> </span>LOG<span class="w"> </span>--log-prefix<span class="w"> </span><span class="s2">&quot;GW-FORWARD-DROP: &quot;</span><span class="w"> </span>--log-level<span class="w"> </span><span class="m">4</span>
+<a id="__codelineno-17-63" name="__codelineno-17-63" href="#__codelineno-17-63"></a>iptables<span class="w"> </span>-A<span class="w"> </span>FORWARD<span class="w"> </span>-j<span class="w"> </span>DROP
+<a id="__codelineno-17-64" name="__codelineno-17-64" href="#__codelineno-17-64"></a>
+<a id="__codelineno-17-65" name="__codelineno-17-65" href="#__codelineno-17-65"></a><span class="c1"># ===================== NAT =====================</span>
+<a id="__codelineno-17-66" name="__codelineno-17-66" href="#__codelineno-17-66"></a><span class="c1"># MASQUERADE — LAN → Internet</span>
+<a id="__codelineno-17-67" name="__codelineno-17-67" href="#__codelineno-17-67"></a>iptables<span class="w"> </span>-t<span class="w"> </span>nat<span class="w"> </span>-A<span class="w"> </span>POSTROUTING<span class="w"> </span>-s<span class="w"> </span><span class="nv">$LAN_NET</span><span class="w"> </span>-o<span class="w"> </span><span class="nv">$WAN_IF</span><span class="w"> </span>-j<span class="w"> </span>MASQUERADE
+<a id="__codelineno-17-68" name="__codelineno-17-68" href="#__codelineno-17-68"></a>
+<a id="__codelineno-17-69" name="__codelineno-17-69" href="#__codelineno-17-69"></a><span class="c1"># DNAT — проброс HTTP ззовні → внутрішній сервер</span>
+<a id="__codelineno-17-70" name="__codelineno-17-70" href="#__codelineno-17-70"></a>iptables<span class="w"> </span>-t<span class="w"> </span>nat<span class="w"> </span>-A<span class="w"> </span>PREROUTING<span class="w"> </span>-i<span class="w"> </span><span class="nv">$WAN_IF</span><span class="w"> </span>-p<span class="w"> </span>tcp<span class="w"> </span>--dport<span class="w"> </span><span class="m">80</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-17-71" name="__codelineno-17-71" href="#__codelineno-17-71"></a><span class="w">    </span>-j<span class="w"> </span>DNAT<span class="w"> </span>--to-destination<span class="w"> </span><span class="nv">$INT_SERVER</span>:8080
+<a id="__codelineno-17-72" name="__codelineno-17-72" href="#__codelineno-17-72"></a>
+<a id="__codelineno-17-73" name="__codelineno-17-73" href="#__codelineno-17-73"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Rules applied successfully&quot;</span>
+<a id="__codelineno-17-74" name="__codelineno-17-74" href="#__codelineno-17-74"></a>iptables<span class="w"> </span>-L<span class="w"> </span>-v<span class="w"> </span>-n
+</code></pre></div>
+<hr />
+<h2 id="7">7 Логування та діагностика</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="c1"># Додати правило логування ПЕРЕД відповідним DROP</span>
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>iptables<span class="w"> </span>-I<span class="w"> </span>INPUT<span class="w"> </span><span class="m">1</span><span class="w"> </span>-p<span class="w"> </span>tcp<span class="w"> </span>--dport<span class="w"> </span><span class="m">22</span><span class="w"> </span>-j<span class="w"> </span>LOG<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="w">    </span>--log-prefix<span class="w"> </span><span class="s2">&quot;SSH-ATTEMPT: &quot;</span><span class="w"> </span>--log-level<span class="w"> </span><span class="m">4</span>
+<a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a>
+<a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a><span class="c1"># Переглянути логи</span>
+<a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a>tail<span class="w"> </span>-f<span class="w"> </span>/var/log/kern.log<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>iptables
+<a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a>tail<span class="w"> </span>-f<span class="w"> </span>/var/log/syslog<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">&quot;iptables-DROP&quot;</span>
+<a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a>journalctl<span class="w"> </span>-kf<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">&quot;GW-FORWARD&quot;</span>
+<a id="__codelineno-18-9" name="__codelineno-18-9" href="#__codelineno-18-9"></a>
+<a id="__codelineno-18-10" name="__codelineno-18-10" href="#__codelineno-18-10"></a><span class="c1"># Переглянути активні NAT-трансляції (conntrack)</span>
+<a id="__codelineno-18-11" name="__codelineno-18-11" href="#__codelineno-18-11"></a>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>conntrack
+<a id="__codelineno-18-12" name="__codelineno-18-12" href="#__codelineno-18-12"></a>conntrack<span class="w"> </span>-L
+<a id="__codelineno-18-13" name="__codelineno-18-13" href="#__codelineno-18-13"></a>conntrack<span class="w"> </span>-L<span class="w"> </span>-p<span class="w"> </span>tcp
+<a id="__codelineno-18-14" name="__codelineno-18-14" href="#__codelineno-18-14"></a>conntrack<span class="w"> </span>-L<span class="w"> </span>--src-nat<span class="w">        </span><span class="c1"># активні SNAT/MASQUERADE</span>
+<a id="__codelineno-18-15" name="__codelineno-18-15" href="#__codelineno-18-15"></a>conntrack<span class="w"> </span>-L<span class="w"> </span>--dst-nat<span class="w">        </span><span class="c1"># активні DNAT</span>
+<a id="__codelineno-18-16" name="__codelineno-18-16" href="#__codelineno-18-16"></a>
+<a id="__codelineno-18-17" name="__codelineno-18-17" href="#__codelineno-18-17"></a><span class="c1"># Статистика по правилах (скільки пакетів спрацювало)</span>
+<a id="__codelineno-18-18" name="__codelineno-18-18" href="#__codelineno-18-18"></a>iptables<span class="w"> </span>-L<span class="w"> </span>-v<span class="w"> </span>-n<span class="w"> </span>--line-numbers
+<a id="__codelineno-18-19" name="__codelineno-18-19" href="#__codelineno-18-19"></a>iptables<span class="w"> </span>-t<span class="w"> </span>nat<span class="w"> </span>-L<span class="w"> </span>-v<span class="w"> </span>-n
+<a id="__codelineno-18-20" name="__codelineno-18-20" href="#__codelineno-18-20"></a>
+<a id="__codelineno-18-21" name="__codelineno-18-21" href="#__codelineno-18-21"></a><span class="c1"># Скинути лічильники</span>
+<a id="__codelineno-18-22" name="__codelineno-18-22" href="#__codelineno-18-22"></a>iptables<span class="w"> </span>-Z
+<a id="__codelineno-18-23" name="__codelineno-18-23" href="#__codelineno-18-23"></a>
+<a id="__codelineno-18-24" name="__codelineno-18-24" href="#__codelineno-18-24"></a><span class="c1"># Трасування пакету (debug конкретного пакету)</span>
+<a id="__codelineno-18-25" name="__codelineno-18-25" href="#__codelineno-18-25"></a>iptables<span class="w"> </span>-t<span class="w"> </span>raw<span class="w"> </span>-A<span class="w"> </span>PREROUTING<span class="w"> </span>-s<span class="w"> </span><span class="m">1</span>.2.3.4<span class="w"> </span>-j<span class="w"> </span>TRACE
+<a id="__codelineno-18-26" name="__codelineno-18-26" href="#__codelineno-18-26"></a>iptables<span class="w"> </span>-t<span class="w"> </span>raw<span class="w"> </span>-A<span class="w"> </span>OUTPUT<span class="w"> </span>-d<span class="w"> </span><span class="m">1</span>.2.3.4<span class="w"> </span>-j<span class="w"> </span>TRACE
+<a id="__codelineno-18-27" name="__codelineno-18-27" href="#__codelineno-18-27"></a><span class="c1"># Потім переглянути</span>
+<a id="__codelineno-18-28" name="__codelineno-18-28" href="#__codelineno-18-28"></a>journalctl<span class="w"> </span>-k<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">&quot;TRACE&quot;</span>
+<a id="__codelineno-18-29" name="__codelineno-18-29" href="#__codelineno-18-29"></a><span class="c1"># Видалити після діагностики:</span>
+<a id="__codelineno-18-30" name="__codelineno-18-30" href="#__codelineno-18-30"></a>iptables<span class="w"> </span>-t<span class="w"> </span>raw<span class="w"> </span>-D<span class="w"> </span>PREROUTING<span class="w"> </span>-s<span class="w"> </span><span class="m">1</span>.2.3.4<span class="w"> </span>-j<span class="w"> </span>TRACE
+</code></pre></div>
+<h3 id="71">7.1 Типові помилки</h3>
+<table>
+<thead>
+<tr>
+<th>Симптом</th>
+<th>Причина</th>
+<th>Рішення</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>LAN не виходить в інтернет</td>
+<td>Немає MASQUERADE або IP forwarding вимкнено</td>
+<td><code>sysctl net.ipv4.ip_forward</code>, перевірити POSTROUTING</td>
+</tr>
+<tr>
+<td>DNAT не працює</td>
+<td>Немає правила в FORWARD</td>
+<td>Додати <code>FORWARD</code> дозвіл для трафіку після DNAT</td>
+</tr>
+<tr>
+<td>Правила зникають після ребуту</td>
+<td>Не збережено</td>
+<td><code>netfilter-persistent save</code></td>
+</tr>
+<tr>
+<td>SSH заблокований після застосування DROP</td>
+<td>Порядок правил — DROP раніше ACCEPT</td>
+<td>Перевірити <code>iptables -L -n --line-numbers</code>, перемістити правило</td>
+</tr>
+<tr>
+<td>ESTABLISHED трафік блокується</td>
+<td>Немає правила для <code>ctstate ESTABLISHED,RELATED</code></td>
+<td>Додати на початок INPUT/FORWARD</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<div class="admonition info">
+<p class="admonition-title">nftables — наступник iptables</p>
+<p>У сучасних дистрибутивах (Ubuntu 22.04+, Debian 11+) рекомендується використовувати <strong>nftables</strong> замість iptables. Команди <code>iptables</code> там є обгорткою над nftables через <code>iptables-nft</code>. Синтаксис iptables залишається робочим, але для нових проєктів варто вивчити nftables</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Повернутись нагору
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      © 2026 Кафедра №21 - Bci права захищені
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://mitit.mil.gov.ua/page/faculty2" target="_blank" rel="noopener" title="mitit.mil.gov.ua" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M16.36 14c.08-.66.14-1.32.14-2s-.06-1.34-.14-2h3.38c.16.64.26 1.31.26 2s-.1 1.36-.26 2m-5.15 5.56c.6-1.11 1.06-2.31 1.38-3.56h2.95a8.03 8.03 0 0 1-4.33 3.56M14.34 14H9.66c-.1-.66-.16-1.32-.16-2s.06-1.35.16-2h4.68c.09.65.16 1.32.16 2s-.07 1.34-.16 2M12 19.96c-.83-1.2-1.5-2.53-1.91-3.96h3.82c-.41 1.43-1.08 2.76-1.91 3.96M8 8H5.08A7.92 7.92 0 0 1 9.4 4.44C8.8 5.55 8.35 6.75 8 8m-2.92 8H8c.35 1.25.8 2.45 1.4 3.56A8 8 0 0 1 5.08 16m-.82-2C4.1 13.36 4 12.69 4 12s.1-1.36.26-2h3.38c-.08.66-.14 1.32-.14 2s.06 1.34.14 2M12 4.03c.83 1.2 1.5 2.54 1.91 3.97h-3.82c.41-1.43 1.08-2.77 1.91-3.97M18.92 8h-2.95a15.7 15.7 0 0 0-1.38-3.56c1.84.63 3.37 1.9 4.33 3.56M12 2C6.47 2 2 6.5 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "content.code.copy", "search.suggest", "search.highlight"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u0421\u043a\u043e\u043f\u0456\u0439\u043e\u0432\u0430\u043d\u043e \u0432 \u0431\u0443\u0444\u0435\u0440", "clipboard.copy": "\u0421\u043a\u043e\u043f\u0456\u044e\u0432\u0430\u0442\u0438 \u0432 \u0431\u0443\u0444\u0435\u0440", "search.result.more.one": "\u0429\u0435 1 \u0437\u0431\u0456\u0433 \u043d\u0430 \u0446\u0456\u0439 \u0441\u0442\u043e\u0440\u0456\u043d\u0446\u0456", "search.result.more.other": "\u0429\u0435 # \u0437\u0431\u0456\u0433\u0456\u0432 \u043d\u0430 \u0446\u0456\u0439 \u0441\u0442\u043e\u0440\u0456\u043d\u0446\u0456", "search.result.none": "\u0417\u0431\u0456\u0433\u0456\u0432 \u043d\u0435 \u0437\u043d\u0430\u0439\u0434\u0435\u043d\u043e", "search.result.one": "\u0417\u043d\u0430\u0439\u0434\u0435\u043d\u043e 1 \u0437\u0431\u0456\u0433", "search.result.other": "\u0417\u043d\u0430\u0439\u0434\u0435\u043d\u043e # \u0437\u0431\u0456\u0433\u0456\u0432", "search.result.placeholder": "\u0420\u043e\u0437\u043f\u043e\u0447\u043d\u0456\u0442\u044c \u043f\u0438\u0441\u0430\u0442\u0438 \u0434\u043b\u044f \u043f\u043e\u0448\u0443\u043a\u0443", "search.result.term.missing": "\u041d\u0435 \u0437\u043d\u0430\u0439\u0434\u0435\u043d\u043e \u0437\u0430\u043f\u0438\u0442\u0443", "select.version": "\u041e\u0431\u0440\u0430\u0442\u0438 \u0432\u0435\u0440\u0441\u0456\u044e"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
