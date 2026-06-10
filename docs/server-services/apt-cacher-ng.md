@@ -354,19 +354,3 @@ sudo systemctl status apt-cacher-ng
 ```
 
 ---
-
-## IaC розгортання
-
-Якщо хочеш розгорнути Apt-Cacher-NG як код (Terraform + Ansible + AWX + Vault + GitLab CI) — дивись наш репозиторій:
-
-**🔗 [Infrastructure GitLab — ist.viti.edu.ua](https://gitlab.ist.viti.edu.ua/infrastructure)**
-
-Там знайдеш:
-- `vm-terraform` — Terraform конфігурація для створення VM в vSphere
-- `vm-ansible` — Ansible роль `apt_cacher` для автоматичного розгортання
-- `vm-inventory` — inventory файли
-- `k8s-apps` — AWX job templates для запуску через CI/CD
-
----
-
-*Документація підготовлена для інфраструктури ist.viti.edu.ua*
