@@ -73,6 +73,14 @@
 
     [:octicons-arrow-right-24: Читати](tcpdump-guide.md)
 
+-   :simple-envoyproxy: **apt cacher**
+
+    ---
+
+    Розгортання локального дзеркала APT
+
+    [:octicons-arrow-right-24: Читати](apt-cacher-ng.md)
+
 -   :octicons-law-16: __Chmod calc__
 
     ---
