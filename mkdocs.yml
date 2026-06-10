@@ -72,6 +72,7 @@ nav:
       - 'SYSLOG': server-services/syslog.md
       - 'iptables': server-services/iptables.md
       - 'TCPDump': server-services/tcpdump-guide.md
+      - 'APT Cacher': server-services/apt-cacher-ng.md
       - 'Калькулятор прав': server-services/chmod-calculator.md
 
 markdown_extensions:
