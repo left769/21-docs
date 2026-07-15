@@ -60,6 +60,7 @@ nav:
       - 'NAT в Cisco': network-configs/cisco-nat.md
       - 'DHCP-сервер': network-configs/dhcp.md
       - 'IPsec в Cisco': network-configs/ipsec.md
+      - 'WireGuard в Mikrotik': network-configs/wireguard-mikrotik.md
       - 'OSPF': network-configs/ospf.md
       - 'Cisco cheat sheet': network-configs/cisco-cheat-sheet.md
       - 'Калькулятор маски підмереж': network-configs/subnet-calculator.md
@@ -72,6 +73,7 @@ nav:
       - 'SYSLOG': server-services/syslog.md
       - 'iptables': server-services/iptables.md
       - 'TCPDump': server-services/tcpdump-guide.md
+      - 'APT Cacher': server-services/apt-cacher-ng.md
       - 'Калькулятор прав': server-services/chmod-calculator.md
 
 markdown_extensions:

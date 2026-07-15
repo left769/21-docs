@@ -81,6 +81,14 @@
 
     [:octicons-arrow-right-24: Читати](ipsec.md)
 
+-   :simple-wireguard: __Mikrotik WireGuard__
+
+    ---
+
+    Налаштування WireGuard VPN на маршрутизаторі Mikrotik
+
+    [:octicons-arrow-right-24: Читати](mikrotik-wireguard.md)
+
 -   :material-calculator: __Калькулятор маски__
 
     ---
