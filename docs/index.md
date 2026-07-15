@@ -55,7 +55,6 @@ Network:
 - network-configs/bgp.md
 - network-configs/mikrotik-cheat-sheet.md
 - network-configs/mikrotik-ovpn.md
-- network-configs/mikrotik-wireguard.md
 - network-configs/mikrotik-firewall.md
 - network-configs/fortigate.md
 ```
