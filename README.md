@@ -3,7 +3,7 @@
 Навчальний довідник-шпаргалка для студентів спеціальності **F6 Інформаційні системи та технології**.
 Охоплює мережеві технології, мережеву безпеку та адміністрування Linux.
 
-🔗 **[Відкрити довідник](https://left769.github.io/21-docs/)**
+🔗 **[Відкрити довідник](https://ist.pp.ua/)**
 
 ---
 
@@ -12,33 +12,33 @@
 ### 🌐 Мережі
 | Розділ | Опис |
 |--------|------|
-| [Вступ до мереж](https://left769.github.io/21-docs/network-configs/) | Базові концепції та моделі OSI/TCP-IP |
-| [IP інтерфейси](https://left769.github.io/21-docs/network-configs/ip-interfaces/) | Налаштування інтерфейсів, IPv4/IPv6 |
-| [VLAN та Trunk](https://left769.github.io/21-docs/network-configs/vlans/) | Сегментація мережі, 802.1Q |
-| [VLAN в Mikrotik](https://left769.github.io/21-docs/network-configs/vlans-mikrotik/) | Налаштування VLAN на маршрутизаторі Mikrotik |
-| [STP](https://left769.github.io/21-docs/network-configs/stp/) | Налаштування STP на Cisco |
-| [Маршрутизація](https://left769.github.io/21-docs/network-configs/routing/) | Статична та динамічна маршрутизація |
-| [Dual WAN](https://left769.github.io/21-docs/network-configs/isp-failover/) | Налаштування автоматичного переключення між провайдерами в Cisco |
-| [Контроль доступу](https://left769.github.io/21-docs/network-configs/acl/) | ACL, фільтрація трафіку |
-| [Cisco NAT](https://left769.github.io/21-docs/network-configs/cisco-nat/) | Налаштування NAT на Cisco |
-| [Cisco DHCP](https://left769.github.io/21-docs/network-configs/dhcp/) | Налаштування DHCP-сервера на Cisco |
+| [Вступ до мереж](https://ist.pp.ua/network-configs/) | Базові концепції та моделі OSI/TCP-IP |
+| [IP інтерфейси](https://ist.pp.ua/network-configs/ip-interfaces/) | Налаштування інтерфейсів, IPv4/IPv6 |
+| [VLAN та Trunk](https://ist.pp.ua/network-configs/vlans/) | Сегментація мережі, 802.1Q |
+| [VLAN в Mikrotik](https://ist.pp.ua/network-configs/vlans-mikrotik/) | Налаштування VLAN на маршрутизаторі Mikrotik |
+| [STP](https://ist.pp.ua/network-configs/stp/) | Налаштування STP на Cisco |
+| [Маршрутизація](https://ist.pp.ua/network-configs/routing/) | Статична та динамічна маршрутизація |
+| [Dual WAN](https://ist.pp.ua/network-configs/isp-failover/) | Налаштування автоматичного переключення між провайдерами в Cisco |
+| [Контроль доступу](https://ist.pp.ua/network-configs/acl/) | ACL, фільтрація трафіку |
+| [Cisco NAT](https://ist.pp.ua/network-configs/cisco-nat/) | Налаштування NAT на Cisco |
+| [Cisco DHCP](https://ist.pp.ua/network-configs/dhcp/) | Налаштування DHCP-сервера на Cisco |
 | [Cisco IPsec](https://ist.pp.ua/network-configs/ipsec/) | Налаштування IPsec-VPN між маршрутизаторами Cisco |
 | [Mikrotik Wireguard](https://ist.pp.ua/mikrotik-wireguard) | Налаштування WireGuard на маршрутизаторі Mikrotik |
-| [OSPF](https://left769.github.io/21-docs/network-configs/ospf/) | Налаштування OSPFv2 на Cisco |
-| [Cisco IOS — Шпаргалка](https://left769.github.io/21-docs/network-configs/cisco-cheat-sheet/) | Повний довідник команд Cisco IOS |
-| [Калькулятор маски](https://left769.github.io/21-docs/network-configs/subnet-calculator/) | Зачіб визначення параметрів ІР-мереж |
+| [OSPF](https://ist.pp.ua/network-configs/ospf/) | Налаштування OSPFv2 на Cisco |
+| [Cisco IOS — Шпаргалка](https://ist.pp.ua/network-configs/cisco-cheat-sheet/) | Повний довідник команд Cisco IOS |
+| [Калькулятор маски](https://ist.pp.ua/network-configs/subnet-calculator/) | Зачіб визначення параметрів ІР-мереж |
 
 ### 🖥️ Сервіси Linux
 | Розділ | Опис |
 |--------|------|
-| [Сервіси на базі Linux](https://left769.github.io/21-docs/server-services/) | Розгортання серверних сервісів |
-| [IP addr](https://left769.github.io/21-docs/server-services/linux-network-interfaces/) | Мережеві налаштування в Linux |
-| [SSH](https://left769.github.io/21-docs/server-services/ssh/) | Налаштування SSH |
-| [RADIUS](https://left769.github.io/21-docs/server-services/radius/) | Налаштування сервера автентифікації |
-| [SYSLOG](https://left769.github.io/21-docs/server-services/syslog/) | Налаштування syslog-сервера |
-| [iptables](https://left769.github.io/21-docs/server-services/iptables/) | Налаштування хостового фаєрволу |
-| [TCPdump](https://left769.github.io/21-docs/server-services/tcpdump-guide/) | Використання tcpdump |
-| [chmod-калькулятор](https://left769.github.io/21-docs/server-services/chmod-calculator/) | Калькулятор прав в Linux |
+| [Сервіси на базі Linux](https://ist.pp.ua/server-services/) | Розгортання серверних сервісів |
+| [IP addr](https://ist.pp.ua/server-services/linux-network-interfaces/) | Мережеві налаштування в Linux |
+| [SSH](https://ist.pp.ua/server-services/ssh/) | Налаштування SSH |
+| [RADIUS](https://ist.pp.ua/server-services/radius/) | Налаштування сервера автентифікації |
+| [SYSLOG](https://ist.pp.ua/server-services/syslog/) | Налаштування syslog-сервера |
+| [iptables](https://ist.pp.ua/server-services/iptables/) | Налаштування хостового фаєрволу |
+| [TCPdump](https://ist.pp.ua/server-services/tcpdump-guide/) | Використання tcpdump |
+| [chmod-калькулятор](https://ist.pp.ua/server-services/chmod-calculator/) | Калькулятор прав в Linux |
 
 ---
 
