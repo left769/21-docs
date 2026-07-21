@@ -13,17 +13,17 @@
 | Розділ | Опис |
 |--------|------|
 | [Вступ до мереж](https://ist.pp.ua/network-configs/) | Базові концепції та моделі OSI/TCP-IP |
-| [IP інтерфейси](https://ist.pp.ua/network-configs/ip-interfaces/) | Налаштування інтерфейсів, IPv4/IPv6 |
+| [IP інтерфейси](https://ist.pp.ua/network-configs/IP-interfaces/) | Налаштування інтерфейсів, IPv4/IPv6 |
 | [VLAN та Trunk](https://ist.pp.ua/network-configs/vlans/) | Сегментація мережі, 802.1Q |
 | [VLAN в Mikrotik](https://ist.pp.ua/network-configs/vlans-mikrotik/) | Налаштування VLAN на маршрутизаторі Mikrotik |
 | [STP](https://ist.pp.ua/network-configs/stp/) | Налаштування STP на Cisco |
 | [Маршрутизація](https://ist.pp.ua/network-configs/routing/) | Статична та динамічна маршрутизація |
 | [Dual WAN](https://ist.pp.ua/network-configs/isp-failover/) | Налаштування автоматичного переключення між провайдерами в Cisco |
-| [Контроль доступу](https://ist.pp.ua/network-configs/acl/) | ACL, фільтрація трафіку |
+| [Контроль доступу](https://ist.pp.ua/network-configs/ACL/) | ACL, фільтрація трафіку |
 | [Cisco NAT](https://ist.pp.ua/network-configs/cisco-nat/) | Налаштування NAT на Cisco |
 | [Cisco DHCP](https://ist.pp.ua/network-configs/dhcp/) | Налаштування DHCP-сервера на Cisco |
 | [Cisco IPsec](https://ist.pp.ua/network-configs/ipsec/) | Налаштування IPsec-VPN між маршрутизаторами Cisco |
-| [Mikrotik Wireguard](https://ist.pp.ua/mikrotik-wireguard) | Налаштування WireGuard на маршрутизаторі Mikrotik |
+| [Mikrotik Wireguard](https://ist.pp.ua/network-configs/mikrotik-wireguard/) | Налаштування WireGuard на маршрутизаторі Mikrotik |
 | [OSPF](https://ist.pp.ua/network-configs/ospf/) | Налаштування OSPFv2 на Cisco |
 | [Cisco IOS — Шпаргалка](https://ist.pp.ua/network-configs/cisco-cheat-sheet/) | Повний довідник команд Cisco IOS |
 | [Калькулятор маски](https://ist.pp.ua/network-configs/subnet-calculator/) | Зачіб визначення параметрів ІР-мереж |
