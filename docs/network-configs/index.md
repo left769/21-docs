@@ -121,6 +121,14 @@
 
     [:octicons-arrow-right-24: Читати](ospf.md)
 
+-   :material-server-security: __Захист пристроїв__
+
+    ---
+
+    Базові заходи по захисту мережевих пристрїв
+
+    [:octicons-arrow-right-24: Читати](basic-dev-sec.md)
+
 </div>
 
 ---

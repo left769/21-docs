@@ -25,8 +25,9 @@
 | [Cisco IPsec](https://ist.pp.ua/network-configs/ipsec/) | Налаштування IPsec-VPN між маршрутизаторами Cisco |
 | [Mikrotik Wireguard](https://ist.pp.ua/network-configs/mikrotik-wireguard/) | Налаштування WireGuard на маршрутизаторі Mikrotik |
 | [OSPF](https://ist.pp.ua/network-configs/ospf/) | Налаштування OSPFv2 на Cisco |
+| [Захист пристроїв](https://ist.pp.ua/network-configs/basic-dev-sec/) | Базові заходи по захисту мережевих пристрїв|
 | [Cisco IOS — Шпаргалка](https://ist.pp.ua/network-configs/cisco-cheat-sheet/) | Повний довідник команд Cisco IOS |
-| [Калькулятор маски](https://ist.pp.ua/network-configs/subnet-calculator/) | Зачіб визначення параметрів ІР-мереж |
+| [Калькулятор маски](https://ist.pp.ua/network-configs/subnet-calculator/) | Заcіб визначення параметрів ІР-мереж |
 
 ### 🖥️ Сервіси Linux
 | Розділ | Опис |

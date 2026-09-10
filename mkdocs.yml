@@ -60,8 +60,9 @@ nav:
       - 'NAT в Cisco': network-configs/cisco-nat.md
       - 'DHCP-сервер': network-configs/dhcp.md
       - 'IPsec в Cisco': network-configs/ipsec.md
-      - 'WireGuard в Mikrotik': network-configs/wireguard-mikrotik.md
+      - 'WireGuard в Mikrotik': network-configs/mikrotik-wireguard.md
       - 'OSPF': network-configs/ospf.md
+      - 'Захист пристроїв': network-configs/basic-dev-sec.md
       - 'Cisco cheat sheet': network-configs/cisco-cheat-sheet.md
       - 'Калькулятор маски підмереж': network-configs/subnet-calculator.md
   - 🖥️ Сервіси:
