@@ -54,6 +54,7 @@ nav:
       - 'VLAN та Trunk': network-configs/vlans.md
       - 'VLAN в Mikrotik': network-configs/vlans-mikrotik.md
       - 'STP': network-configs/stp.md
+      - 'VTP/DTP': network-configs/vtp-dtp.md
       - 'Маршрутизація': network-configs/routing.md
       - 'Dual WAN': network-configs/isp-failover.md
       - 'Контроль доступу': network-configs/ACL.md

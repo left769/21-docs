@@ -17,6 +17,7 @@
 | [VLAN та Trunk](https://ist.pp.ua/network-configs/vlans/) | Сегментація мережі, 802.1Q |
 | [VLAN в Mikrotik](https://ist.pp.ua/network-configs/vlans-mikrotik/) | Налаштування VLAN на маршрутизаторі Mikrotik |
 | [STP](https://ist.pp.ua/network-configs/stp/) | Налаштування STP на Cisco |
+| [VTP/DTP](https://ist.pp.ua/network-configs/vtp-dtp/) | Налаштування протоколів VTP та DTP |
 | [Маршрутизація](https://ist.pp.ua/network-configs/routing/) | Статична та динамічна маршрутизація |
 | [Dual WAN](https://ist.pp.ua/network-configs/isp-failover/) | Налаштування автоматичного переключення між провайдерами в Cisco |
 | [Контроль доступу](https://ist.pp.ua/network-configs/ACL/) | ACL, фільтрація трафіку |

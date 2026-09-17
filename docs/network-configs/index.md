@@ -113,6 +113,14 @@
 
     [:octicons-arrow-right-24: Читати](stp.md)
 
+-   :material-family-tree: __VTP/DTP__
+
+    ---
+
+    Налаштування протоколів VTP та DTP
+
+    [:octicons-arrow-right-24: Читати](vtp-dtp.md)
+
 -   :material-graph-outline: __OSPF__
 
     ---
