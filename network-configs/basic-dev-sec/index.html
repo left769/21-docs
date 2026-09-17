@@ -1,0 +1,1859 @@
+
+<!doctype html>
+<html lang="uk" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="Створено колективом кафедри №21">
+      
+      
+      
+        <link rel="prev" href="../ospf/">
+      
+      
+        <link rel="next" href="../cisco-cheat-sheet/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/logo_dep21_white.ico">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Захист пристроїв - Довідник кафедри Інформаційних систем та технологій</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          Перейти до змісту
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Хедер">
+    <a href="../.." title="Довідник кафедри Інформаційних систем та технологій" class="md-header__button md-logo" aria-label="Довідник кафедри Інформаційних систем та технологій" data-md-component="logo">
+      
+  <img src="../../assets/logo_dep21_white.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Довідник кафедри Інформаційних систем та технологій
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Захист пристроїв
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Перейти на темну тему"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Перейти на темну тему" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="indigo"  aria-label="Перейти на світлу тему"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Перейти на світлу тему" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Пошук" placeholder="Пошук" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Шукати">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Очистити" aria-label="Очистити" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Пошук розпочато
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Вкладки" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../.." class="md-tabs__link">
+          
+  
+  
+  🏠 Головна
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+  🌐 Мережі
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../server-services/" class="md-tabs__link">
+          
+  
+  
+  🖥️ Сервіси
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Навігація" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Довідник кафедри Інформаційних систем та технологій" class="md-nav__button md-logo" aria-label="Довідник кафедри Інформаційних систем та технологій" data-md-component="logo">
+      
+  <img src="../../assets/logo_dep21_white.png" alt="logo">
+
+    </a>
+    Довідник кафедри Інформаційних систем та технологій
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🏠 Головна
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    🏠 Головна
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    👋Вступ
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../pnet/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🧪Інструкція з користування PNET Lab
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../subnet-calculator/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Калькулятор маски підмереж
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../server-services/chmod-calculator/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Калькулятор прав Linux
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🌐 Мережі
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    🌐 Мережі
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Вступ до мереж
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../IP-interfaces/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IP інтерфейси
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../vlans/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VLAN та Trunk
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../vlans-mikrotik/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VLAN в Mikrotik
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../stp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    STP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../vtp-dtp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VTP/DTP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../routing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Маршрутизація
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../isp-failover/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dual WAN
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ACL/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Контроль доступу
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cisco-nat/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NAT в Cisco
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dhcp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DHCP-сервер
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ipsec/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IPsec в Cisco
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mikrotik-wireguard/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    WireGuard в Mikrotik
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ospf/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OSPF
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Захист пристроїв
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Захист пристроїв
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Зміст">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Зміст
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#cisco-iosios-xe-mikrotik-routeros" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        (Cisco IOS/IOS-XE - комутатори та маршрутизатори; MikroTik RouterOS — маршрутизатори)
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cisco-cheat-sheet/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cisco cheat sheet
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../subnet-calculator/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Калькулятор маски підмереж
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🖥️ Сервіси
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    🖥️ Сервіси
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../server-services/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Сервіси на базі OC Linux
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../server-services/linux-network-interfaces/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ip addr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../server-services/ssh/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SSH
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../server-services/radius/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RADIUS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../server-services/syslog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SYSLOG
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../server-services/iptables/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    iptables
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../server-services/tcpdump-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    TCPDump
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../server-services/apt-cacher-ng/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    APT Cacher
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../server-services/chmod-calculator/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Калькулятор прав Linux
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Зміст">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Зміст
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#cisco-iosios-xe-mikrotik-routeros" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        (Cisco IOS/IOS-XE - комутатори та маршрутизатори; MikroTik RouterOS — маршрутизатори)
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="_1">Інструкція з впровадження правил безпеки мережевих пристроїв</h1>
+<h2 id="cisco-iosios-xe-mikrotik-routeros">(Cisco IOS/IOS-XE - комутатори та маршрутизатори; MikroTik RouterOS — маршрутизатори)</h2>
+<p>Документ описує базовий набір заходів по захисту самих мережевих пристроїв (device hardening)</p>
+<hr />
+<h1 id="1-cisco-ios-ios-xe">ЧАСТИНА 1. CISCO IOS / IOS-XE</h1>
+<h2 id="11-vty-console-aux">1.1. Захист віртуальних підключень (VTY, console, aux)</h2>
+<h3 id="111-vty-acl">1.1.1. Обмеження доступу до VTY по ACL</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>ip access-list standard MGMT-ACCESS
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a> permit 10.90.30.0 0.0.0.255
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a> permit 10.90.40.5
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a> deny any log
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>line vty 0 15
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a> access-class MGMT-ACCESS in
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a> transport input ssh
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a> exec-timeout 5 0
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a> logging synchronous
+</code></pre></div>
+<ul>
+<li><code>access-class</code> дозволяє підключення лише з довірених підмереж/адрес</li>
+<li><code>transport input ssh</code> вимикає telnet на VTY (детальніше — п. 1.5)</li>
+<li><code>exec-timeout 5 0</code> — автоматичне завершення неактивної сесії (5 хв)</li>
+</ul>
+<h3 id="112">1.1.2. Консольний порт</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>line console 0
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a> exec-timeout 5 0
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a> password 7 &lt;encrypted&gt;
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a> login local
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a> logging synchronous
+</code></pre></div>
+<h3 id="113-ssh">1.1.3. Обов’язкове шифрування SSH</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>ip domain-name bek.k21
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>crypto key generate rsa modulus 2048
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>ip ssh version 2
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>ip ssh time-out 60
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>ip ssh authentication-retries 3
+</code></pre></div>
+<h3 id="114">1.1.4. Захист паролів у конфігурації</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>service password-encryption
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>enable secret &lt;strong-password&gt;
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>no enable password
+</code></pre></div>
+<p><code>enable secret</code> використовує хешування (MD5/scrypt залежно від версії), на відміну від зворотно-оборотного <code>enable password</code></p>
+<hr />
+<h2 id="12">1.2. Створення користувачів</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>username netadmin privilege 15 secret &lt;strong-password&gt;
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>username teacher privilege 5 secret &lt;strong-password&gt;
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>username auditor privilege 1 secret &lt;strong-password&gt;
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>line vty 0 15
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a> login local
+</code></pre></div>
+<p>Рекомендації:
+- Кожен адміністратор - окремий обліковий запис (без спільних логінів)
+- Використовувати <code>secret</code>, а не <code>password</code> (хешування замість plaintext/оборотного шифру)
+- Мінімальна довжина паролів:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>security passwords min-length 12
+</code></pre></div></p>
+<h2 id="-ios-aaa-login-block-for-13-">- Блокування облікового запису за перевищення часу бездіяльності неможливо в IOS напряму без зовнішнього AAA, тому контроль здійснюється через <code>login block-for</code> (див. п. 1.3) - він діє на рівні пристрою, а не окремого користувача</h2>
+<h2 id="13-fail-to-ban">1.3. Налаштування "fail-to-ban" (захист від підбору пароля)</h2>
+<p>Cisco IOS має вбудований механізм <code>login block-for</code>, що тимчасово блокує спроби входу після перевищення порогу невдалих автентифікацій - аналог fail2ban на рівні пристрою</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>login block-for 120 attempts 4 within 60
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>login quiet-mode access-class QUIET-PERMIT
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>login delay 2
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>login on-failure log every 1
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>login on-success log every 1
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>ip access-list standard QUIET-PERMIT
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a> permit 10.90.40.5
+</code></pre></div>
+<p>Пояснення:
+- <code>block-for 120 attempts 4 within 60</code> - якщо протягом 60 секунд відбулося 4 невдалі спроби входу (з будь-якої адреси), пристрій на 120 секунд блокує <strong>всі</strong> нові спроби автентифікації (SSH/Telnet/HTTP), крім адрес у <code>QUIET-PERMIT</code> (аварійний доступ для адміністратора)
+- <code>login delay 2</code> - пауза 2 секунди між спробами введення пароля (уповільнює брутфорс)
+- <code>login on-failure/on-success log</code> - журналювання спроб для подальшого аналізу (syslog)
+Перегляд стану:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>show login
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>show login failures
+</code></pre></div></p>
+<hr />
+<h2 id="14">1.4. Призначення адміністративних ролей</h2>
+<h3 id="141-015">1.4.1. Класичні рівні привілеїв (0–15)</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>privilege exec level 5 show running-config
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>privilege exec level 5 configure terminal
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>privilege exec level 1 show interfaces
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>username operator1 privilege 5 secret &lt;password&gt;
+</code></pre></div>
+<p>Рівень 15 - повний доступ, 1 - базовий read-only, проміжні рівні (2–14) налаштовуються під конкретні команди.</p>
+<h3 id="142-parser-views-ios-123-ios-xe">1.4.2. Parser Views (гнучкіший рольовий доступ, IOS 12.3+ / IOS-XE)</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>aaa new-model
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>enable secret &lt;root-secret&gt;
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>parser view NETWORK_OPERATOR
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a> secret &lt;view-secret&gt;
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a> commands exec include show
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a> commands exec include ping
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a> commands exec include traceroute
+<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a> commands configure include interface
+<a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a>
+<a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a>parser view SECURITY_ADMIN
+<a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a> secret &lt;view-secret&gt;
+<a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a> commands exec include all show
+<a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a> commands configure include all
+</code></pre></div>
+<blockquote>
+<p>Примітка: <code>aaa new-model</code> тут вмикається <strong>лише</strong> для локальної рольової моделі (<code>parser view</code>) і роботи з локальною базою користувачів через <code>login local</code> - зовнішній AAA-сервер (RADIUS/TACACS+) при цьому не використовується і не налаштовується.</p>
+</blockquote>
+<p>Активація ролі оператором:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>enable view NETWORK_OPERATOR
+</code></pre></div></p>
+<hr />
+<h2 id="15">1.5. Деактивація застарілих/небезпечних методів підключення</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>! Заборона Telnet — лише SSH
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>line vty 0 15
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a> transport input ssh
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>! Вимкнення HTTP-сервера керування (незашифрований)
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>no ip http server
+<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a>ip http secure-server
+<a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a>ip http secure-port 443
+<a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a>ip http authentication local
+<a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a>
+<a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a>! Вимкнення непотрібних "дрібних" сервісів
+<a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a>no service tcp-small-servers
+<a id="__codelineno-11-13" name="__codelineno-11-13" href="#__codelineno-11-13"></a>no service udp-small-servers
+<a id="__codelineno-11-14" name="__codelineno-11-14" href="#__codelineno-11-14"></a>no ip bootp server
+<a id="__codelineno-11-15" name="__codelineno-11-15" href="#__codelineno-11-15"></a>no ip finger
+<a id="__codelineno-11-16" name="__codelineno-11-16" href="#__codelineno-11-16"></a>no ip identd
+<a id="__codelineno-11-17" name="__codelineno-11-17" href="#__codelineno-11-17"></a>
+<a id="__codelineno-11-18" name="__codelineno-11-18" href="#__codelineno-11-18"></a>! Вимкнення CDP там, де він не потрібен (за замовчуванням розкриває топологію)
+<a id="__codelineno-11-19" name="__codelineno-11-19" href="#__codelineno-11-19"></a>no cdp run
+<a id="__codelineno-11-20" name="__codelineno-11-20" href="#__codelineno-11-20"></a>! або точково на порт:
+<a id="__codelineno-11-21" name="__codelineno-11-21" href="#__codelineno-11-21"></a>interface range Ethernet0/0-4
+<a id="__codelineno-11-22" name="__codelineno-11-22" href="#__codelineno-11-22"></a> no cdp enable
+<a id="__codelineno-11-23" name="__codelineno-11-23" href="#__codelineno-11-23"></a>
+<a id="__codelineno-11-24" name="__codelineno-11-24" href="#__codelineno-11-24"></a>! Вимкнення застарілого/непотрібного LLDP на зовнішніх/user-портах
+<a id="__codelineno-11-25" name="__codelineno-11-25" href="#__codelineno-11-25"></a>no lldp run
+<a id="__codelineno-11-26" name="__codelineno-11-26" href="#__codelineno-11-26"></a>
+<a id="__codelineno-11-27" name="__codelineno-11-27" href="#__codelineno-11-27"></a>! Заборона SNMP v1/v2 (незашифровані community-рядки), використання лише v3
+<a id="__codelineno-11-28" name="__codelineno-11-28" href="#__codelineno-11-28"></a>no snmp-server community public
+<a id="__codelineno-11-29" name="__codelineno-11-29" href="#__codelineno-11-29"></a>no snmp-server community private
+<a id="__codelineno-11-30" name="__codelineno-11-30" href="#__codelineno-11-30"></a>snmp-server group SNMPV3GROUP v3 priv
+<a id="__codelineno-11-31" name="__codelineno-11-31" href="#__codelineno-11-31"></a>snmp-server user snmpadmin SNMPV3GROUP v3 auth sha &lt;auth-pass&gt; priv aes 128 &lt;priv-pass&gt;
+<a id="__codelineno-11-32" name="__codelineno-11-32" href="#__codelineno-11-32"></a>
+<a id="__codelineno-11-33" name="__codelineno-11-33" href="#__codelineno-11-33"></a>! Забороняємо proxy-arp, source-routing тощо на інтерфейсах керування
+<a id="__codelineno-11-34" name="__codelineno-11-34" href="#__codelineno-11-34"></a>interface Vlan1
+<a id="__codelineno-11-35" name="__codelineno-11-35" href="#__codelineno-11-35"></a> no ip proxy-arp
+<a id="__codelineno-11-36" name="__codelineno-11-36" href="#__codelineno-11-36"></a>no ip source-route
+<a id="__codelineno-11-37" name="__codelineno-11-37" href="#__codelineno-11-37"></a>
+<a id="__codelineno-11-38" name="__codelineno-11-38" href="#__codelineno-11-38"></a>! Банер попередження про несанкціонований доступ
+<a id="__codelineno-11-39" name="__codelineno-11-39" href="#__codelineno-11-39"></a>banner login ^C
+<a id="__codelineno-11-40" name="__codelineno-11-40" href="#__codelineno-11-40"></a>УВАГА! Доступ дозволено лише авторизованим користувачам.
+<a id="__codelineno-11-41" name="__codelineno-11-41" href="#__codelineno-11-41"></a>Усі дії журналюються.
+<a id="__codelineno-11-42" name="__codelineno-11-42" href="#__codelineno-11-42"></a>^C
+</code></pre></div>
+<hr />
+<h1 id="2-mikrotik-routeros">ЧАСТИНА 2. MIKROTIK ROUTEROS</h1>
+<h2 id="21">2.1. Захист віртуальних підключень</h2>
+<h3 id="211">2.1.1. Обмеження служб керування за адресою джерела</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>/ip service
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>set winbox address=10.90.40.0/24
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>set ssh address=10.90.40.0/24
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>set www disabled=yes
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>set www-ssl disabled=yes
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>set api disabled=yes
+<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a>set api-ssl disabled=yes
+<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a>set telnet disabled=yes
+<a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a>set ftp disabled=yes
+</code></pre></div>
+<h3 id="212-firewall-input-service-address">2.1.2. Захист через firewall input-ланцюг (обов'язково поряд з <code>service address</code>)</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>/ip firewall filter
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>add chain=input protocol=tcp dst-port=22,8291 src-address-list=MGMT_ALLOWED action=accept comment="allow mgmt SSH/WinBox"
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>add chain=input protocol=tcp dst-port=22,8291 action=drop comment="drop other SSH/WinBox"
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>add chain=input connection-state=established,related action=accept
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>add chain=input connection-state=invalid action=drop
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>add chain=input action=drop comment="default deny to router itself"
+<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a>
+<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a>/ip firewall address-list
+<a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a>add address=10.90.40.0/24 list=MGMT_ALLOWED
+</code></pre></div>
+<h3 id="213">2.1.3. Таймаути неактивних сесій</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>/ip ssh
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>set forwarding-enabled=no strong-crypto=yes
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>/system console
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a># для serial/консолі — обмежити фізичний доступ організаційно
+<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a>
+<a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a>/ip service
+<a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a>set ssh port=2222   ;# зміна стандартного порту (security through obscurity, додатковий бар'єр)
+</code></pre></div>
+<hr />
+<h2 id="22">2.2. Створення користувачів</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>/user group
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>add name=readonly policy=read,test,winbox
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>add name=netops policy=read,write,test,winbox,sniff
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>add name=fulladmin policy=local,telnet,ssh,ftp,reboot,read,write,policy,test,winbox,password,web,sniff,sensitive,api,romon,dude,tikapp
+<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a>
+<a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a>/user
+<a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a>add name=netadmin group=netops password=&lt;strong-password&gt;
+<a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a>remove [find name=admin]
+</code></pre></div>
+<p>Рекомендації:
+- Обов'язково видалити або перейменувати/деактивувати обліковий запис <code>admin</code> за замовчуванням
+- Кожен адміністратор - окремий обліковий запис
+- Вимога складних паролів:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>/user aaa
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>set minimum-password-length=12
+</code></pre></div></p>
+<hr />
+<h2 id="23-fail-to-ban-brute-force">2.3. Налаштування "fail-to-ban" (захист від brute-force)</h2>
+<p>RouterOS не має вбудованого <code>login block-for</code>, як Cisco, тому механізм реалізується через firewall (address-list з таймаутом — фактичний аналог fail2ban):</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>/ip firewall filter
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a># Крок 1: занесення адреси в чорний список після 3-ї невдалої спроби SSH за 5 хв
+<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a>add chain=input protocol=tcp dst-port=2222 connection-state=new \
+<a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a>    src-address-list=ssh_stage3 action=add-src-to-address-list \
+<a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a>    address-list=ssh_blacklist address-list-timeout=1d comment="stage3-&gt;blacklist"
+<a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a>
+<a id="__codelineno-17-8" name="__codelineno-17-8" href="#__codelineno-17-8"></a>add chain=input protocol=tcp dst-port=2222 connection-state=new \
+<a id="__codelineno-17-9" name="__codelineno-17-9" href="#__codelineno-17-9"></a>    src-address-list=ssh_stage2 action=add-src-to-address-list \
+<a id="__codelineno-17-10" name="__codelineno-17-10" href="#__codelineno-17-10"></a>    address-list=ssh_stage3 address-list-timeout=1m
+<a id="__codelineno-17-11" name="__codelineno-17-11" href="#__codelineno-17-11"></a>
+<a id="__codelineno-17-12" name="__codelineno-17-12" href="#__codelineno-17-12"></a>add chain=input protocol=tcp dst-port=2222 connection-state=new \
+<a id="__codelineno-17-13" name="__codelineno-17-13" href="#__codelineno-17-13"></a>    src-address-list=ssh_stage1 action=add-src-to-address-list \
+<a id="__codelineno-17-14" name="__codelineno-17-14" href="#__codelineno-17-14"></a>    address-list=ssh_stage2 address-list-timeout=1m
+<a id="__codelineno-17-15" name="__codelineno-17-15" href="#__codelineno-17-15"></a>
+<a id="__codelineno-17-16" name="__codelineno-17-16" href="#__codelineno-17-16"></a>add chain=input protocol=tcp dst-port=2222 connection-state=new \
+<a id="__codelineno-17-17" name="__codelineno-17-17" href="#__codelineno-17-17"></a>    action=add-src-to-address-list address-list=ssh_stage1 \
+<a id="__codelineno-17-18" name="__codelineno-17-18" href="#__codelineno-17-18"></a>    address-list-timeout=1m
+<a id="__codelineno-17-19" name="__codelineno-17-19" href="#__codelineno-17-19"></a>
+<a id="__codelineno-17-20" name="__codelineno-17-20" href="#__codelineno-17-20"></a># Крок 2: блокування всіх, хто в blacklist
+<a id="__codelineno-17-21" name="__codelineno-17-21" href="#__codelineno-17-21"></a>add chain=input src-address-list=ssh_blacklist action=drop comment="drop brute-force sources"
+</code></pre></div>
+<p>Логіка: кожна нова спроба підключення до SSH-порту переводить адресу в наступний "щабель" списку; після 3 підключень за короткий проміжок часу адреса потрапляє у <code>ssh_blacklist</code> на добу і блокується.</p>
+<p>Аналогічно можна захистити WinBox (порт 8291) - дублюванням правил зі зміною <code>dst-port</code>.</p>
+<p>Додатково - журналювання спроб входу:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>/system logging
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>add topics=system,error,critical action=memory
+<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a>add topics=account action=memory
+</code></pre></div></p>
+<hr />
+<h2 id="24">2.4. Призначення адміністративних ролей</h2>
+<p>RouterOS використовує групи політик (<code>/user group</code>), аналог рівнів привілеїв Cisco:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>/user group
+<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>add name=network-viewer policy=read,winbox comment="лише перегляд"
+<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>add name=network-operator policy=read,write,test,winbox comment="базові зміни, без sensitive/password"
+<a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a>add name=security-admin policy=local,ssh,winbox,read,write,policy,test,password,sensitive,api comment="повний доступ, окрім reboot/ftp"
+<a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a>add name=super-admin policy=local,telnet,ssh,ftp,reboot,read,write,policy,test,winbox,password,web,sniff,sensitive,api,romon comment="повний контроль"
+</code></pre></div>
+<p>Прив'язка користувачів:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>/user
+<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>add name=viewer1 group=network-viewer password=&lt;pass&gt;
+<a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a>add name=noc1 group=network-operator password=&lt;pass&gt;
+<a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a>add name=secadmin group=security-admin password=&lt;pass&gt;
+</code></pre></div></p>
+<p>Політику <code>sensitive</code> (перегляд паролів/секретів у конфігурації) та <code>password</code> (зміна паролів) варто видавати лише обмеженому колу security-адміністраторів.</p>
+<hr />
+<h2 id="25">2.5. Деактивація застарілих/небезпечних методів підключення</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>/ip service
+<a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a>set telnet disabled=yes
+<a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a>set ftp disabled=yes
+<a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a>set www disabled=yes
+<a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a>set api disabled=yes
+<a id="__codelineno-21-6" name="__codelineno-21-6" href="#__codelineno-21-6"></a>set api-ssl disabled=yes
+<a id="__codelineno-21-7" name="__codelineno-21-7" href="#__codelineno-21-7"></a>
+<a id="__codelineno-21-8" name="__codelineno-21-8" href="#__codelineno-21-8"></a># Залишаємо лише SSH (з обмеженнями за адресою) та WinBox/WinBox через захищений тунель
+<a id="__codelineno-21-9" name="__codelineno-21-9" href="#__codelineno-21-9"></a>set ssh disabled=no
+<a id="__codelineno-21-10" name="__codelineno-21-10" href="#__codelineno-21-10"></a>set winbox disabled=no
+<a id="__codelineno-21-11" name="__codelineno-21-11" href="#__codelineno-21-11"></a>
+<a id="__codelineno-21-12" name="__codelineno-21-12" href="#__codelineno-21-12"></a>/ip ssh
+<a id="__codelineno-21-13" name="__codelineno-21-13" href="#__codelineno-21-13"></a>set strong-crypto=yes
+<a id="__codelineno-21-14" name="__codelineno-21-14" href="#__codelineno-21-14"></a>
+<a id="__codelineno-21-15" name="__codelineno-21-15" href="#__codelineno-21-15"></a># Вимкнення MAC-Telnet/MAC-WinBox для L2-discovery-доступу (небезпечно на транзитних портах)
+<a id="__codelineno-21-16" name="__codelineno-21-16" href="#__codelineno-21-16"></a>/tool mac-server
+<a id="__codelineno-21-17" name="__codelineno-21-17" href="#__codelineno-21-17"></a>set allowed-interface-list=none
+<a id="__codelineno-21-18" name="__codelineno-21-18" href="#__codelineno-21-18"></a>/tool mac-server mac-winbox
+<a id="__codelineno-21-19" name="__codelineno-21-19" href="#__codelineno-21-19"></a>set allowed-interface-list=none
+<a id="__codelineno-21-20" name="__codelineno-21-20" href="#__codelineno-21-20"></a>
+<a id="__codelineno-21-21" name="__codelineno-21-21" href="#__codelineno-21-21"></a># Вимкнення Neighbor Discovery (розкриває інформацію про пристрій в мережі)
+<a id="__codelineno-21-22" name="__codelineno-21-22" href="#__codelineno-21-22"></a>/ip neighbor discovery-settings
+<a id="__codelineno-21-23" name="__codelineno-21-23" href="#__codelineno-21-23"></a>set discover-interface-list=none
+<a id="__codelineno-21-24" name="__codelineno-21-24" href="#__codelineno-21-24"></a>
+<a id="__codelineno-21-25" name="__codelineno-21-25" href="#__codelineno-21-25"></a># Вимкнення Bandwidth Test Server, якщо не використовується
+<a id="__codelineno-21-26" name="__codelineno-21-26" href="#__codelineno-21-26"></a>/tool bandwidth-server
+<a id="__codelineno-21-27" name="__codelineno-21-27" href="#__codelineno-21-27"></a>set enabled=no
+<a id="__codelineno-21-28" name="__codelineno-21-28" href="#__codelineno-21-28"></a>
+<a id="__codelineno-21-29" name="__codelineno-21-29" href="#__codelineno-21-29"></a># Вимкнення застарілого/непотрібного графа трафіку та DNS-кешу для зовнішніх запитів
+<a id="__codelineno-21-30" name="__codelineno-21-30" href="#__codelineno-21-30"></a>/ip dns
+<a id="__codelineno-21-31" name="__codelineno-21-31" href="#__codelineno-21-31"></a>set allow-remote-requests=no
+<a id="__codelineno-21-32" name="__codelineno-21-32" href="#__codelineno-21-32"></a>
+<a id="__codelineno-21-33" name="__codelineno-21-33" href="#__codelineno-21-33"></a># UPnP — типове джерело неконтрольованого прокидання портів
+<a id="__codelineno-21-34" name="__codelineno-21-34" href="#__codelineno-21-34"></a>/ip upnp
+<a id="__codelineno-21-35" name="__codelineno-21-35" href="#__codelineno-21-35"></a>set enabled=no
+<a id="__codelineno-21-36" name="__codelineno-21-36" href="#__codelineno-21-36"></a>
+<a id="__codelineno-21-37" name="__codelineno-21-37" href="#__codelineno-21-37"></a># Вимкнення непотрібних пакетів (romon)
+<a id="__codelineno-21-38" name="__codelineno-21-38" href="#__codelineno-21-38"></a>/tool romon
+<a id="__codelineno-21-39" name="__codelineno-21-39" href="#__codelineno-21-39"></a>set enabled=no
+</code></pre></div>
+<hr />
+<h1 id="3-cisco-mikrotik">3. Додаткові рекомендації (спільні для Cisco та MikroTik)</h1>
+<p>Ці пункти не входили до обов'язкового переліку, але суттєво підвищують загальний рівень захищеності пристрою:</p>
+<ol>
+<li><strong>Точний час (NTP)</strong> - критично для коректних міток часу в логах при розслідуванні інцидентів.</li>
+<li>Cisco: <code>ntp server 192.168.21.95</code></li>
+<li>MikroTik: <code>/system ntp client set enabled=yes servers=192.168.21.95</code></li>
+<li><strong>Централізоване журналювання (syslog)</strong> - навіть без AAA-сервера, окремий syslog-сервер (лише прийом логів) значно полегшує аудит.</li>
+<li>Cisco: <code>logging host 10.0.0.20</code></li>
+<li>MikroTik: <code>/system logging action add name=remote target=remote remote=10.0.0.20</code></li>
+<li><strong>Резервне копіювання конфігурації</strong> та контроль цілісності (порівняння з еталоном) - дозволяє швидко виявити несанкціоновані зміни</li>
+<li><strong>Вимкнення невикористовуваних фізичних портів/інтерфейсів</strong>, щоб унеможливити фізичне підключення сторонніх пристроїв</li>
+<li>Cisco: <code>interface range Gi0/10-24</code> → <code>shutdown</code></li>
+<li>MikroTik: <code>/interface ethernet disable ether5</code></li>
+<li><strong>Мінімізація сервісів discovery-протоколів</strong> (CDP/LLDP/MNDP) на портах, де немає потреби в автовиявленні сусідів - знижує розвідувальну цінність пристрою для зловмисника</li>
+<li><strong>Регулярне оновлення прошивки/ОС</strong> (Cisco IOS, RouterOS) для закриття відомих CVE</li>
+<li><strong>Банер попередження про юридичну відповідальність</strong> за несанкціонований доступ - на обох платформах (<code>banner login</code> у Cisco, <code>/ip service set ... banner</code> або MOTD у MikroTik через <code>/system note</code>)</li>
+</ol>
+<hr />
+<blockquote>
+<p>📌 <strong>Контрольний чек-лист впровадження:</strong></p>
+<ul>
+<li>✅ VTY/консоль обмежені ACL, увімкнено лише SSH, встановлено exec-timeout</li>
+<li>✅ Створено персональні облікові записи для кожного адміністратора, видалено/перейменовано дефолтні (<code>admin</code>)</li>
+<li>✅ Паролі хешовані (<code>secret</code>/<code>password</code> v3+), встановлена мінімальна довжина</li>
+<li>✅ Налаштовано <code>login block-for</code> (Cisco) / address-list брутфорс-захист (MikroTik)</li>
+<li>✅ Розподілено рольовий доступ (privilege levels/parser views — Cisco; user group policy — MikroTik)</li>
+<li>✅ Вимкнено Telnet, HTTP (незашифрований), FTP, small-services, застарілі discovery-протоколи де не потрібні</li>
+<li>✅ Заплановано регулярне резервне копіювання конфігурацій</li>
+<li>✅ Вимкнено невикористовувані фізичні порти</li>
+<li>✅ Налаштовано NTP та централізоване журналювання</li>
+<li>✅ Заплановано регулярне оновлення ПЗ пристроїв</li>
+</ul>
+</blockquote>
+<hr />
+<div class="admonition quote">
+<p class="admonition-title">Примітка</p>
+<p>Стаття базується на офіційній документації Cisco TAC та адаптовано з використанням інструментів штучного інтелекту</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Повернутись нагору
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      © 2026 Кафедра №21 - Bci права захищені
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://mitit.mil.gov.ua/page/faculty2" target="_blank" rel="noopener" title="mitit.mil.gov.ua" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M16.36 14c.08-.66.14-1.32.14-2s-.06-1.34-.14-2h3.38c.16.64.26 1.31.26 2s-.1 1.36-.26 2m-5.15 5.56c.6-1.11 1.06-2.31 1.38-3.56h2.95a8.03 8.03 0 0 1-4.33 3.56M14.34 14H9.66c-.1-.66-.16-1.32-.16-2s.06-1.35.16-2h4.68c.09.65.16 1.32.16 2s-.07 1.34-.16 2M12 19.96c-.83-1.2-1.5-2.53-1.91-3.96h3.82c-.41 1.43-1.08 2.76-1.91 3.96M8 8H5.08A7.92 7.92 0 0 1 9.4 4.44C8.8 5.55 8.35 6.75 8 8m-2.92 8H8c.35 1.25.8 2.45 1.4 3.56A8 8 0 0 1 5.08 16m-.82-2C4.1 13.36 4 12.69 4 12s.1-1.36.26-2h3.38c-.08.66-.14 1.32-.14 2s.06 1.34.14 2M12 4.03c.83 1.2 1.5 2.54 1.91 3.97h-3.82c.41-1.43 1.08-2.77 1.91-3.97M18.92 8h-2.95a15.7 15.7 0 0 0-1.38-3.56c1.84.63 3.37 1.9 4.33 3.56M12 2C6.47 2 2 6.5 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "content.code.copy", "search.suggest", "search.highlight"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u0421\u043a\u043e\u043f\u0456\u0439\u043e\u0432\u0430\u043d\u043e \u0432 \u0431\u0443\u0444\u0435\u0440", "clipboard.copy": "\u0421\u043a\u043e\u043f\u0456\u044e\u0432\u0430\u0442\u0438 \u0432 \u0431\u0443\u0444\u0435\u0440", "search.result.more.one": "\u0429\u0435 1 \u0437\u0431\u0456\u0433 \u043d\u0430 \u0446\u0456\u0439 \u0441\u0442\u043e\u0440\u0456\u043d\u0446\u0456", "search.result.more.other": "\u0429\u0435 # \u0437\u0431\u0456\u0433\u0456\u0432 \u043d\u0430 \u0446\u0456\u0439 \u0441\u0442\u043e\u0440\u0456\u043d\u0446\u0456", "search.result.none": "\u0417\u0431\u0456\u0433\u0456\u0432 \u043d\u0435 \u0437\u043d\u0430\u0439\u0434\u0435\u043d\u043e", "search.result.one": "\u0417\u043d\u0430\u0439\u0434\u0435\u043d\u043e 1 \u0437\u0431\u0456\u0433", "search.result.other": "\u0417\u043d\u0430\u0439\u0434\u0435\u043d\u043e # \u0437\u0431\u0456\u0433\u0456\u0432", "search.result.placeholder": "\u0420\u043e\u0437\u043f\u043e\u0447\u043d\u0456\u0442\u044c \u043f\u0438\u0441\u0430\u0442\u0438 \u0434\u043b\u044f \u043f\u043e\u0448\u0443\u043a\u0443", "search.result.term.missing": "\u041d\u0435 \u0437\u043d\u0430\u0439\u0434\u0435\u043d\u043e \u0437\u0430\u043f\u0438\u0442\u0443", "select.version": "\u041e\u0431\u0440\u0430\u0442\u0438 \u0432\u0435\u0440\u0441\u0456\u044e"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>
