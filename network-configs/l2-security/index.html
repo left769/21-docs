@@ -1,0 +1,2733 @@
+
+<!doctype html>
+<html lang="uk" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="Створено колективом кафедри №21">
+      
+      
+      
+        <link rel="prev" href="../basic-dev-sec/">
+      
+      
+        <link rel="next" href="../cisco-cheat-sheet/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/logo_dep21_white.ico">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Захист L2 - Довідник кафедри Інформаційних систем та технологій</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#l2-security-" class="md-skip">
+          Перейти до змісту
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Хедер">
+    <a href="../.." title="Довідник кафедри Інформаційних систем та технологій" class="md-header__button md-logo" aria-label="Довідник кафедри Інформаційних систем та технологій" data-md-component="logo">
+      
+  <img src="../../assets/logo_dep21_white.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Довідник кафедри Інформаційних систем та технологій
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Захист L2
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Перейти на темну тему"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Перейти на темну тему" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="indigo"  aria-label="Перейти на світлу тему"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Перейти на світлу тему" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Пошук" placeholder="Пошук" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Шукати">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Очистити" aria-label="Очистити" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Пошук розпочато
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Вкладки" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../.." class="md-tabs__link">
+          
+  
+  
+  🏠 Головна
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+  🌐 Мережі
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../server-services/" class="md-tabs__link">
+          
+  
+  
+  🖥️ Сервіси
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Навігація" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Довідник кафедри Інформаційних систем та технологій" class="md-nav__button md-logo" aria-label="Довідник кафедри Інформаційних систем та технологій" data-md-component="logo">
+      
+  <img src="../../assets/logo_dep21_white.png" alt="logo">
+
+    </a>
+    Довідник кафедри Інформаційних систем та технологій
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🏠 Головна
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    🏠 Головна
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    👋Вступ
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../pnet/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🧪Інструкція з користування PNET Lab
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../subnet-calculator/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Калькулятор маски підмереж
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../server-services/chmod-calculator/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Калькулятор прав Linux
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🌐 Мережі
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    🌐 Мережі
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Вступ до мереж
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ip-interfaces.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IP інтерфейси
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../vlans/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VLAN та Trunk
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../vlans-mikrotik/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VLAN в Mikrotik
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../stp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    STP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../vtp-dtp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VTP/DTP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../routing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Маршрутизація
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../isp-failover/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dual WAN
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../acl.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Контроль доступу
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cisco-nat/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NAT в Cisco
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dhcp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DHCP-сервер
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ipsec/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IPsec в Cisco
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mikrotik-wireguard/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    WireGuard в Mikrotik
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ospf/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OSPF
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../basic-dev-sec/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Захист пристроїв
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Захист L2
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Захист L2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Зміст">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Зміст
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Загальна картина
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-port-security-mac-flooding" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1 Port Security - захист від MAC Flooding
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1 Port Security - захист від MAC Flooding">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 Проблема
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-port-security" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 Що робить Port Security
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3 Приклад виводу
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-dhcp-snooping-rogue-dhcp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2 DHCP Snooping - захист від Rogue DHCP
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2 DHCP Snooping - захист від Rogue DHCP">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 Проблема
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-dhcp-snooping" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 Що робить DHCP Snooping
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-dai-dynamic-arp-inspection-arp-spoofing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3 DAI - Dynamic ARP Inspection (захист від ARP Spoofing)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3 DAI - Dynamic ARP Inspection (захист від ARP Spoofing)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 Проблема
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-dai" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 Що робить DAI
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-ip-source-guard-ip-spoofing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4 IP Source Guard - захист від IP Spoofing
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4 IP Source Guard - захист від IP Spoofing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 Проблема
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-ip-source-guard" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 Що робить IP Source Guard
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-stp-bpdu-guard-root-guard-loop-guard" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5 Захист STP - BPDU Guard, Root Guard, Loop Guard
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5 Захист STP - BPDU Guard, Root Guard, Loop Guard">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 Проблема
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-bpdu-guard-access-bpdu" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 BPDU Guard - захист access-портів від несанкціонованих BPDU
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-root-guard-root-bridge" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3 Root Guard - захист від підміни Root Bridge
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#54-loop-guard-bpdu" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.4 Loop Guard - захист від петель при втраті BPDU
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#55-bpdu-filter-bpdu" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.5 BPDU Filter - фільтрація BPDU на граничних портах
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-vlan-hopping-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6 VLAN Hopping - атака та захист
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6 VLAN Hopping - атака та захист">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 Проблема
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-switch-spoofing-dtp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2 Захист від Switch Spoofing (вимкнення DTP)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63-double-tagging-native-vlan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3 Захист від Double Tagging (native VLAN)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-access-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7 Повна конфігурація захищеного access-порту
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-trunk-uplink" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8 Повна конфігурація захищеного trunk-порту (uplink)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9 Порядок глобального налаштування на комутаторі
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10 Перевірка та діагностика
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10 Перевірка та діагностика">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#101" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.1 Типові помилки
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cisco-cheat-sheet/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cisco cheat sheet
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../subnet-calculator/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Калькулятор маски підмереж
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🖥️ Сервіси
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    🖥️ Сервіси
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../server-services/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Сервіси на базі OC Linux
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../server-services/linux-network-interfaces/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ip addr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../server-services/ssh/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SSH
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../server-services/radius/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RADIUS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../server-services/syslog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SYSLOG
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../server-services/iptables/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    iptables
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../server-services/tcpdump-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    TCPDump
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../server-services/apt-cacher-ng/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    APT Cacher
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../server-services/chmod-calculator/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Калькулятор прав Linux
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Зміст">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Зміст
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Загальна картина
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-port-security-mac-flooding" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1 Port Security - захист від MAC Flooding
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1 Port Security - захист від MAC Flooding">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 Проблема
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-port-security" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 Що робить Port Security
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3 Приклад виводу
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-dhcp-snooping-rogue-dhcp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2 DHCP Snooping - захист від Rogue DHCP
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2 DHCP Snooping - захист від Rogue DHCP">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 Проблема
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-dhcp-snooping" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 Що робить DHCP Snooping
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-dai-dynamic-arp-inspection-arp-spoofing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3 DAI - Dynamic ARP Inspection (захист від ARP Spoofing)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3 DAI - Dynamic ARP Inspection (захист від ARP Spoofing)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 Проблема
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-dai" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 Що робить DAI
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-ip-source-guard-ip-spoofing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4 IP Source Guard - захист від IP Spoofing
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4 IP Source Guard - захист від IP Spoofing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 Проблема
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-ip-source-guard" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 Що робить IP Source Guard
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-stp-bpdu-guard-root-guard-loop-guard" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5 Захист STP - BPDU Guard, Root Guard, Loop Guard
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5 Захист STP - BPDU Guard, Root Guard, Loop Guard">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 Проблема
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-bpdu-guard-access-bpdu" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 BPDU Guard - захист access-портів від несанкціонованих BPDU
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-root-guard-root-bridge" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3 Root Guard - захист від підміни Root Bridge
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#54-loop-guard-bpdu" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.4 Loop Guard - захист від петель при втраті BPDU
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#55-bpdu-filter-bpdu" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.5 BPDU Filter - фільтрація BPDU на граничних портах
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-vlan-hopping-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6 VLAN Hopping - атака та захист
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6 VLAN Hopping - атака та захист">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 Проблема
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-switch-spoofing-dtp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2 Захист від Switch Spoofing (вимкнення DTP)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63-double-tagging-native-vlan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3 Захист від Double Tagging (native VLAN)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-access-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7 Повна конфігурація захищеного access-порту
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-trunk-uplink" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8 Повна конфігурація захищеного trunk-порту (uplink)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9 Порядок глобального налаштування на комутаторі
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10 Перевірка та діагностика
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10 Перевірка та діагностика">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#101" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.1 Типові помилки
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="l2-security-">Захист канального рівня (L2 Security) - Шпаргалка</h1>
+<blockquote>
+<p>Курс: Безпека електронно-комунікаційних мереж | 3 курс</p>
+</blockquote>
+<hr />
+<h2 id="_1">Загальна картина</h2>
+<p>Канальний рівень OSI (L2) - одне з найбільш вразливих місць корпоративної мережі. На відміну від L3 (IP), більшість комутаторів за замовчуванням <strong>довіряють</strong> будь-якому пристрою що підключився до порту. Це дозволяє зловмиснику маніпулювати MAC-таблицями, ARP-кешем, DHCP-відповідями та VLAN-ізоляцією</p>
+<blockquote>
+<p>📁 Схема атак та захисних механізмів:
+<img alt="Схема атак та захисних механізмів" src="../../assets/network-configs_l2-security_1.svg" /></p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>Атака</th>
+<th>Ціль</th>
+<th>Захист</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MAC Address Flooding</td>
+<td>Переповнити MAC-таблицю → switch стає hub</td>
+<td>Port Security</td>
+</tr>
+<tr>
+<td>Rogue DHCP Server</td>
+<td>Підмінити шлюз/DNS → MITM</td>
+<td>DHCP Snooping</td>
+</tr>
+<tr>
+<td>ARP Spoofing / Poisoning</td>
+<td>Підмінити ARP → MITM / DoS</td>
+<td>DAI (Dynamic ARP Inspection)</td>
+</tr>
+<tr>
+<td>IP Spoofing</td>
+<td>Підробити source IP → обхід ACL</td>
+<td>IP Source Guard</td>
+</tr>
+<tr>
+<td>STP Manipulation</td>
+<td>Стати Root Bridge → перехоплення трафіку</td>
+<td>BPDU Guard, Root Guard</td>
+</tr>
+<tr>
+<td>VLAN Hopping</td>
+<td>Отримати доступ до іншого VLAN</td>
+<td>Вимкнення DTP, native VLAN</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="1-port-security-mac-flooding">1 Port Security - захист від MAC Flooding</h2>
+<h3 id="11">1.1 Проблема</h3>
+<p><strong>MAC Flooding</strong>: зловмисник генерує мільйони фреймів з підробленими MAC-адресами. Таблиця MAC-адрес комутатора (CAM table) переповнюється. Комутатор починає флудити весь вхідний трафік на всі порти - перетворюється на концентратор (hub). Зловмисник перехоплює трафік між легітимними хостами</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Зловмисник → [MAC 11:11:11, MAC 22:22:22, MAC 33:33:33 ...] → SW
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>CAM table переповнена → SW флудить весь трафік → зловмисник бачить чужі дані
+</code></pre></div>
+<h3 id="12-port-security">1.2 Що робить Port Security</h3>
+<p>Обмежує кількість MAC-адрес на порту та визначає дію при порушенні.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>! Увімкнути Port Security на access-порту
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>interface GigabitEthernet1/0/1
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a> switchport mode access
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a> switchport access vlan 10
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a> switchport port-security                          ! увімкнути
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a> switchport port-security maximum 2                ! максимум 2 MAC на порту
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a> switchport port-security violation restrict        ! дія при порушенні
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a> switchport port-security mac-address sticky        ! автозапам'ятовування MAC
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>! Три режими violation:
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>! protect  — відкидати фрейми з невідомих MAC, без логу, без shutdown
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>! restrict — відкидати + логувати + лічильник порушень
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>! shutdown — відключити порт (err-disabled) ← за замовчуванням
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>! Статично вказати дозволену MAC-адресу
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>interface GigabitEthernet1/0/1
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a> switchport port-security mac-address 00A0.1234.5678
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>! Sticky — зберегти першу MAC що з'явилась (в running-config)
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a> switchport port-security mac-address sticky
+</code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">Sticky MAC та перезавантаження</p>
+<p><code>sticky</code> зберігає вивчені MAC у <code>running-config</code>. Щоб вони збереглись після перезавантаження - виконай <code>copy running-config startup-config</code>. Інакше після ребуту порт знову прийме будь-яку MAC</p>
+</div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>! Відновлення err-disabled порту
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>interface GigabitEthernet1/0/1
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a> shutdown
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a> no shutdown
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>! Або автоматичне відновлення (через N секунд)
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>errdisable recovery cause psecure-violation
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>errdisable recovery interval 300
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>! Перевірка
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>show port-security
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>show port-security interface GigabitEthernet1/0/1
+<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>show port-security address
+</code></pre></div>
+<h3 id="13">1.3 Приклад виводу</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>Switch# show port-security interface GigabitEthernet1/0/1
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>Port Security              : Enabled
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>Port Status                : Secure-up
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>Violation Mode             : Restrict
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>Aging Time                 : 0 mins
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>Maximum MAC Addresses      : 2
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>Total MAC Addresses        : 1
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>Configured MAC Addresses   : 0
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>Sticky MAC Addresses       : 1
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>Last Source Address:Vlan   : 00A0.1234.5678:10
+<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>Security Violation Count   : 0
+</code></pre></div>
+<hr />
+<h2 id="2-dhcp-snooping-rogue-dhcp">2 DHCP Snooping - захист від Rogue DHCP</h2>
+<h3 id="21">2.1 Проблема</h3>
+<p><strong>Rogue DHCP Server</strong>: зловмисник запускає власний DHCP-сервер в мережі. Клієнти можуть отримати відповідь від зловмисного сервера швидше ніж від легітимного. Зловмисник призначає себе шлюзом або DNS-сервером → весь трафік клієнтів проходить через нього (MITM)</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>PC → DHCPDISCOVER → [SW] → обидва DHCP-сервери отримують запит
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>Rogue DHCP відповідає швидше → PC отримує: GW = 192.168.1.254 (зловмисник)
+</code></pre></div>
+<h3 id="22-dhcp-snooping">2.2 Що робить DHCP Snooping</h3>
+<p>Поділяє порти на <strong>trusted</strong> (легітимний DHCP-сервер) та <strong>untrusted</strong> (всі інші). DHCP-відповіді (<code>OFFER</code>, <code>ACK</code>) блокуються на untrusted-портах. Веде <strong>DHCP Snooping Binding Table</strong> (IP+MAC+VLAN+Port) - використовується DAI та IP Source Guard</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>! Глобально увімкнути DHCP Snooping
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>ip dhcp snooping
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>! Увімкнути для конкретних VLAN
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>ip dhcp snooping vlan 10,20,30
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>! Вимкнути Option 82 (щоб не змінювати пакети на доступі)
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>no ip dhcp snooping information option
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>
+<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a>! Позначити uplink-порт до легітимного DHCP-сервера як trusted
+<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a>interface GigabitEthernet1/0/24
+<a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a> description "Uplink to Core / DHCP Server"
+<a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a> ip dhcp snooping trust
+<a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a>
+<a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a>! Всі інші порти (до ПК) — untrusted за замовчуванням
+<a id="__codelineno-6-16" name="__codelineno-6-16" href="#__codelineno-6-16"></a>
+<a id="__codelineno-6-17" name="__codelineno-6-17" href="#__codelineno-6-17"></a>! Обмежити швидкість DHCP-запитів на untrusted-портах (захист від DHCP flood)
+<a id="__codelineno-6-18" name="__codelineno-6-18" href="#__codelineno-6-18"></a>interface GigabitEthernet1/0/1
+<a id="__codelineno-6-19" name="__codelineno-6-19" href="#__codelineno-6-19"></a> ip dhcp snooping limit rate 15      ! не більше 15 пакетів/сек
+<a id="__codelineno-6-20" name="__codelineno-6-20" href="#__codelineno-6-20"></a>
+<a id="__codelineno-6-21" name="__codelineno-6-21" href="#__codelineno-6-21"></a>! Перевірка
+<a id="__codelineno-6-22" name="__codelineno-6-22" href="#__codelineno-6-22"></a>show ip dhcp snooping
+<a id="__codelineno-6-23" name="__codelineno-6-23" href="#__codelineno-6-23"></a>show ip dhcp snooping binding
+<a id="__codelineno-6-24" name="__codelineno-6-24" href="#__codelineno-6-24"></a>show ip dhcp snooping statistics
+</code></pre></div>
+<div class="admonition info">
+<p class="admonition-title">DHCP Snooping Binding Table</p>
+<p>Таблиця містить: IP-адресу, MAC-адресу, VLAN, порт і час оренди для кожного клієнта що отримав адресу через snooping. Ця таблиця використовується як основа для DAI та IP Source Guard</p>
+</div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>Switch# show ip dhcp snooping binding
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>MacAddress         IpAddress      Lease(sec) Type      VLAN  Interface
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>00:A0:12:34:56:78  192.168.1.10   86400      dynamic   10    Gi1/0/1
+</code></pre></div>
+<hr />
+<h2 id="3-dai-dynamic-arp-inspection-arp-spoofing">3 DAI - Dynamic ARP Inspection (захист від ARP Spoofing)</h2>
+<h3 id="31">3.1 Проблема</h3>
+<p><strong>ARP Spoofing / ARP Poisoning</strong>: зловмисник надсилає підроблені ARP-відповіді, стверджуючи що його MAC відповідає IP-адресі шлюзу (або іншого хоста). Жертви оновлюють свій ARP-кеш → весь трафік йде через зловмисника (MITM або DoS)</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>Легітимно: 192.168.1.1 → MAC aa:bb:cc:dd:ee:ff (router)
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>ARP Poison: зловмисник надсилає → 192.168.1.1 = MAC 11:22:33:44:55:66 (attacker)
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>Жертва оновлює ARP → весь трафік до шлюзу йде зловмиснику
+</code></pre></div>
+<h3 id="32-dai">3.2 Що робить DAI</h3>
+<p>Перевіряє кожен ARP-пакет на untrusted-порту: чи відповідає пара IP+MAC записам у DHCP Snooping Binding Table (або статичним ARP ACL). Якщо не відповідає - пакет відкидається</p>
+<div class="admonition warning">
+<p class="admonition-title">DAI вимагає DHCP Snooping</p>
+<p>DAI перевіряє пари IP+MAC по DHCP Snooping Binding Table. Якщо DHCP Snooping не увімкнено або хост має статичну IP - потрібно додати статичний ARP ACL</p>
+</div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>! DHCP Snooping повинен бути увімкнений (див. розділ 2)
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>! Увімкнути DAI для VLAN
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>ip arp inspection vlan 10,20,30
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>! Позначити uplink як trusted (ARP-перевірка не виконується)
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>interface GigabitEthernet1/0/24
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a> ip arp inspection trust
+<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a>
+<a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a>! Обмеження швидкості ARP на untrusted-портах
+<a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a>interface GigabitEthernet1/0/1
+<a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a> ip arp inspection limit rate 100      ! пакетів/сек (default: 100)
+<a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a> ip arp inspection limit rate 100 burst interval 1
+<a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a>
+<a id="__codelineno-9-15" name="__codelineno-9-15" href="#__codelineno-9-15"></a>! Для хостів зі статичною IP (не в DHCP binding table)
+<a id="__codelineno-9-16" name="__codelineno-9-16" href="#__codelineno-9-16"></a>! Додати статичний ARP ACL
+<a id="__codelineno-9-17" name="__codelineno-9-17" href="#__codelineno-9-17"></a>arp access-list STATIC-HOSTS
+<a id="__codelineno-9-18" name="__codelineno-9-18" href="#__codelineno-9-18"></a> permit ip host 192.168.1.50 mac host 00A0.1234.ABCD
+<a id="__codelineno-9-19" name="__codelineno-9-19" href="#__codelineno-9-19"></a> permit ip host 192.168.1.51 mac host 00A0.1234.ABCE
+<a id="__codelineno-9-20" name="__codelineno-9-20" href="#__codelineno-9-20"></a>
+<a id="__codelineno-9-21" name="__codelineno-9-21" href="#__codelineno-9-21"></a>ip arp inspection filter STATIC-HOSTS vlan 10
+<a id="__codelineno-9-22" name="__codelineno-9-22" href="#__codelineno-9-22"></a>
+<a id="__codelineno-9-23" name="__codelineno-9-23" href="#__codelineno-9-23"></a>! Розширена перевірка (src-mac, dst-mac, IP валідність)
+<a id="__codelineno-9-24" name="__codelineno-9-24" href="#__codelineno-9-24"></a>ip arp inspection validate src-mac dst-mac ip
+<a id="__codelineno-9-25" name="__codelineno-9-25" href="#__codelineno-9-25"></a>
+<a id="__codelineno-9-26" name="__codelineno-9-26" href="#__codelineno-9-26"></a>! Перевірка
+<a id="__codelineno-9-27" name="__codelineno-9-27" href="#__codelineno-9-27"></a>show ip arp inspection
+<a id="__codelineno-9-28" name="__codelineno-9-28" href="#__codelineno-9-28"></a>show ip arp inspection vlan 10
+<a id="__codelineno-9-29" name="__codelineno-9-29" href="#__codelineno-9-29"></a>show ip arp inspection statistics
+<a id="__codelineno-9-30" name="__codelineno-9-30" href="#__codelineno-9-30"></a>show ip arp inspection interfaces
+</code></pre></div>
+<hr />
+<h2 id="4-ip-source-guard-ip-spoofing">4 IP Source Guard - захист від IP Spoofing</h2>
+<h3 id="41">4.1 Проблема</h3>
+<p><strong>IP Spoofing</strong>: зловмисник підробляє source IP у пакетах. Може обходити ACL що фільтрують за IP-адресою джерела, або імітувати трафік від іншого хоста</p>
+<h3 id="42-ip-source-guard">4.2 Що робить IP Source Guard</h3>
+<p>Перевіряє source IP (та опціонально MAC) кожного пакету на untrusted-порту. Дозволяє тільки ті IP-адреси що є в DHCP Snooping Binding Table або статично налаштовані</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>! DHCP Snooping повинен бути увімкнений!
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>! Увімкнути IP Source Guard на untrusted-порту (тільки IP-перевірка)
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>interface GigabitEthernet1/0/1
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a> ip verify source
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>! Увімкнути з перевіркою і IP, і MAC (суворіший режим)
+<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a>interface GigabitEthernet1/0/1
+<a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a> ip verify source port-security
+<a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a>
+<a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a>! Для хостів зі статичною IP — додати статичний binding
+<a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a>ip source binding 00A0.1234.5678 vlan 10 192.168.1.50 interface GigabitEthernet1/0/1
+<a id="__codelineno-10-13" name="__codelineno-10-13" href="#__codelineno-10-13"></a>
+<a id="__codelineno-10-14" name="__codelineno-10-14" href="#__codelineno-10-14"></a>! Перевірка
+<a id="__codelineno-10-15" name="__codelineno-10-15" href="#__codelineno-10-15"></a>show ip verify source
+<a id="__codelineno-10-16" name="__codelineno-10-16" href="#__codelineno-10-16"></a>show ip source binding
+</code></pre></div>
+<div class="admonition info">
+<p class="admonition-title">Залежність від DHCP Snooping</p>
+<p>IP Source Guard блокує всі пакети з порту поки клієнт не отримає IP через DHCP (і запис не з'явиться в binding table). Для хостів зі статичними IP обов'язково додай <code>ip source binding</code> вручну</p>
+</div>
+<hr />
+<h2 id="5-stp-bpdu-guard-root-guard-loop-guard">5 Захист STP - BPDU Guard, Root Guard, Loop Guard</h2>
+<h3 id="51">5.1 Проблема</h3>
+<p><strong>STP Manipulation</strong>: зловмисник підключає комутатор з нижчим Bridge Priority і надсилає BPDU що претендують на роль Root Bridge. Якщо зловмисник стає Root Bridge - весь трафік мережі перебудовується через нього. Або: зловмисник надсилає BPDU на access-порти щоб спровокувати перерахунок STP (DoS)</p>
+<h3 id="52-bpdu-guard-access-bpdu">5.2 BPDU Guard - захист access-портів від несанкціонованих BPDU</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>! Глобально (для всіх PortFast-портів)
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>spanning-tree portfast bpduguard default
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>! На конкретному порту
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>interface GigabitEthernet1/0/1
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a> spanning-tree portfast
+<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a> spanning-tree bpduguard enable
+<a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a>
+<a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a>! При спрацюванні порт переходить у err-disabled
+<a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a>! Автовідновлення
+<a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a>errdisable recovery cause bpduguard
+<a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a>errdisable recovery interval 300
+<a id="__codelineno-11-13" name="__codelineno-11-13" href="#__codelineno-11-13"></a>
+<a id="__codelineno-11-14" name="__codelineno-11-14" href="#__codelineno-11-14"></a>! Перевірка
+<a id="__codelineno-11-15" name="__codelineno-11-15" href="#__codelineno-11-15"></a>show spanning-tree inconsistentports
+<a id="__codelineno-11-16" name="__codelineno-11-16" href="#__codelineno-11-16"></a>show interfaces status err-disabled
+</code></pre></div>
+<h3 id="53-root-guard-root-bridge">5.3 Root Guard - захист від підміни Root Bridge</h3>
+<p>Застосовується на downlink-портах (до access-рівня). Якщо через цей порт надходить Superior BPDU - порт переходить у <code>root-inconsistent</code> (блокується), але не відключається</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>! На портах що дивляться вниз (до access-комутаторів)
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>interface GigabitEthernet1/0/23
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a> spanning-tree guard root
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>! Перевірка
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>show spanning-tree inconsistentports
+</code></pre></div>
+<h3 id="54-loop-guard-bpdu">5.4 Loop Guard - захист від петель при втраті BPDU</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>! Глобально (рекомендовано на uplink/trunk)
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>spanning-tree loopguard default
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>! На конкретному порту
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>interface GigabitEthernet1/0/24
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a> spanning-tree guard loop
+</code></pre></div>
+<h3 id="55-bpdu-filter-bpdu">5.5 BPDU Filter - фільтрація BPDU на граничних портах</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>! Глобально (тільки на PortFast-портах - не надсилає BPDU назовні)
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>spanning-tree portfast bpdufilter default
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>! УВАГА: на конкретному порту повністю вимикає STP!
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a>! Використовуй тільки на граничних портах до провайдерів
+<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a>interface GigabitEthernet1/0/1
+<a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a> spanning-tree bpdufilter enable
+</code></pre></div>
+<hr />
+<h2 id="6-vlan-hopping-">6 VLAN Hopping - атака та захист</h2>
+<h3 id="61">6.1 Проблема</h3>
+<p><strong>VLAN Hopping</strong> - два варіанти:</p>
+<p><strong>1. Switch Spoofing</strong>: зловмисник надсилає DTP-фрейми щоб перевести порт у trunk-режим. Отримує доступ до всіх VLAN</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>Порт у режимі dynamic auto/desirable → зловмисник надсилає DTP → порт стає trunk
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>Зловмисник тегує трафік VLAN 20 → отримує доступ до VLAN 20
+</code></pre></div>
+<p><strong>2. Double Tagging</strong>: зловмисник додає подвійний 802.1Q тег. Зовнішній тег = native VLAN (знімається першим комутатором), внутрішній = цільовий VLAN. Трафік потрапляє у чужий VLAN</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>Зловмисник надсилає: [VLAN 1 tag][VLAN 20 tag][payload]
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>SW-1 знімає зовнішній тег (native VLAN 1) і пересилає далі
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>SW-2 бачить тег VLAN 20 → доставляє в VLAN 20
+</code></pre></div>
+<h3 id="62-switch-spoofing-dtp">6.2 Захист від Switch Spoofing (вимкнення DTP)</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>! На ВСІХ access-портах — явний режим + вимкнення DTP
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>interface range GigabitEthernet1/0/1 - 20
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a> switchport mode access
+<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a> switchport nonegotiate            ! вимкнути DTP
+<a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a>
+<a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a>! На trunk-портах між комутаторами — явний trunk + nonegotiate
+<a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a>interface GigabitEthernet1/0/24
+<a id="__codelineno-17-8" name="__codelineno-17-8" href="#__codelineno-17-8"></a> switchport mode trunk
+<a id="__codelineno-17-9" name="__codelineno-17-9" href="#__codelineno-17-9"></a> switchport nonegotiate
+<a id="__codelineno-17-10" name="__codelineno-17-10" href="#__codelineno-17-10"></a>
+<a id="__codelineno-17-11" name="__codelineno-17-11" href="#__codelineno-17-11"></a>! Вимкнути невикористані порти
+<a id="__codelineno-17-12" name="__codelineno-17-12" href="#__codelineno-17-12"></a>interface range GigabitEthernet1/0/21 - 22
+<a id="__codelineno-17-13" name="__codelineno-17-13" href="#__codelineno-17-13"></a> switchport mode access
+<a id="__codelineno-17-14" name="__codelineno-17-14" href="#__codelineno-17-14"></a> switchport access vlan 999        ! "чорна діра" VLAN
+<a id="__codelineno-17-15" name="__codelineno-17-15" href="#__codelineno-17-15"></a> shutdown
+</code></pre></div>
+<h3 id="63-double-tagging-native-vlan">6.3 Захист від Double Tagging (native VLAN)</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>! Змінити native VLAN з 1 на невикористовуваний VLAN
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>interface GigabitEthernet1/0/24
+<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a> switchport trunk native vlan 999  ! не VLAN 1!
+<a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a>
+<a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a>! Або — тегувати native VLAN (IEEE 802.1Q все одно буде без тегу, але Cisco може)
+<a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a>vlan dot1q tag native               ! глобально на платформах що підтримують
+<a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a>
+<a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a>! Заборонити native VLAN на транку (не передавати)
+<a id="__codelineno-18-9" name="__codelineno-18-9" href="#__codelineno-18-9"></a>interface GigabitEthernet1/0/24
+<a id="__codelineno-18-10" name="__codelineno-18-10" href="#__codelineno-18-10"></a> switchport trunk allowed vlan remove 1
+<a id="__codelineno-18-11" name="__codelineno-18-11" href="#__codelineno-18-11"></a> switchport trunk allowed vlan remove 999  ! і native теж
+<a id="__codelineno-18-12" name="__codelineno-18-12" href="#__codelineno-18-12"></a>
+<a id="__codelineno-18-13" name="__codelineno-18-13" href="#__codelineno-18-13"></a>! Обмежити дозволені VLAN на транку (тільки потрібні)
+<a id="__codelineno-18-14" name="__codelineno-18-14" href="#__codelineno-18-14"></a>interface GigabitEthernet1/0/24
+<a id="__codelineno-18-15" name="__codelineno-18-15" href="#__codelineno-18-15"></a> switchport trunk allowed vlan 10,20,30
+</code></pre></div>
+<div class="admonition info">
+<p class="admonition-title">Чому VLAN 1 небезпечний як native</p>
+<p>VLAN 1 — native VLAN за замовчуванням на всіх Cisco комутаторах і саме на нього розрахована атака Double Tagging. Якщо зловмисник знаходиться в access-порту VLAN 1 — атака спрацьовує без будь-яких додаткових дій</p>
+</div>
+<hr />
+<h2 id="7-access-">7 Повна конфігурація захищеного access-порту</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>! Шаблон для типового access-порту з усіма захисними механізмами
+<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>
+<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>interface GigabitEthernet1/0/1
+<a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a> description "PC - VLAN 10 - secured"
+<a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a> switchport mode access
+<a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a> switchport access vlan 10
+<a id="__codelineno-19-7" name="__codelineno-19-7" href="#__codelineno-19-7"></a> switchport nonegotiate                        ! вимкнути DTP
+<a id="__codelineno-19-8" name="__codelineno-19-8" href="#__codelineno-19-8"></a>
+<a id="__codelineno-19-9" name="__codelineno-19-9" href="#__codelineno-19-9"></a> ! Port Security
+<a id="__codelineno-19-10" name="__codelineno-19-10" href="#__codelineno-19-10"></a> switchport port-security
+<a id="__codelineno-19-11" name="__codelineno-19-11" href="#__codelineno-19-11"></a> switchport port-security maximum 1            ! тільки 1 MAC
+<a id="__codelineno-19-12" name="__codelineno-19-12" href="#__codelineno-19-12"></a> switchport port-security violation restrict
+<a id="__codelineno-19-13" name="__codelineno-19-13" href="#__codelineno-19-13"></a> switchport port-security mac-address sticky
+<a id="__codelineno-19-14" name="__codelineno-19-14" href="#__codelineno-19-14"></a>
+<a id="__codelineno-19-15" name="__codelineno-19-15" href="#__codelineno-19-15"></a> ! STP
+<a id="__codelineno-19-16" name="__codelineno-19-16" href="#__codelineno-19-16"></a> spanning-tree portfast
+<a id="__codelineno-19-17" name="__codelineno-19-17" href="#__codelineno-19-17"></a> spanning-tree bpduguard enable
+<a id="__codelineno-19-18" name="__codelineno-19-18" href="#__codelineno-19-18"></a>
+<a id="__codelineno-19-19" name="__codelineno-19-19" href="#__codelineno-19-19"></a> ! DHCP Snooping rate limit
+<a id="__codelineno-19-20" name="__codelineno-19-20" href="#__codelineno-19-20"></a> ip dhcp snooping limit rate 15
+<a id="__codelineno-19-21" name="__codelineno-19-21" href="#__codelineno-19-21"></a>
+<a id="__codelineno-19-22" name="__codelineno-19-22" href="#__codelineno-19-22"></a> ! IP Source Guard
+<a id="__codelineno-19-23" name="__codelineno-19-23" href="#__codelineno-19-23"></a> ip verify source
+<a id="__codelineno-19-24" name="__codelineno-19-24" href="#__codelineno-19-24"></a>
+<a id="__codelineno-19-25" name="__codelineno-19-25" href="#__codelineno-19-25"></a> ! ARP rate limit
+<a id="__codelineno-19-26" name="__codelineno-19-26" href="#__codelineno-19-26"></a> ip arp inspection limit rate 100
+<a id="__codelineno-19-27" name="__codelineno-19-27" href="#__codelineno-19-27"></a>
+<a id="__codelineno-19-28" name="__codelineno-19-28" href="#__codelineno-19-28"></a> no shutdown
+</code></pre></div>
+<hr />
+<h2 id="8-trunk-uplink">8 Повна конфігурація захищеного trunk-порту (uplink)</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>! Uplink до core/distribution або до DHCP-сервера
+<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>
+<a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a>interface GigabitEthernet1/0/24
+<a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a> description "Uplink to Core SW"
+<a id="__codelineno-20-5" name="__codelineno-20-5" href="#__codelineno-20-5"></a> switchport mode trunk
+<a id="__codelineno-20-6" name="__codelineno-20-6" href="#__codelineno-20-6"></a> switchport nonegotiate
+<a id="__codelineno-20-7" name="__codelineno-20-7" href="#__codelineno-20-7"></a> switchport trunk native vlan 999              ! не VLAN 1
+<a id="__codelineno-20-8" name="__codelineno-20-8" href="#__codelineno-20-8"></a> switchport trunk allowed vlan 10,20,30        ! тільки потрібні VLAN
+<a id="__codelineno-20-9" name="__codelineno-20-9" href="#__codelineno-20-9"></a>
+<a id="__codelineno-20-10" name="__codelineno-20-10" href="#__codelineno-20-10"></a> ! Trusted для DHCP Snooping та DAI
+<a id="__codelineno-20-11" name="__codelineno-20-11" href="#__codelineno-20-11"></a> ip dhcp snooping trust
+<a id="__codelineno-20-12" name="__codelineno-20-12" href="#__codelineno-20-12"></a> ip arp inspection trust
+<a id="__codelineno-20-13" name="__codelineno-20-13" href="#__codelineno-20-13"></a>
+<a id="__codelineno-20-14" name="__codelineno-20-14" href="#__codelineno-20-14"></a> ! STP захист
+<a id="__codelineno-20-15" name="__codelineno-20-15" href="#__codelineno-20-15"></a> spanning-tree guard root                      ! не дозволяти стати Root Bridge через цей порт
+<a id="__codelineno-20-16" name="__codelineno-20-16" href="#__codelineno-20-16"></a> spanning-tree guard loop
+<a id="__codelineno-20-17" name="__codelineno-20-17" href="#__codelineno-20-17"></a>
+<a id="__codelineno-20-18" name="__codelineno-20-18" href="#__codelineno-20-18"></a> no shutdown
+</code></pre></div>
+<hr />
+<h2 id="9">9 Порядок глобального налаштування на комутаторі</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>! 1. DHCP Snooping (перший — бо DAI і IP SG залежать від нього)
+<a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a>ip dhcp snooping
+<a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a>ip dhcp snooping vlan 10,20,30
+<a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a>no ip dhcp snooping information option
+<a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a>
+<a id="__codelineno-21-6" name="__codelineno-21-6" href="#__codelineno-21-6"></a>! 2. DAI
+<a id="__codelineno-21-7" name="__codelineno-21-7" href="#__codelineno-21-7"></a>ip arp inspection vlan 10,20,30
+<a id="__codelineno-21-8" name="__codelineno-21-8" href="#__codelineno-21-8"></a>ip arp inspection validate src-mac dst-mac ip
+<a id="__codelineno-21-9" name="__codelineno-21-9" href="#__codelineno-21-9"></a>
+<a id="__codelineno-21-10" name="__codelineno-21-10" href="#__codelineno-21-10"></a>! 3. STP глобально
+<a id="__codelineno-21-11" name="__codelineno-21-11" href="#__codelineno-21-11"></a>spanning-tree mode rapid-pvst
+<a id="__codelineno-21-12" name="__codelineno-21-12" href="#__codelineno-21-12"></a>spanning-tree portfast default
+<a id="__codelineno-21-13" name="__codelineno-21-13" href="#__codelineno-21-13"></a>spanning-tree portfast bpduguard default
+<a id="__codelineno-21-14" name="__codelineno-21-14" href="#__codelineno-21-14"></a>spanning-tree portfast bpdufilter default
+<a id="__codelineno-21-15" name="__codelineno-21-15" href="#__codelineno-21-15"></a>spanning-tree loopguard default
+<a id="__codelineno-21-16" name="__codelineno-21-16" href="#__codelineno-21-16"></a>
+<a id="__codelineno-21-17" name="__codelineno-21-17" href="#__codelineno-21-17"></a>! 4. Errdisable recovery
+<a id="__codelineno-21-18" name="__codelineno-21-18" href="#__codelineno-21-18"></a>errdisable recovery cause bpduguard
+<a id="__codelineno-21-19" name="__codelineno-21-19" href="#__codelineno-21-19"></a>errdisable recovery cause psecure-violation
+<a id="__codelineno-21-20" name="__codelineno-21-20" href="#__codelineno-21-20"></a>errdisable recovery cause arp-inspection
+<a id="__codelineno-21-21" name="__codelineno-21-21" href="#__codelineno-21-21"></a>errdisable recovery interval 300
+<a id="__codelineno-21-22" name="__codelineno-21-22" href="#__codelineno-21-22"></a>
+<a id="__codelineno-21-23" name="__codelineno-21-23" href="#__codelineno-21-23"></a>! 5. Налаштувати інтерфейси (access і trunk — див. розділи 7 і 8)
+</code></pre></div>
+<hr />
+<h2 id="10">10 Перевірка та діагностика</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>! Port Security
+<a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a>show port-security
+<a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a>show port-security interface GigabitEthernet1/0/1
+<a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a>show port-security address
+<a id="__codelineno-22-5" name="__codelineno-22-5" href="#__codelineno-22-5"></a>
+<a id="__codelineno-22-6" name="__codelineno-22-6" href="#__codelineno-22-6"></a>! DHCP Snooping
+<a id="__codelineno-22-7" name="__codelineno-22-7" href="#__codelineno-22-7"></a>show ip dhcp snooping
+<a id="__codelineno-22-8" name="__codelineno-22-8" href="#__codelineno-22-8"></a>show ip dhcp snooping binding
+<a id="__codelineno-22-9" name="__codelineno-22-9" href="#__codelineno-22-9"></a>show ip dhcp snooping statistics
+<a id="__codelineno-22-10" name="__codelineno-22-10" href="#__codelineno-22-10"></a>
+<a id="__codelineno-22-11" name="__codelineno-22-11" href="#__codelineno-22-11"></a>! DAI
+<a id="__codelineno-22-12" name="__codelineno-22-12" href="#__codelineno-22-12"></a>show ip arp inspection
+<a id="__codelineno-22-13" name="__codelineno-22-13" href="#__codelineno-22-13"></a>show ip arp inspection vlan 10
+<a id="__codelineno-22-14" name="__codelineno-22-14" href="#__codelineno-22-14"></a>show ip arp inspection statistics
+<a id="__codelineno-22-15" name="__codelineno-22-15" href="#__codelineno-22-15"></a>show ip arp inspection interfaces
+<a id="__codelineno-22-16" name="__codelineno-22-16" href="#__codelineno-22-16"></a>
+<a id="__codelineno-22-17" name="__codelineno-22-17" href="#__codelineno-22-17"></a>! IP Source Guard
+<a id="__codelineno-22-18" name="__codelineno-22-18" href="#__codelineno-22-18"></a>show ip verify source
+<a id="__codelineno-22-19" name="__codelineno-22-19" href="#__codelineno-22-19"></a>show ip source binding
+<a id="__codelineno-22-20" name="__codelineno-22-20" href="#__codelineno-22-20"></a>
+<a id="__codelineno-22-21" name="__codelineno-22-21" href="#__codelineno-22-21"></a>! STP захист
+<a id="__codelineno-22-22" name="__codelineno-22-22" href="#__codelineno-22-22"></a>show spanning-tree inconsistentports
+<a id="__codelineno-22-23" name="__codelineno-22-23" href="#__codelineno-22-23"></a>show interfaces status err-disabled
+<a id="__codelineno-22-24" name="__codelineno-22-24" href="#__codelineno-22-24"></a>show errdisable recovery
+<a id="__codelineno-22-25" name="__codelineno-22-25" href="#__codelineno-22-25"></a>
+<a id="__codelineno-22-26" name="__codelineno-22-26" href="#__codelineno-22-26"></a>! VLAN та trunk
+<a id="__codelineno-22-27" name="__codelineno-22-27" href="#__codelineno-22-27"></a>show interfaces trunk
+<a id="__codelineno-22-28" name="__codelineno-22-28" href="#__codelineno-22-28"></a>show vlan brief
+<a id="__codelineno-22-29" name="__codelineno-22-29" href="#__codelineno-22-29"></a>show interfaces GigabitEthernet1/0/1 switchport
+</code></pre></div>
+<h3 id="101">10.1 Типові помилки</h3>
+<table>
+<thead>
+<tr>
+<th>Симптом</th>
+<th>Причина</th>
+<th>Рішення</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Клієнти не отримують IP</td>
+<td>DAI/IP SG увімкнені без DHCP Snooping</td>
+<td>Увімкнути <code>ip dhcp snooping</code> + <code>ip dhcp snooping vlan</code></td>
+</tr>
+<tr>
+<td>Легітимний DHCP-сервер не відповідає</td>
+<td>Uplink не позначено як <code>trusted</code></td>
+<td><code>ip dhcp snooping trust</code> на uplink</td>
+</tr>
+<tr>
+<td>ARP не проходить для статичних IP</td>
+<td>Хост не в DHCP binding table</td>
+<td>Додати <code>arp access-list</code> або статичний <code>ip source binding</code></td>
+</tr>
+<tr>
+<td>Порт у err-disabled після BPDU</td>
+<td>BPDU Guard спрацював</td>
+<td>Вимкнути/увімкнути порт або дочекатись <code>errdisable recovery</code></td>
+</tr>
+<tr>
+<td>ПК не підключається (Port Security)</td>
+<td>MAC-ліміт перевищено</td>
+<td><code>show port-security</code>, перевірити maximum або очистити binding</td>
+</tr>
+<tr>
+<td>VLAN Hopping досі можливий</td>
+<td>Native VLAN = VLAN 1</td>
+<td>Змінити native VLAN на всіх транках на невикористовуваний</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<blockquote>
+<p>📌 <strong>Після налаштування обов'язково зберегти:</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>copy running-config startup-config
+</code></pre></div></p>
+</blockquote>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Повернутись нагору
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      © 2026 Кафедра №21 - Bci права захищені
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://mitit.mil.gov.ua/page/faculty2" target="_blank" rel="noopener" title="mitit.mil.gov.ua" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M16.36 14c.08-.66.14-1.32.14-2s-.06-1.34-.14-2h3.38c.16.64.26 1.31.26 2s-.1 1.36-.26 2m-5.15 5.56c.6-1.11 1.06-2.31 1.38-3.56h2.95a8.03 8.03 0 0 1-4.33 3.56M14.34 14H9.66c-.1-.66-.16-1.32-.16-2s.06-1.35.16-2h4.68c.09.65.16 1.32.16 2s-.07 1.34-.16 2M12 19.96c-.83-1.2-1.5-2.53-1.91-3.96h3.82c-.41 1.43-1.08 2.76-1.91 3.96M8 8H5.08A7.92 7.92 0 0 1 9.4 4.44C8.8 5.55 8.35 6.75 8 8m-2.92 8H8c.35 1.25.8 2.45 1.4 3.56A8 8 0 0 1 5.08 16m-.82-2C4.1 13.36 4 12.69 4 12s.1-1.36.26-2h3.38c-.08.66-.14 1.32-.14 2s.06 1.34.14 2M12 4.03c.83 1.2 1.5 2.54 1.91 3.97h-3.82c.41-1.43 1.08-2.77 1.91-3.97M18.92 8h-2.95a15.7 15.7 0 0 0-1.38-3.56c1.84.63 3.37 1.9 4.33 3.56M12 2C6.47 2 2 6.5 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "content.code.copy", "search.suggest", "search.highlight"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u0421\u043a\u043e\u043f\u0456\u0439\u043e\u0432\u0430\u043d\u043e \u0432 \u0431\u0443\u0444\u0435\u0440", "clipboard.copy": "\u0421\u043a\u043e\u043f\u0456\u044e\u0432\u0430\u0442\u0438 \u0432 \u0431\u0443\u0444\u0435\u0440", "search.result.more.one": "\u0429\u0435 1 \u0437\u0431\u0456\u0433 \u043d\u0430 \u0446\u0456\u0439 \u0441\u0442\u043e\u0440\u0456\u043d\u0446\u0456", "search.result.more.other": "\u0429\u0435 # \u0437\u0431\u0456\u0433\u0456\u0432 \u043d\u0430 \u0446\u0456\u0439 \u0441\u0442\u043e\u0440\u0456\u043d\u0446\u0456", "search.result.none": "\u0417\u0431\u0456\u0433\u0456\u0432 \u043d\u0435 \u0437\u043d\u0430\u0439\u0434\u0435\u043d\u043e", "search.result.one": "\u0417\u043d\u0430\u0439\u0434\u0435\u043d\u043e 1 \u0437\u0431\u0456\u0433", "search.result.other": "\u0417\u043d\u0430\u0439\u0434\u0435\u043d\u043e # \u0437\u0431\u0456\u0433\u0456\u0432", "search.result.placeholder": "\u0420\u043e\u0437\u043f\u043e\u0447\u043d\u0456\u0442\u044c \u043f\u0438\u0441\u0430\u0442\u0438 \u0434\u043b\u044f \u043f\u043e\u0448\u0443\u043a\u0443", "search.result.term.missing": "\u041d\u0435 \u0437\u043d\u0430\u0439\u0434\u0435\u043d\u043e \u0437\u0430\u043f\u0438\u0442\u0443", "select.version": "\u041e\u0431\u0440\u0430\u0442\u0438 \u0432\u0435\u0440\u0441\u0456\u044e"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>
