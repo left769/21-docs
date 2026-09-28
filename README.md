@@ -27,6 +27,7 @@
 | [Mikrotik Wireguard](https://ist.pp.ua/network-configs/mikrotik-wireguard/) | Налаштування WireGuard на маршрутизаторі Mikrotik |
 | [OSPF](https://ist.pp.ua/network-configs/ospf/) | Налаштування OSPFv2 на Cisco |
 | [Захист пристроїв](https://ist.pp.ua/network-configs/basic-dev-sec/) | Базові заходи по захисту мережевих пристрїв|
+| [Захист L2](https://ist.pp.ua/network-configs/l2-security/) | Базові заходи по захисту 2 рівня |
 | [Cisco IOS — Шпаргалка](https://ist.pp.ua/network-configs/cisco-cheat-sheet/) | Повний довідник команд Cisco IOS |
 | [Калькулятор маски](https://ist.pp.ua/network-configs/subnet-calculator/) | Заcіб визначення параметрів ІР-мереж |
 
