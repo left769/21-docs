@@ -25,6 +25,7 @@
 | [Cisco DHCP](https://ist.pp.ua/network-configs/dhcp/) | Налаштування DHCP-сервера на Cisco |
 | [Cisco IPsec](https://ist.pp.ua/network-configs/ipsec/) | Налаштування IPsec-VPN між маршрутизаторами Cisco |
 | [Mikrotik Wireguard](https://ist.pp.ua/network-configs/mikrotik-wireguard/) | Налаштування WireGuard на маршрутизаторі Mikrotik |
+| [Mikrotik Firewall](https://ist.pp.ua/network-configs/mikrotik-firewall/) | Налаштування firewall та NAT на маршрутизаторі Mikrotik |
 | [OSPF](https://ist.pp.ua/network-configs/ospf/) | Налаштування OSPFv2 на Cisco |
 | [Захист пристроїв](https://ist.pp.ua/network-configs/basic-dev-sec/) | Базові заходи по захисту мережевих пристрїв|
 | [Захист L2](https://ist.pp.ua/network-configs/l2-security/) | Базові заходи по захисту 2 рівня |

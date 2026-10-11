@@ -62,6 +62,7 @@ nav:
       - 'DHCP-сервер': network-configs/dhcp.md
       - 'IPsec в Cisco': network-configs/ipsec.md
       - 'WireGuard в Mikrotik': network-configs/mikrotik-wireguard.md
+      - 'Firewall в Mikrotik': network-configs/mikrotik-firewall.md
       - 'OSPF': network-configs/ospf.md
       - 'Захист пристроїв': network-configs/basic-dev-sec.md
       - 'Захист L2': network-configs/l2-security.md

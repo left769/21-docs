@@ -89,6 +89,14 @@
 
     [:octicons-arrow-right-24: Читати](mikrotik-wireguard.md)
 
+-   :material-wall-fire: __Mikrotik Firewall__
+
+    ---
+
+    Налаштування firewall та NAT на маршрутизаторі Mikrotik
+
+    [:octicons-arrow-right-24: Читати](mikrotik-firewall.md)
+
 -   :material-calculator: __Калькулятор маски__
 
     ---
