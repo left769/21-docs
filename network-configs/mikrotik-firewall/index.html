@@ -1,0 +1,3580 @@
+
+<!doctype html>
+<html lang="uk" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="Створено колективом кафедри №21">
+      
+      
+      
+        <link rel="prev" href="../mikrotik-wireguard/">
+      
+      
+        <link rel="next" href="../ospf/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/logo_dep21_white.ico">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Firewall в Mikrotik - Довідник кафедри Інформаційних систем та технологій</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#firewall-mikrotik-nat" class="md-skip">
+          Перейти до змісту
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Хедер">
+    <a href="../.." title="Довідник кафедри Інформаційних систем та технологій" class="md-header__button md-logo" aria-label="Довідник кафедри Інформаційних систем та технологій" data-md-component="logo">
+      
+  <img src="../../assets/logo_dep21_white.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Довідник кафедри Інформаційних систем та технологій
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Firewall в Mikrotik
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Перейти на темну тему"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Перейти на темну тему" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="indigo"  aria-label="Перейти на світлу тему"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Перейти на світлу тему" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Пошук" placeholder="Пошук" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Шукати">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Очистити" aria-label="Очистити" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Пошук розпочато
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Вкладки" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../.." class="md-tabs__link">
+          
+  
+  
+  🏠 Головна
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+  🌐 Мережі
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../server-services/" class="md-tabs__link">
+          
+  
+  
+  🖥️ Сервіси
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Навігація" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Довідник кафедри Інформаційних систем та технологій" class="md-nav__button md-logo" aria-label="Довідник кафедри Інформаційних систем та технологій" data-md-component="logo">
+      
+  <img src="../../assets/logo_dep21_white.png" alt="logo">
+
+    </a>
+    Довідник кафедри Інформаційних систем та технологій
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🏠 Головна
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    🏠 Головна
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    👋Вступ
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../pnet/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🧪Інструкція з користування PNET Lab
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../subnet-calculator/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Калькулятор маски підмереж
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../server-services/chmod-calculator/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Калькулятор прав Linux
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🌐 Мережі
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    🌐 Мережі
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Вступ до мереж
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ip-interfaces.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IP інтерфейси
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../vlans/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VLAN та Trunk
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../vlans-mikrotik/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VLAN в Mikrotik
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../stp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    STP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../vtp-dtp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VTP/DTP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../routing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Маршрутизація
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../isp-failover/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dual WAN
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../acl.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Контроль доступу
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cisco-nat/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NAT в Cisco
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dhcp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DHCP-сервер
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ipsec/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IPsec в Cisco
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mikrotik-wireguard/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    WireGuard в Mikrotik
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Firewall в Mikrotik
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Firewall в Mikrotik
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Зміст">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Зміст
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1 Схема мережі
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1 Схема мережі">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 Політика безпеки
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2 Теоретичні відомості
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2 Теоретичні відомості">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-firewall-routeros" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 Складові Firewall у RouterOS
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 Ланцюжки: куди потрапляє пакет
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 Порядок обробки правил
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-connection-tracking" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4 Стани з'єднань (connection tracking)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#25-action" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.5 Дії (Action)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#26-winbox-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.6 Особливості WinBox 4
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#27-interface-list-address-list" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.7 Interface List та Address List
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-mikrotik-routeros-7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3 Налаштування MikroTik (RouterOS 7)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3 Налаштування MikroTik (RouterOS 7)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-safe-mode" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 Підготовка - Safe Mode
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-1-wan-lan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 Крок 1 - Створити списки інтерфейсів WAN та LAN
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-2-mgmt" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 Крок 2 - Створити список адрес адміністраторів MGMT
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34-3-input" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4 Крок 3 - Захист маршрутизатора (ланцюжок input)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.4 Крок 3 - Захист маршрутизатора (ланцюжок input)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Правило 1 - пропустити встановлені з'єднання
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-invalid" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Правило 2 - відкинути invalid
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-icmp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Правило 3 - дозволити ICMP
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-winbox-ssh-mgmt" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Правило 4 - WinBox та SSH лише з MGMT
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-6-dns-lan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Правила 5-6 - DNS з LAN
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Правило 7 - заборонити все інше
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#35-4-forward" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.5 Крок 4 - Захист мереж (ланцюжок forward)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.5 Крок 4 - Захист мереж (ланцюжок forward)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#3-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Правило 3 - адміністратори мають доступ усюди
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-web-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Правило 4 - користувачі → Web-сервер
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Правило 5 - доступ до Інтернету
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Правило 6 - пропустити проброшені порти
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#36-5-nat" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.6 Крок 5 - NAT: вихід в Інтернет та прокидання порту
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.6 Крок 5 - NAT: вихід в Інтернет та прокидання порту">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#361-masquerade-lan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.6.1 Masquerade - доступ LAN до Інтернету
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#362-dst-nat-web-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.6.2 Dst-nat - прокидання порту до Web-сервера
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#37-6-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.7 Крок 6 - Перевірка
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.7 Крок 6 - Перевірка">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#371" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.7.1 Лічильники правил
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#372" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.7.2 Журнал
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#373" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.7.3 Таблиця з'єднань
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#374" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.7.4 Перевірка політики з вузлів
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#38-psd-raw" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.8 Додатково - захист від сканування портів (PSD + Raw)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#39-fasttrack" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.9 Додатково - FastTrack
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#310-l2-ipv6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.10 Додатково - доступ на рівні L2 та IPv6
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#311-cli" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.11 Повна конфігурація (CLI)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4 Типові помилки
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5 Корисні команди
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ospf/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OSPF
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../basic-dev-sec/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Захист пристроїв
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../l2-security/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Захист L2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cisco-cheat-sheet/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cisco cheat sheet
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../subnet-calculator/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Калькулятор маски підмереж
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🖥️ Сервіси
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    🖥️ Сервіси
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../server-services/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Сервіси на базі OC Linux
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../server-services/linux-network-interfaces/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ip addr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../server-services/ssh/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SSH
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../server-services/radius/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RADIUS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../server-services/syslog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SYSLOG
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../server-services/iptables/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    iptables
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../server-services/tcpdump-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    TCPDump
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../server-services/apt-cacher-ng/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    APT Cacher
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../server-services/chmod-calculator/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Калькулятор прав Linux
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Зміст">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Зміст
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1 Схема мережі
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1 Схема мережі">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 Політика безпеки
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2 Теоретичні відомості
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2 Теоретичні відомості">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-firewall-routeros" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 Складові Firewall у RouterOS
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 Ланцюжки: куди потрапляє пакет
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 Порядок обробки правил
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-connection-tracking" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4 Стани з'єднань (connection tracking)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#25-action" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.5 Дії (Action)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#26-winbox-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.6 Особливості WinBox 4
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#27-interface-list-address-list" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.7 Interface List та Address List
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-mikrotik-routeros-7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3 Налаштування MikroTik (RouterOS 7)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3 Налаштування MikroTik (RouterOS 7)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-safe-mode" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 Підготовка - Safe Mode
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-1-wan-lan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 Крок 1 - Створити списки інтерфейсів WAN та LAN
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-2-mgmt" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 Крок 2 - Створити список адрес адміністраторів MGMT
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34-3-input" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4 Крок 3 - Захист маршрутизатора (ланцюжок input)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.4 Крок 3 - Захист маршрутизатора (ланцюжок input)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Правило 1 - пропустити встановлені з'єднання
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-invalid" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Правило 2 - відкинути invalid
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-icmp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Правило 3 - дозволити ICMP
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-winbox-ssh-mgmt" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Правило 4 - WinBox та SSH лише з MGMT
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-6-dns-lan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Правила 5-6 - DNS з LAN
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Правило 7 - заборонити все інше
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#35-4-forward" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.5 Крок 4 - Захист мереж (ланцюжок forward)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.5 Крок 4 - Захист мереж (ланцюжок forward)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#3-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Правило 3 - адміністратори мають доступ усюди
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-web-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Правило 4 - користувачі → Web-сервер
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Правило 5 - доступ до Інтернету
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Правило 6 - пропустити проброшені порти
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#36-5-nat" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.6 Крок 5 - NAT: вихід в Інтернет та прокидання порту
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.6 Крок 5 - NAT: вихід в Інтернет та прокидання порту">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#361-masquerade-lan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.6.1 Masquerade - доступ LAN до Інтернету
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#362-dst-nat-web-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.6.2 Dst-nat - прокидання порту до Web-сервера
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#37-6-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.7 Крок 6 - Перевірка
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.7 Крок 6 - Перевірка">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#371" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.7.1 Лічильники правил
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#372" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.7.2 Журнал
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#373" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.7.3 Таблиця з'єднань
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#374" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.7.4 Перевірка політики з вузлів
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#38-psd-raw" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.8 Додатково - захист від сканування портів (PSD + Raw)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#39-fasttrack" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.9 Додатково - FastTrack
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#310-l2-ipv6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.10 Додатково - доступ на рівні L2 та IPv6
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#311-cli" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.11 Повна конфігурація (CLI)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4 Типові помилки
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5 Корисні команди
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="firewall-mikrotik-nat">Firewall на MikroTik - фільтрація трафіку та NAT</h1>
+<blockquote>
+<p>Курс: Комп'ютерні мережі, L1B | 2-3 курс</p>
+<p>Перевірено на RouterOS 7.24.5 та WinBox 4.4</p>
+</blockquote>
+<hr />
+<h2 id="1">1 Схема мережі</h2>
+<blockquote>
+<p>📁 Зображення схеми: <code>assets/network-configs_mikrotik-firewall_1.svg</code></p>
+</blockquote>
+<p><img alt="Схема мережі для налаштування firewall" src="../../assets/network-configs_mikrotik-firewall_1.svg" /></p>
+<p>Інструкція є продовженням <a href="../vlans-mikrotik/">VLAN на MikroTik</a>: на маршрутизаторі R1 вже налаштовано VLAN 10, 20, 30 за схемою router-on-a-stick. Додатково порт <code>ether1</code> підключено до провайдера (WAN)</p>
+<table>
+<thead>
+<tr>
+<th>VLAN</th>
+<th>Підмережа</th>
+<th>Шлюз (R1)</th>
+<th>Вузол</th>
+<th>Призначення</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>10</td>
+<td>192.168.10.0/24</td>
+<td>192.168.10.1</td>
+<td>192.168.10.100</td>
+<td>Адміністрування (MGMT)</td>
+</tr>
+<tr>
+<td>20</td>
+<td>192.168.20.0/24</td>
+<td>192.168.20.1</td>
+<td>192.168.20.100</td>
+<td>Користувачі</td>
+</tr>
+<tr>
+<td>30</td>
+<td>192.168.30.0/24</td>
+<td>192.168.30.1</td>
+<td>192.168.30.10</td>
+<td>Сервери (Web-сервер)</td>
+</tr>
+<tr>
+<td>-</td>
+<td>адреса від провайдера (DHCP)</td>
+<td>-</td>
+<td>-</td>
+<td>WAN, порт <code>ether1</code></td>
+</tr>
+</tbody>
+</table>
+<p>Якщо WAN ще не налаштовано - отримати адресу від провайдера та (за потреби) увімкнути на R1 DNS-сервер для клієнтів:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>/ip dhcp-client add interface=ether1
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>/ip dns set allow-remote-requests=yes
+</code></pre></div>
+<h3 id="11">1.1 Політика безпеки</h3>
+<p>Що має дозволяти firewall:</p>
+<table>
+<thead>
+<tr>
+<th>Звідки</th>
+<th>Куди</th>
+<th>Що дозволено</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>VLAN 10 (адміністратори)</td>
+<td>маршрутизатор R1</td>
+<td>WinBox (TCP 8291), SSH (TCP 22)</td>
+</tr>
+<tr>
+<td>усі VLAN</td>
+<td>маршрутизатор R1</td>
+<td>ping (ICMP), DNS (порт 53)</td>
+</tr>
+<tr>
+<td>VLAN 10</td>
+<td>будь-куди</td>
+<td>усе</td>
+</tr>
+<tr>
+<td>VLAN 20</td>
+<td>Web-сервер 192.168.30.10</td>
+<td>тільки HTTP/HTTPS (TCP 80, 443)</td>
+</tr>
+<tr>
+<td>усі VLAN</td>
+<td>Інтернет</td>
+<td>усе</td>
+</tr>
+<tr>
+<td>Інтернет</td>
+<td>Web-сервер</td>
+<td>TCP 8080 на WAN-адресі R1 → 192.168.30.10:80</td>
+</tr>
+<tr>
+<td><strong>усе інше</strong></td>
+<td></td>
+<td><strong>заборонено та записується в журнал</strong></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition info">
+<p class="admonition-title">Принцип налаштування</p>
+<p>Використовується підхід <strong>"дозволити потрібне - заборонити все інше"</strong> (default deny): спочатку правила <code>accept</code> для потрібного трафіку, а останнім у кожному ланцюжку - правило <code>drop</code> для всього, що не підійшло під жодне правило</p>
+</div>
+<hr />
+<h2 id="2">2 Теоретичні відомості</h2>
+<h3 id="21-firewall-routeros">2.1 Складові Firewall у RouterOS</h3>
+<p>Firewall знаходиться в меню <strong>IP → Firewall</strong>. Кожна вкладка - окрема таблиця правил або допоміжний інструмент</p>
+<p><img alt="Вкладки вікна Firewall у WinBox 4" src="../../assets/network-configs_mikrotik-firewall_2.png" /></p>
+<table>
+<thead>
+<tr>
+<th>Вкладка</th>
+<th>Призначення</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Filter Rules</strong></td>
+<td>Фільтрація: пропустити або відкинути пакет. Основна вкладка цієї інструкції</td>
+</tr>
+<tr>
+<td><strong>NAT</strong></td>
+<td>Трансляція адрес: вихід LAN в Інтернет (masquerade), проикдання портів (dst-nat)</td>
+</tr>
+<tr>
+<td><strong>Mangle</strong></td>
+<td>Маркування пакетів і з'єднань для маршрутизації та QoS (у цій інструкції не використовується)</td>
+</tr>
+<tr>
+<td><strong>Raw</strong></td>
+<td>Обробка пакетів <strong>до</strong> connection tracking - найдешевший спосіб відкинути небажаний трафік</td>
+</tr>
+<tr>
+<td><strong>Service Ports</strong></td>
+<td>NAT-помічники для протоколів FTP, SIP, PPTP тощо</td>
+</tr>
+<tr>
+<td><strong>Connections</strong></td>
+<td>Таблиця з'єднань, які відстежує маршрутизатор</td>
+</tr>
+<tr>
+<td><strong>Address Lists</strong></td>
+<td>Іменовані списки IP-адрес для використання в правилах</td>
+</tr>
+<tr>
+<td><strong>Layer7 Protocols</strong></td>
+<td>Пошук шаблонів (regex) у вмісті пакетів - сильно навантажує процесор</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition tip">
+<p class="admonition-title">Якщо ви знайомі з iptables</p>
+<p>Firewall RouterOS побудований за тією ж логікою, що й <a href="../../server-services/iptables/">iptables</a> у Linux: ланцюжок <code>input</code> = <code>INPUT</code>, <code>forward</code> = <code>FORWARD</code>, <code>output</code> = <code>OUTPUT</code>, <code>dstnat</code> = <code>PREROUTING</code> таблиці nat, <code>srcnat</code> = <code>POSTROUTING</code>, а address-list - аналог ipset</p>
+</div>
+<h3 id="22">2.2 Ланцюжки: куди потрапляє пакет</h3>
+<blockquote>
+<p>📁 Схема: <code>assets/network-configs_mikrotik-firewall_3.svg</code></p>
+</blockquote>
+<p><img alt="Проходження пакета через RouterOS (спрощено)" src="../../assets/network-configs_mikrotik-firewall_3.svg" /></p>
+<table>
+<thead>
+<tr>
+<th>Ланцюжок</th>
+<th>Який трафік обробляє</th>
+<th>Приклад</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>input</code></td>
+<td>адресований <strong>самому маршрутизатору</strong></td>
+<td>WinBox, SSH, ping шлюзу, DNS-запит до R1</td>
+</tr>
+<tr>
+<td><code>forward</code></td>
+<td>що проходить <strong>через</strong> маршрутизатор</td>
+<td>ПК з VLAN 20 → Web-сервер, ПК → Інтернет</td>
+</tr>
+<tr>
+<td><code>output</code></td>
+<td>створений <strong>самим маршрутизатором</strong></td>
+<td>R1 звертається до DNS провайдера, ping з R1</td>
+</tr>
+</tbody>
+</table>
+<p>Отже, <code>input</code> захищає <strong>сам маршрутизатор</strong>, а <code>forward</code> - <strong>мережі за ним</strong>. Ланцюжок <code>output</code> у цій інструкції не фільтруємо</p>
+<h3 id="23">2.3 Порядок обробки правил</h3>
+<ul>
+<li>Правила ланцюжка перевіряються <strong>згори донизу</strong></li>
+<li>Перше правило з <strong>кінцевою</strong> дією (<code>accept</code>, <code>drop</code>, <code>reject</code>) завершує обробку пакета - нижчі правила вже не перевіряються</li>
+<li>Дії <code>log</code>, <code>add-src-to-address-list</code>, <code>passthrough</code> <strong>не кінцеві</strong>: пакет перевіряється далі</li>
+<li>Якщо пакет не підійшов під жодне правило - <strong>він пропускається</strong>. На відміну від Cisco ACL, у RouterOS немає неявного <code>deny any</code> в кінці, тому правило <code>drop</code> треба додати самостійно</li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">Порядок має значення</p>
+<p>Правило <code>drop</code>, розміщене вище за правила <code>accept</code>, заблокує й потрібний трафік - включно з вашим підключенням WinBox</p>
+</div>
+<h3 id="24-connection-tracking">2.4 Стани з'єднань (connection tracking)</h3>
+<p>Маршрутизатор відстежує кожне з'єднання (вкладка <strong>Connections</strong>) і визначає для кожного пакета його стан:</p>
+<table>
+<thead>
+<tr>
+<th>Стан</th>
+<th>Значення</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>new</code></td>
+<td>перший пакет нового з'єднання (наприклад, TCP SYN)</td>
+</tr>
+<tr>
+<td><code>established</code></td>
+<td>пакет уже відомого з'єднання, на яке була відповідь</td>
+</tr>
+<tr>
+<td><code>related</code></td>
+<td>пакет, пов'язаний з наявним з'єднанням (ICMP-помилки, дані FTP)</td>
+</tr>
+<tr>
+<td><code>invalid</code></td>
+<td>пакет, що не належить жодному відомому з'єднанню або некоректний</td>
+</tr>
+<tr>
+<td><code>untracked</code></td>
+<td>пакет, для якого відстеження вимкнено в Raw (дія <code>notrack</code>)</td>
+</tr>
+</tbody>
+</table>
+<p>Тому достатньо дозволити лише <strong>початок</strong> з'єднання в потрібному напрямку - відповіді пройдуть через правило <code>established,related</code>. Такий firewall називають <strong>stateful</strong></p>
+<h3 id="25-action">2.5 Дії (Action)</h3>
+<p><img alt="Список дій правила Filter" src="../../assets/network-configs_mikrotik-firewall_4.png" /></p>
+<table>
+<thead>
+<tr>
+<th>Дія</th>
+<th>Що робить</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>accept</code></td>
+<td>пропустити пакет</td>
+</tr>
+<tr>
+<td><code>drop</code></td>
+<td>мовчки відкинути (відправник не отримує відповіді)</td>
+</tr>
+<tr>
+<td><code>reject</code></td>
+<td>відкинути та повідомити відправника (ICMP-помилка або TCP RST)</td>
+</tr>
+<tr>
+<td><code>log</code></td>
+<td>записати пакет у журнал і перевіряти далі</td>
+</tr>
+<tr>
+<td><code>add src/dst to address list</code></td>
+<td>додати адресу джерела/призначення в address-list і перевіряти далі</td>
+</tr>
+<tr>
+<td><code>jump</code> / <code>return</code></td>
+<td>перейти у власний ланцюжок / повернутися з нього</td>
+</tr>
+<tr>
+<td><code>passthrough</code></td>
+<td>лише порахувати пакет і перевіряти далі</td>
+</tr>
+<tr>
+<td><code>fasttrack connection</code></td>
+<td>пропускати пакети з'єднання в обхід firewall (див. розділ 3.9)</td>
+</tr>
+<tr>
+<td><code>tarpit</code></td>
+<td>"утримувати" TCP-з'єднання атакуючого (захист від сканування)</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition tip">
+<p class="admonition-title">drop чи reject?</p>
+<p>Для трафіку з Інтернету використовуйте <code>drop</code> - сканер не дізнається, що порт закритий. <code>reject</code> зручніший усередині LAN: клієнт одразу отримує помилку замість очікування тайм-ауту</p>
+</div>
+<h3 id="26-winbox-4">2.6 Особливості WinBox 4</h3>
+<p>У формах правил WinBox 4 поля умов за замовчуванням приховані:</p>
+<p><img alt="Елементи форми правила у WinBox 4" src="../../assets/network-configs_mikrotik-firewall_5.png" /></p>
+<ol>
+<li><strong>+</strong> - додати умову (поле з'являється у формі)</li>
+<li><strong>!</strong> - інвертувати умову (логічне НЕ). На знімку <code>!MGMT</code> означає "усі адреси, <strong>крім</strong> списку MGMT"</li>
+<li><strong>−</strong> - прибрати умову</li>
+</ol>
+<p>Інші корисні елементи:</p>
+<ul>
+<li><strong>Copy</strong> (права панель вікна правила) - створює копію правила, яку можна змінити</li>
+<li>Порядок правил змінюється <strong>перетягуванням</strong> за маркер <code>⠿</code> ліворуч від номера правила</li>
+<li><strong>Comment</strong> правила показується окремим рядком над ним</li>
+<li><strong>Safe Mode</strong> - перемикач у верхній панелі WinBox</li>
+</ul>
+<h3 id="27-interface-list-address-list">2.7 Interface List та Address List</h3>
+<ul>
+<li><strong>Interface List</strong> - іменований список інтерфейсів (<code>WAN</code>, <code>LAN</code>). Правила посилаються на список, а не на конкретний інтерфейс: якщо з'явиться новий VLAN, достатньо додати його до списку <code>LAN</code> - правила firewall змінювати не потрібно</li>
+<li><strong>Address List</strong> - іменований список IP-адрес або підмереж. Записи бувають постійні та тимчасові (з <code>timeout</code>), їх можна додавати автоматично правилами firewall. Як адресу можна вказати й доменне ім'я - RouterOS сам визначить його IP-адреси</li>
+</ul>
+<hr />
+<h2 id="3-mikrotik-routeros-7">3 Налаштування MikroTik (RouterOS 7)</h2>
+<h3 id="31-safe-mode">3.1 Підготовка - Safe Mode</h3>
+<div class="admonition danger">
+<p class="admonition-title">Firewall може заблокувати доступ до самого маршрутизатора</p>
+<p>Помилка в правилах <code>input</code> - і WinBox-сесія обірветься. Підключайтеся до R1 з VLAN 10 (адреса 192.168.10.1) та вмикайте <strong>Safe Mode</strong> перед змінами</p>
+</div>
+<p>Safe Mode вмикається перемикачем у верхній панелі WinBox (у терміналі - <code>Ctrl+X</code> або <code>F4</code>). Якщо з'єднання обірветься, RouterOS автоматично скасує всі зміни, зроблені в цьому режимі (обрив визначається за TCP-тайм-аутом - до 9 хвилин). Коли все працює - вимкніть Safe Mode, і зміни буде збережено</p>
+<p><img alt="Увімкнений Safe Mode у WinBox 4" src="../../assets/network-configs_mikrotik-firewall_6.png" /></p>
+<div class="admonition note">
+<p class="admonition-title">Обмеження Safe Mode</p>
+<p>Safe Mode пам'ятає до 100 останніх змін. Якщо їх більше - режим вимикається автоматично і зміни <strong>не</strong> відкочуються. Тому вмикайте його для кожного кроку окремо</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Заводська конфігурація (defconf)</p>
+<p>На маршрутизаторах MikroTik із заводськими налаштуваннями вже є списки <code>WAN</code>/<code>LAN</code> та правила firewall з коментарем <code>defconf</code>. Перевірте перед початком: <code>/ip firewall filter print</code>. Інструкція розрахована на конфігурацію без заводських правил (як після налаштування з <a href="../vlans-mikrotik/">VLAN на MikroTik</a>)</p>
+</div>
+<hr />
+<h3 id="32-1-wan-lan">3.2 Крок 1 - Створити списки інтерфейсів WAN та LAN</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>/interface list
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>add name=WAN
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>add name=LAN
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>/interface list member
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>add list=WAN interface=ether1
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>add list=LAN interface=vlan.10
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>add list=LAN interface=vlan.20
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>add list=LAN interface=vlan.30
+</code></pre></div>
+<p><strong>WinBox:</strong> <code>Interfaces</code> → вкладка <code>Interface List</code> → <code>Lists</code> → <code>New</code> → Name = <code>WAN</code>. Аналогічно створити список <code>LAN</code></p>
+<p><img alt="Створення списку інтерфейсів WAN" src="../../assets/network-configs_mikrotik-firewall_7.png" /></p>
+<p>Додати інтерфейси до списків: вкладка <code>Interface List</code> → <code>New</code> → List = <code>WAN</code>, Interface = <code>ether1</code>. Аналогічно <code>vlan.10</code>, <code>vlan.20</code>, <code>vlan.30</code> → список <code>LAN</code></p>
+<p><img alt="Додавання ether1 до списку WAN" src="../../assets/network-configs_mikrotik-firewall_8.png" /></p>
+<p><img alt="Списки WAN та LAN" src="../../assets/network-configs_mikrotik-firewall_9.png" /></p>
+<div class="admonition info">
+<p class="admonition-title">Чому vlan.X, а не bridge1 чи ether5</p>
+<p>Firewall працює на 3 рівні й бачить інтерфейс, на якому знаходиться IP-адреса. Для наших мереж це <code>vlan.10</code>, <code>vlan.20</code>, <code>vlan.30</code> - саме їх видно в журналі як <code>in:vlan.20</code></p>
+</div>
+<hr />
+<h3 id="33-2-mgmt">3.3 Крок 2 - Створити список адрес адміністраторів MGMT</h3>
+<p>Цей список використовується для доступу до керування маршрутизатором</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>/ip firewall address-list
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>add list=MGMT address=192.168.10.0/24 comment="Admin VLAN 10"
+</code></pre></div>
+<p><strong>WinBox:</strong> <code>IP</code> → <code>Firewall</code></p>
+<p><img alt="Меню IP → Firewall" src="../../assets/network-configs_mikrotik-firewall_10.png" /></p>
+<p>Вкладка <code>Address Lists</code> → <code>New</code> → List = <code>MGMT</code>, Address = <code>192.168.10.0/24</code></p>
+<p><img alt="Створення списку адрес MGMT" src="../../assets/network-configs_mikrotik-firewall_11.png" /></p>
+<div class="admonition tip">
+<p class="admonition-title">Суворіший варіант</p>
+<p>Замість усієї підмережі можна додати лише адреси конкретних адміністраторів, наприклад <code>192.168.10.100/32</code></p>
+</div>
+<hr />
+<h3 id="34-3-input">3.4 Крок 3 - Захист маршрутизатора (ланцюжок input)</h3>
+<table>
+<thead>
+<tr>
+<th>№</th>
+<th>Правило</th>
+<th>Навіщо</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>accept established, related, untracked</td>
+<td>пропустити відповіді та вже дозволені з'єднання</td>
+</tr>
+<tr>
+<td>2</td>
+<td>drop invalid</td>
+<td>відкинути некоректні пакети</td>
+</tr>
+<tr>
+<td>3</td>
+<td>accept ICMP</td>
+<td>ping та службові ICMP-повідомлення</td>
+</tr>
+<tr>
+<td>4</td>
+<td>accept WinBox/SSH з MGMT</td>
+<td>керування маршрутизатором лише з VLAN 10</td>
+</tr>
+<tr>
+<td>5-6</td>
+<td>accept DNS з LAN</td>
+<td>клієнти використовують R1 як DNS-сервер</td>
+</tr>
+<tr>
+<td>7</td>
+<td>drop усе інше + журнал</td>
+<td>заборонити все, що не дозволено вище</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>/ip firewall filter
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>add chain=input action=accept \
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>    connection-state=established,related,untracked \
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>    comment="input: accept established,related,untracked"
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>add chain=input action=drop connection-state=invalid \
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>    comment="input: drop invalid"
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>add chain=input action=accept protocol=icmp \
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>    comment="input: accept ICMP"
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>add chain=input action=accept protocol=tcp dst-port=22,8291 \
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>    src-address-list=MGMT comment="input: accept WinBox/SSH from MGMT"
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>add chain=input action=accept protocol=udp dst-port=53 in-interface-list=LAN \
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>    comment="input: accept DNS (udp) from LAN"
+<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>add chain=input action=accept protocol=tcp dst-port=53 in-interface-list=LAN \
+<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a>    comment="input: accept DNS (tcp) from LAN"
+<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a>add chain=input action=drop log=yes log-prefix="IN-DROP" \
+<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a>    comment="input: drop all other"
+</code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">Коментарі до правил</p>
+<p>Підписуйте кожне правило (поле <strong>Comment</strong>): через місяць ніхто не згадає, навіщо потрібне "правило №5". Коментарі також зручно використовувати в командах: <code>[find comment="..."]</code></p>
+</div>
+<p>Далі - те саме у WinBox: <code>IP</code> → <code>Firewall</code> → вкладка <code>Filter Rules</code> → <code>New</code></p>
+<h4 id="1-">Правило 1 - пропустити встановлені з'єднання</h4>
+<ul>
+<li><strong>General:</strong> Chain = <code>input</code>, Connection State (кнопка <strong>+</strong>) = ☑ <code>established</code> ☑ <code>related</code> ☑ <code>untracked</code></li>
+<li><strong>Action:</strong> Action = <code>accept</code> (значення за замовчуванням)</li>
+<li><strong>Comment:</strong> <code>input: accept established,related,untracked</code></li>
+</ul>
+<p><img alt="Правило input: established, related, untracked" src="../../assets/network-configs_mikrotik-firewall_12.png" /></p>
+<p><img alt="Дія accept" src="../../assets/network-configs_mikrotik-firewall_13.png" /></p>
+<h4 id="2-invalid">Правило 2 - відкинути invalid</h4>
+<ul>
+<li><strong>General:</strong> Chain = <code>input</code>, Connection State = ☑ <code>invalid</code></li>
+<li><strong>Action:</strong> Action = <code>drop</code></li>
+</ul>
+<h4 id="3-icmp">Правило 3 - дозволити ICMP</h4>
+<ul>
+<li><strong>General:</strong> Chain = <code>input</code>, Protocol = <code>icmp</code></li>
+<li><strong>Action:</strong> <code>accept</code></li>
+</ul>
+<p><img alt="Правило input: accept ICMP" src="../../assets/network-configs_mikrotik-firewall_14.png" /></p>
+<div class="admonition info">
+<p class="admonition-title">Чому не блокувати ping</p>
+<p>ICMP потрібен не лише для ping: через нього передаються повідомлення про помилки та працює визначення MTU (Path MTU Discovery). Повна заборона ICMP ускладнює діагностику мережі</p>
+</div>
+<h4 id="4-winbox-ssh-mgmt">Правило 4 - WinBox та SSH лише з MGMT</h4>
+<ul>
+<li><strong>General:</strong> Chain = <code>input</code>, Src. Address List = <code>MGMT</code>, Protocol = <code>tcp</code>, Dst. Port = <code>22,8291</code></li>
+<li><strong>Action:</strong> <code>accept</code></li>
+</ul>
+<p><img alt="Правило input: WinBox/SSH з MGMT" src="../../assets/network-configs_mikrotik-firewall_15.png" /></p>
+<table>
+<thead>
+<tr>
+<th>Порт</th>
+<th>Служба</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TCP 8291</td>
+<td>WinBox</td>
+</tr>
+<tr>
+<td>TCP 22</td>
+<td>SSH</td>
+</tr>
+<tr>
+<td>TCP 80 / 443</td>
+<td>WebFig (додайте, якщо використовується)</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition tip">
+<p class="admonition-title">Додатковий рівень захисту</p>
+<p>Обмежте адреси і в налаштуваннях самих служб: <code>IP → Services</code> → поле <strong>Available From</strong> (CLI: <code>/ip service set winbox address=192.168.10.0/24</code>). Детальніше - у розділі <a href="../basic-dev-sec/">Захист пристроїв</a></p>
+</div>
+<h4 id="5-6-dns-lan">Правила 5-6 - DNS з LAN</h4>
+<ul>
+<li><strong>General:</strong> Chain = <code>input</code>, Protocol = <code>udp</code>, Dst. Port = <code>53</code>, In. Interface List = <code>LAN</code></li>
+<li><strong>Action:</strong> <code>accept</code></li>
+</ul>
+<p><img alt="Правило input: DNS (udp) з LAN" src="../../assets/network-configs_mikrotik-firewall_16.png" /></p>
+<p>DNS використовує і UDP, і TCP. Друге правило швидше створити копіюванням: відкрийте правило подвійним кліком → <strong>Copy</strong></p>
+<p><img alt="Кнопка Copy у вікні правила" src="../../assets/network-configs_mikrotik-firewall_17.png" /></p>
+<p>У копії змініть Protocol на <code>tcp</code> та коментар → <strong>OK</strong></p>
+<p><img alt="Копія правила з протоколом tcp" src="../../assets/network-configs_mikrotik-firewall_18.png" /></p>
+<div class="admonition warning">
+<p class="admonition-title">Відкритий DNS-резолвер</p>
+<p>Якщо на R1 увімкнено <code>allow-remote-requests=yes</code>, а firewall не обмежує порт 53, маршрутизатор відповідатиме на DNS-запити з Інтернету. Такі "відкриті резолвери" використовують для DDoS-атак (DNS amplification). Правило 7 закриває цю проблему</p>
+</div>
+<h4 id="7-">Правило 7 - заборонити все інше</h4>
+<ul>
+<li><strong>General:</strong> Chain = <code>input</code> (інших умов немає - правило підходить для будь-якого пакета)</li>
+<li><strong>Action:</strong> Action = <code>drop</code>, ☑ <strong>Log</strong>, Log Prefix = <code>IN-DROP</code></li>
+</ul>
+<p><img alt="Правило input: drop усе інше з журналюванням" src="../../assets/network-configs_mikrotik-firewall_19.png" /></p>
+<div class="admonition danger">
+<p class="admonition-title">Перевірте перед натисканням OK</p>
+<p>Правило 4 (WinBox/SSH з MGMT) вже існує, ви підключені з VLAN 10, Safe Mode увімкнено</p>
+</div>
+<p>Результат - ланцюжок <code>input</code>:</p>
+<p><img alt="Правила ланцюжка input" src="../../assets/network-configs_mikrotik-firewall_20.png" /></p>
+<p>Якщо WinBox-сесія не обірвалася - вимкніть <strong>Safe Mode</strong>, щоб зберегти зміни</p>
+<div class="admonition info">
+<p class="admonition-title">DHCP-сервер і CAPsMAN</p>
+<p>DHCP-сервер на R1 працює навіть без окремого дозволу (він отримує пакети в обхід firewall), але запити клієнтів потраплятимуть у журнал з позначкою <code>IN-DROP</code>. Щоб не засмічувати журнал, додайте вище правила 7 правило <code>chain=input protocol=udp dst-port=67 in-interface-list=LAN action=accept</code>. Якщо на маршрутизаторі працює CAPsMAN, дозвольте також <code>dst-address=127.0.0.1</code> (як у заводській конфігурації)</p>
+</div>
+<hr />
+<h3 id="35-4-forward">3.5 Крок 4 - Захист мереж (ланцюжок forward)</h3>
+<table>
+<thead>
+<tr>
+<th>№</th>
+<th>Правило</th>
+<th>Навіщо</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>accept established, related, untracked</td>
+<td>пропустити відповіді</td>
+</tr>
+<tr>
+<td>2</td>
+<td>drop invalid</td>
+<td>відкинути некоректні пакети</td>
+</tr>
+<tr>
+<td>3</td>
+<td>accept з <code>vlan.10</code></td>
+<td>адміністратори мають доступ до всіх мереж</td>
+</tr>
+<tr>
+<td>4</td>
+<td>accept <code>vlan.20</code> → 192.168.30.10, TCP 80/443</td>
+<td>користувачі → лише Web-сервер</td>
+</tr>
+<tr>
+<td>5</td>
+<td>accept LAN → WAN</td>
+<td>доступ до Інтернету для всіх VLAN</td>
+</tr>
+<tr>
+<td>6</td>
+<td>accept dstnat з WAN</td>
+<td>пропустити проброшені порти (крок 5)</td>
+</tr>
+<tr>
+<td>7</td>
+<td>drop усе інше + журнал</td>
+<td>усі інші з'єднання між VLAN та з Інтернету заборонені</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>/ip firewall filter
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>add chain=forward action=accept \
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>    connection-state=established,related,untracked \
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>    comment="forward: accept established,related,untracked"
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>add chain=forward action=drop connection-state=invalid \
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>    comment="forward: drop invalid"
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>add chain=forward action=accept in-interface=vlan.10 \
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>    comment="forward: accept from Admin VLAN 10"
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>add chain=forward action=accept in-interface=vlan.20 \
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>    dst-address=192.168.30.10 protocol=tcp dst-port=80,443 \
+<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>    comment="forward: Users -&gt; Web server (HTTP/HTTPS)"
+<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>add chain=forward action=accept in-interface-list=LAN out-interface-list=WAN \
+<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>    comment="forward: LAN -&gt; Internet"
+<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a>add chain=forward action=accept in-interface-list=WAN \
+<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a>    connection-nat-state=dstnat \
+<a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a>    comment="forward: accept port forwarding (dstnat)"
+<a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a>add chain=forward action=drop log=yes log-prefix="FWD-DROP" \
+<a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a>    comment="forward: drop all other"
+</code></pre></div>
+<p><strong>WinBox:</strong> <code>IP</code> → <code>Firewall</code> → <code>Filter Rules</code> → <code>New</code></p>
+<p>Правила 1, 2 та 7 створюються так само, як у ланцюжку <code>input</code>, але з Chain = <code>forward</code> (для правила 7 - Log Prefix = <code>FWD-DROP</code>)</p>
+<h4 id="3-">Правило 3 - адміністратори мають доступ усюди</h4>
+<ul>
+<li><strong>General:</strong> Chain = <code>forward</code>, In. Interface = <code>vlan.10</code></li>
+<li><strong>Action:</strong> <code>accept</code></li>
+</ul>
+<p><img alt="Правило forward: усе з VLAN 10" src="../../assets/network-configs_mikrotik-firewall_21.png" /></p>
+<h4 id="4-web-">Правило 4 - користувачі → Web-сервер</h4>
+<ul>
+<li><strong>General:</strong> Chain = <code>forward</code>, Dst. Address = <code>192.168.30.10</code>, Protocol = <code>tcp</code>, Dst. Port = <code>80,443</code>, In. Interface = <code>vlan.20</code></li>
+<li><strong>Action:</strong> <code>accept</code></li>
+</ul>
+<p><img alt="Правило forward: VLAN 20 → Web-сервер" src="../../assets/network-configs_mikrotik-firewall_22.png" /></p>
+<p>Відповіді сервера пройдуть через правило 1 (<code>established</code>), а от <strong>самостійно</strong> звернутися до VLAN 20 сервер не зможе - такі з'єднання відкине правило 7</p>
+<h4 id="5-">Правило 5 - доступ до Інтернету</h4>
+<ul>
+<li><strong>General:</strong> Chain = <code>forward</code>, In. Interface List = <code>LAN</code>, Out. Interface List = <code>WAN</code></li>
+<li><strong>Action:</strong> <code>accept</code></li>
+</ul>
+<p><img alt="Правило forward: LAN → Інтернет" src="../../assets/network-configs_mikrotik-firewall_23.png" /></p>
+<h4 id="6-">Правило 6 - пропустити проброшені порти</h4>
+<ul>
+<li><strong>General:</strong> Chain = <code>forward</code>, In. Interface List = <code>WAN</code>, Connection NAT State = ☑ <code>dstnat</code></li>
+<li><strong>Action:</strong> <code>accept</code></li>
+</ul>
+<p><img alt="Правило forward: dstnat з WAN" src="../../assets/network-configs_mikrotik-firewall_24.png" /></p>
+<div class="admonition info">
+<p class="admonition-title">Навіщо connection-nat-state=dstnat</p>
+<p>Правило <code>dst-nat</code> (крок 5) змінює адресу призначення ще <strong>до</strong> ланцюжка forward, тому тут пакет уже має адресу <code>192.168.30.10</code>, а не WAN-адресу R1. Умова <code>dstnat</code> пропускає з Інтернету лише ті з'єднання, для яких явно створено правило прокидання порту. Щоб опублікувати ще один сервіс, достатньо додати правило NAT</p>
+</div>
+<p>Результат - повний список правил Filter:</p>
+<p><img alt="Усі правила Filter: input та forward" src="../../assets/network-configs_mikrotik-firewall_25.png" /></p>
+<hr />
+<h3 id="36-5-nat">3.6 Крок 5 - NAT: вихід в Інтернет та прокидання порту</h3>
+<h4 id="361-masquerade-lan">3.6.1 Masquerade - доступ LAN до Інтернету</h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>/ip firewall nat
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>add chain=srcnat action=masquerade out-interface-list=WAN \
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>    comment="masquerade LAN -&gt; Internet"
+</code></pre></div>
+<p><strong>WinBox:</strong> <code>IP</code> → <code>Firewall</code> → вкладка <code>NAT</code> → <code>New</code>:</p>
+<ul>
+<li><strong>General:</strong> Chain = <code>srcnat</code>, Out. Interface List = <code>WAN</code></li>
+<li><strong>Action:</strong> Action = <code>masquerade</code></li>
+</ul>
+<p><img alt="NAT: srcnat, Out. Interface List = WAN" src="../../assets/network-configs_mikrotik-firewall_26.png" /></p>
+<p><img alt="NAT: дія masquerade" src="../../assets/network-configs_mikrotik-firewall_27.png" /></p>
+<div class="admonition info">
+<p class="admonition-title">masquerade чи src-nat?</p>
+<p><code>masquerade</code> автоматично підставляє поточну адресу WAN-інтерфейсу - це потрібно, коли адреса динамічна (DHCP, PPPoE). Якщо провайдер видав статичну адресу, використовують <code>action=src-nat to-addresses=&lt;публічна IP&gt;</code></p>
+</div>
+<h4 id="362-dst-nat-web-">3.6.2 Dst-nat - прокидання порту до Web-сервера</h4>
+<p>Запити на порт TCP 8080 WAN-адреси R1 передаються на 192.168.30.10:80</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>/ip firewall nat
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>add chain=dstnat action=dst-nat in-interface-list=WAN \
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>    protocol=tcp dst-port=8080 to-addresses=192.168.30.10 to-ports=80 \
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>    comment="port forwarding: WAN:8080 -&gt; Web server:80"
+</code></pre></div>
+<p><strong>WinBox:</strong> <code>NAT</code> → <code>New</code>:</p>
+<ul>
+<li><strong>General:</strong> Chain = <code>dstnat</code>, Protocol = <code>tcp</code>, Dst. Port = <code>8080</code>, In. Interface List = <code>WAN</code></li>
+<li><strong>Action:</strong> Action = <code>dst-nat</code>, To Addresses = <code>192.168.30.10</code>, To Ports = <code>80</code></li>
+</ul>
+<p><img alt="NAT: dstnat, TCP 8080 з WAN" src="../../assets/network-configs_mikrotik-firewall_28.png" /></p>
+<p><img alt="NAT: дія dst-nat на 192.168.30.10:80" src="../../assets/network-configs_mikrotik-firewall_29.png" /></p>
+<p>Результат - правила NAT:</p>
+<p><img alt="Правила NAT" src="../../assets/network-configs_mikrotik-firewall_30.png" /></p>
+<div class="admonition note">
+<p class="admonition-title">Hairpin NAT</p>
+<p>Клієнти з LAN не зможуть відкрити сервер за <strong>зовнішньою</strong> адресою R1 (порт 8080) - для цього потрібне додаткове правило hairpin NAT. Усередині мережі звертайтеся до сервера напряму: <code>http://192.168.30.10</code></p>
+</div>
+<hr />
+<h3 id="37-6-">3.7 Крок 6 - Перевірка</h3>
+<h4 id="371">3.7.1 Лічильники правил</h4>
+<p>Колонки <strong>Bytes</strong> та <strong>Packets</strong> показують, скільки трафіку обробило кожне правило. Правило з нульовим лічильником або не потрібне, або має помилку в умовах, або розміщене нижче за інше правило, яке "перехоплює" його трафік</p>
+<p><img alt="Лічильники правил" src="../../assets/network-configs_mikrotik-firewall_31.png" /></p>
+<p>Колонки таблиці налаштовуються кнопкою <code>≡</code> праворуч від заголовків. Скинути лічильники - <strong>Reset All Counters</strong> у бічній панелі</p>
+<h4 id="372">3.7.2 Журнал</h4>
+<p>Правила з ☑ <strong>Log</strong> записують відкинуті пакети в журнал (<code>Log</code>) з префіксом <code>IN-DROP</code> / <code>FWD-DROP</code>:</p>
+<p><img alt="Журнал відкинутих пакетів" src="../../assets/network-configs_mikrotik-firewall_32.png" /></p>
+<p>Розбір запису:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>IN-DROP input: in:vlan.20 out:(unknown 0), connection-state:new
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>src-mac 02:00:00:00:20:64, proto TCP (SYN),
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>192.168.20.100:53052-&gt;192.168.20.1:8291, len 60
+</code></pre></div>
+<ul>
+<li><code>IN-DROP</code> - префікс правила, <code>input</code> - ланцюжок</li>
+<li><code>in:vlan.20</code> - вхідний інтерфейс (з якого VLAN прийшов пакет)</li>
+<li><code>connection-state:new</code> - спроба нового з'єднання</li>
+<li><code>192.168.20.100:53052-&gt;192.168.20.1:8291</code> - ПК з VLAN 20 намагався підключитися до WinBox маршрутизатора</li>
+</ul>
+<h4 id="373">3.7.3 Таблиця з'єднань</h4>
+<p>Вкладка <code>Connections</code> показує з'єднання, які відстежує маршрутизатор:</p>
+<p><img alt="Таблиця з'єднань" src="../../assets/network-configs_mikrotik-firewall_33.png" /></p>
+<table>
+<thead>
+<tr>
+<th>Прапорець</th>
+<th>Значення</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>S</code></td>
+<td>seen reply - на з'єднання була відповідь</td>
+</tr>
+<tr>
+<td><code>A</code></td>
+<td>assured - з'єднання підтверджене (трафік в обидва боки)</td>
+</tr>
+<tr>
+<td><code>C</code></td>
+<td>confirmed - з'єднання записане в таблицю</td>
+</tr>
+<tr>
+<td><code>s</code></td>
+<td>srcnat - до з'єднання застосовано srcnat (masquerade)</td>
+</tr>
+<tr>
+<td><code>d</code></td>
+<td>dstnat - до з'єднання застосовано dstnat (прокидання порту)</td>
+</tr>
+</tbody>
+</table>
+<h4 id="374">3.7.4 Перевірка політики з вузлів</h4>
+<table>
+<thead>
+<tr>
+<th>Звідки</th>
+<th>Перевірка</th>
+<th>Очікуваний результат</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ПК VLAN 20</td>
+<td><code>ping 192.168.20.1</code></td>
+<td>✅ відповідь (ICMP дозволено)</td>
+</tr>
+<tr>
+<td>ПК VLAN 20</td>
+<td><code>ping 192.168.10.100</code></td>
+<td>❌ немає відповіді</td>
+</tr>
+<tr>
+<td>ПК VLAN 20</td>
+<td><code>curl http://192.168.30.10</code></td>
+<td>✅ сторінка Web-сервера</td>
+</tr>
+<tr>
+<td>ПК VLAN 20</td>
+<td><code>nc -zv 192.168.30.10 22</code></td>
+<td>❌ тайм-аут</td>
+</tr>
+<tr>
+<td>ПК VLAN 20</td>
+<td>WinBox або <code>nc -zv 192.168.20.1 8291</code></td>
+<td>❌ тайм-аут</td>
+</tr>
+<tr>
+<td>ПК VLAN 20</td>
+<td><code>nslookup mikrotik.com 192.168.20.1</code></td>
+<td>✅ DNS відповідає</td>
+</tr>
+<tr>
+<td>ПК VLAN 20</td>
+<td><code>ping 1.1.1.1</code></td>
+<td>✅ Інтернет працює</td>
+</tr>
+<tr>
+<td>ПК VLAN 10</td>
+<td><code>ping 192.168.20.100</code>, <code>nc -zv 192.168.30.10 22</code></td>
+<td>✅ адміністратор має доступ усюди</td>
+</tr>
+<tr>
+<td>ПК VLAN 10</td>
+<td>WinBox на 192.168.10.1</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Сервер VLAN 30</td>
+<td><code>ping 192.168.20.100</code></td>
+<td>❌</td>
+</tr>
+<tr>
+<td>Сервер VLAN 30</td>
+<td><code>ping 1.1.1.1</code></td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Вузол в Інтернеті</td>
+<td><code>curl http://&lt;WAN-адреса R1&gt;:8080</code></td>
+<td>✅ сторінка Web-сервера</td>
+</tr>
+<tr>
+<td>Вузол в Інтернеті</td>
+<td>WinBox на WAN-адресу R1</td>
+<td>❌</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition tip">
+<p class="admonition-title">Чим перевіряти</p>
+<p>VPCS у PNET Lab має обмежений набір команд (<code>ping</code>, <code>trace</code>). Для перевірки HTTP, DNS та TCP-портів зручніше використовувати вузли з Linux (<code>curl</code>, <code>nc</code>, <code>nslookup</code>). Після кожної перевірки дивіться, який лічильник збільшився і що з'явилося в журналі</p>
+</div>
+<hr />
+<h3 id="38-psd-raw">3.8 Додатково - захист від сканування портів (PSD + Raw)</h3>
+<p>PSD (Port Scan Detection) виявляє сканування: кожен TCP-пакет на новий порт має "вагу". Якщо пакети від однієї адреси на різні порти йдуть з паузою не більше <code>Delay Threshold</code>, а їх сумарна вага досягає <code>Weight Threshold</code>, ця адреса вважається сканером</p>
+<table>
+<thead>
+<tr>
+<th>Параметр</th>
+<th>Значення</th>
+<th>Пояснення</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Weight Threshold</td>
+<td>21</td>
+<td>поріг сумарної ваги</td>
+</tr>
+<tr>
+<td>Delay Threshold</td>
+<td>3 с</td>
+<td>максимальна пауза між пакетами однієї серії сканування</td>
+</tr>
+<tr>
+<td>Low Port Weight</td>
+<td>3</td>
+<td>вага порту &lt; 1024 (7 таких портів = 21)</td>
+</tr>
+<tr>
+<td>High Port Weight</td>
+<td>1</td>
+<td>вага порту ≥ 1024 (21 такий порт = 21)</td>
+</tr>
+</tbody>
+</table>
+<p>Сканер потрапляє в список <code>port_scanners</code> на добу, а правило в <strong>Raw</strong> відкидає весь його трафік ще до connection tracking</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>/ip firewall filter
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>add chain=input action=add-src-to-address-list protocol=tcp \
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>    psd=21,3s,3,1 src-address-list=!MGMT \
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>    address-list=port_scanners address-list-timeout=1d \
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>    comment="input: detect port scan -&gt; port_scanners" \
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>    place-before=[find comment="input: drop all other"]
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>/ip firewall raw
+<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a>add chain=prerouting action=drop src-address-list=port_scanners \
+<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a>    comment="raw: drop port scanners"
+</code></pre></div>
+<p><strong>WinBox:</strong> <code>Filter Rules</code> → <code>New</code>:</p>
+<ul>
+<li><strong>General:</strong> Chain = <code>input</code>, Src. Address List = <code>MGMT</code> з інверсією <strong>!</strong> (адміністраторів не блокуємо), Protocol = <code>tcp</code></li>
+</ul>
+<p><img alt="PSD: умови правила" src="../../assets/network-configs_mikrotik-firewall_34.png" /></p>
+<ul>
+<li><strong>Extra:</strong> розгорнути <strong>PSD</strong> і задати параметри</li>
+</ul>
+<p><img alt="PSD: параметри виявлення" src="../../assets/network-configs_mikrotik-firewall_35.png" /></p>
+<ul>
+<li><strong>Action:</strong> Action = <code>add src to address list</code>, Address List = <code>port_scanners</code>, Timeout = <code>1d 00:00:00</code></li>
+</ul>
+<p><img alt="PSD: додати джерело до списку port_scanners" src="../../assets/network-configs_mikrotik-firewall_36.png" /></p>
+<p>Нове правило з'являється в кінці списку. Перетягніть його за маркер <code>⠿</code> <strong>вище</strong> правила <code>input: drop all other</code> - інакше пакети будуть відкинуті раніше, ніж PSD їх проаналізує</p>
+<p><img alt="PSD-правило перед правилом drop" src="../../assets/network-configs_mikrotik-firewall_37.png" /></p>
+<p>Правило в Raw: <code>IP</code> → <code>Firewall</code> → вкладка <code>Raw</code> → <code>New</code>:</p>
+<ul>
+<li><strong>General:</strong> Chain = <code>prerouting</code>, Src. Address List = <code>port_scanners</code></li>
+<li><strong>Action:</strong> <code>drop</code></li>
+</ul>
+<p><img alt="Raw: відкидати трафік сканерів" src="../../assets/network-configs_mikrotik-firewall_38.png" /></p>
+<p><img alt="Raw: дія drop" src="../../assets/network-configs_mikrotik-firewall_39.png" /></p>
+<p>Перевірка: після сканування з ПК VLAN 20 (<code>nmap 192.168.20.1</code>) його адреса з'являється у списку з тайм-аутом, і весь трафік з неї відкидається - навіть ping</p>
+<p><img alt="Динамічний запис у списку port_scanners" src="../../assets/network-configs_mikrotik-firewall_40.png" /></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a># Розблокувати адресу вручну
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>/ip firewall address-list remove \
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>    [find list=port_scanners address=192.168.20.100]
+</code></pre></div>
+<div class="admonition info">
+<p class="admonition-title">Чому Raw</p>
+<p>Raw обробляє пакети до connection tracking, тому відкидання там найменше навантажує процесор - це важливо під час сканування чи DoS-атаки</p>
+</div>
+<hr />
+<h3 id="39-fasttrack">3.9 Додатково - FastTrack</h3>
+<p>FastTrack пропускає пакети вже встановлених з'єднань в обхід більшої частини firewall, що значно знижує навантаження на процесор. Правило ставиться <strong>першим</strong> у ланцюжку forward:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>/ip firewall filter
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>add chain=forward action=fasttrack-connection \
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>    connection-state=established,related comment="forward: fasttrack" \
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>    place-before=[find comment="forward: accept established,related,untracked"]
+</code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">Обмеження FastTrack</p>
+<ul>
+<li>Пакети FastTrack-з'єднань не проходять через Mangle, Queues та більшість правил firewall - не вмикайте його разом із Simple Queues (обмеження швидкості) та політиками IPsec без додаткових винятків</li>
+<li>Після додавання з'являється динамічне правило <code>special dummy rule to show fasttrack counters</code> - це нормально</li>
+<li>На пристроях з апаратним прискоренням маршрутизації (L3 HW offload) правило може мати ще параметр <code>hw-offload=yes</code>. На CHR і пристроях без такої підтримки цей параметр недоступний</li>
+</ul>
+</div>
+<hr />
+<h3 id="310-l2-ipv6">3.10 Додатково - доступ на рівні L2 та IPv6</h3>
+<div class="admonition danger">
+<p class="admonition-title">MAC-WinBox обходить IP firewall</p>
+<p>WinBox уміє підключатися за MAC-адресою (вкладка Neighbors) - це трафік 2 рівня, і правила <code>IP → Firewall</code> його <strong>не фільтрують</strong>. Обмежте MAC-доступ та виявлення сусідів:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>/tool mac-server set allowed-interface-list=LAN
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>/tool mac-server mac-winbox set allowed-interface-list=LAN
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>/ip neighbor discovery-settings set discover-interface-list=LAN
+</code></pre></div>
+<p>Ще краще - створити окремий список інтерфейсів лише з <code>vlan.10</code>. Детальніше - у розділі <a href="../basic-dev-sec/">Захист пристроїв</a></p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">IPv6 потребує окремого firewall</p>
+<p>Правила <code>/ip firewall</code> діють лише для IPv4. Якщо IPv6 не використовується - вимкніть його: <code>/ipv6 settings set disable-ipv6=yes</code>. Якщо використовується - налаштуйте аналогічні правила в <code>/ipv6 firewall filter</code></p>
+</div>
+<hr />
+<h3 id="311-cli">3.11 Повна конфігурація (CLI)</h3>
+<details class="example">
+<summary>Повний скрипт налаштування firewall (натисніть, щоб розгорнути)</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a># ===== Списки інтерфейсів =====
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>/interface list
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>add name=WAN
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>add name=LAN
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>/interface list member
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>add list=WAN interface=ether1
+<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a>add list=LAN interface=vlan.10
+<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a>add list=LAN interface=vlan.20
+<a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a>add list=LAN interface=vlan.30
+<a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a>
+<a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a># ===== Список адрес адміністраторів =====
+<a id="__codelineno-12-12" name="__codelineno-12-12" href="#__codelineno-12-12"></a>/ip firewall address-list
+<a id="__codelineno-12-13" name="__codelineno-12-13" href="#__codelineno-12-13"></a>add list=MGMT address=192.168.10.0/24 comment="Admin VLAN 10"
+<a id="__codelineno-12-14" name="__codelineno-12-14" href="#__codelineno-12-14"></a>
+<a id="__codelineno-12-15" name="__codelineno-12-15" href="#__codelineno-12-15"></a># ===== Захист маршрутизатора (input) =====
+<a id="__codelineno-12-16" name="__codelineno-12-16" href="#__codelineno-12-16"></a>/ip firewall filter
+<a id="__codelineno-12-17" name="__codelineno-12-17" href="#__codelineno-12-17"></a>add chain=input action=accept \
+<a id="__codelineno-12-18" name="__codelineno-12-18" href="#__codelineno-12-18"></a>    connection-state=established,related,untracked \
+<a id="__codelineno-12-19" name="__codelineno-12-19" href="#__codelineno-12-19"></a>    comment="input: accept established,related,untracked"
+<a id="__codelineno-12-20" name="__codelineno-12-20" href="#__codelineno-12-20"></a>add chain=input action=drop connection-state=invalid \
+<a id="__codelineno-12-21" name="__codelineno-12-21" href="#__codelineno-12-21"></a>    comment="input: drop invalid"
+<a id="__codelineno-12-22" name="__codelineno-12-22" href="#__codelineno-12-22"></a>add chain=input action=accept protocol=icmp \
+<a id="__codelineno-12-23" name="__codelineno-12-23" href="#__codelineno-12-23"></a>    comment="input: accept ICMP"
+<a id="__codelineno-12-24" name="__codelineno-12-24" href="#__codelineno-12-24"></a>add chain=input action=accept protocol=tcp dst-port=22,8291 \
+<a id="__codelineno-12-25" name="__codelineno-12-25" href="#__codelineno-12-25"></a>    src-address-list=MGMT comment="input: accept WinBox/SSH from MGMT"
+<a id="__codelineno-12-26" name="__codelineno-12-26" href="#__codelineno-12-26"></a>add chain=input action=accept protocol=udp dst-port=53 in-interface-list=LAN \
+<a id="__codelineno-12-27" name="__codelineno-12-27" href="#__codelineno-12-27"></a>    comment="input: accept DNS (udp) from LAN"
+<a id="__codelineno-12-28" name="__codelineno-12-28" href="#__codelineno-12-28"></a>add chain=input action=accept protocol=tcp dst-port=53 in-interface-list=LAN \
+<a id="__codelineno-12-29" name="__codelineno-12-29" href="#__codelineno-12-29"></a>    comment="input: accept DNS (tcp) from LAN"
+<a id="__codelineno-12-30" name="__codelineno-12-30" href="#__codelineno-12-30"></a>add chain=input action=add-src-to-address-list protocol=tcp \
+<a id="__codelineno-12-31" name="__codelineno-12-31" href="#__codelineno-12-31"></a>    psd=21,3s,3,1 src-address-list=!MGMT \
+<a id="__codelineno-12-32" name="__codelineno-12-32" href="#__codelineno-12-32"></a>    address-list=port_scanners address-list-timeout=1d \
+<a id="__codelineno-12-33" name="__codelineno-12-33" href="#__codelineno-12-33"></a>    comment="input: detect port scan -&gt; port_scanners"
+<a id="__codelineno-12-34" name="__codelineno-12-34" href="#__codelineno-12-34"></a>add chain=input action=drop log=yes log-prefix="IN-DROP" \
+<a id="__codelineno-12-35" name="__codelineno-12-35" href="#__codelineno-12-35"></a>    comment="input: drop all other"
+<a id="__codelineno-12-36" name="__codelineno-12-36" href="#__codelineno-12-36"></a>
+<a id="__codelineno-12-37" name="__codelineno-12-37" href="#__codelineno-12-37"></a># ===== Захист мереж (forward) =====
+<a id="__codelineno-12-38" name="__codelineno-12-38" href="#__codelineno-12-38"></a>add chain=forward action=accept \
+<a id="__codelineno-12-39" name="__codelineno-12-39" href="#__codelineno-12-39"></a>    connection-state=established,related,untracked \
+<a id="__codelineno-12-40" name="__codelineno-12-40" href="#__codelineno-12-40"></a>    comment="forward: accept established,related,untracked"
+<a id="__codelineno-12-41" name="__codelineno-12-41" href="#__codelineno-12-41"></a>add chain=forward action=drop connection-state=invalid \
+<a id="__codelineno-12-42" name="__codelineno-12-42" href="#__codelineno-12-42"></a>    comment="forward: drop invalid"
+<a id="__codelineno-12-43" name="__codelineno-12-43" href="#__codelineno-12-43"></a>add chain=forward action=accept in-interface=vlan.10 \
+<a id="__codelineno-12-44" name="__codelineno-12-44" href="#__codelineno-12-44"></a>    comment="forward: accept from Admin VLAN 10"
+<a id="__codelineno-12-45" name="__codelineno-12-45" href="#__codelineno-12-45"></a>add chain=forward action=accept in-interface=vlan.20 \
+<a id="__codelineno-12-46" name="__codelineno-12-46" href="#__codelineno-12-46"></a>    dst-address=192.168.30.10 protocol=tcp dst-port=80,443 \
+<a id="__codelineno-12-47" name="__codelineno-12-47" href="#__codelineno-12-47"></a>    comment="forward: Users -&gt; Web server (HTTP/HTTPS)"
+<a id="__codelineno-12-48" name="__codelineno-12-48" href="#__codelineno-12-48"></a>add chain=forward action=accept in-interface-list=LAN out-interface-list=WAN \
+<a id="__codelineno-12-49" name="__codelineno-12-49" href="#__codelineno-12-49"></a>    comment="forward: LAN -&gt; Internet"
+<a id="__codelineno-12-50" name="__codelineno-12-50" href="#__codelineno-12-50"></a>add chain=forward action=accept in-interface-list=WAN \
+<a id="__codelineno-12-51" name="__codelineno-12-51" href="#__codelineno-12-51"></a>    connection-nat-state=dstnat \
+<a id="__codelineno-12-52" name="__codelineno-12-52" href="#__codelineno-12-52"></a>    comment="forward: accept port forwarding (dstnat)"
+<a id="__codelineno-12-53" name="__codelineno-12-53" href="#__codelineno-12-53"></a>add chain=forward action=drop log=yes log-prefix="FWD-DROP" \
+<a id="__codelineno-12-54" name="__codelineno-12-54" href="#__codelineno-12-54"></a>    comment="forward: drop all other"
+<a id="__codelineno-12-55" name="__codelineno-12-55" href="#__codelineno-12-55"></a>
+<a id="__codelineno-12-56" name="__codelineno-12-56" href="#__codelineno-12-56"></a># ===== NAT =====
+<a id="__codelineno-12-57" name="__codelineno-12-57" href="#__codelineno-12-57"></a>/ip firewall nat
+<a id="__codelineno-12-58" name="__codelineno-12-58" href="#__codelineno-12-58"></a>add chain=srcnat action=masquerade out-interface-list=WAN \
+<a id="__codelineno-12-59" name="__codelineno-12-59" href="#__codelineno-12-59"></a>    comment="masquerade LAN -&gt; Internet"
+<a id="__codelineno-12-60" name="__codelineno-12-60" href="#__codelineno-12-60"></a>add chain=dstnat action=dst-nat in-interface-list=WAN \
+<a id="__codelineno-12-61" name="__codelineno-12-61" href="#__codelineno-12-61"></a>    protocol=tcp dst-port=8080 to-addresses=192.168.30.10 to-ports=80 \
+<a id="__codelineno-12-62" name="__codelineno-12-62" href="#__codelineno-12-62"></a>    comment="port forwarding: WAN:8080 -&gt; Web server:80"
+<a id="__codelineno-12-63" name="__codelineno-12-63" href="#__codelineno-12-63"></a>
+<a id="__codelineno-12-64" name="__codelineno-12-64" href="#__codelineno-12-64"></a># ===== Raw: відкидати трафік сканерів портів =====
+<a id="__codelineno-12-65" name="__codelineno-12-65" href="#__codelineno-12-65"></a>/ip firewall raw
+<a id="__codelineno-12-66" name="__codelineno-12-66" href="#__codelineno-12-66"></a>add chain=prerouting action=drop src-address-list=port_scanners \
+<a id="__codelineno-12-67" name="__codelineno-12-67" href="#__codelineno-12-67"></a>    comment="raw: drop port scanners"
+</code></pre></div>
+</details>
+<p>Скрипт можна вставити в термінал (<code>New Terminal</code> у WinBox) або завантажити файлом <code>firewall.rsc</code> у <code>Files</code> і виконати <code>/import file-name=firewall.rsc</code></p>
+<hr />
+<h2 id="4">4 Типові помилки</h2>
+<table>
+<thead>
+<tr>
+<th>Симптом</th>
+<th>Причина</th>
+<th>Рішення</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Після додавання правила обірвався WinBox</td>
+<td><code>drop</code> у <code>input</code> стоїть вище за правило для MGMT або підключення не з VLAN 10</td>
+<td>Safe Mode відкотить зміни. Без нього - підключитися через консоль або MAC-WinBox і виправити порядок</td>
+</tr>
+<tr>
+<td>Не відкриваються сайти, хоча доступ дозволено</td>
+<td>немає правила <code>established,related</code> - блокуються відповіді</td>
+<td>додати правило 1 у <code>forward</code> та <code>input</code></td>
+</tr>
+<tr>
+<td>Лічильник правила дорівнює 0</td>
+<td>вище стоїть правило, яке "перехоплює" трафік, або помилка в умовах</td>
+<td>перевірити порядок і умови, переглянути журнал</td>
+</tr>
+<tr>
+<td>Прокидання порту не працює</td>
+<td>у forward немає правила <code>dstnat</code> або в NAT вказано не той порт/інтерфейс</td>
+<td>перевірити правило 6 кроку 4 і правило dst-nat</td>
+</tr>
+<tr>
+<td>Прокидання порту не працює зсередини LAN</td>
+<td>потрібен hairpin NAT</td>
+<td>звертатися до сервера за внутрішньою адресою</td>
+</tr>
+<tr>
+<td>Новий VLAN не має доступу до Інтернету</td>
+<td>інтерфейс не додано до списку <code>LAN</code></td>
+<td><code>/interface list member add list=LAN interface=vlan.40</code></td>
+</tr>
+<tr>
+<td><code>failure: already have interface list with such name</code></td>
+<td>список уже існує (заводська конфігурація)</td>
+<td>використати наявний список, перевірити його склад</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="5">5 Корисні команди</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a># Правила з лічильниками
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>/ip firewall filter print stats
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>/ip firewall nat print stats
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a># Детально - лише правила ланцюжка input
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>/ip firewall filter print detail where chain=input
+<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a>
+<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a># Скинути лічильники
+<a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a>/ip firewall filter reset-counters-all
+<a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a>
+<a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a># Записи журналу firewall
+<a id="__codelineno-13-12" name="__codelineno-13-12" href="#__codelineno-13-12"></a>/log print where topics~"firewall"
+<a id="__codelineno-13-13" name="__codelineno-13-13" href="#__codelineno-13-13"></a>
+<a id="__codelineno-13-14" name="__codelineno-13-14" href="#__codelineno-13-14"></a># Активні з'єднання
+<a id="__codelineno-13-15" name="__codelineno-13-15" href="#__codelineno-13-15"></a>/ip firewall connection print
+<a id="__codelineno-13-16" name="__codelineno-13-16" href="#__codelineno-13-16"></a>
+<a id="__codelineno-13-17" name="__codelineno-13-17" href="#__codelineno-13-17"></a># Тимчасово вимкнути / увімкнути правило
+<a id="__codelineno-13-18" name="__codelineno-13-18" href="#__codelineno-13-18"></a>/ip firewall filter disable [find comment="forward: drop all other"]
+<a id="__codelineno-13-19" name="__codelineno-13-19" href="#__codelineno-13-19"></a>/ip firewall filter enable [find comment="forward: drop all other"]
+<a id="__codelineno-13-20" name="__codelineno-13-20" href="#__codelineno-13-20"></a>
+<a id="__codelineno-13-21" name="__codelineno-13-21" href="#__codelineno-13-21"></a># Перемістити правило вище за інше
+<a id="__codelineno-13-22" name="__codelineno-13-22" href="#__codelineno-13-22"></a>/ip firewall filter move \
+<a id="__codelineno-13-23" name="__codelineno-13-23" href="#__codelineno-13-23"></a>    [find comment="input: detect port scan -&gt; port_scanners"] \
+<a id="__codelineno-13-24" name="__codelineno-13-24" href="#__codelineno-13-24"></a>    destination=[find comment="input: drop all other"]
+</code></pre></div>
+<hr />
+<blockquote>
+<p>📌 <strong>Зберегти резервну копію MikroTik:</strong> <code>System → Backup</code> або через CLI: <code>/system backup save</code></p>
+<p>📌 <strong>Експортувати правила firewall у текстовий файл:</strong> <code>/ip firewall export file=firewall</code></p>
+</blockquote>
+<hr />
+<div class="admonition quote">
+<p class="admonition-title">Джерело</p>
+<p>Стаття базується на офіційній документації MikroTik:</p>
+<ul>
+<li><a href="https://help.mikrotik.com/docs/spaces/ROS/pages/48660574/Filter">Filter</a></li>
+<li><a href="https://help.mikrotik.com/docs/spaces/ROS/pages/3211299/NAT">NAT</a></li>
+<li><a href="https://help.mikrotik.com/docs/spaces/ROS/pages/130220087/Connection+tracking">Connection tracking</a></li>
+<li><a href="https://help.mikrotik.com/docs/spaces/ROS/pages/328227/Packet+Flow+in+RouterOS">Packet Flow in RouterOS</a></li>
+<li><a href="https://help.mikrotik.com/docs/spaces/ROS/pages/130220135/Address-lists">Address-lists</a></li>
+<li><a href="https://help.mikrotik.com/docs/spaces/ROS/pages/47579180/Interface+Lists">Interface Lists</a></li>
+<li><a href="https://help.mikrotik.com/docs/spaces/ROS/pages/328513/Building+Advanced+Firewall">Building Advanced Firewall</a></li>
+<li><a href="https://help.mikrotik.com/docs/spaces/ROS/pages/328155/Configuration+Management">Configuration Management (Safe Mode)</a></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Повернутись нагору
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      © 2026 Кафедра №21 - Bci права захищені
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://mitit.mil.gov.ua/page/faculty2" target="_blank" rel="noopener" title="mitit.mil.gov.ua" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M16.36 14c.08-.66.14-1.32.14-2s-.06-1.34-.14-2h3.38c.16.64.26 1.31.26 2s-.1 1.36-.26 2m-5.15 5.56c.6-1.11 1.06-2.31 1.38-3.56h2.95a8.03 8.03 0 0 1-4.33 3.56M14.34 14H9.66c-.1-.66-.16-1.32-.16-2s.06-1.35.16-2h4.68c.09.65.16 1.32.16 2s-.07 1.34-.16 2M12 19.96c-.83-1.2-1.5-2.53-1.91-3.96h3.82c-.41 1.43-1.08 2.76-1.91 3.96M8 8H5.08A7.92 7.92 0 0 1 9.4 4.44C8.8 5.55 8.35 6.75 8 8m-2.92 8H8c.35 1.25.8 2.45 1.4 3.56A8 8 0 0 1 5.08 16m-.82-2C4.1 13.36 4 12.69 4 12s.1-1.36.26-2h3.38c-.08.66-.14 1.32-.14 2s.06 1.34.14 2M12 4.03c.83 1.2 1.5 2.54 1.91 3.97h-3.82c.41-1.43 1.08-2.77 1.91-3.97M18.92 8h-2.95a15.7 15.7 0 0 0-1.38-3.56c1.84.63 3.37 1.9 4.33 3.56M12 2C6.47 2 2 6.5 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "content.code.copy", "search.suggest", "search.highlight"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u0421\u043a\u043e\u043f\u0456\u0439\u043e\u0432\u0430\u043d\u043e \u0432 \u0431\u0443\u0444\u0435\u0440", "clipboard.copy": "\u0421\u043a\u043e\u043f\u0456\u044e\u0432\u0430\u0442\u0438 \u0432 \u0431\u0443\u0444\u0435\u0440", "search.result.more.one": "\u0429\u0435 1 \u0437\u0431\u0456\u0433 \u043d\u0430 \u0446\u0456\u0439 \u0441\u0442\u043e\u0440\u0456\u043d\u0446\u0456", "search.result.more.other": "\u0429\u0435 # \u0437\u0431\u0456\u0433\u0456\u0432 \u043d\u0430 \u0446\u0456\u0439 \u0441\u0442\u043e\u0440\u0456\u043d\u0446\u0456", "search.result.none": "\u0417\u0431\u0456\u0433\u0456\u0432 \u043d\u0435 \u0437\u043d\u0430\u0439\u0434\u0435\u043d\u043e", "search.result.one": "\u0417\u043d\u0430\u0439\u0434\u0435\u043d\u043e 1 \u0437\u0431\u0456\u0433", "search.result.other": "\u0417\u043d\u0430\u0439\u0434\u0435\u043d\u043e # \u0437\u0431\u0456\u0433\u0456\u0432", "search.result.placeholder": "\u0420\u043e\u0437\u043f\u043e\u0447\u043d\u0456\u0442\u044c \u043f\u0438\u0441\u0430\u0442\u0438 \u0434\u043b\u044f \u043f\u043e\u0448\u0443\u043a\u0443", "search.result.term.missing": "\u041d\u0435 \u0437\u043d\u0430\u0439\u0434\u0435\u043d\u043e \u0437\u0430\u043f\u0438\u0442\u0443", "select.version": "\u041e\u0431\u0440\u0430\u0442\u0438 \u0432\u0435\u0440\u0441\u0456\u044e"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>
