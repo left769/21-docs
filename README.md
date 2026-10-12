@@ -20,7 +20,7 @@
 | [VTP/DTP](https://ist.pp.ua/network-configs/vtp-dtp/) | Налаштування протоколів VTP та DTP |
 | [Маршрутизація](https://ist.pp.ua/network-configs/routing/) | Статична та динамічна маршрутизація |
 | [Dual WAN](https://ist.pp.ua/network-configs/isp-failover/) | Налаштування автоматичного переключення між провайдерами в Cisco |
-| [Контроль доступу](https://ist.pp.ua/network-configs/ACL/) | ACL, фільтрація трафіку |
+| [Контроль доступу](https://ist.pp.ua/network-configs/acl/) | ACL, фільтрація трафіку |
 | [Cisco NAT](https://ist.pp.ua/network-configs/cisco-nat/) | Налаштування NAT на Cisco |
 | [Cisco DHCP](https://ist.pp.ua/network-configs/dhcp/) | Налаштування DHCP-сервера на Cisco |
 | [Cisco IPsec](https://ist.pp.ua/network-configs/ipsec/) | Налаштування IPsec-VPN між маршрутизаторами Cisco |
